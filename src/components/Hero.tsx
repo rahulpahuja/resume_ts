@@ -37,7 +37,7 @@ const Hero = () => {
             icon={<Mail className="h-5 w-5" />}
           />
           <ActionButton 
-            href="resume.pdf"
+            href="/resume.pdf"
             primary={false}
             text="Download Resume"
             icon={<FileText className="h-5 w-5" />}
