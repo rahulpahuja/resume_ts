@@ -31,7 +31,7 @@ const Header = () => {
           
           {/* Desktop Navigation */}
           <nav className="hidden md:flex space-x-8">
-            {['About', 'Blogs','Skills', 'Projects', 'Contact'].map((item) => (
+            {['About' ,'Skills', 'Projects', 'Blogs','Contact'].map((item) => (
               <a 
                 key={item}
                 href={`#${item.toLowerCase()}`}
@@ -44,7 +44,7 @@ const Header = () => {
               href="mailto:therahulpahuja@gmail.com"
               className="bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded-md transition-colors duration-200"
             >
-              Hire Me
+              Download Resume
             </a>
           </nav>
 
@@ -62,7 +62,7 @@ const Header = () => {
       {mobileMenuOpen && (
         <div className="md:hidden bg-gray-800 shadow-xl">
           <div className="px-4 py-3 space-y-3">
-            {['About', 'Skills', 'Projects', 'Contact'].map((item) => (
+            {['About', 'Skills', 'Projects','Blogs', 'Contact'].map((item) => (
               <a 
                 key={item}
                 href={`#${item.toLowerCase()}`}
