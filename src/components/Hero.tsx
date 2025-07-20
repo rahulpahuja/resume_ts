@@ -4,14 +4,14 @@ const Hero = () => {
   return (
     <section id="home" className="pt-32 pb-20 md:pt-40 md:pb-24 text-center">
       <div className="animate-fadeIn">
-        <h1 className="text-4xl md:text-6xl font-bold mb-4 bg-clip-text text-transparent bg-gradient-to-r from-blue-400 to-purple-500">
-          Rahul Pahuja
-        </h1>
         <div className="flex justify-center mb-6">
         <img src={profileImage}
             alt="Rahul Pahuja"
             className="w-32 h-32 md:w-40 md:h-40 rounded-full object-cover border-4 border-white shadow-lg"/>
         </div>
+        <h1 className="text-4xl md:text-6xl font-bold mb-4 bg-clip-text text-transparent bg-gradient-to-r from-blue-400 to-purple-500">
+          Rahul Pahuja
+        </h1>
         <p className="text-lg md:text-xl text-gray-300 max-w-3xl mx-auto leading-relaxed">
           Experienced Staff Software Engineer | Android & iOS Expert | Proven Leader in Mobile App Development, Cyber Security, Banking, IoT & Video Streaming
         </p>
