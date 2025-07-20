@@ -9,10 +9,8 @@ const Hero = () => {
         </h1>
         <div className="flex justify-center mb-6">
         <img src={profileImage}
-        alt="Rahul Pahuja"
-        className="w-32 h-32 md:w-40 md:h-40 rounded-full object-cover border-4 border-white shadow-lg"
-        
-        />
+            alt="Rahul Pahuja"
+            className="w-32 h-32 md:w-40 md:h-40 rounded-full object-cover border-4 border-white shadow-lg"/>
         </div>
         <p className="text-lg md:text-xl text-gray-300 max-w-3xl mx-auto leading-relaxed">
           Experienced Staff Software Engineer | Android & iOS Expert | Proven Leader in Mobile App Development, Cyber Security, Banking, IoT & Video Streaming
