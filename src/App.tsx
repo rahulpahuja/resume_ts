@@ -1,12 +1,15 @@
 import { useEffect } from 'react';
 import Header from './components/Header';
 import Hero from './components/Hero';
+// import { Toaster } from "@/components/ui/toaster";
 import About from './components/About';
 import ClientsMarquee from './components/ClientsMarquee';
 import Skills from './components/Skills';
 import Projects from './components/Projects';
 import Contact from './components/Contact';
 import Footer from './components/Footer';
+import Blogs from './components/Blogs';
+import BlogDetail from './components/BlogDetail';
 
 function App() {
   useEffect(() => {
@@ -23,6 +26,7 @@ function App() {
           <ClientsMarquee />
           <Skills />
           <Projects />
+          <Blogs />
           <Contact />
         </main>
         <Footer />
