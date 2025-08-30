@@ -113,11 +113,11 @@ const ClientsMarquee = () => {
 };
 
 const ClientLogo = ({ name, logoUrl }: { name: string; logoUrl: string }) => (
-  <div className="flex items-center justify-center min-w-[120px] h-16 bg-white rounded-xl p-2">
+  <div className="flex items-center justify-center min-w-[140px] h-20 bg-white rounded-xl shadow-md p-3">
     <img 
       src={logoUrl} 
       alt={name} 
-      className="h-10 max-w-[120px] object-contain opacity-90 hover:opacity-100 transition-opacity duration-300" 
+      className="h-12 max-w-[120px] object-contain"
     />
   </div>
 );
