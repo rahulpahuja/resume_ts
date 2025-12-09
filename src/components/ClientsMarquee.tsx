@@ -117,8 +117,8 @@ const ClientLogo = ({ name, logoUrl }: { name: string; logoUrl: string }) => (
     <img 
       src={logoUrl} 
       alt={name} 
-           className="h-10 max-w-[120px] object-contain grayscale opacity-70 hover:opacity-100 transition-opacity duration-300"
-      {/* className="h-12 max-w-[120px] object-contain" */}
+      className="h-10 max-w-[120px] object-contain grayscale opacity-70 hover:opacity-100 transition-opacity duration-300"
+      
     />
   </div>
 );
