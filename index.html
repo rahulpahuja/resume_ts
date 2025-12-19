@@ -18,5 +18,58 @@
   <body>
     <div id="root"></div>
     <script type="module" src="/src/main.tsx"></script>
+    <a href="/rellow.html" id="dj-portal-btn">
+      <span>🎧</span> DJ RELLOW
+    </a>
+
+    <style>
+      #dj-portal-btn {
+        position: fixed;
+        top: 20px;
+        right: 20px; /* Moves it to top-right corner */
+        z-index: 99999; /* Ensures it sits on top of everything */
+        
+        background-color: #000000;
+        color: #F0FF00; /* Neon Yellow matches your DJ site */
+        border: 2px solid #F0FF00;
+        
+        text-decoration: none;
+        font-family: system-ui, -apple-system, sans-serif;
+        font-weight: 900;
+        font-size: 14px;
+        text-transform: uppercase;
+        letter-spacing: 1px;
+        
+        padding: 12px 24px;
+        border-radius: 4px;
+        box-shadow: 0 4px 15px rgba(0,0,0,0.5);
+        transition: all 0.2s ease;
+        
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        backdrop-filter: blur(5px);
+      }
+
+      #dj-portal-btn:hover {
+        background-color: #F0FF00;
+        color: #000000;
+        transform: translateY(-2px);
+        box-shadow: 0 0 20px #F0FF00; /* Neon Glow on hover */
+      }
+
+      /* Mobile Support: Moves to bottom if screen is small so it doesn't block header */
+      @media (max-width: 768px) {
+        #dj-portal-btn {
+          top: auto;
+          bottom: 20px;
+          right: 20px;
+          font-size: 12px;
+          padding: 10px 20px;
+        }
+      }
+    </style>
+    </body>
+</html>
   </body>
 </html>
