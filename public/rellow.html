@@ -11,6 +11,7 @@
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollToPlugin.min.js"></script>
 
     <style>
         body { margin: 0; overflow-x: hidden; background: #000000; font-family: 'Archivo Black', sans-serif; user-select: none; }
@@ -33,37 +34,12 @@
         #chapter-1 { top: 10vh; }
         #chapter-3 { top: 900vh; color: #ffbb00; text-shadow: 0 0 60px rgba(255, 100, 0, 1); }
 
-        /* --- PASSWORD LAYER (NEW) --- */
-        #password-layer {
-            position: fixed; top: 0; left: 0; width: 100%; height: 100%;
-            background: #000000; z-index: 20000; /* Highest Priority */
-            display: flex; flex-direction: column; align-items: center; justify-content: center;
-            gap: 20px;
-        }
-        #pass-title { color: white; font-size: 1.2rem; letter-spacing: 2px; }
-        #pass-input {
-            background: transparent; border: 2px solid #333; color: #F0FF00;
-            padding: 15px 30px; font-family: 'Archivo Black', sans-serif;
-            font-size: 1.5rem; text-align: center; outline: none; text-transform: uppercase;
-            width: 300px; transition: 0.3s;
-        }
-        #pass-input:focus { border-color: #F0FF00; box-shadow: 0 0 20px rgba(240, 255, 0, 0.3); }
-        #pass-btn {
-            background: #F0FF00; color: black; border: none;
-            padding: 15px 40px; font-family: 'Archivo Black', sans-serif;
-            font-size: 1rem; cursor: pointer; transition: 0.3s;
-        }
-        #pass-btn:hover { transform: scale(1.05); box-shadow: 0 0 20px #F0FF00; }
-        #pass-error {
-            color: #ff0000; font-size: 0.8rem; letter-spacing: 1px;
-            opacity: 0; transition: opacity 0.3s;
-        }
-
         /* --- AUDIO OVERLAY --- */
         #audio-overlay {
             position: fixed; top: 0; left: 0; width: 100%; height: 100%;
             background: rgba(0,0,0,0.95); z-index: 9999;
-            display: none; /* Hidden by default until password unlocked */
+            /* CHANGED: Visible by default now */
+            display: flex; 
             justify-content: center; align-items: center; flex-direction: column; gap: 20px;
             cursor: pointer; transition: opacity 0.5s;
         }
@@ -157,19 +133,12 @@
 </head>
 <body>
 
-    <div id="password-layer">
-        <div id="pass-title">RESTRICTED AREA</div>
-        <input type="text" id="pass-input" placeholder="ENTER PASSWORD">
-        <button id="pass-btn">UNLOCK</button>
-        <div id="pass-error">ACCESS DENIED - INCORRECT CREDENTIALS</div>
-    </div>
-
     <div id="audio-overlay">
-        <button id="audio-btn">🔊 DROP THE BEAT</button>
-        <div class="warning">STYLE: FRANCIS MERCIER (AFRO HOUSE)</div>
+        <button id="audio-btn">DROP THE BEAT</button>
+        <div class="warning">STYLE:AFRO HOUSE</div>
     </div>
 
-    <a href="tel:+919876543210" id="top-contact">📞 BOOK NOW</a>
+    <a href="tel:+918819091000" id="top-contact">BOOK NOW</a>
 
     <div id="fader-container">
         <div id="fader-track">
@@ -191,14 +160,14 @@
 
     <div id="controls">
         <div id="status">LIVE: DEEP AFRO HOUSE</div>
-        <label id="upload-btn-label" for="file-input">⚡ LOAD TRACK</label>
+        <label id="upload-btn-label" for="file-input">LOAD TRACK</label>
         <input type="file" id="file-input" accept="audio/*">
     </div>
 
     <div class="scroll-container">
         <div class="story-text" id="chapter-1">SOLAR<br>JOURNEY</div>
         <div class="story-text filled-text" id="chapter-3">DJ<br>RELLOW</div>
-        <a href="tel:+919876543210" id="final-cta">CONTACT NOW</a>
+        <a href="tel:+918819091000" id="final-cta">CONTACT NOW</a>
     </div>
 
     <script type="module">
@@ -209,48 +178,18 @@
         import { RenderPass } from 'three/addons/postprocessing/RenderPass.js';
         import { UnrealBloomPass } from 'three/addons/postprocessing/UnrealBloomPass.js';
 
-        // --- PASSWORD LOGIC ---
-        const passLayer = document.getElementById('password-layer');
-        const passInput = document.getElementById('pass-input');
-        const passBtn = document.getElementById('pass-btn');
-        const passError = document.getElementById('pass-error');
-        const audioOverlay = document.getElementById('audio-overlay');
-
-        function checkPassword() {
-            const val = passInput.value.toLowerCase().trim();
-            if(val === 'dj rellow') {
-                // Correct Password
-                gsap.to(passLayer, {
-                    opacity: 0, 
-                    duration: 0.5, 
-                    onComplete: () => {
-                        passLayer.style.display = 'none';
-                        audioOverlay.style.display = 'flex'; // Show Audio Start
-                    }
-                });
-            } else {
-                // Wrong Password
-                passError.style.opacity = 1;
-                gsap.fromTo(passInput, {x: -10}, {x: 10, duration: 0.1, yoyo: true, repeat: 5});
-            }
-        }
-        passBtn.addEventListener('click', checkPassword);
-        passInput.addEventListener('keypress', (e) => { if(e.key === 'Enter') checkPassword(); });
-
-
-        // --- 1. FRANCIS MERCIER STYLE AUDIO ENGINE ---
+        // --- AUDIO ENGINE ---
         const audioEngine = {
             ctx: null, masterGain: null, faderGain: null,
             isPlaying: false, nextNoteTime: 0, 
-            tempo: 122, // Faster House Tempo
+            tempo: 122, 
             lookahead: 25.0, scheduleAheadTime: 0.1, current16thNote: 0,
             
-            // Hypnotic Minor Scale Pluck Riff
             synthNotes: [
-                55.0, 0, 0, 55.0,   // A
+                55.0, 0, 0, 55.0,   
                 0, 55.0, 0, 0,
-                65.41, 0, 0, 65.41, // C
-                0, 55.0, 0, 82.41   // A, E
+                65.41, 0, 0, 65.41, 
+                0, 55.0, 0, 82.41   
             ],
 
             noiseNode: null, noiseFilter: null, noiseGain: null,
@@ -292,7 +231,7 @@
                 this.noiseNode.loop = true;
                 this.noiseFilter = this.ctx.createBiquadFilter();
                 this.noiseFilter.type = 'lowpass';
-                this.noiseFilter.frequency.value = 60; // Deeper start
+                this.noiseFilter.frequency.value = 60; 
                 this.noiseGain = this.ctx.createGain();
                 this.noiseGain.gain.value = 0;
                 
@@ -402,7 +341,19 @@
             }
         };
 
-        document.getElementById('audio-overlay').addEventListener('click', () => audioEngine.init());
+        // --- AUTO SCROLL TRIGGER ---
+        document.getElementById('audio-overlay').addEventListener('click', () => {
+            audioEngine.init();
+            
+            gsap.registerPlugin(ScrollToPlugin);
+            const maxScroll = document.documentElement.scrollHeight - window.innerHeight;
+
+            gsap.to(window, {
+                scrollTo: maxScroll,
+                duration: 15, 
+                ease: "none"
+            });
+        });
 
         // --- FADER DRAG LOGIC ---
         const faderTrack = document.getElementById('fader-track');
@@ -433,7 +384,7 @@
         });
 
 
-        // --- 2. THREE.JS SCENE ---
+        // --- THREE.JS SCENE ---
         const scene = new THREE.Scene();
         scene.fog = new THREE.FogExp2(0x000000, 0.001); 
         const camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 3000);
@@ -455,7 +406,7 @@
         const camLight = new THREE.DirectionalLight(0xffffff, 0.5); 
         camLight.position.set(0,0,1); camera.add(camLight); scene.add(camera);
 
-        // --- 3. PROCEDURAL TEXTURES ---
+        // --- PROCEDURAL TEXTURES ---
         function createPlanetTexture(type, color1Hex, color2Hex) {
             const canvas = document.createElement('canvas');
             canvas.width = 512; canvas.height = 512;
@@ -478,7 +429,7 @@
             return new THREE.CanvasTexture(canvas);
         }
 
-        // --- 4. SCENE OBJECTS ---
+        // --- SCENE OBJECTS ---
         const sunMat = new THREE.ShaderMaterial({
             uniforms: { time: { value: 0 }, beatScale: { value: 1.0 }, distortion: { value: 1.5 }, opacity: { value: 1.0 }, brightness: { value: 0.0 } },
             vertexShader: `uniform float time;uniform float beatScale;uniform float distortion;varying vec2 vUv;varying float vNoise;varying vec3 vNormal; vec3 mod289(vec3 x) { return x - floor(x * (1.0 / 289.0)) * 289.0; } vec4 mod289(vec4 x) { return x - floor(x * (1.0 / 289.0)) * 289.0; } vec4 permute(vec4 x) { return mod289(((x*34.0)+1.0)*x); } vec4 taylorInvSqrt(vec4 r) { return 1.79284291400159 - 0.85373472095314 * r; } float snoise(vec3 v) { const vec2 C = vec2(1.0/6.0, 1.0/3.0); const vec4 D = vec4(0.0, 0.5, 1.0, 2.0); vec3 i = floor(v + dot(v, C.yyy)); vec3 x0 = v - i + dot(i, C.xxx); vec3 g = step(x0.yzx, x0.xyz); vec3 l = 1.0 - g; vec3 i1 = min(g.xyz, l.zxy); vec3 i2 = max(g.xyz, l.zxy); vec3 x1 = x0 - i1 + C.xxx; vec3 x2 = x0 - i2 + C.yyy; vec3 x3 = x0 - D.yyy; i = mod289(i); vec4 p = permute(permute(permute(i.z + vec4(0.0, i1.z, i2.z, 1.0)) + i.y + vec4(0.0, i1.y, i2.y, 1.0)) + i.x + vec4(0.0, i1.x, i2.x, 1.0)); float n_ = 0.142857142857; vec3 ns = n_ * D.wyz - D.xzx; vec4 j = p - 49.0 * floor(p * ns.z * ns.z); vec4 x_ = floor(j * ns.z); vec4 y_ = floor(j - 7.0 * x_); vec4 x = x_ * ns.x + ns.yyyy; vec4 y = y_ * ns.x + ns.yyyy; vec4 h = 1.0 - abs(x) - abs(y); vec4 b0 = vec4(x.xy, y.xy); vec4 b1 = vec4(x.zw, y.zw); vec4 s0 = floor(b0) * 2.0 + 1.0; vec4 s1 = floor(b1) * 2.0 + 1.0; vec4 sh = -step(h, vec4(0.0)); vec4 a0 = b0.xzyw + s0.xzyw * sh.xxyy; vec4 a1 = b1.xzyw + s1.xzyw * sh.zzww; vec3 p0 = vec3(a0.xy, h.x); vec3 p1 = vec3(a0.zw, h.y); vec3 p2 = vec3(a1.xy, h.z); vec3 p3 = vec3(a1.zw, h.w); vec4 norm = taylorInvSqrt(vec4(dot(p0, p0), dot(p1, p1), dot(p2, p2), dot(p3, p3))); p0 *= norm.x; p1 *= norm.y; p2 *= norm.z; p3 *= norm.w; vec4 m = max(0.6 - vec4(dot(x0, x0), dot(x1, x1), dot(x2, x2), dot(x3, x3)), 0.0); m = m * m; return 42.0 * dot(m * m, vec4(dot(p0, x0), dot(p1, x1), dot(p2, x2), dot(p3, x3))); } void main() { vUv = uv; vNormal = normal; float noiseVal = snoise(position * 0.10 + time * 0.5); vNoise = noiseVal; vec3 newPos = position + (normal * noiseVal * distortion * beatScale); gl_Position = projectionMatrix * modelViewMatrix * vec4(newPos, 1.0); }`,
@@ -553,11 +504,14 @@
             initTimeline();
         });
 
-        // --- 5. ANIMATION LOOP ---
+        // --- ANIMATION LOOP ---
         gsap.registerPlugin(ScrollTrigger);
         let scrollVelocity = 0;
         
         function initTimeline() {
+            // FIX: Create a target color object
+            const targetFogColor = new THREE.Color(0xffaa00);
+
             const tl = gsap.timeline({ scrollTrigger: { 
                 trigger: ".scroll-container", start: "top top", end: "bottom bottom", scrub: 0.5,
                 onUpdate: (self) => { scrollVelocity = Math.abs(self.getVelocity()); }
@@ -567,7 +521,11 @@
             tl.to(sunMat.uniforms.distortion, { value: 10.0, duration: 8.5, ease: "power2.in" }, 0)
               .to(sunMat.uniforms.brightness, { value: 0.5, duration: 8.5, ease: "power2.in" }, 0)
               .to("#chapter-1", { opacity: 1, duration: 1, yoyo: true, repeat: 1 }, 0)
-              .to(scene.fog, { density: 0.05, color: 0xffaa00, duration: 1.5 }, 8.5)
+              
+              // FIX: Animate properties individually instead of replacing the object
+              .to(scene.fog, { density: 0.05, duration: 1.5 }, 8.5)
+              .to(scene.fog.color, { r: targetFogColor.r, g: targetFogColor.g, b: targetFogColor.b, duration: 1.5 }, 8.5)
+
               .to(sunMat.uniforms.brightness, { value: 5.0, duration: 1.5 }, 8.5)
               .to(sunMat.uniforms.opacity, { value: 0, duration: 0.2 }, 9.5)
               .call(() => { morphParticles.visible = true; scene.fog.density = 0.002; scene.fog.color.setHex(0x000000); }, null, 9.5)
