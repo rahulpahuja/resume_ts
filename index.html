@@ -30,6 +30,7 @@
             scroll-behavior: smooth; 
             overflow-x: hidden; 
             font-family: 'Inter', sans-serif; 
+            zoom: 100%;
         }
         
         
@@ -123,6 +124,7 @@
         const App = () => {
             const [active, setActive] = useState('eng');
             const currentTheme = SECTIONS.find(s => s.id === active) || SECTIONS[0];
+            const { motion } = window;
 
             useEffect(() => {
                 const observer = new IntersectionObserver((entries) => {
@@ -133,6 +135,32 @@
                 document.querySelectorAll('section').forEach(s => observer.observe(s));
                 return () => observer.disconnect();
             }, []);
+
+            const handleNavClick = (e, id) => {
+                e.preventDefault();
+                const element = document.getElementById(id);
+                if (element) {
+                    element.scrollIntoView({ behavior: 'smooth' });
+                }
+            };
+
+            const sectionVariants = {
+                hidden: { opacity: 0, y: 50 },
+                visible: { 
+                    opacity: 1, 
+                    y: 0,
+                    transition: { 
+                        duration: 0.8, 
+                        ease: "easeOut",
+                        staggerChildren: 0.2 
+                    }
+                }
+            };
+
+            const itemVariants = {
+                hidden: { opacity: 0, y: 20 },
+                visible: { opacity: 1, y: 0, transition: { duration: 0.5 } }
+            };
 
             return (
                 <div className="relative">
@@ -152,6 +180,7 @@
                         <div className="bg-black/90 backdrop-blur-2xl border border-white/10 p-1.5 rounded-full flex gap-1 shadow-2xl">
                             {SECTIONS.map((s) => (
                                 <a key={s.id} href={`#${s.id}`} 
+                                   onClick={(e) => handleNavClick(e, s.id)}
                                    className={`px-6 md:px-8 py-2.5 rounded-full text-[9px] font-bold uppercase tracking-widest transition-all duration-500 ${active === s.id ? 'text-black' : 'text-gray-500 hover:text-white'}`}
                                    style={{ backgroundColor: active === s.id ? s.color : 'transparent' }}>
                                     {s.label}
@@ -163,8 +192,14 @@
                     <main>
                         {/* 01. ENGINEERING */}
                         <section id="eng" className="section grid-bg flex flex-col justify-center items-center p-8 pt-40">
-                            <div className="max-w-6xl w-full grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
-                                <div className="lg:col-span-7">
+                            <motion.div 
+                                className="max-w-6xl w-full grid grid-cols-1 lg:grid-cols-12 gap-12 items-center"
+                                variants={sectionVariants}
+                                initial="hidden"
+                                whileInView="visible"
+                                viewport={{ once: true, amount: 0.2 }}
+                            >
+                                <motion.div className="lg:col-span-7" variants={itemVariants}>
                                     <span className="text-cyan-400 font-mono text-xs tracking-[0.4em] mb-4 block uppercase font-bold">// ARCHITECT_CORE_V2</span>
                                     <h2 className="text-6xl md:text-8xl font-black tracking-tighter mb-8 leading-none uppercase italic">Build <br/> <span className="text-cyan-400">Better.</span></h2>
                                     <p className="text-gray-400 font-mono text-sm leading-relaxed max-w-xl mb-8">Staff Engineer at CyberArk. Specializing in high-security mobile infrastructure and data analytics at global scale.</p>
@@ -174,16 +209,35 @@
                                         ))}
                                     </div>
                                     <div className="flex flex-col gap-4">
-                                        <a href="mailto:therahulpahuja@gmail.com" className="inline-block px-6 py-3 bg-cyan-500/20 border border-cyan-500/50 text-cyan-300 rounded font-mono text-xs font-bold uppercase tracking-widest hover:bg-cyan-500/30 transition-all w-fit">Get in Touch →</a>
+                                        <div className="flex items-center gap-4">
+                                            <a href="mailto:therahulpahuja@gmail.com" className="inline-block px-6 py-3 bg-cyan-500/20 border border-cyan-500/50 text-cyan-300 rounded font-mono text-xs font-bold uppercase tracking-widest hover:bg-cyan-500/30 transition-all w-fit">Get in Touch →</a>
+                                            <div className="flex gap-3 items-center ml-2 border-l border-cyan-500/30 pl-6">
+                                                <a href="https://linkedin.com/in/therahulpahuja" target="_blank" rel="noopener noreferrer" className="text-cyan-400/60 hover:text-cyan-400 hover:scale-110 transition-all" title="LinkedIn">
+                                                    <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 24 24"><path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z"/></svg>
+                                                </a>
+                                                <a href="#" target="_blank" rel="noopener noreferrer" className="text-cyan-400/60 hover:text-cyan-400 hover:scale-110 transition-all" title="YouTube">
+                                                    <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 24 24"><path d="M19.615 3.184c-3.604-.246-11.631-.245-15.23 0-3.897.266-4.356 2.62-4.385 8.816.029 6.185.484 8.549 4.385 8.816 3.6.245 11.626.246 15.23 0 3.897-.266 4.356-2.62 4.385-8.816-.029-6.185-.484-8.549-4.385-8.816zm-10.615 12.816v-8l8 3.993-8 4.007z"/></svg>
+                                                </a>
+                                                <a href="#" target="_blank" rel="noopener noreferrer" className="text-cyan-400/60 hover:text-cyan-400 hover:scale-110 transition-all" title="X (Twitter)">
+                                                    <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 24 24"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg>
+                                                </a>
+                                                <a href="#" target="_blank" rel="noopener noreferrer" className="text-cyan-400/60 hover:text-cyan-400 hover:scale-110 transition-all" title="Instagram">
+                                                    <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 24 24"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/></svg>
+                                                </a>
+                                                <a href="#" target="_blank" rel="noopener noreferrer" className="text-cyan-400/60 hover:text-cyan-400 hover:scale-110 transition-all" title="Facebook">
+                                                    <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 24 24"><path d="M9 8h-3v4h3v12h5v-12h3.642l.358-4h-4v-1.667c0-.955.192-1.333 1.115-1.333h2.885v-5h-3.808c-3.596 0-5.192 1.583-5.192 4.615v3.385z"/></svg>
+                                                </a>
+                                            </div>
+                                        </div>
                                     </div>
-                                </div>
-                                <div className="lg:col-span-5 flex justify-center">
+                                </motion.div>
+                                <motion.div className="lg:col-span-5 flex justify-center" variants={itemVariants}>
                                     <div className="profile-container">
                                         <div className="scan-bar"></div>
                                         <img src="public/profile.jpg" alt="Rahul Pahuja" className="w-full h-full object-cover" />
                                     </div>
-                                </div>
-                            </div>
+                                </motion.div>
+                            </motion.div>
                             <div className="w-screen mt-32 border-y border-white/5 py-10 overflow-hidden">
                                 <div className="ticker-text uppercase italic font-mono opacity-20">
                                     {[...CLIENTS, ...CLIENTS].map((c, i) => <span key={i} className="text-4xl font-black">{c}</span>)}
@@ -212,63 +266,81 @@
 
                         {/* 02. BLOGS */}
                         <section id="blog" className="section flex flex-col justify-center items-center p-8 bg-neutral-950/50">
-                            <div className="max-w-6xl w-full">
-                                <div className="mb-16 border-l-4 border-purple-500 pl-6">
+                            <motion.div 
+                                className="max-w-6xl w-full"
+                                variants={sectionVariants}
+                                initial="hidden"
+                                whileInView="visible"
+                                viewport={{ once: true, amount: 0.2 }}
+                            >
+                                <motion.div className="mb-16 border-l-4 border-purple-500 pl-6" variants={itemVariants}>
                                     <h2 className="text-5xl font-black uppercase italic tracking-tighter">Technical <span className="text-purple-500">Insights</span></h2>
                                     <p className="text-gray-500 font-mono text-xs mt-2 uppercase tracking-widest">Storage // Transmissions // Logs</p>
-                                </div>
+                                </motion.div>
                                 <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
                                     {BLOGS.map((blog, i) => (
-                                        <div key={i} className="glass p-8 group border border-purple-500/20 hover:border-purple-500/50 transition-all hover:shadow-lg hover:shadow-purple-500/10 cursor-pointer">
+                                        <motion.div key={i} className="glass p-8 group border border-purple-500/20 hover:border-purple-500/50 transition-all hover:shadow-lg hover:shadow-purple-500/10 cursor-pointer" variants={itemVariants}>
                                             <span className="text-[10px] font-mono text-purple-400 mb-4 block uppercase tracking-widest">[{blog.tag}]</span>
                                             <h3 className="text-xl font-bold mb-4 group-hover:text-purple-300 transition-colors">{blog.title}</h3>
                                             <p className="text-gray-400 text-sm mb-6 font-light">{blog.desc}</p>
                                             <a href="#" className="text-[10px] font-mono font-bold uppercase tracking-widest text-white underline underline-offset-4 decoration-purple-900 hover:decoration-purple-500">Read Transmission →</a>
-                                        </div>
+                                        </motion.div>
                                     ))}
                                 </div>
-                            </div>
+                            </motion.div>
                         </section>
 
                         {/* 03. WORK */}
                         <section id="work" className="section bg-black flex flex-col justify-center items-center p-8 relative overflow-hidden">
-                            <div className="max-w-6xl w-full">
-                                <div className="mb-16 border-l-4 border-rose-500 pl-6">
+                            <motion.div 
+                                className="max-w-6xl w-full"
+                                variants={sectionVariants}
+                                initial="hidden"
+                                whileInView="visible"
+                                viewport={{ once: true, amount: 0.2 }}
+                            >
+                                <motion.div className="mb-16 border-l-4 border-rose-500 pl-6" variants={itemVariants}>
                                     <h2 className="text-5xl font-black uppercase italic tracking-tighter">Professional <span className="text-rose-500">Journey</span></h2>
                                     <p className="text-gray-500 font-mono text-xs mt-2 uppercase tracking-widest">10+ Years // 50+ Projects // Global Scale</p>
-                                </div>
+                                </motion.div>
                                 
                                 <div className="grid grid-cols-1 md:grid-cols-2 gap-8 mb-12">
                                     {Object.entries(SKILLS).map(([category, items]) => (
-                                        <div key={category} className="glass p-6 border border-rose-500/20">
+                                        <motion.div key={category} className="glass p-6 border border-rose-500/20" variants={itemVariants}>
                                             <h3 className="text-rose-400 font-mono text-xs uppercase tracking-widest font-bold mb-4 block">{category}</h3>
                                             <div className="flex flex-wrap gap-2">
                                                 {items.map(skill => (
                                                     <span key={skill} className="px-3 py-1 border border-rose-500/20 rounded text-[10px] font-mono text-rose-300 bg-rose-500/5">{skill}</span>
                                                 ))}
                                             </div>
-                                        </div>
+                                        </motion.div>
                                     ))}
                                 </div>
 
-                                <div className="text-center">
+                                <motion.div className="text-center" variants={itemVariants}>
                                     <p className="text-gray-400 font-mono text-xs uppercase tracking-widest mb-6">Featured Companies</p>
                                     <div className="flex justify-center gap-4 flex-wrap">
                                         {CLIENTS.slice(0, 5).map(client => (
                                             <span key={client} className="px-4 py-2 border border-rose-500/20 rounded-full text-xs font-mono text-rose-300">{client}</span>
                                         ))}
                                     </div>
-                                </div>
-                            </div>
+                                </motion.div>
+                            </motion.div>
                         </section>
 
                         {/* 04. PROJECTS */}
                         <section id="projects" className="section bg-gradient-to-b from-black to-green-950/20 flex flex-col justify-center items-center p-8">
-                            <div className="max-w-6xl w-full">
-                                <div className="mb-16 border-l-4 border-green-400 pl-6">
+                            <motion.div 
+                                className="max-w-6xl w-full"
+                                variants={sectionVariants}
+                                initial="hidden"
+                                whileInView="visible"
+                                viewport={{ once: true, amount: 0.1 }}
+                            >
+                                <motion.div className="mb-16 border-l-4 border-green-400 pl-6" variants={itemVariants}>
                                     <h2 className="text-5xl font-black uppercase italic tracking-tighter">Featured <span className="text-green-400">Projects</span></h2>
                                     <p className="text-gray-500 font-mono text-xs mt-2 uppercase tracking-widest">Innovation // Code // Impact</p>
-                                </div>
+                                </motion.div>
                                 
                                 <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
                                     {[
@@ -276,16 +348,18 @@
                                             title: "AI Similarity",
                                             desc: "Advanced machine learning algorithm for semantic similarity matching. Enables intelligent content recommendations and duplicate detection across large datasets.",
                                             tech: ["Python", "TensorFlow", "NLP", "Vector DB"],
-                                            icon: "🤖"
+                                            icon: "🤖",
+                                            link: "https://69a65ad8cce3d69888c55e89--aquamarine-starship-b124cd.netlify.app/"
                                         },
                                         {
                                             title: "CodeForumBlogs",
                                             desc: "Community-driven platform for technical discussions and blogging. Features real-time collaboration, code syntax highlighting, and knowledge sharing among developers.",
                                             tech: ["React", "Node.js", "MongoDB", "WebSocket"],
-                                            icon: "💬"
+                                            icon: "💬",
+                                            link: "https://www.codeforumblogs.com"
                                         }
                                     ].map((project, i) => (
-                                        <div key={i} className="glass p-8 border border-green-400/30 hover:border-green-400/60 transition-all group cursor-pointer">
+                                        <motion.div key={i} className="glass p-8 border border-green-400/30 hover:border-green-400/60 transition-all group cursor-pointer" variants={itemVariants}>
                                             <div className="text-5xl mb-4">{project.icon}</div>
                                             <h3 className="text-2xl font-black text-green-300 mb-3 group-hover:text-green-200 transition-colors">{project.title}</h3>
                                             <p className="text-gray-300 text-sm leading-relaxed mb-6">{project.desc}</p>
@@ -294,28 +368,34 @@
                                                     <span key={t} className="px-2 py-1 border border-green-400/30 rounded text-[10px] font-mono text-green-300 bg-green-500/5">{t}</span>
                                                 ))}
                                             </div>
-                                            <a href="#" className="text-[10px] font-mono font-bold uppercase tracking-widest text-green-300 hover:text-green-200 underline underline-offset-4 decoration-green-900 hover:decoration-green-500">View Project →</a>
-                                        </div>
+                                            <a href={project.link || "#"} target={project.link ? "_blank" : undefined} rel={project.link ? "noopener noreferrer" : undefined} className="text-[10px] font-mono font-bold uppercase tracking-widest text-green-300 hover:text-green-200 underline underline-offset-4 decoration-green-900 hover:decoration-green-500">View Project →</a>
+                                        </motion.div>
                                     ))}
                                 </div>
 
-                                <div className="mt-12 p-8 glass border border-green-400/20 text-center">
+                                <motion.div className="mt-12 p-8 glass border border-green-400/20 text-center" variants={itemVariants}>
                                     <p className="text-gray-400 font-mono text-xs uppercase tracking-widest mb-4">More projects available on GitHub</p>
                                     <a href="https://github.com/rahulpahuja" className="inline-block px-6 py-3 bg-green-500/20 border border-green-500/50 text-green-300 rounded font-mono text-xs font-bold uppercase tracking-widest hover:bg-green-500/30 transition-all">Explore All Projects →</a>
-                                </div>
-                            </div>
+                                </motion.div>
+                            </motion.div>
                         </section>
 
                         {/* 05. ENTREPRENEURSHIP */}
                         <section id="startup" className="section bg-gradient-to-b from-cyan-950/20 to-black flex flex-col justify-center items-center p-8 relative overflow-hidden">
-                            <div className="max-w-6xl w-full">
-                                <div className="mb-16 border-l-4 border-cyan-400 pl-6">
+                            <motion.div 
+                                className="max-w-6xl w-full"
+                                variants={sectionVariants}
+                                initial="hidden"
+                                whileInView="visible"
+                                viewport={{ once: true, amount: 0.2 }}
+                            >
+                                <motion.div className="mb-16 border-l-4 border-cyan-400 pl-6" variants={itemVariants}>
                                     <h2 className="text-5xl font-black uppercase italic tracking-tighter">Building <span className="text-cyan-400">Mobile1x</span></h2>
                                     <p className="text-gray-500 font-mono text-xs mt-2 uppercase tracking-widest">Startup // Innovation // Impact</p>
-                                </div>
+                                </motion.div>
                                 
                                 <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
-                                    <div className="space-y-6">
+                                    <motion.div className="space-y-6" variants={itemVariants}>
                                         <div className="glass p-6 border border-cyan-400/30">
                                             <h3 className="text-2xl font-black text-cyan-300 mb-3">Mobile1x</h3>
                                             <p className="text-gray-300 leading-relaxed">A cutting-edge mobile development platform focused on delivering exceptional user experiences and enterprise-grade solutions. Building the future of mobile-first applications.</p>
@@ -339,33 +419,40 @@
                                                 <p className="text-gray-300 text-sm">In Development</p>
                                             </div>
                                         </div>
-                                    </div>
+                                    </motion.div>
                                     
-                                    <div className="glass p-8 border border-cyan-400/30 text-center">
+                                    <motion.div className="glass p-8 border border-cyan-400/30 text-center" variants={itemVariants}>
                                         <p className="text-6xl mb-6">🚀</p>
                                         <h3 className="text-3xl font-black text-cyan-300 mb-3">Mobile1x</h3>
                                         <p className="text-gray-400 font-mono text-[10px] uppercase tracking-widest mb-6">Next Generation Mobile Development</p>
                                         <p className="text-gray-300 text-sm leading-relaxed">Transforming ideas into scalable mobile solutions with a focus on performance, security, and user delight.</p>
-                                        <div className="mt-8 flex gap-2 text-2xl justify-center">
+                                        <div className="mt-6 mb-8 flex gap-2 text-2xl justify-center">
                                             <span>📱</span>
                                             <span>⚡</span>
                                             <span>🔒</span>
                                         </div>
-                                    </div>
+                                        <a href="https://mobile1x.com/" target="_blank" rel="noopener noreferrer" className="inline-block px-6 py-3 bg-cyan-500/20 border border-cyan-500/50 text-cyan-300 rounded font-mono text-xs font-bold uppercase tracking-widest hover:bg-cyan-500/30 transition-all">Visit Mobile1x →</a>
+                                    </motion.div>
                                 </div>
-                            </div>
+                            </motion.div>
                         </section>
 
                         {/* 06. TRAINER */}
                         <section id="trainer" className="section bg-gradient-to-b from-black to-pink-950/20 flex flex-col justify-center items-center p-8">
-                            <div className="max-w-6xl w-full">
-                                <div className="mb-16 border-l-4 border-pink-500 pl-6">
+                            <motion.div 
+                                className="max-w-6xl w-full"
+                                variants={sectionVariants}
+                                initial="hidden"
+                                whileInView="visible"
+                                viewport={{ once: true, amount: 0.1 }}
+                            >
+                                <motion.div className="mb-16 border-l-4 border-pink-500 pl-6" variants={itemVariants}>
                                     <h2 className="text-5xl font-black uppercase italic tracking-tighter">Knowledge <span className="text-pink-500">Transfer</span></h2>
                                     <p className="text-gray-500 font-mono text-xs mt-2 uppercase tracking-widest">Training // Mentorship // Growth</p>
-                                </div>
+                                </motion.div>
                                 
                                 <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center mb-12">
-                                    <div className="glass p-8 border border-pink-500/30">
+                                    <motion.div className="glass p-8 border border-pink-500/30" variants={itemVariants}>
                                         <div className="text-center mb-8">
                                             <p className="text-8xl font-black text-pink-400 mb-2">41</p>
                                             <p className="text-gray-300 font-mono text-xs uppercase tracking-widest">Trainees Trained</p>
@@ -384,9 +471,9 @@
                                                 <p className="text-gray-300 text-sm">100% Placement in Tech Industry</p>
                                             </div>
                                         </div>
-                                    </div>
+                                    </motion.div>
                                     
-                                    <div className="space-y-6">
+                                    <motion.div className="space-y-6" variants={itemVariants}>
                                         <div>
                                             <h3 className="text-2xl font-black text-pink-300 mb-4">Training Curriculum</h3>
                                             <div className="space-y-3">
@@ -417,10 +504,10 @@
                                                 ))}
                                             </div>
                                         </div>
-                                    </div>
+                                    </motion.div>
                                 </div>
 
-                                <div className="mt-16 border-t border-pink-500/20 pt-12">
+                                <motion.div className="mt-16 border-t border-pink-500/20 pt-12" variants={itemVariants}>
                                     <p className="text-gray-500 font-mono text-xs uppercase tracking-widest mb-8 block text-center">Partnerships & Organizations</p>
                                     <div className="grid grid-cols-2 gap-8 max-w-2xl mx-auto">
                                         <div className="glass p-8 border border-pink-500/20 flex flex-col items-center justify-center text-center group hover:border-pink-500/50 transition-all">
@@ -434,20 +521,26 @@
                                             <p className="text-gray-500 font-mono text-[10px] uppercase tracking-widest mt-2">Official Developer Program</p>
                                         </div>
                                     </div>
-                                </div>
-                            </div>
+                                </motion.div>
+                            </motion.div>
                         </section>
 
                         {/* 07. MUSIC */}
                         <section id="music" className="section flex flex-col justify-center items-center p-8 bg-gradient-to-b from-black via-pink-950/30 to-black">
-                            <div className="max-w-6xl w-full">
-                                <div className="mb-16 border-l-4 border-pink-500 pl-6">
+                            <motion.div 
+                                className="max-w-6xl w-full"
+                                variants={sectionVariants}
+                                initial="hidden"
+                                whileInView="visible"
+                                viewport={{ once: true, amount: 0.1 }}
+                            >
+                                <motion.div className="mb-16 border-l-4 border-pink-500 pl-6" variants={itemVariants}>
                                     <h2 className="text-5xl font-black uppercase italic tracking-tighter">Sonic <span className="text-pink-500">Canvas</span></h2>
                                     <p className="text-gray-500 font-mono text-xs mt-2 uppercase tracking-widest">Beats // Frequencies // Vibes</p>
-                                </div>
+                                </motion.div>
                                 
                                 <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center mb-12">
-                                    <div>
+                                    <motion.div variants={itemVariants}>
                                         <p className="text-gray-300 text-lg leading-relaxed mb-6">DJ RELLOW is an electronic music producer and DJ, blending high-energy house beats with ambient soundscapes. From intimate lounge sets to festival crowds, every track crafted with precision and passion.</p>
                                         <div className="space-y-4">
                                             <div className="glass p-4 border border-pink-500/20">
@@ -463,9 +556,9 @@
                                                 <p className="text-gray-300">SoundCloud • Spotify • Apple Music</p>
                                             </div>
                                         </div>
-                                    </div>
+                                    </motion.div>
                                     
-                                    <div className="glass p-8 border border-pink-500/30 text-center">
+                                    <motion.div className="glass p-8 border border-pink-500/30 text-center" variants={itemVariants}>
                                         <div className="mb-8">
                                             <p className="text-6xl mb-4">🎵</p>
                                             <h3 className="text-3xl font-black text-pink-400 mb-2">DJ RELLOW</h3>
@@ -475,10 +568,10 @@
                                             <a href="/rellow.html" className="block w-full px-6 py-3 bg-pink-500/20 border border-pink-500/50 text-pink-300 rounded font-mono text-xs font-bold uppercase tracking-widest hover:bg-pink-500/30 transition-all">Explore Portal →</a>
                                             <a href="https://soundcloud.com" className="block w-full px-6 py-3 border border-pink-500/20 text-pink-300 rounded font-mono text-xs font-bold uppercase tracking-widest hover:border-pink-500/50 transition-all">SoundCloud</a>
                                         </div>
-                                    </div>
+                                    </motion.div>
                                 </div>
 
-                                <div className="border-t border-pink-500/20 pt-12">
+                                <motion.div className="border-t border-pink-500/20 pt-12" variants={itemVariants}>
                                     <p className="text-gray-500 font-mono text-xs uppercase tracking-widest mb-6 block text-center">Recent Releases</p>
                                     <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
                                         {[
@@ -492,17 +585,23 @@
                                             </div>
                                         ))}
                                     </div>
-                                </div>
-                            </div>
+                                </motion.div>
+                            </motion.div>
                         </section>
 
                         {/* 08. ASTRO */}
                         <section id="astro" className="section flex flex-col justify-center items-center p-8 bg-gradient-to-b from-black to-amber-950/20">
-                            <div className="text-center">
-                                <h2 className="text-7xl md:text-9xl font-serif italic text-amber-400 mb-4">Celestial</h2>
-                                <p className="text-amber-100/40 font-mono tracking-[0.5em] text-xs uppercase underline decoration-amber-900 underline-offset-8">Observation Logs 2026</p>
-                                <p className="text-amber-100/30 font-light mt-8 max-w-2xl mx-auto">A personal exploration of cosmic patterns, data visualization, and the intersection of technology and astronomy.</p>
-                            </div>
+                            <motion.div 
+                                className="text-center"
+                                variants={sectionVariants}
+                                initial="hidden"
+                                whileInView="visible"
+                                viewport={{ once: true, amount: 0.5 }}
+                            >
+                                <motion.h2 className="text-7xl md:text-9xl font-serif italic text-amber-400 mb-4" variants={itemVariants}>Celestial</motion.h2>
+                                <motion.p className="text-amber-100/40 font-mono tracking-[0.5em] text-xs uppercase underline decoration-amber-900 underline-offset-8" variants={itemVariants}>Observation Logs 2026</motion.p>
+                                <motion.p className="text-amber-100/30 font-light mt-8 max-w-2xl mx-auto" variants={itemVariants}>A personal exploration of cosmic patterns, data visualization, and the intersection of technology and astronomy.</motion.p>
+                            </motion.div>
                         </section>
 
                         {/* FOOTER */}
