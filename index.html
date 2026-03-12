@@ -1,75 +1,520 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <link rel="icon" type="image/svg+xml" href="/vite.svg" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <meta name="description" content="Rahul Pahuja - Staff Software Engineer specializing in Android & iOS development with experience in cyber security, banking, IoT & video streaming." />
-    <title>Rahul Pahuja | Mobile Engineer</title>
-    <!-- Google tag (gtag.js) -->
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Rahul Pahuja | Staff Software Engineer & DJ</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://unpkg.com/react@18/umd/react.development.js"></script>
+    <script src="https://unpkg.com/react-dom@18/umd/react-dom.development.js"></script>
+    <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+    <script src="https://unpkg.com/framer-motion@10.16.4/dist/framer-motion.js"></script>
+    
+    <!-- Google Analytics -->
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-QS8D87DMKZ"></script>
     <script>
-      window.dataLayer = window.dataLayer || [];
-      function gtag(){dataLayer.push(arguments);}
-      gtag('js', new Date());
-      gtag('config', 'G-QS8D87DMKZ');
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+        gtag('config', 'G-QS8D87DMKZ');
     </script>
-  </head>
-  <body>
-    <div id="root"></div>
-    <script type="module" src="/src/main.tsx"></script>
-    <a href="/rellow.html" id="dj-portal-btn">
-      <span>🎧</span> DJ RELLOW
-    </a>
-
+    
     <style>
-      #dj-portal-btn {
-        position: fixed;
-        top: 20px;
-        right: 20px; /* Moves it to top-right corner */
-        z-index: 99999; /* Ensures it sits on top of everything */
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;700;900&family=JetBrains+Mono:wght@400;700&family=Playfair+Display:ital,wght@0,900;1,900&display=swap');
         
-        background-color: #000000;
-        color: #F0FF00; /* Neon Yellow matches your DJ site */
-        border: 2px solid #F0FF00;
+        * { margin: 0; padding: 0; box-sizing: border-box; }
         
-        text-decoration: none;
-        font-family: system-ui, -apple-system, sans-serif;
-        font-weight: 900;
-        font-size: 14px;
-        text-transform: uppercase;
-        letter-spacing: 1px;
-        
-        padding: 12px 24px;
-        border-radius: 4px;
-        box-shadow: 0 4px 15px rgba(0,0,0,0.5);
-        transition: all 0.2s ease;
-        
-        display: flex;
-        align-items: center;
-        gap: 10px;
-        backdrop-filter: blur(5px);
-      }
-
-      #dj-portal-btn:hover {
-        background-color: #F0FF00;
-        color: #000000;
-        transform: translateY(-2px);
-        box-shadow: 0 0 20px #F0FF00; /* Neon Glow on hover */
-      }
-
-      /* Mobile Support: Moves to bottom if screen is small so it doesn't block header */
-      @media (max-width: 768px) {
-        #dj-portal-btn {
-          top: auto;
-          bottom: 20px;
-          right: 20px;
-          font-size: 12px;
-          padding: 10px 20px;
+        body { 
+            background-color: #050505; 
+            color: white; 
+            scroll-behavior: smooth; 
+            overflow-x: hidden; 
+            font-family: 'Inter', sans-serif; 
         }
-      }
+        
+        .font-mono { font-family: 'JetBrains Mono', monospace; }
+        .font-serif { font-family: 'Playfair Display', serif; }
+        
+        .glass { 
+            background: rgba(255, 255, 255, 0.03); 
+            backdrop-filter: blur(15px); 
+            border: 1px solid rgba(255, 255, 255, 0.1); 
+        }
+        
+        .grid-bg { 
+            background-image: radial-gradient(circle at 1px 1px, rgba(0, 242, 255, 0.05) 1px, transparent 0); 
+            background-size: 40px 40px; 
+        }
+        
+        .profile-container { 
+            width: 280px; 
+            height: 280px; 
+            border-radius: 50%; 
+            border: 2px solid #00F2FF; 
+            position: relative; 
+            overflow: hidden; 
+            box-shadow: 0 0 30px rgba(0, 242, 255, 0.2); 
+        }
+        
+        .scan-bar { 
+            position: absolute; 
+            width: 100%; 
+            height: 3px; 
+            background: #00F2FF; 
+            top: 0; 
+            animation: scan 3s linear infinite; 
+            box-shadow: 0 0 15px #00F2FF; 
+            z-index: 10; 
+        }
+        
+        @keyframes scan { 
+            0% { top: -5% } 
+            100% { top: 105% } 
+        }
+        
+        .ticker-text { 
+            animation: ticker 40s linear infinite; 
+            display: flex; 
+            gap: 4rem; 
+            width: max-content; 
+        }
+        
+        @keyframes ticker { 
+            from { transform: translateX(0); } 
+            to { transform: translateX(-50%); } 
+        }
+        
+        .section { min-height: 100vh; }
     </style>
-    </body>
-</html>
-  </body>
+</head>
+<body>
+    <div id="root"></div>
+
+    <script type="text/babel">
+        const { useState, useEffect } = React;
+
+        const SECTIONS = [
+            { id: 'eng', label: 'Engineering', color: '#00F2FF', sub: 'Staff Software Engineer' },
+            { id: 'blog', label: 'Blogs', color: '#A855F7', sub: 'Technical Articles' },
+            { id: 'work', label: 'Work', color: '#FF2D55', sub: 'Professional Journey' },
+            { id: 'projects', label: 'Projects', color: '#00FF88', sub: 'Showcase & Innovation' },
+            { id: 'startup', label: 'Startup', color: '#00D9FF', sub: 'Entrepreneurship' },
+            { id: 'trainer', label: 'Trainer', color: '#FF6B9D', sub: 'Education & Mentorship' },
+            { id: 'music', label: 'Music', color: '#FF006E', sub: 'DJ & Production' },
+            { id: 'astro', label: 'Astro', color: '#FFD700', sub: 'Celestial Data' }
+        ];
+
+        const BLOGS = [
+            { title: "Building Enterprise Security with TeeSDK", tag: "Security", desc: "Hardware-backed protection for enterprise-grade mobile applications." },
+            { title: "Real-time Analytics: Conviva SDK Architecture", tag: "Architecture", desc: "Processing 12 billion metric computations per minute at scale." },
+            { title: "Mobile Banking: Lessons from Bankwest", tag: "FinTech", desc: "Implementing secure currency flows and self-service features." }
+        ];
+
+        const CLIENTS = ["CyberArk", "Coforge", "CBA", "Bankwest", "Conviva", "Intellicus", "Chevron", "Shell", "Wipro"];
+
+        const SKILLS = {
+            mobile: ["Android", "iOS", "Kotlin", "Swift", "React Native"],
+            backend: ["Java", "Python", "Node.js", "Spring Boot", "Firebase"],
+            devops: ["CI/CD", "Jenkins", "GitHub", "Docker", "Kubernetes"],
+            security: ["TEE SDK", "DataStore", "Authentication", "Encryption"]
+        };
+
+        const App = () => {
+            const [active, setActive] = useState('eng');
+            const currentTheme = SECTIONS.find(s => s.id === active) || SECTIONS[0];
+
+            useEffect(() => {
+                const observer = new IntersectionObserver((entries) => {
+                    entries.forEach(entry => { 
+                        if (entry.isIntersecting) setActive(entry.target.id); 
+                    });
+                }, { threshold: 0.4 });
+                document.querySelectorAll('section').forEach(s => observer.observe(s));
+                return () => observer.disconnect();
+            }, []);
+
+            return (
+                <div className="relative">
+                    {/* FIXED HEADER */}
+                    <header className="fixed top-0 left-0 w-full z-[100] p-6 md:p-10 flex justify-between items-center pointer-events-none">
+                        <div className="pointer-events-auto">
+                            <h1 className="text-2xl font-black tracking-tighter uppercase">Rahul <span style={{ color: currentTheme.color }}>Pahuja</span></h1>
+                            <p className="text-[10px] font-mono tracking-[0.3em] opacity-50 uppercase mt-1">{currentTheme.sub}</p>
+                        </div>
+                        <div className="flex gap-4 pointer-events-auto">
+                            <a href="/rellow.html" className="bg-[#F0FF00] text-black px-5 py-2 rounded-full text-[10px] font-black uppercase tracking-widest hover:scale-105 transition-all">DJ RELLOW</a>
+                        </div>
+                    </header>
+
+                    {/* DYNAMIC NAV */}
+                    <nav className="fixed bottom-8 left-1/2 -translate-x-1/2 z-50">
+                        <div className="bg-black/90 backdrop-blur-2xl border border-white/10 p-1.5 rounded-full flex gap-1 shadow-2xl">
+                            {SECTIONS.map((s) => (
+                                <a key={s.id} href={`#${s.id}`} 
+                                   className={`px-6 md:px-8 py-2.5 rounded-full text-[9px] font-bold uppercase tracking-widest transition-all duration-500 ${active === s.id ? 'text-black' : 'text-gray-500 hover:text-white'}`}
+                                   style={{ backgroundColor: active === s.id ? s.color : 'transparent' }}>
+                                    {s.label}
+                                </a>
+                            ))}
+                        </div>
+                    </nav>
+
+                    <main>
+                        {/* 01. ENGINEERING */}
+                        <section id="eng" className="section grid-bg flex flex-col justify-center items-center p-8 pt-40">
+                            <div className="max-w-6xl w-full grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
+                                <div className="lg:col-span-7">
+                                    <span className="text-cyan-400 font-mono text-xs tracking-[0.4em] mb-4 block uppercase font-bold">// ARCHITECT_CORE_V2</span>
+                                    <h2 className="text-6xl md:text-8xl font-black tracking-tighter mb-8 leading-none uppercase italic">Build <br/> <span className="text-cyan-400">Better.</span></h2>
+                                    <p className="text-gray-400 font-mono text-sm leading-relaxed max-w-xl mb-8">Staff Engineer at CyberArk. Specializing in high-security mobile infrastructure and data analytics at global scale.</p>
+                                    <div className="flex flex-wrap gap-3 mb-8">
+                                        {["Android", "iOS", "Kotlin", "Swift", "TEE SDK"].map(s => (
+                                            <span key={s} className="px-3 py-1 border border-cyan-500/20 rounded text-[10px] font-mono text-cyan-300 bg-cyan-500/5">{s}</span>
+                                        ))}
+                                    </div>
+                                    <div className="flex flex-col gap-4">
+                                        <a href="mailto:therahulpahuja@gmail.com" className="inline-block px-6 py-3 bg-cyan-500/20 border border-cyan-500/50 text-cyan-300 rounded font-mono text-xs font-bold uppercase tracking-widest hover:bg-cyan-500/30 transition-all w-fit">Get in Touch →</a>
+                                    </div>
+                                </div>
+                                <div className="lg:col-span-5 flex justify-center">
+                                    <div className="profile-container">
+                                        <div className="scan-bar"></div>
+                                        <img src="public/profile.jpg" alt="Rahul Pahuja" className="w-full h-full object-cover" />
+                                    </div>
+                                </div>
+                            </div>
+                            <div className="w-screen mt-32 border-y border-white/5 py-10 overflow-hidden">
+                                <div className="ticker-text uppercase italic font-mono opacity-20">
+                                    {[...CLIENTS, ...CLIENTS].map((c, i) => <span key={i} className="text-4xl font-black">{c}</span>)}
+                                </div>
+                                <div className="ticker-text flex gap-12 items-center mt-8">
+                                    {[
+                                        { name: 'Conviva', logo: 'https://www.conviva.ai/wp-content/uploads/2025/11/symbol.svg' },
+                                        { name: 'Wipro', logo: 'https://commons.wikimedia.org/wiki/File:Wipro_new_logo.svg' },
+                                        { name: 'LTIMindtree', logo: 'https://www.ltm.com/content/dam/ltimcorporatewebsite/refresh-images/LTM-Logo.svg' },
+                                        { name: 'Google', logo: 'https://www.gstatic.com/marketing-cms/assets/images/f5/d3/a7f9db7045429cb6dc6be56bdcbe/google-logo-about.svg' },
+                                        { name: 'Chevron', logo: 'https://www.chevron.com/-/media/shared-media/images/hallmark-2023-theme-light.png' },
+                                        { name: 'Bankwest', logo: 'https://www.bankwest.com.au/content/dam/bankwest/system/logos/bankwest-logo.svg' },
+                                        { name: 'Intellicus', logo: 'https://www.intellicus.com/wp-content/uploads/2024/01/Intellicus_logo_light.svg' },
+                                        { name: 'CBA', logo: 'https://www.commbank.com.au/content/dam/commbank/commBank-logo.svg' },
+                                        { name: 'Cyberark', logo: 'https://www.cyberark.com/wp-content/uploads/2024/10/cyberark-logo-tagline.svg' },
+                                        { name: 'Coforge', logo: 'https://www.coforge.com/hubfs/website-assets/coforge-logo.svg' },
+                                        { name: 'Shell', logo: 'https://www.shell.com/etc.clientlibs/amidala/clientlibs/theme-base/resources/favicon/favicon.svg' }
+                                    ].map((company, i) => (
+                                        <React.Fragment key={i}>
+                                            <img src={company.logo} alt={company.name} className="h-16 w-auto object-contain" />
+                                        </React.Fragment>
+                                    ))}
+                                </div>
+                            </div>
+                        </section>
+
+                        {/* 02. BLOGS */}
+                        <section id="blog" className="section flex flex-col justify-center items-center p-8 bg-neutral-950/50">
+                            <div className="max-w-6xl w-full">
+                                <div className="mb-16 border-l-4 border-purple-500 pl-6">
+                                    <h2 className="text-5xl font-black uppercase italic tracking-tighter">Technical <span className="text-purple-500">Insights</span></h2>
+                                    <p className="text-gray-500 font-mono text-xs mt-2 uppercase tracking-widest">Storage // Transmissions // Logs</p>
+                                </div>
+                                <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+                                    {BLOGS.map((blog, i) => (
+                                        <div key={i} className="glass p-8 group border border-purple-500/20 hover:border-purple-500/50 transition-all hover:shadow-lg hover:shadow-purple-500/10 cursor-pointer">
+                                            <span className="text-[10px] font-mono text-purple-400 mb-4 block uppercase tracking-widest">[{blog.tag}]</span>
+                                            <h3 className="text-xl font-bold mb-4 group-hover:text-purple-300 transition-colors">{blog.title}</h3>
+                                            <p className="text-gray-400 text-sm mb-6 font-light">{blog.desc}</p>
+                                            <a href="#" className="text-[10px] font-mono font-bold uppercase tracking-widest text-white underline underline-offset-4 decoration-purple-900 hover:decoration-purple-500">Read Transmission →</a>
+                                        </div>
+                                    ))}
+                                </div>
+                            </div>
+                        </section>
+
+                        {/* 03. WORK */}
+                        <section id="work" className="section bg-black flex flex-col justify-center items-center p-8 relative overflow-hidden">
+                            <div className="max-w-6xl w-full">
+                                <div className="mb-16 border-l-4 border-rose-500 pl-6">
+                                    <h2 className="text-5xl font-black uppercase italic tracking-tighter">Professional <span className="text-rose-500">Journey</span></h2>
+                                    <p className="text-gray-500 font-mono text-xs mt-2 uppercase tracking-widest">10+ Years // 50+ Projects // Global Scale</p>
+                                </div>
+                                
+                                <div className="grid grid-cols-1 md:grid-cols-2 gap-8 mb-12">
+                                    {Object.entries(SKILLS).map(([category, items]) => (
+                                        <div key={category} className="glass p-6 border border-rose-500/20">
+                                            <h3 className="text-rose-400 font-mono text-xs uppercase tracking-widest font-bold mb-4 block">{category}</h3>
+                                            <div className="flex flex-wrap gap-2">
+                                                {items.map(skill => (
+                                                    <span key={skill} className="px-3 py-1 border border-rose-500/20 rounded text-[10px] font-mono text-rose-300 bg-rose-500/5">{skill}</span>
+                                                ))}
+                                            </div>
+                                        </div>
+                                    ))}
+                                </div>
+
+                                <div className="text-center">
+                                    <p className="text-gray-400 font-mono text-xs uppercase tracking-widest mb-6">Featured Companies</p>
+                                    <div className="flex justify-center gap-4 flex-wrap">
+                                        {CLIENTS.slice(0, 5).map(client => (
+                                            <span key={client} className="px-4 py-2 border border-rose-500/20 rounded-full text-xs font-mono text-rose-300">{client}</span>
+                                        ))}
+                                    </div>
+                                </div>
+                            </div>
+                        </section>
+
+                        {/* 04. PROJECTS */}
+                        <section id="projects" className="section bg-gradient-to-b from-black to-green-950/20 flex flex-col justify-center items-center p-8">
+                            <div className="max-w-6xl w-full">
+                                <div className="mb-16 border-l-4 border-green-400 pl-6">
+                                    <h2 className="text-5xl font-black uppercase italic tracking-tighter">Featured <span className="text-green-400">Projects</span></h2>
+                                    <p className="text-gray-500 font-mono text-xs mt-2 uppercase tracking-widest">Innovation // Code // Impact</p>
+                                </div>
+                                
+                                <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
+                                    {[
+                                        {
+                                            title: "AI Similarity",
+                                            desc: "Advanced machine learning algorithm for semantic similarity matching. Enables intelligent content recommendations and duplicate detection across large datasets.",
+                                            tech: ["Python", "TensorFlow", "NLP", "Vector DB"],
+                                            icon: "🤖"
+                                        },
+                                        {
+                                            title: "CodeForumBlogs",
+                                            desc: "Community-driven platform for technical discussions and blogging. Features real-time collaboration, code syntax highlighting, and knowledge sharing among developers.",
+                                            tech: ["React", "Node.js", "MongoDB", "WebSocket"],
+                                            icon: "💬"
+                                        }
+                                    ].map((project, i) => (
+                                        <div key={i} className="glass p-8 border border-green-400/30 hover:border-green-400/60 transition-all group cursor-pointer">
+                                            <div className="text-5xl mb-4">{project.icon}</div>
+                                            <h3 className="text-2xl font-black text-green-300 mb-3 group-hover:text-green-200 transition-colors">{project.title}</h3>
+                                            <p className="text-gray-300 text-sm leading-relaxed mb-6">{project.desc}</p>
+                                            <div className="flex flex-wrap gap-2 mb-6">
+                                                {project.tech.map(t => (
+                                                    <span key={t} className="px-2 py-1 border border-green-400/30 rounded text-[10px] font-mono text-green-300 bg-green-500/5">{t}</span>
+                                                ))}
+                                            </div>
+                                            <a href="#" className="text-[10px] font-mono font-bold uppercase tracking-widest text-green-300 hover:text-green-200 underline underline-offset-4 decoration-green-900 hover:decoration-green-500">View Project →</a>
+                                        </div>
+                                    ))}
+                                </div>
+
+                                <div className="mt-12 p-8 glass border border-green-400/20 text-center">
+                                    <p className="text-gray-400 font-mono text-xs uppercase tracking-widest mb-4">More projects available on GitHub</p>
+                                    <a href="https://github.com/rahulpahuja" className="inline-block px-6 py-3 bg-green-500/20 border border-green-500/50 text-green-300 rounded font-mono text-xs font-bold uppercase tracking-widest hover:bg-green-500/30 transition-all">Explore All Projects →</a>
+                                </div>
+                            </div>
+                        </section>
+
+                        {/* 05. ENTREPRENEURSHIP */}
+                        <section id="startup" className="section bg-gradient-to-b from-cyan-950/20 to-black flex flex-col justify-center items-center p-8 relative overflow-hidden">
+                            <div className="max-w-6xl w-full">
+                                <div className="mb-16 border-l-4 border-cyan-400 pl-6">
+                                    <h2 className="text-5xl font-black uppercase italic tracking-tighter">Building <span className="text-cyan-400">Mobile1x</span></h2>
+                                    <p className="text-gray-500 font-mono text-xs mt-2 uppercase tracking-widest">Startup // Innovation // Impact</p>
+                                </div>
+                                
+                                <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+                                    <div className="space-y-6">
+                                        <div className="glass p-6 border border-cyan-400/30">
+                                            <h3 className="text-2xl font-black text-cyan-300 mb-3">Mobile1x</h3>
+                                            <p className="text-gray-300 leading-relaxed">A cutting-edge mobile development platform focused on delivering exceptional user experiences and enterprise-grade solutions. Building the future of mobile-first applications.</p>
+                                        </div>
+                                        
+                                        <div className="grid grid-cols-2 gap-4">
+                                            <div className="glass p-4 border border-cyan-400/20 text-center">
+                                                <p className="text-cyan-400 font-mono text-xs uppercase tracking-widest font-bold mb-2">Focus</p>
+                                                <p className="text-gray-300 text-sm">Mobile Apps</p>
+                                            </div>
+                                            <div className="glass p-4 border border-cyan-400/20 text-center">
+                                                <p className="text-cyan-400 font-mono text-xs uppercase tracking-widest font-bold mb-2">Stack</p>
+                                                <p className="text-gray-300 text-sm">Native & Cross-platform</p>
+                                            </div>
+                                            <div className="glass p-4 border border-cyan-400/20 text-center">
+                                                <p className="text-cyan-400 font-mono text-xs uppercase tracking-widest font-bold mb-2">Team</p>
+                                                <p className="text-gray-300 text-sm">Full Stack Engineers</p>
+                                            </div>
+                                            <div className="glass p-4 border border-cyan-400/20 text-center">
+                                                <p className="text-cyan-400 font-mono text-xs uppercase tracking-widest font-bold mb-2">Status</p>
+                                                <p className="text-gray-300 text-sm">In Development</p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    
+                                    <div className="glass p-8 border border-cyan-400/30 text-center">
+                                        <p className="text-6xl mb-6">🚀</p>
+                                        <h3 className="text-3xl font-black text-cyan-300 mb-3">Mobile1x</h3>
+                                        <p className="text-gray-400 font-mono text-[10px] uppercase tracking-widest mb-6">Next Generation Mobile Development</p>
+                                        <p className="text-gray-300 text-sm leading-relaxed">Transforming ideas into scalable mobile solutions with a focus on performance, security, and user delight.</p>
+                                        <div className="mt-8 flex gap-2 text-2xl justify-center">
+                                            <span>📱</span>
+                                            <span>⚡</span>
+                                            <span>🔒</span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </section>
+
+                        {/* 06. TRAINER */}
+                        <section id="trainer" className="section bg-gradient-to-b from-black to-pink-950/20 flex flex-col justify-center items-center p-8">
+                            <div className="max-w-6xl w-full">
+                                <div className="mb-16 border-l-4 border-pink-500 pl-6">
+                                    <h2 className="text-5xl font-black uppercase italic tracking-tighter">Knowledge <span className="text-pink-500">Transfer</span></h2>
+                                    <p className="text-gray-500 font-mono text-xs mt-2 uppercase tracking-widest">Training // Mentorship // Growth</p>
+                                </div>
+                                
+                                <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center mb-12">
+                                    <div className="glass p-8 border border-pink-500/30">
+                                        <div className="text-center mb-8">
+                                            <p className="text-8xl font-black text-pink-400 mb-2">41</p>
+                                            <p className="text-gray-300 font-mono text-xs uppercase tracking-widest">Trainees Trained</p>
+                                        </div>
+                                        <div className="space-y-3">
+                                            <div className="glass p-4 border border-pink-500/20">
+                                                <p className="text-pink-400 font-mono text-[10px] uppercase tracking-widest font-bold mb-1">Program</p>
+                                                <p className="text-gray-300 text-sm">Google Mobile Development Track</p>
+                                            </div>
+                                            <div className="glass p-4 border border-pink-500/20">
+                                                <p className="text-pink-400 font-mono text-[10px] uppercase tracking-widest font-bold mb-1">Duration</p>
+                                                <p className="text-gray-300 text-sm">Comprehensive Android Bootcamp</p>
+                                            </div>
+                                            <div className="glass p-4 border border-pink-500/20">
+                                                <p className="text-pink-400 font-mono text-[10px] uppercase tracking-widest font-bold mb-1">Success Rate</p>
+                                                <p className="text-gray-300 text-sm">100% Placement in Tech Industry</p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    
+                                    <div className="space-y-6">
+                                        <div>
+                                            <h3 className="text-2xl font-black text-pink-300 mb-4">Training Curriculum</h3>
+                                            <div className="space-y-3">
+                                                <div className="border-l-2 border-pink-500 pl-4">
+                                                    <h4 className="text-pink-300 font-bold mb-1">Android Development Fundamentals</h4>
+                                                    <p className="text-gray-400 text-sm">Core concepts, Architecture, Lifecycle Management</p>
+                                                </div>
+                                                <div className="border-l-2 border-pink-500 pl-4">
+                                                    <h4 className="text-pink-300 font-bold mb-1">Java & Kotlin Programming</h4>
+                                                    <p className="text-gray-400 text-sm">Modern language features, Coroutines, Flow API</p>
+                                                </div>
+                                                <div className="border-l-2 border-pink-500 pl-4">
+                                                    <h4 className="text-pink-300 font-bold mb-1">Advanced Topics</h4>
+                                                    <p className="text-gray-400 text-sm">Jetpack Libraries, Security, Performance Optimization</p>
+                                                </div>
+                                                <div className="border-l-2 border-pink-500 pl-4">
+                                                    <h4 className="text-pink-300 font-bold mb-1">Real-World Projects</h4>
+                                                    <p className="text-gray-400 text-sm">Google-approved applications & portfolio building</p>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        
+                                        <div className="glass p-6 border border-pink-500/20">
+                                            <p className="text-pink-400 font-mono text-[10px] uppercase tracking-widest font-bold mb-3 block">Technologies Covered</p>
+                                            <div className="flex flex-wrap gap-2">
+                                                {["Java", "Kotlin", "Android SDK", "Jetpack", "Room DB", "Firebase", "REST APIs", "Unit Testing"].map(tech => (
+                                                    <span key={tech} className="px-2 py-1 border border-pink-500/20 rounded text-[10px] font-mono text-pink-300 bg-pink-500/5">{tech}</span>
+                                                ))}
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div className="mt-16 border-t border-pink-500/20 pt-12">
+                                    <p className="text-gray-500 font-mono text-xs uppercase tracking-widest mb-8 block text-center">Partnerships & Organizations</p>
+                                    <div className="grid grid-cols-2 gap-8 max-w-2xl mx-auto">
+                                        <div className="glass p-8 border border-pink-500/20 flex flex-col items-center justify-center text-center group hover:border-pink-500/50 transition-all">
+                                            <img src="https://www.ltm.com/content/dam/ltimcorporatewebsite/refresh-images/LTM-Logo.svg" alt="LTIMindtree" className="h-16 mb-4 object-contain" />
+                                            <h4 className="text-lg font-black text-pink-300 group-hover:text-pink-200 transition-colors">LTIMindtree</h4>
+                                            <p className="text-gray-500 font-mono text-[10px] uppercase tracking-widest mt-2">Enterprise Training Partner</p>
+                                        </div>
+                                        <div className="glass p-8 border border-pink-500/20 flex flex-col items-center justify-center text-center group hover:border-pink-500/50 transition-all">
+                                            <img src="https://www.gstatic.com/marketing-cms/assets/images/f5/d3/a7f9db7045429cb6dc6be56bdcbe/google-logo-about.svg" alt="Google" className="h-16 mb-4 object-contain" />
+                                            <h4 className="text-lg font-black text-pink-300 group-hover:text-pink-200 transition-colors">Google</h4>
+                                            <p className="text-gray-500 font-mono text-[10px] uppercase tracking-widest mt-2">Official Developer Program</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </section>
+
+                        {/* 07. MUSIC */}
+                        <section id="music" className="section flex flex-col justify-center items-center p-8 bg-gradient-to-b from-black via-pink-950/30 to-black">
+                            <div className="max-w-6xl w-full">
+                                <div className="mb-16 border-l-4 border-pink-500 pl-6">
+                                    <h2 className="text-5xl font-black uppercase italic tracking-tighter">Sonic <span className="text-pink-500">Canvas</span></h2>
+                                    <p className="text-gray-500 font-mono text-xs mt-2 uppercase tracking-widest">Beats // Frequencies // Vibes</p>
+                                </div>
+                                
+                                <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center mb-12">
+                                    <div>
+                                        <p className="text-gray-300 text-lg leading-relaxed mb-6">DJ RELLOW is an electronic music producer and DJ, blending high-energy house beats with ambient soundscapes. From intimate lounge sets to festival crowds, every track crafted with precision and passion.</p>
+                                        <div className="space-y-4">
+                                            <div className="glass p-4 border border-pink-500/20">
+                                                <p className="text-pink-400 font-mono text-xs uppercase tracking-widest font-bold mb-2">Genre</p>
+                                                <p className="text-gray-300">House • Techno • Deep House • Ambient</p>
+                                            </div>
+                                            <div className="glass p-4 border border-pink-500/20">
+                                                <p className="text-pink-400 font-mono text-xs uppercase tracking-widest font-bold mb-2">Equipment</p>
+                                                <p className="text-gray-300">Ableton Live • Native Instruments • Synthesizers</p>
+                                            </div>
+                                            <div className="glass p-4 border border-pink-500/20">
+                                                <p className="text-pink-400 font-mono text-xs uppercase tracking-widest font-bold mb-2">Platforms</p>
+                                                <p className="text-gray-300">SoundCloud • Spotify • Apple Music</p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    
+                                    <div className="glass p-8 border border-pink-500/30 text-center">
+                                        <div className="mb-8">
+                                            <p className="text-6xl mb-4">🎵</p>
+                                            <h3 className="text-3xl font-black text-pink-400 mb-2">DJ RELLOW</h3>
+                                            <p className="text-gray-400 font-mono text-xs uppercase tracking-widest">Frequency: 128 BPM</p>
+                                        </div>
+                                        <div className="space-y-3">
+                                            <a href="/rellow.html" className="block w-full px-6 py-3 bg-pink-500/20 border border-pink-500/50 text-pink-300 rounded font-mono text-xs font-bold uppercase tracking-widest hover:bg-pink-500/30 transition-all">Explore Portal →</a>
+                                            <a href="https://soundcloud.com" className="block w-full px-6 py-3 border border-pink-500/20 text-pink-300 rounded font-mono text-xs font-bold uppercase tracking-widest hover:border-pink-500/50 transition-all">SoundCloud</a>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div className="border-t border-pink-500/20 pt-12">
+                                    <p className="text-gray-500 font-mono text-xs uppercase tracking-widest mb-6 block text-center">Recent Releases</p>
+                                    <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+                                        {[
+                                            { title: "Neon Dreams", date: "2026" },
+                                            { title: "Digital Horizon", date: "2025" },
+                                            { title: "Midnight Frequencies", date: "2025" }
+                                        ].map((track, i) => (
+                                            <div key={i} className="glass p-4 border border-pink-500/20 hover:border-pink-500/50 transition-all text-center">
+                                                <p className="text-pink-300 font-bold mb-2">{track.title}</p>
+                                                <p className="text-gray-500 font-mono text-[10px]">{track.date}</p>
+                                            </div>
+                                        ))}
+                                    </div>
+                                </div>
+                            </div>
+                        </section>
+
+                        {/* 08. ASTRO */}
+                        <section id="astro" className="section flex flex-col justify-center items-center p-8 bg-gradient-to-b from-black to-amber-950/20">
+                            <div className="text-center">
+                                <h2 className="text-7xl md:text-9xl font-serif italic text-amber-400 mb-4">Celestial</h2>
+                                <p className="text-amber-100/40 font-mono tracking-[0.5em] text-xs uppercase underline decoration-amber-900 underline-offset-8">Observation Logs 2026</p>
+                                <p className="text-amber-100/30 font-light mt-8 max-w-2xl mx-auto">A personal exploration of cosmic patterns, data visualization, and the intersection of technology and astronomy.</p>
+                            </div>
+                        </section>
+
+                        {/* FOOTER */}
+                        <footer className="border-t border-white/5 p-8 md:p-10 bg-black/50 text-center text-gray-500 font-mono text-xs uppercase tracking-widest">
+                            <p>© 2026 Rahul Pahuja | <a href="https://github.com/rahulpahuja" className="text-white hover:text-cyan-400">GitHub</a> • <a href="https://linkedin.com/in/therahulpahuja" className="text-white hover:text-cyan-400">LinkedIn</a> • <a href="mailto:therahulpahuja@gmail.com" className="text-white hover:text-cyan-400">Email</a></p>
+                        </footer>
+                    </main>
+                </div>
+            );
+        };
+
+        const root = ReactDOM.createRoot(document.getElementById('root'));
+        root.render(<App />);
+    </script>
+</body>
 </html>

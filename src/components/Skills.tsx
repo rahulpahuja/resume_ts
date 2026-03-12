@@ -2,12 +2,13 @@ import { useState } from 'react';
 import SectionHeading from './SectionHeading';
 
 // Skill categories and their colors
+// mapped to extended palette for consistent branding
 const categories = {
-  mobile: { name: "Mobile", color: "bg-blue-500", textColor: "text-blue-200" },
-  web: { name: "Web", color: "bg-purple-500", textColor: "text-purple-200" },
-  backend: { name: "Backend", color: "bg-green-500", textColor: "text-green-200" },
-  devops: { name: "DevOps", color: "bg-amber-500", textColor: "text-amber-200" },
-  tools: { name: "Tools", color: "bg-red-500", textColor: "text-red-200" },
+  mobile: { name: "Mobile", color: "bg-primary", textColor: "text-primary-light" },
+  web: { name: "Web", color: "bg-accent", textColor: "text-accent-light" },
+  backend: { name: "Backend", color: "bg-secondary", textColor: "text-secondary-light" },
+  devops: { name: "DevOps", color: "bg-primary-dark", textColor: "text-primary-light" },
+  tools: { name: "Tools", color: "bg-accent-dark", textColor: "text-accent-light" },
 };
 
 // Skills data with categories
@@ -52,7 +53,7 @@ const Skills = () => {
     : skillsData;
     
   return (
-    <section id="skills" className="py-16 scroll-mt-20">
+    <section id="skills" className="py-20 scroll-mt-20 bg-slate-900/50">
       <SectionHeading title="Skills" subtitle="Technologies & Tools I Use" />
       
       <div className="mt-8 flex flex-wrap justify-center gap-2 mb-8">

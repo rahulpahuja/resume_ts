@@ -63,7 +63,7 @@ const ClientsMarquee = () => {
   const duplicated = useMemo(() => [...clients, ...clients], []);
 
   return (
-    <section style={{ padding: "100px 0", position: "relative" }}>
+    <section className="bg-slate-900/40" style={{ padding: "100px 0", position: "relative" }}>
       <SectionHeading title="Clients & Companies" subtitle="Organizations I've Worked With" />
 
       <div

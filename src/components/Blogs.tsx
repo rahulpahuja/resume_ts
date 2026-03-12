@@ -120,7 +120,7 @@ const Blogs = () => {
   const regularBlogs = blogs.filter(blog => !blog.featured);
   
   return (
-    <section id="blogs" className="py-16 scroll-mt-20">
+    <section id="blogs" className="py-20 scroll-mt-20 bg-slate-900/50">
       <SectionHeading title="Blogs & Articles" subtitle="Technical Insights & Project Stories" />
       
       {/* Tab Navigation */}
@@ -145,7 +145,7 @@ const Blogs = () => {
       {featuredBlogs.length > 0 && (
         <div className="mb-12">
           <h3 className="text-2xl font-bold mb-6 text-center">
-            <span className="bg-gradient-to-r from-blue-400 to-blue-600 bg-clip-text text-transparent">
+            <span className="bg-gradient-to-r from-primary to-accent bg-clip-text text-transparent">
               Featured {activeTab === 'technical' ? 'Articles' : 'Stories'}
             </span>
           </h3>
@@ -175,7 +175,7 @@ interface BlogCardProps {
 const FeaturedBlogCard: React.FC<BlogCardProps> = ({ blog, index }) => {
   return (
     <article 
-      className="group relative bg-gradient-to-br from-gray-800/50 to-gray-900/50 backdrop-blur-sm rounded-2xl overflow-hidden border border-gray-700/50 hover:border-blue-500/50 transition-all duration-500 transform hover:scale-[1.02] animate-fade-in"
+      className="group relative bg-gradient-to-br from-surface-dark/50 to-surface-dark/60 dark:from-surface-light/50 dark:to-surface-light/60 backdrop-blur-sm rounded-2xl overflow-hidden border border-gray-700/50 hover:border-primary/50 transition-all duration-500 transform hover:scale-[1.02] animate-fade-in"
       style={{ animationDelay: `${index * 0.1}s` }}
     >
       {/* Featured Badge */}
@@ -189,7 +189,7 @@ const FeaturedBlogCard: React.FC<BlogCardProps> = ({ blog, index }) => {
       <div className="p-8">
         {/* Category & Date */}
         <div className="flex items-center justify-between mb-4">
-          <span className="inline-flex items-center px-3 py-1 text-xs font-medium bg-blue-500/20 text-blue-400 rounded-full border border-blue-500/30">
+          <span className="inline-flex items-center px-3 py-1 text-xs font-medium bg-primary/20 text-primary rounded-full border border-primary/30">
             {blog.category}
           </span>
           <div className="flex items-center gap-4 text-sm text-gray-400">
@@ -239,7 +239,7 @@ const FeaturedBlogCard: React.FC<BlogCardProps> = ({ blog, index }) => {
 const BlogCard: React.FC<BlogCardProps> = ({ blog, index }) => {
   return (
     <article 
-      className="group bg-gray-800/40 backdrop-blur-sm rounded-xl overflow-hidden border border-gray-700/50 hover:border-blue-500/30 transition-all duration-300 transform hover:scale-[1.02] animate-fade-in"
+      className="group bg-gray-800/40 backdrop-blur-sm rounded-xl overflow-hidden border border-gray-700/50 hover:border-primary/30 transition-all duration-300 transform hover:scale-[1.02] animate-fade-in"
       style={{ animationDelay: `${index * 0.1}s` }}
     >
       <div className="p-6">

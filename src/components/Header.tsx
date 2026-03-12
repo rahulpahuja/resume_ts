@@ -1,9 +1,31 @@
 import { useState, useEffect } from 'react';
-import { Menu, X, Code2 } from 'lucide-react';
+import { Menu, X, Code2, Sun, Moon } from 'lucide-react';
 
 const Header = () => {
   const [isScrolled, setIsScrolled] = useState(false);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+  const [darkMode, setDarkMode] = useState(false);
+
+  // initialize theme based on localStorage or system preference
+  useEffect(() => {
+    const stored = localStorage.getItem('theme');
+    if (stored === 'dark' || (!stored && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
+      document.documentElement.classList.add('dark');
+      setDarkMode(true);
+    }
+  }, []);
+
+  const toggleTheme = () => {
+    const next = !darkMode;
+    setDarkMode(next);
+    if (next) {
+      document.documentElement.classList.add('dark');
+      localStorage.setItem('theme', 'dark');
+    } else {
+      document.documentElement.classList.remove('dark');
+      localStorage.setItem('theme', 'light');
+    }
+  };
 
   useEffect(() => {
     const handleScroll = () => {
@@ -25,7 +47,7 @@ const Header = () => {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex justify-between items-center">
           <div className="flex items-center space-x-2">
-            <Code2 className="h-8 w-8 text-blue-400" />
+            <Code2 className="h-8 w-8 text-primary" />
             <span className="font-bold text-xl md:text-2xl">Rahul Pahuja</span>
           </div>
           
@@ -35,20 +57,27 @@ const Header = () => {
               <a 
                 key={item}
                 href={`#${item.toLowerCase()}`}
-                className="text-gray-300 hover:text-white transition-colors duration-200"
+                className="text-gray-300 hover:text-white transition-colors duration-200 relative group"
               >
                 {item}
+                <span className="absolute left-0 -bottom-1 w-0 h-0.5 bg-primary transition-all group-hover:w-full"></span>
               </a>
             ))}
             <a 
               href="mailto:therahulpahuja@gmail.com"
-              className="bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded-md transition-colors duration-200"
+              className="bg-gradient-to-r from-blue-500 to-blue-600 hover:from-blue-600 hover:to-blue-700 text-white px-4 py-2 rounded-md transition-all duration-200 shadow-lg shadow-blue-500/50"
             >
               Download Resume
             </a>
           </nav>
 
-          {/* Mobile menu button */}
+          {/* Theme toggle + mobile menu button */}
+          <button
+            onClick={toggleTheme}
+            className="hidden md:inline-flex items-center justify-center text-gray-300 hover:text-white p-2 rounded-full transition-colors duration-200"
+          >
+            {darkMode ? <Sun className="h-6 w-6" /> : <Moon className="h-6 w-6" />}
+          </button>
           <button 
             className="md:hidden text-gray-300 hover:text-white"
             onClick={() => setMobileMenuOpen(!mobileMenuOpen)}

@@ -92,7 +92,7 @@ const Projects = () => {
   const projects = activeTab === 'professional' ? professionalProjects : personalProjects;
   
   return (
-    <section id="projects" className="py-16 scroll-mt-20">
+    <section id="projects" className="py-20 scroll-mt-20 bg-slate-900/40">
       <SectionHeading title="Projects" subtitle="My Work & Contributions" />
       
       <div className="flex justify-center space-x-4 mb-10">
@@ -127,7 +127,7 @@ interface ProjectCardProps {
 const ProjectCard: React.FC<ProjectCardProps> = ({ project, index }) => {
   return (
     <div 
-      className="bg-gray-800/40 backdrop-blur-sm rounded-xl overflow-hidden border border-gray-700/50 hover:border-blue-500/30 transition-all duration-300 transform hover:scale-[1.02] group"
+      className="bg-surface-dark/40 dark:bg-surface-light/40 backdrop-blur-sm rounded-xl overflow-hidden border border-gray-700/50 hover:border-primary/30 transition-all duration-300 transform hover:scale-[1.02] group"
       style={{ 
         animationDelay: `${index * 0.1}s`,
         animationName: 'fadeInUp',
@@ -136,13 +136,13 @@ const ProjectCard: React.FC<ProjectCardProps> = ({ project, index }) => {
       }}
     >
       <div className="p-6">
-        <h3 className="text-xl font-bold mb-2 group-hover:text-blue-400 transition-colors duration-300">
+        <h3 className="text-xl font-bold mb-2 group-hover:text-primary transition-colors duration-300">
           {project.title}
         </h3>
         
         <div className="flex flex-wrap gap-2 mb-3">
           {project.tags?.map((tag: string, i: number) => (
-            <span key={i} className="text-xs px-2 py-1 bg-gray-700/70 rounded-md text-gray-300">
+            <span key={i} className="text-xs px-2 py-1 bg-surface-dark/70 dark:bg-surface-light/70 rounded-md text-gray-300 dark:text-gray-700">
               {tag}
             </span>
           ))}
@@ -156,7 +156,7 @@ const ProjectCard: React.FC<ProjectCardProps> = ({ project, index }) => {
           <div className="mt-4 space-y-2">
             {project.stats.map((stat: string, i: number) => (
               <div key={i} className="flex items-center text-sm">
-                <div className="w-2 h-2 rounded-full bg-blue-500 mr-2"></div>
+                <div className="w-2 h-2 rounded-full bg-primary mr-2"></div>
                 <span className="text-gray-300">{stat}</span>
               </div>
             ))}
@@ -195,7 +195,7 @@ const TabButton: React.FC<TabButtonProps> = ({ active, onClick, children }) => (
   <button
     className={`px-6 py-2 rounded-md transition-all duration-300 ${
       active 
-        ? 'bg-blue-600 text-white' 
+        ? 'bg-primary text-white' 
         : 'bg-gray-800 text-gray-400 hover:bg-gray-700 hover:text-gray-300'
     }`}
     onClick={onClick}
@@ -215,7 +215,7 @@ const ProjectLink: React.FC<ProjectLinkProps> = ({ href, icon, text }) => (
     href={href} 
     target="_blank" 
     rel="noopener noreferrer"
-    className="inline-flex items-center gap-1 text-sm text-gray-400 hover:text-blue-400 transition-colors duration-300"
+    className="inline-flex items-center gap-1 text-sm text-gray-400 hover:text-primary transition-colors duration-300"
   >
     {icon}
     <span>{text}</span>
