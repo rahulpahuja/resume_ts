@@ -5,6 +5,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Rahul Pahuja | Staff Software Engineer & DJ</title>
+    <script src="https://unpkg.com/tone@14.8.49/build/Tone.js"></script>
     <script src="https://cdn.tailwindcss.com"></script>
     <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
     <script src="blogs.js"></script>
@@ -119,6 +120,208 @@
     <div id="root"></div>
 
     <script type="text/babel">
+        const ScrollMusicEngine = (() => {
+
+            let pad
+            let bass
+            let melody
+            let hat
+
+            let padLoop
+            let bassLoop
+            let melodyLoop
+            let hatLoop
+
+            let currentSection = null
+
+            const sections = {
+
+                eng: {
+                    bpm: 90,
+                    chords: [
+                        ["C3", "G3", "A3"],
+                        ["D3", "A3", "C4"],
+                        ["A2", "E3", "G3"],
+                        ["F3", "C4", "A3"]
+                    ]
+                },
+
+                blog: {
+                    bpm: 80,
+                    chords: [
+                        ["E3", "G3", "B3"],
+                        ["C3", "E3", "G3"],
+                        ["D3", "F3", "A3"],
+                        ["G3", "B3", "D4"]
+                    ]
+                },
+
+                work: {
+                    bpm: 95,
+                    chords: [
+                        ["C3", "E3", "G3"],
+                        ["A2", "C3", "E3"],
+                        ["F3", "A3", "C4"],
+                        ["G3", "B3", "D4"]
+                    ]
+                },
+
+                projects: {
+                    bpm: 110,
+                    chords: [
+                        ["C4", "E4", "G4"],
+                        ["D4", "F4", "A4"],
+                        ["A3", "C4", "E4"],
+                        ["G3", "B3", "D4"]
+                    ]
+                },
+
+                startup: {
+                    bpm: 105,
+                    chords: [
+                        ["D3", "F3", "A3"],
+                        ["G3", "B3", "D4"],
+                        ["A3", "C4", "E4"],
+                        ["F3", "A3", "C4"]
+                    ]
+                },
+
+                trainer: {
+                    bpm: 70,
+                    chords: [
+                        ["C3", "F3", "A3"],
+                        ["D3", "G3", "A3"],
+                        ["F3", "A3", "C4"],
+                        ["G3", "B3", "D4"]
+                    ]
+                },
+
+                music: {
+                    bpm: 120,
+                    chords: [
+                        ["C4", "E4", "G4"],
+                        ["G3", "B3", "D4"],
+                        ["A3", "C4", "E4"],
+                        ["F3", "A3", "C4"]
+                    ]
+                },
+
+                astro: {
+                    bpm: 60,
+                    chords: [
+                        ["C4", "G4", "A4"],
+                        ["E4", "B4", "G4"],
+                        ["D4", "A4", "F4"],
+                        ["A3", "E4", "C4"]
+                    ]
+                }
+
+            }
+
+            function createInstruments() {
+
+                pad = new Tone.PolySynth(Tone.Synth, {
+                    oscillator: { type: "sine" },
+                    envelope: { attack: 2, release: 4 }
+                }).toDestination()
+
+                bass = new Tone.MonoSynth({
+                    oscillator: { type: "triangle" },
+                    envelope: { attack: 0.1, release: 0.8 }
+                }).toDestination()
+
+                melody = new Tone.Synth({
+                    oscillator: { type: "triangle" },
+                    envelope: { attack: 0.05, release: 0.5 }
+                }).toDestination()
+
+                hat = new Tone.NoiseSynth({
+                    noise: { type: "white" },
+                    envelope: { attack: 0.001, decay: 0.1, sustain: 0 }
+                }).toDestination()
+
+                pad.volume.value = -18
+                bass.volume.value = -14
+                melody.volume.value = -16
+                hat.volume.value = -30
+
+            }
+
+            function stopLoops() {
+
+                padLoop?.dispose()
+                bassLoop?.dispose()
+                melodyLoop?.dispose()
+                hatLoop?.dispose()
+
+            }
+
+            function playSection(section) {
+
+                if (!sections[section]) return
+
+                currentSection = section
+
+                const data = sections[section]
+
+                Tone.Transport.bpm.value = data.bpm
+
+                stopLoops()
+
+                let step = 0
+
+                padLoop = new Tone.Loop((time) => {
+
+                    const chord = data.chords[step % data.chords.length]
+
+                    pad.triggerAttackRelease(chord, "2n", time)
+
+                    step++
+
+                }, "2n").start(0)
+
+                bassLoop = new Tone.Loop((time) => {
+
+                    const chord = data.chords[step % data.chords.length]
+
+                    bass.triggerAttackRelease(chord[0], "8n", time)
+
+                }, "4n").start(0)
+
+                melodyLoop = new Tone.Loop((time) => {
+
+                    const chord = data.chords[step % data.chords.length]
+
+                    const note = chord[Math.floor(Math.random() * chord.length)]
+
+                    melody.triggerAttackRelease(note, "16n", time)
+
+                }, "8n").start(0)
+
+                hatLoop = new Tone.Loop((time) => {
+
+                    hat.triggerAttackRelease("16n", time)
+
+                }, "8n").start(0)
+
+            }
+
+            function init() {
+
+                createInstruments()
+
+                Tone.Transport.start()
+
+            }
+
+            return {
+
+                init,
+                playSection
+
+            }
+
+        })()
         const { useState, useEffect } = React;
 
         const SECTIONS = [
@@ -156,15 +359,28 @@
             useEffect(() => {
 
                 const observer = new IntersectionObserver((entries) => {
+
                     entries.forEach(entry => {
-                        if (entry.isIntersecting) setActive(entry.target.id);
-                    });
-                }, { threshold: 0.4 });
 
-                document.querySelectorAll('section').forEach(s => observer.observe(s));
+                        if (entry.isIntersecting) {
+
+                            const id = entry.target.id
+
+                            setActive(id)
+
+                            if (window.audioStarted) {
+                                ScrollMusicEngine.playSection(id)
+                            }
+
+                        }
+
+                    })
+
+                }, { threshold: 0.4 })
+
+                document.querySelectorAll("section").forEach(s => observer.observe(s))
 
 
-                // listen for blogs loaded from blogs.js
                 const blogsHandler = (e) => {
                     setBlogs(e.detail)
                 }
@@ -172,12 +388,44 @@
                 window.addEventListener("blogsLoaded", blogsHandler)
 
 
-                return () => {
-                    observer.disconnect()
-                    window.removeEventListener("blogsLoaded", blogsHandler)
+                const unlockAudio = async () => {
+
+                    if (window.audioStarted) return
+
+                    const ctx = Tone.getContext()
+
+                    if (ctx.state !== "running") {
+                        await ctx.resume()
+                    }
+
+                    await Tone.start()
+
+                    ScrollMusicEngine.init()
+                    ScrollMusicEngine.playSection("eng")
+
+                    window.audioStarted = true
+
                 }
 
-            }, []);
+                document.addEventListener("click", unlockAudio, { once: true })
+                document.addEventListener("scroll", unlockAudio, { once: true })
+                document.addEventListener("touchstart", unlockAudio, { once: true })
+                document.addEventListener("keydown", unlockAudio, { once: true })
+                document.getElementById("enableAudio").addEventListener("click", unlockAudio)
+
+                return () => {
+
+                    observer.disconnect()
+
+                    window.removeEventListener("blogsLoaded", blogsHandler)
+
+                    document.removeEventListener("click", unlockAudio)
+
+                    document.removeEventListener("scroll", unlockAudio)
+
+                }
+
+            }, [])
             const handleNavClick = (e, id) => {
                 e.preventDefault();
                 const element = document.getElementById(id);
@@ -219,9 +467,9 @@
                                 <a
                                     href="/resume.pdf"
                                     download
-                                    class="bg-cyan-500/20 border border-cyan-500/50 text-cyan-300 px-4 py-2 rounded-full text-[10px] font-mono font-bold uppercase tracking-widest hover:bg-cyan-500/30 hover:scale-105 transition-all flex items-center gap-2"
+                                    className="bg-cyan-500/20 border border-cyan-500/50 text-cyan-300 px-4 py-2 rounded-full text-[10px] font-mono font-bold uppercase tracking-widest hover:bg-cyan-500/30 hover:scale-105 transition-all flex items-center gap-2"
                                 >
-                                    <svg viewBox="0 0 24 24" fill="currentColor" class="w-4 h-4">
+                                    <svg viewBox="0 0 24 24" fill="currentColor" className="w-4 h-4">
                                         <path d="M5 20H19V18H5V20ZM12 2L6.5 7.5L7.91 8.91L11 5.83V16H13V5.83L16.09 8.91L17.5 7.5L12 2Z" />
                                     </svg>
                                     Resume
@@ -283,6 +531,10 @@
 
                             <a href="/rellow.html" className="bg-[#F0FF00] text-black px-5 py-2 rounded-full text-[10px] font-black uppercase tracking-widest hover:scale-105 transition-all">
                                 DJ RELLOW
+                            </a>
+                            <a id="enableAudio"
+                                class="fixed bottom-6 right-6 bg-cyan-500 text-black px-4 py-2 rounded-full">
+                                Enable Sound
                             </a>
                         </div>
                     </header>
