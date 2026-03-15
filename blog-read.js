@@ -5,10 +5,8 @@
     const BLOG_DIR = "blogs"
     const BLOG_PREFIX = "/blog/"
 
-    let articleText = ""
-
     /* -------------------------
-    Create Viewer
+       Create Viewer
     ------------------------- */
 
     function createViewer() {
@@ -59,13 +57,22 @@ box-shadow:0 0 12px #00f2ff;
 z-index:10000;
 }
 
+/* readability */
+
 #blog-content{
 line-height:1.8;
 word-spacing:.05em;
 letter-spacing:.01em;
 }
 
-#blog-content p{margin-bottom:1.2rem;}
+#blog-content p{
+margin-bottom:1.2rem;
+}
+
+#blog-content h1,#blog-content h2{
+margin-top:2rem;
+margin-bottom:1rem;
+}
 
 #blog-content code{
 background:#000;
@@ -85,17 +92,11 @@ white-space:pre-wrap;
 word-break:break-word;
 }
 
+/* active section */
+
 #blog-content h2.active{
 border-left:3px solid #00f2ff;
 padding-left:10px;
-}
-
-#ai-assistant input{
-background:#020202;
-border:1px solid rgba(0,255,255,.3);
-color:#0ff;
-padding:8px;
-width:100%;
 }
 
 </style>
@@ -110,8 +111,13 @@ width:100%;
 <header class="glass border border-purple-500/40 p-6 mb-8 flex justify-between">
 
 <div>
-<p class="text-purple-400 font-mono text-[10px] uppercase tracking-widest">Transmission Log</p>
+
+<p class="text-purple-400 font-mono text-[10px] uppercase tracking-widest">
+Transmission Log
+</p>
+
 <h1 id="blog-title" class="text-3xl font-black text-white"></h1>
+
 </div>
 
 <button id="blog-close"
@@ -125,13 +131,8 @@ Exit
 
 <div id="voice-controls"></div>
 
-<div id="ai-assistant" class="glass border border-cyan-500/30 p-6 mb-6">
-<p class="text-cyan-400 font-mono text-xs uppercase mb-3">Ask the Article</p>
-<input id="ai-question" placeholder="Ask something about this article..." />
-<div id="ai-answer" class="text-gray-300 text-sm mt-3"></div>
-</div>
-
-<article id="blog-content" class="prose prose-invert max-w-none"></article>
+<article id="blog-content"
+class="prose prose-invert max-w-none"></article>
 
 </div>
 `
@@ -148,7 +149,7 @@ Exit
     }
 
     /* -------------------------
-    Matrix Rain
+       Matrix Rain
     ------------------------- */
 
     function matrixRain() {
@@ -164,7 +165,7 @@ Exit
         const columns = canvas.width / fontSize
         const drops = [...Array(columns)].fill(1)
 
-        setInterval(() => {
+        function draw() {
 
             ctx.fillStyle = "rgba(0,0,0,0.05)"
             ctx.fillRect(0, 0, canvas.width, canvas.height)
@@ -182,12 +183,14 @@ Exit
 
             })
 
-        }, 33)
+        }
+
+        setInterval(draw, 33)
 
     }
 
     /* -------------------------
-    Neural Background
+       Neural Background
     ------------------------- */
 
     function neuralBackground() {
@@ -198,7 +201,7 @@ Exit
         canvas.width = window.innerWidth
         canvas.height = window.innerHeight
 
-        const nodes = [...Array(50)].map(() => ({
+        const nodes = [...Array(60)].map(() => ({
             x: Math.random() * canvas.width,
             y: Math.random() * canvas.height,
             vx: (Math.random() - .5) * .4,
@@ -218,16 +221,19 @@ Exit
                 ctx.fillRect(n.x, n.y, 2, 2)
 
                 nodes.forEach(m => {
+
                     const dx = n.x - m.x
                     const dy = n.y - m.y
                     const d = Math.sqrt(dx * dx + dy * dy)
 
                     if (d < 120) {
+
                         ctx.strokeStyle = "rgba(0,242,255,.1)"
                         ctx.beginPath()
                         ctx.moveTo(n.x, n.y)
                         ctx.lineTo(m.x, m.y)
                         ctx.stroke()
+
                     }
 
                 })
@@ -243,7 +249,7 @@ Exit
     }
 
     /* -------------------------
-    Progress HUD
+       Progress HUD
     ------------------------- */
 
     function progressHUD() {
@@ -251,27 +257,163 @@ Exit
         const bar = document.getElementById("reading-progress")
 
         window.addEventListener("scroll", () => {
+
             const h = document.documentElement
             const scrolled = h.scrollTop / (h.scrollHeight - h.clientHeight)
+
             bar.style.width = scrolled * 100 + "%"
+
         })
 
     }
 
     /* -------------------------
-    Section AI Insights
+       Typing paragraphs
     ------------------------- */
 
-    function generateInsights(text) {
+    function typeParagraphs() {
 
-        const sentences = text.split(". ").filter(s => s.length > 40)
+        document.querySelectorAll("#blog-content p").forEach(p => {
 
-        return sentences.slice(0, 4)
+            const text = p.innerText
+            p.innerText = ""
+
+            let i = 0
+
+            function type() {
+
+                if (i < text.length) {
+                    p.innerText += text.charAt(i)
+                    i++
+                    setTimeout(type, 8)
+                }
+
+            }
+
+            type()
+
+        })
 
     }
 
     /* -------------------------
-    Voice Narration
+       Section highlight
+    ------------------------- */
+
+    function activateSections() {
+
+        const sections = document.querySelectorAll("#blog-content h2")
+
+        const observer = new IntersectionObserver(entries => {
+
+            entries.forEach(e => {
+                if (e.isIntersecting) {
+                    sections.forEach(s => s.classList.remove("active"))
+                    e.target.classList.add("active")
+                }
+            })
+
+        }, { threshold: .4 })
+
+        sections.forEach(s => observer.observe(s))
+
+    }
+
+    /* -------------------------
+       Section Summaries
+    ------------------------- */
+
+    function generateSectionSummaries(md) {
+
+        const sections = md.split(/\n##\s+/)
+
+        let results = []
+
+        sections.forEach((sec, i) => {
+
+            let title = "Introduction"
+            let body = sec
+
+            if (i > 0) {
+                const parts = sec.split("\n")
+                title = parts.shift()
+                body = parts.join(" ")
+            }
+
+            body = body
+                .replace(/```[\s\S]*?```/g, " ")
+                .replace(/[#>*`]/g, " ")
+                .replace(/\n+/g, " ")
+                .replace(/\s+/g, " ")
+                .trim()
+
+            const sentences = body.split(". ").filter(s => s.length > 40)
+
+            if (!sentences.length) return
+
+            const keywords = [
+                "architecture", "performance", "security",
+                "analytics", "mobile", "system", "design",
+                "android", "ios", "api", "scaling"
+            ]
+
+            const scored = sentences.map(s => {
+                let score = 0
+                keywords.forEach(k => {
+                    if (s.toLowerCase().includes(k)) score++
+                })
+                return { sentence: s, score }
+            })
+
+            scored.sort((a, b) => b.score - a.score)
+
+            results.push({
+                title,
+                summary: scored.slice(0, 2).map(s => s.sentence)
+            })
+
+        })
+
+        return results
+
+    }
+
+    function renderSummary(sections) {
+
+        const box = document.getElementById("ai-summary")
+
+        let html = `
+<div class="glass border border-yellow-500/30 p-6 mb-6">
+<p class="text-yellow-400 font-mono text-xs uppercase mb-4">
+AI Insights
+</p>
+`
+
+        sections.forEach(sec => {
+
+            html += `
+<div class="mb-4">
+
+<p class="text-cyan-400 font-mono text-xs uppercase mb-1">
+${sec.title}
+</p>
+
+<ul class="text-gray-300 text-sm list-disc ml-4">
+${sec.summary.map(s => `<li>${s}</li>`).join("")}
+</ul>
+
+</div>
+`
+
+        })
+
+        html += `</div>`
+        box.innerHTML = html
+
+    }
+
+    /* -------------------------
+       Voice narration
     ------------------------- */
 
     function renderVoice(text) {
@@ -286,8 +428,15 @@ Exit
 AI Narration
 </span>
 
-<button id="voice-play" class="px-3 py-1 border border-cyan-500/40 text-cyan-300 font-mono text-xs">Play</button>
-<button id="voice-stop" class="px-3 py-1 border border-cyan-500/40 text-cyan-300 font-mono text-xs">Stop</button>
+<button id="voice-play"
+class="px-3 py-1 border border-cyan-500/40 text-cyan-300 font-mono text-xs">
+Play
+</button>
+
+<button id="voice-stop"
+class="px-3 py-1 border border-cyan-500/40 text-cyan-300 font-mono text-xs">
+Stop
+</button>
 
 </div>
 `
@@ -308,43 +457,23 @@ AI Narration
     }
 
     /* -------------------------
-    AI Assistant
+       Syntax highlight
     ------------------------- */
 
-    function setupAssistant() {
+    async function highlight() {
 
-        const input = document.getElementById("ai-question")
-        const answer = document.getElementById("ai-answer")
+        const { getHighlighter } = await import("https://unpkg.com/shiki@1.0.0/dist/index.mjs")
+        const highlighter = await getHighlighter({ theme: "nord" })
 
-        input.addEventListener("keydown", e => {
-
-            if (e.key !== "Enter") return
-
-            const q = input.value.toLowerCase()
-
-            if (q.includes("summary") || q.includes("summarize")) {
-                answer.innerText = generateInsights(articleText).join(". ")
-                return
-            }
-
-            if (q.includes("problem")) {
-                answer.innerText = "This article explains architecture and implementation details discussed in the document."
-                return
-            }
-
-            if (q.includes("insight")) {
-                answer.innerText = generateInsights(articleText).join(". ")
-                return
-            }
-
-            answer.innerText = "Try asking: summarize, insights, or problem."
-
+        document.querySelectorAll("pre code").forEach(block => {
+            const html = highlighter.codeToHtml(block.innerText, { lang: "javascript" })
+            block.parentElement.outerHTML = html
         })
 
     }
 
     /* -------------------------
-    Load Blog
+       Load Blog
     ------------------------- */
 
     async function openBlog(slug) {
@@ -352,48 +481,52 @@ AI Narration
         const viewer = createViewer()
         viewer.classList.remove("hidden")
 
-        const safeSlug = slug.replace(/[^a-z0-9\-]/gi, "")
+        const url = `https://raw.githubusercontent.com/\${OWNER}/\${REPO}/main/\${BLOG_DIR}/\${slug}.md\`
 
-        const url = `https://raw.githubusercontent.com/${OWNER}/${REPO}/main/${BLOG_DIR}/${safeSlug}.md`
+const res=await fetch(url)
+const md=await res.text()
 
-        const res = await fetch(url)
-        const md = await res.text()
+const clean=md
+.replace(/title:.*\n/,"")
+.replace(/tag:.*\n/,"")
+.replace(/description:.*\n/,"")
 
-        const clean = md
-            .replace(/title:.*\n/, "")
-            .replace(/tag:.*\n/, "")
-            .replace(/description:.*\n/, "")
+marked.setOptions({gfm:true,breaks:true})
 
-        marked.setOptions({ gfm: true, breaks: true })
+const html=marked.parse(clean)
 
-        const html = marked.parse(clean)
+document.getElementById("blog-title").innerText=
+md.match(/title:\s*(.*)/)?.[1]||slug
 
-        document.getElementById("blog-title").innerText =
-            md.match(/title:\s*(.*)/)?.[1] || slug
+document.getElementById("blog-content").innerHTML=html
 
-        document.getElementById("blog-content").innerHTML = html
+const summaries=generateSectionSummaries(clean)
+renderSummary(summaries)
 
-        articleText = clean
-            .replace(/```[\s\S]*?```/g, " ")
-            .replace(/[#>*`]/g, " ")
-            .replace(/\n+/g, " ")
+const text=clean
+.replace(/```[\s\S]*? ```/g," ")
+.replace(/[#>*`]/g," ")
+.replace(/\n+/g, " ")
             .replace(/\s+/g, " ")
             .trim()
 
-        renderVoice(articleText)
+        renderVoice(text)
 
-        setupAssistant()
+        highlight()
 
         matrixRain()
         neuralBackground()
+
         progressHUD()
+        typeParagraphs()
+        activateSections()
 
         window.scrollTo(0, 0)
 
     }
 
     /* -------------------------
-    Click interceptor
+       Click interceptor
     ------------------------- */
 
     function interceptClicks() {
@@ -402,13 +535,11 @@ AI Narration
 
             const link = e.target.closest("a")
             if (!link) return
-
-            const href = link.getAttribute("href")
-            if (!href || !href.endsWith(".md")) return
+            if (!link.href.includes("/blogs/")) return
 
             e.preventDefault()
 
-            const slug = href.split("/").pop().replace(".md", "")
+            const slug = link.href.split("/").pop().replace(".md", "")
 
             history.pushState({}, "", BLOG_PREFIX + slug)
 
@@ -419,23 +550,21 @@ AI Narration
     }
 
     /* -------------------------
-    Routing
+       Routing
     ------------------------- */
 
     function handleRoute() {
 
-        const path = window.location.pathname
+        const path = location.pathname
         if (!path.startsWith(BLOG_PREFIX)) return
 
-        const slug = decodeURIComponent(path.replace(BLOG_PREFIX, ""))
-        if (!slug) return
-
+        const slug = path.replace(BLOG_PREFIX, "")
         openBlog(slug)
 
     }
 
     /* -------------------------
-    Init
+       Init
     ------------------------- */
 
     window.addEventListener("DOMContentLoaded", () => {
