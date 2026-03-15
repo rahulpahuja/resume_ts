@@ -1,0 +1,27 @@
+content:
+  - name: blogs
+    label: Blogs
+    type: collection
+    path: blogs
+    format: markdown
+    fields:
+
+      - name: title
+        label: Title
+        type: text
+
+      - name: date
+        label: Date
+        type: date
+
+      - name: tag
+        label: Tag
+        type: text
+
+      - name: description
+        label: Description
+        type: text
+
+      - name: body
+        label: Content
+        type: rich-text
