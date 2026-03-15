@@ -55,11 +55,11 @@
 
         if (!blogs.length) return
 
-        if (window.BLOGS) {
+        window.BLOGS = blogs
 
-            window.BLOGS.splice(0, window.BLOGS.length, ...blogs)
-
-        }
+        window.dispatchEvent(
+            new CustomEvent("blogsLoaded", { detail: blogs })
+        )
 
     }
 
