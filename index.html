@@ -94,7 +94,8 @@
         .ticker-text {
             animation: ticker 40s linear infinite;
             display: flex;
-            gap: 4rem;
+            align-items: center;
+            gap: 1.5rem;
             width: max-content;
         }
 
@@ -325,7 +326,7 @@
                                 <div className="ticker-text uppercase italic font-mono opacity-20">
                                     {[...CLIENTS, ...CLIENTS].map((c, i) => <span key={i} className="text-4xl font-black">{c}</span>)}
                                 </div>
-                                <div className="ticker-text flex gap-12 items-center mt-8">
+                                <div className="ticker-text flex gap-6 items-center mt-8">
                                     {[
                                         { name: 'Conviva', logo: 'https://www.conviva.ai/wp-content/uploads/2025/11/symbol.svg' },
                                         { name: 'Wipro', logo: 'https://commons.wikimedia.org/wiki/File:Wipro_new_logo.svg' },
@@ -340,7 +341,11 @@
                                         { name: 'Shell', logo: 'https://www.shell.com/etc.clientlibs/amidala/clientlibs/theme-base/resources/favicon/favicon.svg' }
                                     ].map((company, i) => (
                                         <React.Fragment key={i}>
-                                            <img src={company.logo} alt={company.name} className="h-16 w-auto object-contain" />
+                                            <img
+                                                src={company.logo}
+                                                alt={company.name}
+                                                className="h-10 w-auto object-contain opacity-70 hover:opacity-100 transition"
+                                            />
                                         </React.Fragment>
                                     ))}
                                 </div>
