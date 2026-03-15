@@ -361,7 +361,7 @@
                                     <p className="text-gray-500 font-mono text-xs mt-2 uppercase tracking-widest">Storage // Transmissions // Logs</p>
                                 </motion.div>
                                 <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-                                    {BLOGS.map((blog, i) => (
+                                    {blogs.map((blog, i) => (
                                         <motion.div key={i} className="glass p-8 group border border-purple-500/20 hover:border-purple-500/50 transition-all hover:shadow-lg hover:shadow-purple-500/10 cursor-pointer" variants={itemVariants}>
                                             <span className="text-[10px] font-mono text-purple-400 mb-4 block uppercase tracking-widest">[{blog.tag}]</span>
                                             <h3 className="text-xl font-bold mb-4 group-hover:text-purple-300 transition-colors">{blog.title}</h3>
