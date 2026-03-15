@@ -146,7 +146,7 @@
         const App = () => {
             const [active, setActive] = useState('eng');
             const currentTheme = SECTIONS.find(s => s.id === active) || SECTIONS[0];
-            const motion = window.Motion ? window.Motion.motion : null;
+            const { motion } = window.Motion || {};
 
             useEffect(() => {
                 const observer = new IntersectionObserver((entries) => {
