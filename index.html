@@ -148,19 +148,35 @@
 
         const App = () => {
             const [active, setActive] = useState('eng');
+            const [blogs, setBlogs] = useState(BLOGS);
             const currentTheme = SECTIONS.find(s => s.id === active) || SECTIONS[0];
             const { motion } = window.Motion || {};
 
             useEffect(() => {
+
                 const observer = new IntersectionObserver((entries) => {
                     entries.forEach(entry => {
                         if (entry.isIntersecting) setActive(entry.target.id);
                     });
                 }, { threshold: 0.4 });
-                document.querySelectorAll('section').forEach(s => observer.observe(s));
-                return () => observer.disconnect();
-            }, []);
 
+                document.querySelectorAll('section').forEach(s => observer.observe(s));
+
+
+                // listen for blogs loaded from blogs.js
+                const blogsHandler = (e) => {
+                    setBlogs(e.detail)
+                }
+
+                window.addEventListener("blogsLoaded", blogsHandler)
+
+
+                return () => {
+                    observer.disconnect()
+                    window.removeEventListener("blogsLoaded", blogsHandler)
+                }
+
+            }, []);
             const handleNavClick = (e, id) => {
                 e.preventDefault();
                 const element = document.getElementById(id);
