@@ -5,6 +5,8 @@
     const BLOG_DIR = "blogs"
     const BLOG_PREFIX = "/blog/"
 
+    let blogIndex = []
+
     /* -------------------------
        Create Viewer
     ------------------------- */
@@ -12,10 +14,13 @@
     function createViewer() {
 
         let viewer = document.getElementById("cyberpunk-blog")
+
         if (viewer) return viewer
 
         viewer = document.createElement("div")
+
         viewer.id = "cyberpunk-blog"
+
         viewer.className = "fixed inset-0 z-[9999] hidden bg-black/95 overflow-y-auto"
 
         viewer.innerHTML = `
@@ -57,21 +62,12 @@ box-shadow:0 0 12px #00f2ff;
 z-index:10000;
 }
 
-/* readability */
+/* readability fix */
 
 #blog-content{
-line-height:1.8;
+line-height:1.7;
 word-spacing:.05em;
 letter-spacing:.01em;
-}
-
-#blog-content p{
-margin-bottom:1.2rem;
-}
-
-#blog-content h1,#blog-content h2{
-margin-top:2rem;
-margin-bottom:1rem;
 }
 
 #blog-content code{
@@ -92,11 +88,11 @@ white-space:pre-wrap;
 word-break:break-word;
 }
 
-/* active section */
+/* section highlight */
 
-#blog-content h2.active{
+#blog-content section.active{
 border-left:3px solid #00f2ff;
-padding-left:10px;
+padding-left:12px;
 }
 
 </style>
@@ -149,7 +145,7 @@ class="prose prose-invert max-w-none"></article>
     }
 
     /* -------------------------
-       Matrix Rain
+       Matrix Rain (NEW)
     ------------------------- */
 
     function matrixRain() {
@@ -179,6 +175,7 @@ class="prose prose-invert max-w-none"></article>
                 ctx.fillText(text, i * fontSize, y * fontSize)
 
                 if (y * fontSize > canvas.height && Math.random() > 0.975) drops[i] = 0
+
                 drops[i]++
 
             })
@@ -268,7 +265,7 @@ class="prose prose-invert max-w-none"></article>
     }
 
     /* -------------------------
-       Typing paragraphs
+       Typing Paragraphs (NEW)
     ------------------------- */
 
     function typeParagraphs() {
@@ -283,9 +280,12 @@ class="prose prose-invert max-w-none"></article>
             function type() {
 
                 if (i < text.length) {
+
                     p.innerText += text.charAt(i)
                     i++
+
                     setTimeout(type, 8)
+
                 }
 
             }
@@ -297,7 +297,7 @@ class="prose prose-invert max-w-none"></article>
     }
 
     /* -------------------------
-       Section highlight
+       Scroll Highlights (NEW)
     ------------------------- */
 
     function activateSections() {
@@ -307,10 +307,14 @@ class="prose prose-invert max-w-none"></article>
         const observer = new IntersectionObserver(entries => {
 
             entries.forEach(e => {
+
                 if (e.isIntersecting) {
+
                     sections.forEach(s => s.classList.remove("active"))
                     e.target.classList.add("active")
+
                 }
+
             })
 
         }, { threshold: .4 })
@@ -320,95 +324,34 @@ class="prose prose-invert max-w-none"></article>
     }
 
     /* -------------------------
-       Section Summaries
+       Summary Generator
     ------------------------- */
 
-    function generateSectionSummaries(md) {
+    function generateSummary(text) {
 
-        const sections = md.split(/\n##\s+/)
-
-        let results = []
-
-        sections.forEach((sec, i) => {
-
-            let title = "Introduction"
-            let body = sec
-
-            if (i > 0) {
-                const parts = sec.split("\n")
-                title = parts.shift()
-                body = parts.join(" ")
-            }
-
-            body = body
-                .replace(/```[\s\S]*?```/g, " ")
-                .replace(/[#>*`]/g, " ")
-                .replace(/\n+/g, " ")
-                .replace(/\s+/g, " ")
-                .trim()
-
-            const sentences = body.split(". ").filter(s => s.length > 40)
-
-            if (!sentences.length) return
-
-            const keywords = [
-                "architecture", "performance", "security",
-                "analytics", "mobile", "system", "design",
-                "android", "ios", "api", "scaling"
-            ]
-
-            const scored = sentences.map(s => {
-                let score = 0
-                keywords.forEach(k => {
-                    if (s.toLowerCase().includes(k)) score++
-                })
-                return { sentence: s, score }
-            })
-
-            scored.sort((a, b) => b.score - a.score)
-
-            results.push({
-                title,
-                summary: scored.slice(0, 2).map(s => s.sentence)
-            })
-
-        })
-
-        return results
+        const sentences = text.split(". ")
+        return sentences.slice(0, 3).join(". ") + "."
 
     }
 
-    function renderSummary(sections) {
+    function renderSummary(summary) {
 
         const box = document.getElementById("ai-summary")
 
-        let html = `
+        box.innerHTML = `
+
 <div class="glass border border-yellow-500/30 p-6 mb-6">
-<p class="text-yellow-400 font-mono text-xs uppercase mb-4">
-AI Insights
-</p>
-`
 
-        sections.forEach(sec => {
-
-            html += `
-<div class="mb-4">
-
-<p class="text-cyan-400 font-mono text-xs uppercase mb-1">
-${sec.title}
+<p class="text-yellow-400 font-mono text-xs uppercase mb-2">
+AI Summary
 </p>
 
-<ul class="text-gray-300 text-sm list-disc ml-4">
-${sec.summary.map(s => `<li>${s}</li>`).join("")}
-</ul>
+<p class="text-gray-300 text-sm leading-relaxed">
+${summary}
+</p>
 
 </div>
 `
-
-        })
-
-        html += `</div>`
-        box.innerHTML = html
 
     }
 
@@ -463,11 +406,14 @@ Stop
     async function highlight() {
 
         const { getHighlighter } = await import("https://unpkg.com/shiki@1.0.0/dist/index.mjs")
+
         const highlighter = await getHighlighter({ theme: "nord" })
 
         document.querySelectorAll("pre code").forEach(block => {
+
             const html = highlighter.codeToHtml(block.innerText, { lang: "javascript" })
             block.parentElement.outerHTML = html
+
         })
 
     }
@@ -479,36 +425,38 @@ Stop
     async function openBlog(slug) {
 
         const viewer = createViewer()
+
         viewer.classList.remove("hidden")
 
-        const url = `https://raw.githubusercontent.com/\${OWNER}/\${REPO}/main/\${BLOG_DIR}/\${slug}.md\`
+        const url = `https://raw.githubusercontent.com/${OWNER}/${REPO}/main/${BLOG_DIR}/${slug}.md`
 
-const res=await fetch(url)
-const md=await res.text()
+        const res = await fetch(url)
 
-const clean=md
-.replace(/title:.*\n/,"")
-.replace(/tag:.*\n/,"")
-.replace(/description:.*\n/,"")
+        const md = await res.text()
 
-marked.setOptions({gfm:true,breaks:true})
+        const clean = md
+            .replace(/title:.*\n/, "")
+            .replace(/tag:.*\n/, "")
+            .replace(/description:.*\n/, "")
 
-const html=marked.parse(clean)
+        marked.setOptions({ gfm: true, breaks: true })
 
-document.getElementById("blog-title").innerText=
-md.match(/title:\s*(.*)/)?.[1]||slug
+        const html = marked.parse(clean)
 
-document.getElementById("blog-content").innerHTML=html
+        document.getElementById("blog-title").innerText =
+            md.match(/title:\s*(.*)/)?.[1] || slug
 
-const summaries=generateSectionSummaries(clean)
-renderSummary(summaries)
+        document.getElementById("blog-content").innerHTML = html
 
-const text=clean
-.replace(/```[\s\S]*? ```/g," ")
-.replace(/[#>*`]/g," ")
-.replace(/\n+/g, " ")
+        /* FIX spacing bug */
+
+        const text = clean
+            .replace(/[#>*`]/g, "")
+            .replace(/\n+/g, " ")
             .replace(/\s+/g, " ")
             .trim()
+
+        renderSummary(generateSummary(text))
 
         renderVoice(text)
 
@@ -518,6 +466,7 @@ const text=clean
         neuralBackground()
 
         progressHUD()
+
         typeParagraphs()
         activateSections()
 
@@ -534,6 +483,7 @@ const text=clean
         document.addEventListener("click", e => {
 
             const link = e.target.closest("a")
+
             if (!link) return
             if (!link.href.includes("/blogs/")) return
 
@@ -556,9 +506,11 @@ const text=clean
     function handleRoute() {
 
         const path = location.pathname
+
         if (!path.startsWith(BLOG_PREFIX)) return
 
         const slug = path.replace(BLOG_PREFIX, "")
+
         openBlog(slug)
 
     }
