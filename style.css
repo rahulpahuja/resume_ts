@@ -706,3 +706,8 @@ body {
     transform: rotate(360deg);
   }
 }
+
+.fancy-border:hover {
+  transform: translateY(-4px) scale(1.02);
+  transition: 0.3s;
+}
