@@ -1,4 +1,7 @@
-// Data
+// ============================
+// DATA
+// ============================
+
 const skillsData = [
   { name: "Java", category: "mobile", color: "#60a5fa" },
   { name: "Kotlin", category: "mobile", color: "#60a5fa" },
@@ -33,6 +36,7 @@ const skillsData = [
 ];
 
 const projectsData = {
+
   professional: [
     {
       title: "CyberArk Identity App",
@@ -58,90 +62,146 @@ const projectsData = {
       ],
       tags: ["Analytics", "Video", "SDK"]
     }
-    // Add other professional projects...
   ],
+
   personal: [
     {
       title: "AI Similarity",
-      description: "Your ultimate guide to bridging the gap between Android and iOS Platforms",
-      websiteUrl: "http://www.aisimilarity.com",
-      tags: ["AI", "Mobile Development", "Cross-Platform"]
+      description: "Advanced machine learning algorithm for semantic similarity matching. Enables intelligent content recommendations and duplicate detection across large datasets.",
+      websiteUrl: "https://www.aisimilarity.com",
+      logo: "public/ai-similarity-logo.png",
+      tags: ["Python", "TensorFlow", "NLP", "Vector DB"]
     },
     {
-      title: "Code Forum Blogs",
-      description: "A community-powered space to share code snippets, explore development forums, and publish insightful tech blogs.",
+      title: "CodeForumBlogs",
+      description: "Community-driven platform for technical discussions and blogging. Features real-time collaboration, code syntax highlighting, and knowledge sharing among developers.",
       websiteUrl: "https://www.codeforumblogs.com",
-      tags: ["Community", "Blogging", "Code Sharing"]
+      tags: ["React", "Node.js", "MongoDB", "WebSocket"]
     }
   ]
 };
 
-// Header scroll effect
-const header = document.querySelector('.fixed-header');
-window.addEventListener('scroll', () => {
-  if (window.scrollY > 10) {
-    header.classList.add('scrolled');
-  } else {
-    header.classList.remove('scrolled');
-  }
-});
 
-// Mobile menu
+
+// ============================
+// HEADER SCROLL EFFECT
+// ============================
+
+const header = document.querySelector('.fixed-header');
+
+if (header) {
+  window.addEventListener('scroll', () => {
+    if (window.scrollY > 10) {
+      header.classList.add('scrolled');
+    } else {
+      header.classList.remove('scrolled');
+    }
+  });
+}
+
+
+
+// ============================
+// MOBILE MENU
+// ============================
+
 const menuButton = document.querySelector('.mobile-menu-button');
 const mobileNav = document.querySelector('.mobile-nav');
 
-menuButton.addEventListener('click', () => {
-  mobileNav.classList.toggle('active');
-  menuButton.classList.toggle('active');
-});
+if (menuButton && mobileNav) {
 
-// Close mobile menu when clicking a link
-document.querySelectorAll('.mobile-nav a').forEach(link => {
-  link.addEventListener('click', () => {
-    mobileNav.classList.remove('active');
-    menuButton.classList.remove('active');
+  menuButton.addEventListener('click', () => {
+    mobileNav.classList.toggle('active');
+    menuButton.classList.toggle('active');
   });
-});
 
-// Skills filter
+  document.querySelectorAll('.mobile-nav a').forEach(link => {
+    link.addEventListener('click', () => {
+      mobileNav.classList.remove('active');
+      menuButton.classList.remove('active');
+    });
+  });
+
+}
+
+
+
+// ============================
+// SKILLS
+// ============================
+
 const skillsGrid = document.querySelector('.skills-grid');
 const filterButtons = document.querySelectorAll('.filter-button');
 
 function renderSkills(category = null) {
-  const filteredSkills = category === null || category === 'all'
-    ? skillsData
-    : skillsData.filter(skill => skill.category === category);
+
+  if (!skillsGrid) return;
+
+  const filteredSkills =
+    category === null || category === 'all'
+      ? skillsData
+      : skillsData.filter(skill => skill.category === category);
 
   skillsGrid.innerHTML = filteredSkills.map(skill => `
-    <span class="skill-badge" style="background: ${skill.color}20; color: ${skill.color}">
-      ${skill.name}
-    </span>
+      <span class="skill-badge"
+        style="background:${skill.color}20;color:${skill.color}">
+        ${skill.name}
+      </span>
   `).join('');
 }
 
 filterButtons.forEach(button => {
+
   button.addEventListener('click', () => {
+
     filterButtons.forEach(btn => btn.classList.remove('active'));
+
     button.classList.add('active');
+
     renderSkills(button.dataset.category);
+
   });
+
 });
 
-// Projects tabs
+
+
+// ============================
+// PROJECTS
+// ============================
+
 const projectsGrid = document.querySelector('.projects-grid');
 const tabButtons = document.querySelectorAll('.tab-button');
 
-function renderProjects(type = 'professional') {
+function renderProjects(type = "personal") {
+
+  if (!projectsGrid) return;
+
   const projects = projectsData[type];
+
   projectsGrid.innerHTML = projects.map(project => `
+
     <div class="project-card">
+
+      ${project.logo ? `
+        <div style="margin-bottom:16px;display:flex;justify-content:center">
+          <img 
+            src="${project.logo}" 
+            alt="${project.title}"
+            style="height:40px;object-fit:contain;opacity:.9">
+        </div>
+      ` : ""}
+
       <h3 class="text-xl font-bold mb-2">${project.title}</h3>
+
       <div class="flex flex-wrap gap-2 mb-3">
         ${project.tags.map(tag => `
           <span class="badge">${tag}</span>
-        `).join('')}
+        `).join("")}
       </div>
+
       <p class="text-gray-400 mb-4">${project.description}</p>
+
       ${project.stats ? `
         <div class="mt-4 space-y-2">
           ${project.stats.map(stat => `
@@ -149,50 +209,97 @@ function renderProjects(type = 'professional') {
               <div class="w-2 h-2 rounded-full bg-blue-500 mr-2"></div>
               <span class="text-gray-300">${stat}</span>
             </div>
-          `).join('')}
+          `).join("")}
         </div>
-      ` : ''}
+      ` : ""}
+
       <div class="mt-4 pt-4 border-t border-gray-700/50 flex flex-wrap gap-3">
+
         ${project.websiteUrl ? `
-          <a href="${project.websiteUrl}" target="_blank" rel="noopener noreferrer" class="project-link">
+          <a href="${project.websiteUrl}" target="_blank"
+            class="project-link">
             🌐 Visit Website
           </a>
-        ` : ''}
+        ` : ""}
+
         ${project.playStoreUrl ? `
-          <a href="${project.playStoreUrl}" target="_blank" rel="noopener noreferrer" class="project-link">
+          <a href="${project.playStoreUrl}" target="_blank"
+            class="project-link">
             📱 Play Store
           </a>
-        ` : ''}
+        ` : ""}
+
         ${project.appStoreUrl ? `
-          <a href="${project.appStoreUrl}" target="_blank" rel="noopener noreferrer" class="project-link">
+          <a href="${project.appStoreUrl}" target="_blank"
+            class="project-link">
             📱 App Store
           </a>
-        ` : ''}
+        ` : ""}
+
       </div>
+
     </div>
-  `).join('');
+
+  `).join("");
+
 }
 
+
+
+// ============================
+// TAB SWITCHING
+// ============================
+
 tabButtons.forEach(button => {
-  button.addEventListener('click', () => {
-    tabButtons.forEach(btn => btn.classList.remove('active'));
-    button.classList.add('active');
+
+  button.addEventListener("click", () => {
+
+    tabButtons.forEach(btn => btn.classList.remove("active"));
+
+    button.classList.add("active");
+
     renderProjects(button.dataset.tab);
+
   });
+
 });
 
-// Contact form
-const contactForm = document.querySelector('.contact-form');
-contactForm.addEventListener('submit', (e) => {
-  e.preventDefault();
-  // Add form submission logic here
-  alert('Message sent successfully!');
-  contactForm.reset();
-});
 
-// Initialize
-document.addEventListener('DOMContentLoaded', () => {
+
+// ============================
+// CONTACT FORM
+// ============================
+
+const contactForm = document.querySelector(".contact-form");
+
+if (contactForm) {
+
+  contactForm.addEventListener("submit", e => {
+
+    e.preventDefault();
+
+    alert("Message sent successfully!");
+
+    contactForm.reset();
+
+  });
+
+}
+
+
+
+// ============================
+// INIT
+// ============================
+
+document.addEventListener("DOMContentLoaded", () => {
+
   renderSkills();
-  renderProjects('professional');
-  document.getElementById('currentYear').textContent = new Date().getFullYear();
+
+  // Start with PERSONAL so AI Similarity shows
+  renderProjects("personal");
+
+  const year = document.getElementById("currentYear");
+  if (year) year.textContent = new Date().getFullYear();
+
 });

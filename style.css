@@ -636,3 +636,14 @@ body {
   box-shadow: 0 0 10px rgba(0, 242, 255, 0.5);
   transform: translateY(-2px);
 }
+
+.project-card img {
+  filter: brightness(1.2);
+  opacity: 0.9;
+  transition: 0.3s;
+}
+
+.project-card:hover img {
+  opacity: 1;
+  transform: scale(1.05);
+}
