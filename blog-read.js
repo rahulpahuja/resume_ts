@@ -27,14 +27,20 @@
 
 <style>
 
-/* grid */
-
 .grid-bg{
 background-image:radial-gradient(circle at 1px 1px,rgba(0,242,255,.06) 1px,transparent 1px);
 background-size:40px 40px;
 }
 
-/* neural bg */
+#matrix-bg{
+position:fixed;
+top:0;
+left:0;
+width:100%;
+height:100%;
+z-index:-2;
+opacity:.25;
+}
 
 #neural-bg{
 position:fixed;
@@ -44,8 +50,6 @@ width:100%;
 height:100%;
 z-index:-1;
 }
-
-/* progress */
 
 #reading-progress{
 position:fixed;
@@ -58,9 +62,15 @@ box-shadow:0 0 12px #00f2ff;
 z-index:10000;
 }
 
-/* code */
+/* readability fix */
 
-#cyberpunk-blog code{
+#blog-content{
+line-height:1.7;
+word-spacing:.05em;
+letter-spacing:.01em;
+}
+
+#blog-content code{
 background:#000;
 color:#00ff9c;
 padding:4px 6px;
@@ -68,25 +78,28 @@ border-radius:4px;
 font-family:"JetBrains Mono",monospace;
 }
 
-#cyberpunk-blog pre{
+#blog-content pre{
 background:#020202;
 border:1px solid rgba(0,255,150,.2);
 padding:20px;
 border-radius:8px;
 overflow:auto;
+white-space:pre-wrap;
+word-break:break-word;
 }
 
-/* headings */
+/* section highlight */
 
-#blog-content h1,#blog-content h2,#blog-content h3{
-border-left:3px solid #9333ea;
-padding-left:10px;
+#blog-content section.active{
+border-left:3px solid #00f2ff;
+padding-left:12px;
 }
 
 </style>
 
 <div id="reading-progress"></div>
 
+<canvas id="matrix-bg"></canvas>
 <canvas id="neural-bg"></canvas>
 
 <div class="grid-bg p-10 max-w-4xl mx-auto">
@@ -132,6 +145,48 @@ class="prose prose-invert max-w-none"></article>
     }
 
     /* -------------------------
+       Matrix Rain (NEW)
+    ------------------------- */
+
+    function matrixRain() {
+
+        const canvas = document.getElementById("matrix-bg")
+        const ctx = canvas.getContext("2d")
+
+        canvas.width = window.innerWidth
+        canvas.height = window.innerHeight
+
+        const letters = "01アイウエオカキクケコ"
+        const fontSize = 14
+        const columns = canvas.width / fontSize
+        const drops = [...Array(columns)].fill(1)
+
+        function draw() {
+
+            ctx.fillStyle = "rgba(0,0,0,0.05)"
+            ctx.fillRect(0, 0, canvas.width, canvas.height)
+
+            ctx.fillStyle = "#00ff9c"
+            ctx.font = fontSize + "px monospace"
+
+            drops.forEach((y, i) => {
+
+                const text = letters[Math.floor(Math.random() * letters.length)]
+                ctx.fillText(text, i * fontSize, y * fontSize)
+
+                if (y * fontSize > canvas.height && Math.random() > 0.975) drops[i] = 0
+
+                drops[i]++
+
+            })
+
+        }
+
+        setInterval(draw, 33)
+
+    }
+
+    /* -------------------------
        Neural Background
     ------------------------- */
 
@@ -143,7 +198,7 @@ class="prose prose-invert max-w-none"></article>
         canvas.width = window.innerWidth
         canvas.height = window.innerHeight
 
-        const nodes = [...Array(70)].map(() => ({
+        const nodes = [...Array(60)].map(() => ({
             x: Math.random() * canvas.width,
             y: Math.random() * canvas.height,
             vx: (Math.random() - .5) * .4,
@@ -158,9 +213,6 @@ class="prose prose-invert max-w-none"></article>
 
                 n.x += n.vx
                 n.y += n.vy
-
-                if (n.x < 0 || n.x > canvas.width) n.vx *= -1
-                if (n.y < 0 || n.y > canvas.height) n.vy *= -1
 
                 ctx.fillStyle = "#00f2ff"
                 ctx.fillRect(n.x, n.y, 2, 2)
@@ -204,8 +256,7 @@ class="prose prose-invert max-w-none"></article>
         window.addEventListener("scroll", () => {
 
             const h = document.documentElement
-
-            const scrolled = (h.scrollTop) / (h.scrollHeight - h.clientHeight)
+            const scrolled = h.scrollTop / (h.scrollHeight - h.clientHeight)
 
             bar.style.width = scrolled * 100 + "%"
 
@@ -214,37 +265,61 @@ class="prose prose-invert max-w-none"></article>
     }
 
     /* -------------------------
-       Heading animation
+       Typing Paragraphs (NEW)
     ------------------------- */
 
-    function typeWriter(el) {
+    function typeParagraphs() {
 
-        const text = el.innerText
-        el.innerText = ""
+        document.querySelectorAll("#blog-content p").forEach(p => {
 
-        let i = 0
+            const text = p.innerText
+            p.innerText = ""
 
-        function type() {
+            let i = 0
 
-            if (i < text.length) {
+            function type() {
 
-                el.innerText += text.charAt(i)
-                i++
+                if (i < text.length) {
 
-                setTimeout(type, 15)
+                    p.innerText += text.charAt(i)
+                    i++
+
+                    setTimeout(type, 8)
+
+                }
 
             }
 
-        }
+            type()
 
-        type()
+        })
 
     }
 
-    function animateHeadings() {
+    /* -------------------------
+       Scroll Highlights (NEW)
+    ------------------------- */
 
-        document.querySelectorAll("#blog-content h1,#blog-content h2")
-            .forEach(typeWriter)
+    function activateSections() {
+
+        const sections = document.querySelectorAll("#blog-content h2")
+
+        const observer = new IntersectionObserver(entries => {
+
+            entries.forEach(e => {
+
+                if (e.isIntersecting) {
+
+                    sections.forEach(s => s.classList.remove("active"))
+                    e.target.classList.add("active")
+
+                }
+
+            })
+
+        }, { threshold: .4 })
+
+        sections.forEach(s => observer.observe(s))
 
     }
 
@@ -255,10 +330,7 @@ class="prose prose-invert max-w-none"></article>
     function generateSummary(text) {
 
         const sentences = text.split(". ")
-
-        const summary = sentences.slice(0, 3).join(". ") + "."
-
-        return summary
+        return sentences.slice(0, 3).join(". ") + "."
 
     }
 
@@ -315,14 +387,10 @@ Stop
         let speech
 
         document.getElementById("voice-play").onclick = () => {
-
             speech = new SpeechSynthesisUtterance(text)
-
             speech.rate = .95
             speech.pitch = 1.1
-
             speechSynthesis.speak(speech)
-
         }
 
         document.getElementById("voice-stop").onclick = () => {
@@ -344,7 +412,6 @@ Stop
         document.querySelectorAll("pre code").forEach(block => {
 
             const html = highlighter.codeToHtml(block.innerText, { lang: "javascript" })
-
             block.parentElement.outerHTML = html
 
         })
@@ -361,8 +428,7 @@ Stop
 
         viewer.classList.remove("hidden")
 
-        const url =
-            `https://raw.githubusercontent.com/${OWNER}/${REPO}/main/${BLOG_DIR}/${slug}.md`
+        const url = `https://raw.githubusercontent.com/${OWNER}/${REPO}/main/${BLOG_DIR}/${slug}.md`
 
         const res = await fetch(url)
 
@@ -373,6 +439,8 @@ Stop
             .replace(/tag:.*\n/, "")
             .replace(/description:.*\n/, "")
 
+        marked.setOptions({ gfm: true, breaks: true })
+
         const html = marked.parse(clean)
 
         document.getElementById("blog-title").innerText =
@@ -380,7 +448,13 @@ Stop
 
         document.getElementById("blog-content").innerHTML = html
 
-        const text = document.getElementById("blog-content").innerText
+        /* FIX spacing bug */
+
+        const text = clean
+            .replace(/[#>*`]/g, "")
+            .replace(/\n+/g, " ")
+            .replace(/\s+/g, " ")
+            .trim()
 
         renderSummary(generateSummary(text))
 
@@ -388,11 +462,13 @@ Stop
 
         highlight()
 
-        animateHeadings()
-
+        matrixRain()
         neuralBackground()
 
         progressHUD()
+
+        typeParagraphs()
+        activateSections()
 
         window.scrollTo(0, 0)
 
@@ -409,7 +485,6 @@ Stop
             const link = e.target.closest("a")
 
             if (!link) return
-
             if (!link.href.includes("/blogs/")) return
 
             e.preventDefault()
@@ -441,43 +516,12 @@ Stop
     }
 
     /* -------------------------
-       RSS Generator
-    ------------------------- */
-
-    function generateRSS() {
-
-        if (!blogIndex.length) return
-
-        const items = blogIndex.map(b => `
-
-<item>
-<title>${b.title}</title>
-<link>/blog/${b.slug}</link>
-</item>
-
-`).join("")
-
-        const rss = `
-<rss version="2.0">
-<channel>
-<title>Rahul Pahuja Blog</title>
-${items}
-</channel>
-</rss>
-`
-
-        console.log("RSS feed generated")
-
-    }
-
-    /* -------------------------
        Init
     ------------------------- */
 
     window.addEventListener("DOMContentLoaded", () => {
 
         interceptClicks()
-
         handleRoute()
 
     })
