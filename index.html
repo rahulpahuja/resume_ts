@@ -1,5 +1,1048 @@
 <!DOCTYPE html>
 <html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Rahul Pahuja — Principal Mobile Engineer</title>
+  <meta name="description" content="Principal Mobile Engineer. Creator of Secured Storage at CyberArk. 10+ years securing mobile infrastructure across CyberArk, Bankwest, and Conviva.">
+
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script src="https://unpkg.com/react@18/umd/react.development.js"></script>
+  <script src="https://unpkg.com/react-dom@18/umd/react-dom.development.js"></script>
+  <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+  <script src="https://unpkg.com/framer-motion@10.16.4/dist/framer-motion.js"></script>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Mono:wght@300;400;500&family=Syne:wght@400;500;700;800&display=swap" rel="stylesheet">
+
+  <style>
+    :root {
+      --ink:#0c0b09; --paper:#f5f2ec; --p2:#edeae2;
+      --accent:#c0391f; --adim:rgba(192,57,31,.10); --amid:rgba(192,57,31,.32);
+      --muted:#7c7670; --border:rgba(12,11,9,.09); --borderl:rgba(12,11,9,.18);
+    }
+    *,*::before,*::after{margin:0;padding:0;box-sizing:border-box}
+    html{scroll-behavior:smooth}
+    body{background:var(--paper);color:var(--ink);font-family:'Syne',sans-serif;overflow-x:hidden;line-height:1.6}
+    body::after{content:'';position:fixed;inset:0;pointer-events:none;z-index:9000;
+      background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='300' height='300'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='300' height='300' filter='url(%23n)' opacity='.035'/%3E%3C/svg%3E");opacity:.5}
+    img{display:block;max-width:100%}
+    a{color:inherit;text-decoration:none}
+    .serif{font-family:'DM Serif Display',serif}
+    .mono{font-family:'DM Mono',monospace}
+    .label{font-family:'DM Mono',monospace;font-size:10px;letter-spacing:.25em;text-transform:uppercase;color:var(--muted)}
+    .display{font-family:'DM Serif Display',serif;font-size:clamp(3rem,7vw,6.5rem);line-height:.96;letter-spacing:-.02em}
+    .display-sm{font-family:'DM Serif Display',serif;font-size:clamp(2.2rem,5vw,4.5rem);line-height:.98;letter-spacing:-.02em}
+    .wrap{max-width:1180px;margin:0 auto;padding:0 40px}
+    .section{min-height:100vh;padding:130px 0 100px}
+    .section-alt{background:var(--p2)}
+    .section-dark{background:var(--ink);color:var(--paper)}
+    .ruled{background-image:repeating-linear-gradient(to bottom,transparent,transparent 39px,var(--border) 39px,var(--border) 40px)}
+
+    /* header */
+    #site-header{position:fixed;top:0;left:0;right:0;z-index:500;display:flex;justify-content:space-between;align-items:center;padding:18px 40px;background:rgba(245,242,236,.92);backdrop-filter:blur(18px);border-bottom:1px solid var(--border)}
+    .header-name{font-family:'DM Serif Display',serif;font-size:19px;letter-spacing:-.02em}
+    .header-role{font-family:'DM Mono',monospace;font-size:10px;letter-spacing:.18em;text-transform:uppercase;color:var(--muted);margin-left:14px}
+
+    /* buttons */
+    .btn{display:inline-flex;align-items:center;gap:7px;font-family:'DM Mono',monospace;font-size:10px;letter-spacing:.1em;text-transform:uppercase;padding:9px 20px;border-radius:2px;border:none;cursor:pointer;transition:.18s}
+    .btn-solid{background:var(--ink);color:var(--paper)}.btn-solid:hover{background:#1d1c19}
+    .btn-ghost{background:transparent;color:var(--ink);border:1px solid var(--borderl)}.btn-ghost:hover{background:rgba(12,11,9,.04);border-color:var(--ink)}
+    .btn-inv{display:inline-flex;align-items:center;gap:8px;background:var(--paper);color:var(--ink);padding:11px 22px;border-radius:2px;font-family:'DM Mono',monospace;font-size:10px;letter-spacing:.1em;text-transform:uppercase;transition:.18s}.btn-inv:hover{background:#eae7e0}
+
+    /* social */
+    .si{width:32px;height:32px;border:1px solid var(--borderl);border-radius:2px;display:flex;align-items:center;justify-content:center;color:var(--muted);transition:.18s}
+    .si:hover{color:var(--accent);border-color:var(--accent);background:var(--adim)}
+    .si svg{width:13px;height:13px;fill:currentColor}
+
+    /* nav */
+    #site-nav{position:fixed;bottom:26px;left:50%;transform:translateX(-50%);z-index:500;background:rgba(12,11,9,.93);backdrop-filter:blur(20px);border:1px solid rgba(255,255,255,.08);border-radius:999px;padding:4px;display:flex;gap:2px}
+    .nav-btn{padding:7px 15px;border-radius:999px;border:none;background:transparent;color:rgba(255,255,255,.4);font-family:'DM Mono',monospace;font-size:9px;letter-spacing:.1em;text-transform:uppercase;cursor:pointer;transition:all .28s}
+    .nav-btn.active{background:#fff;color:var(--ink);font-weight:500}
+
+    /* profile */
+    .profile-ring{width:252px;height:252px;border-radius:50%;border:1.5px solid var(--accent);overflow:hidden;position:relative;flex-shrink:0}
+    .profile-ring::after{content:'';position:absolute;inset:0;border-radius:50%;box-shadow:inset 0 0 36px rgba(192,57,31,.12)}
+    .scan-bar{position:absolute;width:100%;height:2px;background:linear-gradient(90deg,transparent,var(--accent),transparent);top:0;animation:scan 4s linear infinite;z-index:10}
+    @keyframes scan{0%{top:-2%}100%{top:102%}}
+
+    /* ticker */
+    .ticker-wrap{overflow:hidden}
+    .ticker-inner{display:flex;gap:2rem;width:max-content;animation:ticker 38s linear infinite}
+    @keyframes ticker{from{transform:translateX(0)}to{transform:translateX(-50%)}}
+
+    .accent-rule{width:36px;height:2px;background:var(--accent);flex-shrink:0}
+    .tag{font-family:'DM Mono',monospace;font-size:10px;letter-spacing:.05em;text-transform:uppercase;color:var(--muted);padding:2px 9px;border:1px solid var(--borderl);border-radius:2px;display:inline-block}
+    .tag-accent{color:var(--accent);border-color:var(--amid);background:var(--adim)}
+
+    /* impact */
+    .impact-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:var(--border);margin-bottom:72px}
+    .impact-cell{background:var(--paper);padding:36px 30px}
+    .impact-num{font-family:'DM Serif Display',serif;font-size:clamp(2.8rem,6vw,5rem);line-height:1;color:var(--accent)}
+    .impact-label{font-family:'DM Mono',monospace;font-size:10px;text-transform:uppercase;letter-spacing:.1em;color:var(--muted);margin-top:6px;margin-bottom:14px}
+    .impact-desc{font-size:13px;line-height:1.7;color:var(--muted)}
+
+    /* skills */
+    .skills-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+    .skill-card{background:rgba(255,255,255,.6);border:1px solid var(--border);border-radius:2px;padding:18px 20px;transition:.2s}
+    .skill-card:hover{border-color:var(--borderl);box-shadow:0 3px 20px rgba(0,0,0,.05)}
+    .skill-cat{font-family:'DM Mono',monospace;font-size:10px;text-transform:uppercase;letter-spacing:.15em;color:var(--muted);margin-bottom:12px}
+    .tags{display:flex;flex-wrap:wrap;gap:5px}
+
+    /* featured work (dark card) */
+    .feature-card{background:var(--ink);color:var(--paper);border-radius:2px;padding:52px 48px;margin-bottom:24px;position:relative;overflow:hidden}
+    .feature-card::before{content:'';position:absolute;top:-80px;right:-80px;width:260px;height:260px;border-radius:50%;background:radial-gradient(circle,rgba(192,57,31,.28) 0%,transparent 70%);pointer-events:none}
+    .feature-title{font-family:'DM Serif Display',serif;font-size:clamp(2rem,5vw,3.8rem);letter-spacing:-.02em;color:var(--paper);margin-bottom:8px;display:block;line-height:1}
+    .feature-sub{font-family:'DM Mono',monospace;font-size:10px;text-transform:uppercase;letter-spacing:.2em;color:rgba(255,255,255,.32);margin-bottom:24px;display:block}
+    .feature-desc{font-size:15px;line-height:1.8;color:rgba(245,242,236,.65);max-width:560px;margin-bottom:28px}
+    .feature-meta{display:flex;gap:32px;margin-bottom:32px;flex-wrap:wrap}
+    .fm-k{font-family:'DM Mono',monospace;font-size:10px;text-transform:uppercase;letter-spacing:.1em;color:rgba(245,242,236,.32);margin-bottom:3px}
+    .fm-v{font-size:13px;font-weight:500;color:var(--paper)}
+    .impact-callout{padding:20px 22px;background:rgba(255,255,255,.05);border-left:2px solid var(--accent);margin-bottom:32px}
+    .ic-label{font-family:'DM Mono',monospace;font-size:10px;text-transform:uppercase;letter-spacing:.1em;color:rgba(255,255,255,.28);margin-bottom:10px}
+    .ic-text{font-size:14px;line-height:1.75;color:rgba(245,242,236,.68)}
+
+    /* blog rows */
+    .blog-list{border-top:1px solid var(--border)}
+    .blog-row{border-bottom:1px solid var(--border);padding:26px 0;display:flex;justify-content:space-between;align-items:center;gap:20px;cursor:pointer;transition:padding-left .2s}
+    .blog-row:hover{padding-left:8px}
+    .blog-row:hover .arrow{transform:translateX(5px)}
+    .blog-title{font-family:'DM Serif Display',serif;font-size:21px;margin-bottom:5px}
+    .blog-desc{font-size:13px;color:var(--muted);line-height:1.6}
+    .arrow{display:inline-block;font-size:18px;color:var(--muted);transition:transform .2s;flex-shrink:0}
+
+    /* timeline */
+    .timeline{padding-left:28px;position:relative}
+    .timeline::before{content:'';position:absolute;left:0;top:14px;bottom:40px;width:1px;background:linear-gradient(to bottom,var(--accent),transparent)}
+    .tl-item{position:relative;margin-bottom:52px}
+    .tl-dot{position:absolute;left:-32px;top:14px;width:8px;height:8px;border-radius:50%;background:var(--accent);border:2px solid var(--paper)}
+    .tl-head{display:flex;justify-content:space-between;align-items:baseline;flex-wrap:wrap;gap:8px;margin-bottom:10px}
+    .tl-role{font-family:'DM Serif Display',serif;font-size:20px}
+    .tl-co{color:var(--accent);font-weight:700;font-size:15px;margin-left:10px}
+    .tl-period{font-family:'DM Mono',monospace;font-size:10px;color:var(--muted);letter-spacing:.05em}
+    .tl-bullets{list-style:none;display:flex;flex-direction:column;gap:7px;margin-top:8px}
+    .tl-bullet{display:flex;gap:10px;font-size:14px;line-height:1.65;color:var(--muted)}
+    .tl-dash{color:var(--accent);flex-shrink:0;margin-top:1px}
+
+    /* training */
+    .big-num{font-family:'DM Serif Display',serif;font-size:clamp(4rem,10vw,7rem);line-height:1;color:var(--accent)}
+    .module-item{background:rgba(255,255,255,.55);border:1px solid var(--border);border-radius:2px;padding:15px 18px;display:flex;gap:14px}
+    .module-n{font-family:'DM Mono',monospace;font-size:11px;color:var(--accent);flex-shrink:0;margin-top:1px}
+
+    /* proj */
+    .proj-card{background:rgba(255,255,255,.55);border:1px solid var(--border);border-radius:2px;padding:26px;transition:.2s}
+    .proj-card:hover{border-color:var(--borderl);box-shadow:0 4px 24px rgba(0,0,0,.06)}
+
+    /* sound btn */
+    #enableAudio{position:fixed;bottom:24px;right:24px;z-index:600;background:var(--ink);color:var(--paper);font-family:'DM Mono',monospace;font-size:10px;letter-spacing:.1em;text-transform:uppercase;padding:9px 16px;border:none;border-radius:2px;cursor:pointer;opacity:.6;transition:opacity .2s}
+    #enableAudio:hover{opacity:1}
+
+    /* ── ADMIN SYSTEM ── */
+
+    /* Login modal overlay */
+    .admin-overlay{position:fixed;inset:0;z-index:2000;background:rgba(12,11,9,.7);backdrop-filter:blur(8px);display:flex;align-items:center;justify-content:center}
+    .admin-modal{background:var(--paper);border:1px solid var(--borderl);border-radius:2px;padding:40px;width:340px;position:relative}
+    .admin-modal-title{font-family:'DM Serif Display',serif;font-size:24px;margin-bottom:6px}
+    .admin-modal-sub{font-family:'DM Mono',monospace;font-size:10px;text-transform:uppercase;letter-spacing:.2em;color:var(--muted);margin-bottom:28px}
+    .admin-input{width:100%;padding:11px 14px;border:1px solid var(--borderl);border-radius:2px;font-family:'DM Mono',monospace;font-size:13px;background:var(--paper);color:var(--ink);outline:none;transition:border-color .18s;margin-bottom:10px}
+    .admin-input:focus{border-color:var(--ink)}
+    .admin-input-err{border-color:var(--accent)!important}
+    .admin-err{font-family:'DM Mono',monospace;font-size:10px;color:var(--accent);text-transform:uppercase;letter-spacing:.1em;margin-bottom:14px;height:14px}
+    .admin-modal-close{position:absolute;top:14px;right:14px;background:none;border:none;cursor:pointer;color:var(--muted);font-size:18px;line-height:1;padding:4px}
+    .admin-modal-close:hover{color:var(--ink)}
+
+    /* Admin mode bar */
+    #admin-bar{position:fixed;top:0;left:0;right:0;z-index:900;background:var(--accent);color:#fff;font-family:'DM Mono',monospace;font-size:10px;letter-spacing:.18em;text-transform:uppercase;padding:7px 40px;display:flex;justify-content:space-between;align-items:center;transform:translateY(-100%);transition:transform .3s}
+    #admin-bar.visible{transform:translateY(0)}
+    #admin-bar button{background:rgba(255,255,255,.2);border:1px solid rgba(255,255,255,.4);color:#fff;font-family:'DM Mono',monospace;font-size:10px;letter-spacing:.1em;text-transform:uppercase;padding:4px 14px;border-radius:2px;cursor:pointer;transition:.18s}
+    #admin-bar button:hover{background:rgba(255,255,255,.35)}
+
+    /* Section edit trigger — appears on hover when in admin mode */
+    .editable-section{position:relative}
+    .edit-btn{position:absolute;top:20px;right:20px;z-index:300;display:none;align-items:center;gap:6px;background:var(--accent);color:#fff;border:none;font-family:'DM Mono',monospace;font-size:10px;letter-spacing:.12em;text-transform:uppercase;padding:8px 16px;border-radius:2px;cursor:pointer;transition:.18s;box-shadow:0 2px 12px rgba(192,57,31,.35)}
+    .edit-btn:hover{background:#a02e17;transform:translateY(-1px)}
+    .edit-btn svg{width:12px;height:12px;fill:currentColor;flex-shrink:0}
+    body.admin-mode .edit-btn{display:flex}
+
+    /* Drawer */
+    .edit-drawer{position:fixed;top:0;right:0;bottom:0;z-index:1500;width:480px;max-width:95vw;background:var(--paper);border-left:1px solid var(--borderl);display:flex;flex-direction:column;transform:translateX(100%);transition:transform .32s cubic-bezier(.4,0,.2,1);box-shadow:-8px 0 40px rgba(0,0,0,.12)}
+    .edit-drawer.open{transform:translateX(0)}
+    .drawer-header{padding:24px 28px 20px;border-bottom:1px solid var(--border);display:flex;justify-content:space-between;align-items:center;flex-shrink:0}
+    .drawer-title{font-family:'DM Serif Display',serif;font-size:20px}
+    .drawer-close{background:none;border:none;cursor:pointer;color:var(--muted);font-size:20px;padding:4px;transition:color .18s}
+    .drawer-close:hover{color:var(--ink)}
+    .drawer-body{flex:1;overflow-y:auto;padding:24px 28px}
+    .drawer-footer{padding:20px 28px;border-top:1px solid var(--border);display:flex;gap:10px;flex-shrink:0}
+    .field-group{margin-bottom:20px}
+    .field-label{font-family:'DM Mono',monospace;font-size:10px;text-transform:uppercase;letter-spacing:.15em;color:var(--muted);margin-bottom:7px;display:block}
+    .field-input{width:100%;padding:9px 12px;border:1px solid var(--borderl);border-radius:2px;font-family:'Syne',sans-serif;font-size:13px;background:var(--paper);color:var(--ink);outline:none;resize:vertical;transition:border-color .18s;line-height:1.5}
+    .field-input:focus{border-color:var(--ink)}
+    .field-sep{height:1px;background:var(--border);margin:24px 0}
+    .field-section-head{font-family:'DM Mono',monospace;font-size:10px;text-transform:uppercase;letter-spacing:.2em;color:var(--accent);margin-bottom:16px;margin-top:4px}
+    .saved-toast{position:fixed;bottom:80px;left:50%;transform:translateX(-50%) translateY(20px);z-index:2100;background:var(--ink);color:var(--paper);font-family:'DM Mono',monospace;font-size:11px;letter-spacing:.12em;text-transform:uppercase;padding:10px 22px;border-radius:2px;opacity:0;transition:opacity .25s,transform .25s;pointer-events:none}
+    .saved-toast.show{opacity:1;transform:translateX(-50%) translateY(0)}
+
+    /* fade-in */
+    .fi{opacity:0;transform:translateY(20px);transition:opacity .65s ease,transform .65s ease}
+    .fi.in{opacity:1;transform:translateY(0)}
+    ::-webkit-scrollbar{width:3px}
+    ::-webkit-scrollbar-track{background:var(--p2)}
+    ::-webkit-scrollbar-thumb{background:var(--borderl);border-radius:2px}
+  </style>
+</head>
+<body>
+<div id="root"></div>
+<button id="enableAudio">⟳ Sound</button>
+
+<script type="text/babel">
+/* ── Tone.js lazy loader ── */
+let _toneReady=false;
+async function ensureTone(){
+  if(_toneReady)return true;
+  if(typeof Tone!=='undefined'){_toneReady=true;return true;}
+  return new Promise(resolve=>{
+    const s=document.createElement('script');
+    s.src='https://unpkg.com/tone@14.8.49/build/Tone.js';
+    s.onload=()=>{_toneReady=true;resolve(true);};
+    s.onerror=()=>resolve(false);
+    document.head.appendChild(s);
+  });
+}
+
+const ScrollMusicEngine=(()=>{
+  let pad,bass,melody,hat,pl,bl,ml,hl;
+  const S={
+    hero:    {bpm:72, chords:[["C3","G3","A3"],["D3","A3","C4"],["A2","E3","G3"],["F3","C4","A3"]]},
+    impact:  {bpm:82, chords:[["C3","E3","G3"],["A2","C3","E3"],["F3","A3","C4"],["G3","B3","D4"]]},
+    feature: {bpm:96, chords:[["C4","E4","G4"],["D4","F4","A4"],["A3","C4","E4"],["G3","B3","D4"]]},
+    writing: {bpm:68, chords:[["E3","G3","B3"],["C3","E3","G3"],["D3","F3","A3"],["G3","B3","D4"]]},
+    work:    {bpm:88, chords:[["C3","E3","G3"],["A2","C3","E3"],["F3","A3","C4"],["G3","B3","D4"]]},
+    training:{bpm:74, chords:[["C3","F3","A3"],["D3","G3","A3"],["F3","A3","C4"],["G3","B3","D4"]]},
+    music:   {bpm:120,chords:[["C4","E4","G4"],["G3","B3","D4"],["A3","C4","E4"],["F3","A3","C4"]]},
+    about:   {bpm:60, chords:[["C4","G4","A4"],["E4","B4","G4"],["D4","A4","F4"],["A3","E4","C4"]]}
+  };
+  function mk(){
+    pad=new Tone.PolySynth(Tone.Synth,{oscillator:{type:"sine"},envelope:{attack:2,release:4}}).toDestination();
+    bass=new Tone.MonoSynth({oscillator:{type:"triangle"},envelope:{attack:.1,release:.8}}).toDestination();
+    melody=new Tone.Synth({oscillator:{type:"triangle"},envelope:{attack:.05,release:.5}}).toDestination();
+    hat=new Tone.NoiseSynth({noise:{type:"white"},envelope:{attack:.001,decay:.1,sustain:0}}).toDestination();
+    pad.volume.value=-20;bass.volume.value=-16;melody.volume.value=-18;hat.volume.value=-32;
+  }
+  function stop(){pl?.dispose();bl?.dispose();ml?.dispose();hl?.dispose();}
+  function play(id){
+    const d=S[id];if(!d)return;
+    Tone.Transport.bpm.value=d.bpm;stop();
+    let step=0;
+    pl=new Tone.Loop(t=>{pad.triggerAttackRelease(d.chords[step%d.chords.length],"2n",t);step++;},"2n").start(0);
+    bl=new Tone.Loop(t=>{bass.triggerAttackRelease(d.chords[step%d.chords.length][0],"8n",t);},"4n").start(0);
+    ml=new Tone.Loop(t=>{const c=d.chords[step%d.chords.length];melody.triggerAttackRelease(c[Math.floor(Math.random()*c.length)],"16n",t);},"8n").start(0);
+    hl=new Tone.Loop(t=>{hat.triggerAttackRelease("16n",t);},"8n").start(0);
+  }
+  return{init(){mk();Tone.Transport.start();},play};
+})();
+
+const {useState,useEffect,useRef,useCallback}=React;
+
+/* ══════════════════════════════════════════════════════
+   ADMIN SYSTEM — secret trigger: type "admin" anywhere
+   Password: rellow2026  |  Persists to localStorage
+══════════════════════════════════════════════════════ */
+const ADMIN_PW='rellow2026';
+const LS_KEY='rp_site_content';
+function loadContent(def){try{const r=localStorage.getItem(LS_KEY);if(r)return{...def,...JSON.parse(r)};}catch(e){}return def;}
+function saveContent(d){try{localStorage.setItem(LS_KEY,JSON.stringify(d));}catch(e){}}
+function showToast(){const t=document.getElementById('save-toast');if(!t)return;t.classList.add('show');setTimeout(()=>t.classList.remove('show'),2200);}
+
+function LoginModal({onSuccess,onClose}){
+  const [pw,setPw]=useState('');
+  const [err,setErr]=useState(false);
+  const ref=useRef(null);
+  useEffect(()=>{ref.current?.focus();},[]);
+  const attempt=()=>{if(pw===ADMIN_PW){setErr(false);onSuccess();}else{setErr(true);setPw('');}};
+  return(
+    <div className="admin-overlay" onClick={e=>{if(e.target===e.currentTarget)onClose();}}>
+      <div className="admin-modal">
+        <button className="admin-modal-close" onClick={onClose}>✕</button>
+        <div className="admin-modal-title">Admin access</div>
+        <div className="admin-modal-sub">Enter password to edit</div>
+        <input ref={ref} type="password" className={'admin-input'+(err?' admin-input-err':'')} placeholder="Password"
+          value={pw} onChange={e=>{setPw(e.target.value);setErr(false);}} onKeyDown={e=>e.key==='Enter'&&attempt()}/>
+        <div className="admin-err">{err?'Incorrect password':''}</div>
+        <button className="btn btn-solid" style={{width:'100%',justifyContent:'center',marginTop:'4px'}} onClick={attempt}>Unlock →</button>
+      </div>
+    </div>
+  );
+}
+
+function EditBtn({label,onClick}){
+  return(
+    <button className="edit-btn" onClick={onClick}>
+      <svg viewBox="0 0 24 24" style={{width:'12px',height:'12px',fill:'currentColor',flexShrink:0}}>
+        <path d="M3 17.25V21h3.75L17.81 9.94l-3.75-3.75L3 17.25zM20.71 7.04a1 1 0 0 0 0-1.41l-2.34-2.34a1 1 0 0 0-1.41 0l-1.83 1.83 3.75 3.75 1.83-1.83z"/>
+      </svg>
+      Edit {label}
+    </button>
+  );
+}
+
+function Drawer({open,title,onClose,onSave,children}){
+  return(
+    <div className={'edit-drawer'+(open?' open':'')}>
+      <div className="drawer-header">
+        <div className="drawer-title">{title}</div>
+        <button className="drawer-close" onClick={onClose}>✕</button>
+      </div>
+      <div className="drawer-body">{children}</div>
+      <div className="drawer-footer">
+        <button className="btn btn-solid" style={{flex:1,justifyContent:'center'}} onClick={onSave}>Save changes</button>
+        <button className="btn btn-ghost" onClick={onClose}>Cancel</button>
+      </div>
+    </div>
+  );
+}
+
+function Field({label,value,onChange,rows=1,placeholder=''}){
+  return(
+    <div className="field-group">
+      <label className="field-label">{label}</label>
+      {rows>1
+        ?<textarea className="field-input" rows={rows} value={value} onChange={e=>onChange(e.target.value)} placeholder={placeholder}/>
+        :<input    className="field-input" type="text"  value={value} onChange={e=>onChange(e.target.value)} placeholder={placeholder}/>
+      }
+    </div>
+  );
+}
+
+const NAV=[
+  {id:'hero',    label:'Home'},
+  {id:'impact',  label:'Impact'},
+  {id:'feature', label:'CyberArk'},
+  {id:'writing', label:'Writing'},
+  {id:'work',    label:'Work'},
+  {id:'training',label:'Training'},
+  {id:'music',   label:'Music'},
+  {id:'about',   label:'About'},
+];
+
+const COMPANIES=["CyberArk","Bankwest","CBA","Conviva","Intellicus","Wipro","Chevron","Shell","Coforge","LTIMindtree"];
+
+const TIMELINE=[
+  {
+    role:"Staff Software Engineer",co:"CyberArk",period:"2022 — Present",tag:"Mobile Security",
+    bullets:[
+      "Designed and built CyberArk's Secured Storage layer — the cryptographic foundation protecting enterprise credentials on Android and iOS.",
+      "Made core architecture decisions: TEE-backed key storage, hardware-bound encryption, biometric unlock flows, and secure enclave integration.",
+      "Drove mobile security standards adopted across the product org, establishing the baseline all future mobile features are built on.",
+    ]
+  },
+  {
+    role:"Android & iOS Technical Lead",co:"Coforge — Bankwest (CBA)",period:"2020 — 2022",tag:"Banking",
+    bullets:[
+      "Technical lead for Bankwest's digital banking app — a Commonwealth Bank subsidiary with millions of daily active users.",
+      "Architected self-service features: password reset, currency conversion, and account management across Android and iOS.",
+      "Established code coverage standards and CI test pipelines that reduced regression cycles significantly.",
+    ]
+  },
+  {
+    role:"Senior Engineer — Android Sensors",co:"Conviva",period:"2018 — 2020",tag:"Observability",
+    bullets:[
+      "Built and maintained Android/iOS observability sensors processing 12B+ metric computations per minute.",
+      "Owned ExoPlayer and BrightCove integrations for audience quality measurement at streaming platform scale.",
+      "Contributed to SDK architecture decisions that shaped data reliability guarantees across major streaming clients.",
+    ]
+  },
+  {
+    role:"Senior Software Engineer",co:"Intellicus Technologies",period:"2015 — 2018",tag:"Analytics",
+    bullets:[
+      "Developed the Intellicus Mobile SDK — bringing embedded analytics and BI reporting to Android.",
+      "Integrated on-premise and cloud data sources for enterprise customers including Chevron and Shell.",
+    ]
+  },
+  {
+    role:"Unified Mobile App Developer",co:"Wipro",period:"2013 — 2015",tag:"Fintech",
+    bullets:[
+      "Built award-winning travel app on Wipro's Contextual & Open Banking Platform.",
+      "Implemented Material Design-first UI standards across Android, setting the UI baseline for the project.",
+    ]
+  },
+];
+
+const BLOGS=[
+  {title:"Building Enterprise Security with Secured Storage",tag:"Security",
+   desc:"Architecture decisions behind hardware-backed credential protection — TEE design, key binding, and the threat model that shaped every choice.",link:"#"},
+  {title:"Real-time Analytics: Conviva SDK Architecture",tag:"Architecture",
+   desc:"How we processed 12 billion metric computations per minute, and what the SDK boundary looks like at that scale.",link:"#"},
+  {title:"Jetpack Compose: A Staff Engineer's Perspective",tag:"Android",
+   desc:"Evaluating Compose for production adoption — performance, migration risk, and the team decisions around it.",
+   link:"https://www.linkedin.com/pulse/jetpack-compose-staff-android-engineers-perspective-rahul-pahuja-zauif"},
+  {title:"Mobile Banking: Lessons from Bankwest",tag:"FinTech",
+   desc:"What building secure self-service features for millions of banking customers taught me about trust hierarchies.",link:"#"},
+  {title:"LLM Poisoning: A Cybersecurity Threat Most Companies Are Ignoring",tag:"AI Security",
+   desc:"Adversarial data injection into training pipelines — why it matters for every engineer building on AI.",link:"#"},
+];
+
+const SKILLS={
+  "Mobile":   ["Android","iOS","Kotlin","Swift","Jetpack Compose","UIKit","React Native","Flutter"],
+  "Security": ["Secured Storage","TEE / Secure Enclave","Biometric Auth","Encryption","Snyk"],
+  "Backend":  ["Java","Python","Node.js","Spring Boot","Firebase","REST APIs"],
+  "Infra":    ["Jenkins","TeamCity","CircleCI","GitHub Actions","Docker"],
+};
+
+function useFI(delay=0){
+  const ref=useRef(null);
+  useEffect(()=>{
+    const el=ref.current;if(!el)return;
+    el.style.transitionDelay=delay+'s';
+    const obs=new IntersectionObserver(([e])=>{if(e.isIntersecting){el.classList.add('in');obs.disconnect();}},{threshold:.12});
+    obs.observe(el);return()=>obs.disconnect();
+  },[]);
+  return ref;
+}
+function FI({children,delay=0,style={},className=''}){
+  const ref=useFI(delay);
+  return <div ref={ref} className={'fi '+className} style={style}>{children}</div>;
+}
+
+const LI=()=><svg viewBox="0 0 24 24"><path d="M19 3A2 2 0 0 1 21 5V19A2 2 0 0 1 19 21H5A2 2 0 0 1 3 19V5A2 2 0 0 1 5 3H19ZM8.34 17V10H6V17H8.34ZM7.17 8.65A1.35 1.35 0 1 0 7.17 6A1.35 1.35 0 0 0 7.17 8.65ZM18 17V13.1C18 11 16.9 10 15.2 10C14.2 10 13.6 10.6 13.3 11V10H11V17H13.34V13.5C13.34 12.6 13.7 11.8 14.8 11.8C15.9 11.8 16 12.7 16 13.6V17H18Z"/></svg>;
+const GH=()=><svg viewBox="0 0 24 24"><path d="M12 .5A12 12 0 0 0 8.2 23.4C8.8 23.5 9 23.2 9 22.9V21C5.7 21.7 5 19.5 5 19.5C4.5 18.3 3.8 18 3.8 18C2.8 17.3 3.9 17.3 3.9 17.3C5 17.4 5.6 18.5 5.6 18.5C6.6 20.1 8.3 19.7 9 19.4C9.1 18.7 9.4 18.2 9.8 17.9C7.1 17.6 4.3 16.5 4.3 11.7C4.3 10.3 4.8 9.2 5.7 8.3C5.6 8 5.1 6.7 5.8 5C5.8 5 6.8 4.7 9 6.3C10 6 11 5.9 12 5.9C13 5.9 14 6 15 6.3C17.2 4.7 18.2 5 18.2 5C18.9 6.7 18.4 8 18.3 8.3C19.2 9.2 19.7 10.3 19.7 11.7C19.7 16.5 16.9 17.6 14.2 17.9C14.7 18.3 15 19 15 20V22.9C15 23.2 15.2 23.5 15.8 23.4A12 12 0 0 0 12 .5Z"/></svg>;
+
+/* ── DEFAULT CONTENT (matches existing copy) ── */
+const DEFAULT_CONTENT={
+  hero_headline:'I design the security\nlayer enterprises\nbuild on top of.',
+  hero_sub:'10+ years building mobile infrastructure at depth — from designing the credential vault protecting enterprise identities at CyberArk, to observability sensors processing billions of events at Conviva, to the digital banking platform at Bankwest.',
+  hero_email:'therahulpahuja@gmail.com',
+
+  impact_stats:[
+    {n:'12B+',l:'Events per minute',d:'Conviva SDK — measuring streaming quality at video platform scale across ExoPlayer and BrightCove integrations.'},
+    {n:'M+',  l:'Daily banking users',d:'Bankwest (Commonwealth Bank subsidiary) — technical lead for Android and iOS self-service features used daily by millions.'},
+    {n:'∞',   l:'Enterprise identities secured',d:'CyberArk Secured Storage — the cryptographic foundation protecting privileged credentials on every enterprise mobile deployment.'},
+  ],
+  impact_domain:'Three deep specialisms — mobile security, observability at scale, and mobile banking — developed across a decade of production systems.',
+
+  feature_title:'Secured Storage',
+  feature_sub:'CyberArk · Android & iOS · 2022 — Present',
+  feature_desc:'CyberArk protects the most sensitive credentials in the world. I designed and built the Secured Storage layer — the cryptographic foundation that ensures those credentials stay protected on mobile devices, regardless of what the device, OS, or attacker throws at them.',
+  feature_callout:'This isn\'t a wrapper around a keychain API. It\'s a system-level design problem: which primitives to trust, how to bind keys to device identity, what the degradation path is when hardware security is unavailable, how to design an API surface that future engineers can\'t misuse. These are the decisions that outlast the sprint they were made in — and they were mine to make.',
+
+  blogs:BLOGS,
+  timeline:TIMELINE,
+
+  training_count:'41',
+  training_sub:'Engineers trained — 100% placed',
+  training_body:'Ran a Google-affiliated Android bootcamp in partnership with LTIMindtree. Full curriculum from fundamentals through production-grade development — every graduate placed in industry.',
+
+  music_bio:'Outside of systems architecture, I produce and DJ as Rellow — blending house, deep house, and ambient electronics. The same attention to structure and flow I bring to software, applied to sound.',
+
+  about_p1:'I\'m a principal-track mobile engineer who works on problems that require deep context — the kind where understanding the threat model, the hardware limitations, and the business constraints all at once is what separates a good solution from one that will cause an incident in 18 months.',
+  about_p2:'I hold an M.Tech from BITS Pilani and have worked across Hyderabad, Bengaluru, and remotely for organizations from Wipro and Conviva through to CBA\'s Bankwest and CyberArk. I write about what I build — security architecture, SDK design, mobile platform decisions.',
+  about_p3:'When I\'m not writing Kotlin or Swift I\'m in Ableton as DJ Rellow, building Mobile1x as a side venture, and occasionally reading about the night sky.',
+};
+
+const App=()=>{
+  const [active,setActive]=useState('hero');
+
+  /* ── ADMIN STATE ── */
+  const [showLogin,setShowLogin]=useState(false);
+  const [adminMode,setAdminMode]=useState(false);
+  const [drawer,setDrawer]=useState(null); // which section drawer is open
+  const [content,setContent]=useState(()=>loadContent(DEFAULT_CONTENT));
+  const [draft,setDraft]=useState(null); // working copy while drawer is open
+
+  /* ── SECRET TRIGGER: type "admin" anywhere outside inputs ── */
+  useEffect(()=>{
+    let buf='';
+    const handler=e=>{
+      if(['INPUT','TEXTAREA'].includes(e.target.tagName))return;
+      buf+=e.key.toLowerCase();
+      if(buf.length>5)buf=buf.slice(-5);
+      if(buf.endsWith('admin')){
+        buf='';
+        if(adminMode)return;
+        setShowLogin(true);
+      }
+    };
+    window.addEventListener('keydown',handler);
+    return()=>window.removeEventListener('keydown',handler);
+  },[adminMode]);
+
+  /* ── ADMIN BAR visibility ── */
+  useEffect(()=>{
+    const bar=document.getElementById('admin-bar');
+    if(!bar)return;
+    if(adminMode){bar.classList.add('visible');document.body.classList.add('admin-mode');document.getElementById('site-header').style.top='34px';}
+    else{bar.classList.remove('visible');document.body.classList.remove('admin-mode');document.getElementById('site-header').style.top='0';}
+  },[adminMode]);
+
+  const logout=()=>{setAdminMode(false);setDrawer(null);};
+
+  /* ── OPEN DRAWER ── */
+  const openDrawer=section=>{
+    setDraft(JSON.parse(JSON.stringify(content))); // deep clone
+    setDrawer(section);
+  };
+  const closeDrawer=()=>{setDrawer(null);setDraft(null);};
+  const saveDrawer=()=>{
+    setContent(draft);
+    saveContent(draft);
+    setDrawer(null);
+    setDraft(null);
+    showToast();
+  };
+
+  /* ── DRAFT FIELD HELPER ── */
+  const dset=(key,val)=>setDraft(d=>({...d,[key]:val}));
+
+  /* ── SCROLL + AUDIO ── */
+  useEffect(()=>{
+    const obs=new IntersectionObserver(entries=>{
+      entries.forEach(e=>{if(e.isIntersecting){setActive(e.target.id);if(window.audioStarted)ScrollMusicEngine.play(e.target.id);}});
+    },{threshold:.35});
+    document.querySelectorAll('section[id]').forEach(s=>obs.observe(s));
+    return()=>obs.disconnect();
+  },[]);
+  useEffect(()=>{
+    const unlock=async()=>{
+      if(window.audioStarted)return;
+      try{
+        const ok=await ensureTone();
+        if(!ok)return;
+        const ctx=Tone.getContext();
+        if(ctx.state!=='running')await ctx.resume();
+        await Tone.start();
+        ScrollMusicEngine.init();
+        ScrollMusicEngine.play('hero');
+        window.audioStarted=true;
+      }catch(e){}
+    };
+    ['click','scroll','touchstart','keydown'].forEach(ev=>document.addEventListener(ev,unlock,{once:true}));
+    document.getElementById('enableAudio').addEventListener('click',unlock);
+  },[]);
+  const go=id=>document.getElementById(id)?.scrollIntoView({behavior:'smooth'});
+
+  return <div>
+
+    {/* ── ADMIN BAR ── */}
+    <div id="admin-bar">
+      <span>⬡ Admin mode — edits auto-saved to localStorage</span>
+      <button onClick={logout}>Exit admin</button>
+    </div>
+
+    {/* ── LOGIN MODAL ── */}
+    {showLogin&&<LoginModal onSuccess={()=>{setShowLogin(false);setAdminMode(true);}} onClose={()=>setShowLogin(false)}/>}
+
+    {/* ── SAVE TOAST ── */}
+    <div id="save-toast" className="saved-toast">✓ Saved</div>
+
+    {/* ── DRAWERS ── */}
+
+    {/* HERO drawer */}
+    <Drawer open={drawer==='hero'} title="Edit Hero" onClose={closeDrawer} onSave={saveDrawer}>
+      {draft&&<>
+        <Field label="Headline (use \n for line breaks)" value={draft.hero_headline} onChange={v=>dset('hero_headline',v)} rows={3}/>
+        <Field label="Sub-paragraph" value={draft.hero_sub} onChange={v=>dset('hero_sub',v)} rows={4}/>
+        <Field label="Contact email" value={draft.hero_email} onChange={v=>dset('hero_email',v)}/>
+        <div className="field-sep"/>
+        <div className="field-section-head">Stats (3 fixed)</div>
+        {/* Stats are impact section, keep hero simple */}
+      </>}
+    </Drawer>
+
+    {/* IMPACT drawer */}
+    <Drawer open={drawer==='impact'} title="Edit Impact" onClose={closeDrawer} onSave={saveDrawer}>
+      {draft&&<>
+        <div className="field-section-head">Three impact stats</div>
+        {draft.impact_stats.map((s,i)=>(
+          <div key={i} style={{marginBottom:'20px',padding:'16px',border:'1px solid var(--border)',borderRadius:'2px'}}>
+            <div style={{fontFamily:'DM Mono,monospace',fontSize:'10px',color:'var(--muted)',textTransform:'uppercase',letterSpacing:'.1em',marginBottom:'10px'}}>Stat {i+1}</div>
+            <Field label="Number" value={s.n} onChange={v=>{const a=[...draft.impact_stats];a[i]={...a[i],n:v};dset('impact_stats',a);}}/>
+            <Field label="Label" value={s.l} onChange={v=>{const a=[...draft.impact_stats];a[i]={...a[i],l:v};dset('impact_stats',a);}}/>
+            <Field label="Description" value={s.d} onChange={v=>{const a=[...draft.impact_stats];a[i]={...a[i],d:v};dset('impact_stats',a);}} rows={2}/>
+          </div>
+        ))}
+        <div className="field-sep"/>
+        <Field label="Domain expertise paragraph" value={draft.impact_domain} onChange={v=>dset('impact_domain',v)} rows={3}/>
+      </>}
+    </Drawer>
+
+    {/* FEATURE drawer */}
+    <Drawer open={drawer==='feature'} title="Edit CyberArk Feature" onClose={closeDrawer} onSave={saveDrawer}>
+      {draft&&<>
+        <Field label="Feature title" value={draft.feature_title} onChange={v=>dset('feature_title',v)}/>
+        <Field label="Subtitle / meta line" value={draft.feature_sub} onChange={v=>dset('feature_sub',v)}/>
+        <Field label="Main description" value={draft.feature_desc} onChange={v=>dset('feature_desc',v)} rows={5}/>
+        <Field label="Principal-level callout" value={draft.feature_callout} onChange={v=>dset('feature_callout',v)} rows={5}/>
+      </>}
+    </Drawer>
+
+    {/* WRITING drawer */}
+    <Drawer open={drawer==='writing'} title="Edit Writing / Blogs" onClose={closeDrawer} onSave={saveDrawer}>
+      {draft&&<>
+        {draft.blogs.map((b,i)=>(
+          <div key={i} style={{marginBottom:'20px',padding:'16px',border:'1px solid var(--border)',borderRadius:'2px'}}>
+            <div style={{fontFamily:'DM Mono,monospace',fontSize:'10px',color:'var(--muted)',textTransform:'uppercase',letterSpacing:'.1em',marginBottom:'10px'}}>Article {i+1}</div>
+            <Field label="Tag" value={b.tag} onChange={v=>{const a=[...draft.blogs];a[i]={...a[i],tag:v};dset('blogs',a);}}/>
+            <Field label="Title" value={b.title} onChange={v=>{const a=[...draft.blogs];a[i]={...a[i],title:v};dset('blogs',a);}}/>
+            <Field label="Description" value={b.desc} onChange={v=>{const a=[...draft.blogs];a[i]={...a[i],desc:v};dset('blogs',a);}} rows={2}/>
+            <Field label="URL" value={b.link} onChange={v=>{const a=[...draft.blogs];a[i]={...a[i],link:v};dset('blogs',a);}}/>
+          </div>
+        ))}
+      </>}
+    </Drawer>
+
+    {/* WORK drawer */}
+    <Drawer open={drawer==='work'} title="Edit Career Timeline" onClose={closeDrawer} onSave={saveDrawer}>
+      {draft&&<>
+        {draft.timeline.map((t,i)=>(
+          <div key={i} style={{marginBottom:'24px',padding:'16px',border:'1px solid var(--border)',borderRadius:'2px'}}>
+            <div style={{fontFamily:'DM Mono,monospace',fontSize:'10px',color:'var(--muted)',textTransform:'uppercase',letterSpacing:'.1em',marginBottom:'10px'}}>Role {i+1}</div>
+            <Field label="Role title" value={t.role} onChange={v=>{const a=[...draft.timeline];a[i]={...a[i],role:v};dset('timeline',a);}}/>
+            <Field label="Company" value={t.co} onChange={v=>{const a=[...draft.timeline];a[i]={...a[i],co:v};dset('timeline',a);}}/>
+            <Field label="Period" value={t.period} onChange={v=>{const a=[...draft.timeline];a[i]={...a[i],period:v};dset('timeline',a);}}/>
+            <Field label="Tag" value={t.tag} onChange={v=>{const a=[...draft.timeline];a[i]={...a[i],tag:v};dset('timeline',a);}}/>
+            <div className="field-group">
+              <label className="field-label">Bullets (one per line)</label>
+              <textarea className="field-input" rows={4}
+                value={t.bullets.join('\n')}
+                onChange={e=>{const a=[...draft.timeline];a[i]={...a[i],bullets:e.target.value.split('\n')};dset('timeline',a);}}/>
+            </div>
+          </div>
+        ))}
+      </>}
+    </Drawer>
+
+    {/* TRAINING drawer */}
+    <Drawer open={drawer==='training'} title="Edit Training" onClose={closeDrawer} onSave={saveDrawer}>
+      {draft&&<>
+        <Field label="Count (big number)" value={draft.training_count} onChange={v=>dset('training_count',v)}/>
+        <Field label="Sub-label" value={draft.training_sub} onChange={v=>dset('training_sub',v)}/>
+        <Field label="Body paragraph" value={draft.training_body} onChange={v=>dset('training_body',v)} rows={4}/>
+      </>}
+    </Drawer>
+
+    {/* MUSIC drawer */}
+    <Drawer open={drawer==='music'} title="Edit Music / DJ Rellow" onClose={closeDrawer} onSave={saveDrawer}>
+      {draft&&<>
+        <Field label="Bio paragraph" value={draft.music_bio} onChange={v=>dset('music_bio',v)} rows={4}/>
+      </>}
+    </Drawer>
+
+    {/* ABOUT drawer */}
+    <Drawer open={drawer==='about'} title="Edit About" onClose={closeDrawer} onSave={saveDrawer}>
+      {draft&&<>
+        <Field label="Paragraph 1 (lead)" value={draft.about_p1} onChange={v=>dset('about_p1',v)} rows={4}/>
+        <Field label="Paragraph 2 (career)" value={draft.about_p2} onChange={v=>dset('about_p2',v)} rows={4}/>
+        <Field label="Paragraph 3 (personal)" value={draft.about_p3} onChange={v=>dset('about_p3',v)} rows={3}/>
+      </>}
+    </Drawer>
+
+    {/* HEADER */}
+    <header id="site-header">
+      <div style={{display:'flex',alignItems:'baseline'}}>
+        <span className="header-name">Rahul Pahuja</span>
+        <span className="header-role">Principal Mobile Engineer</span>
+      </div>
+      <div style={{display:'flex',gap:'10px',alignItems:'center'}}>
+        <div style={{display:'flex',gap:'8px'}}>
+          <a href="https://www.linkedin.com/in/therahulpahuja/" target="_blank" rel="noopener noreferrer" className="si"><LI/></a>
+          <a href="https://github.com/rahulpahuja" target="_blank" rel="noopener noreferrer" className="si"><GH/></a>
+        </div>
+        <a href="/resume.pdf" download className="btn btn-solid">Download CV</a>
+      </div>
+    </header>
+
+    {/* NAV */}
+    <nav id="site-nav">
+      {NAV.map(s=><button key={s.id} className={'nav-btn'+(active===s.id?' active':'')} onClick={()=>go(s.id)}>{s.label}</button>)}
+    </nav>
+
+    <main>
+
+      {/* ═══ 01. HERO ═══ */}
+      <section id="hero" className="section ruled editable-section">
+        <EditBtn label="Hero" onClick={()=>openDrawer('hero')}/>
+        <div className="wrap">
+          <div style={{display:'grid',gridTemplateColumns:'1fr auto',gap:'56px',alignItems:'center'}}>
+            <div>
+              <FI><div className="label" style={{marginBottom:'24px'}}>// Principal_engineer — Hyderabad, IN</div></FI>
+              <FI delay={.1}>
+                <h1 className="display" style={{marginBottom:'28px'}}>
+                  {content.hero_headline.split('\n').map((line,i,arr)=>(
+                    <span key={i}>{i===arr.length-1?<em style={{color:'var(--accent)'}}>{line}</em>:line}<br/></span>
+                  ))}
+                </h1>
+              </FI>
+              <FI delay={.2}>
+                <p style={{fontSize:'17px',lineHeight:'1.75',color:'var(--muted)',maxWidth:'520px',marginBottom:'28px'}}>{content.hero_sub}</p>
+              </FI>
+              <FI delay={.3}>
+                <div style={{display:'flex',gap:'10px',flexWrap:'wrap',marginBottom:'44px'}}>
+                  <a href={`mailto:${content.hero_email}`} className="btn btn-solid">Get in touch →</a>
+                  <button onClick={()=>go('feature')} className="btn btn-ghost">Secured Storage ↓</button>
+                </div>
+              </FI>
+              <FI delay={.38}>
+                <div style={{display:'flex',gap:'40px'}}>
+                  {[{n:'10+',l:'Years in mobile'},{n:'12B+',l:'Events/min — Conviva'},{n:'M+',l:'Banking users — Bankwest'}].map(s=>(
+                    <div key={s.n}>
+                      <div style={{fontFamily:'DM Serif Display,serif',fontSize:'26px',color:'var(--accent)',lineHeight:1}}>{s.n}</div>
+                      <div className="label" style={{marginTop:'4px'}}>{s.l}</div>
+                    </div>
+                  ))}
+                </div>
+              </FI>
+            </div>
+            <FI delay={.12}>
+              <div style={{display:'flex',flexDirection:'column',alignItems:'center',gap:'20px'}}>
+                <div className="profile-ring">
+                  <div className="scan-bar"></div>
+                  <img src="public/profile.jpg" alt="Rahul Pahuja" style={{width:'100%',height:'100%',objectFit:'cover'}}/>
+                </div>
+                <div style={{textAlign:'center'}}>
+                  <div style={{fontFamily:'DM Serif Display,serif',fontSize:'17px'}}>Rahul Pahuja</div>
+                  <div className="label" style={{marginTop:'4px'}}>Staff → Principal · CyberArk</div>
+                </div>
+              </div>
+            </FI>
+          </div>
+          <div className="ticker-wrap" style={{marginTop:'56px',borderTop:'1px solid var(--border)',paddingTop:'20px'}}>
+            <div className="label" style={{marginBottom:'12px'}}>Experience across</div>
+            <div className="ticker-inner">
+              {[...COMPANIES,...COMPANIES].map((c,i)=>(
+                <span key={i} style={{fontFamily:'DM Mono,monospace',fontSize:'12px',letterSpacing:'.15em',textTransform:'uppercase',color:'var(--muted)',whiteSpace:'nowrap'}}>{c}&nbsp;&nbsp;·&nbsp;&nbsp;</span>
+              ))}
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* ═══ 02. IMPACT ═══ */}
+      <section id="impact" className="section section-alt editable-section">
+        <EditBtn label="Impact" onClick={()=>openDrawer('impact')}/>
+        <div className="wrap">
+          <FI>
+            <div style={{display:'flex',alignItems:'baseline',gap:'18px',marginBottom:'56px'}}>
+              <div className="accent-rule"></div>
+              <h2 className="display-sm">Impact at scale</h2>
+              <span className="label" style={{marginLeft:'auto'}}>02 / Work</span>
+            </div>
+          </FI>
+          <div className="impact-grid">
+            {content.impact_stats.map((s,i)=>(
+              <FI key={i} delay={i*.1}>
+                <div className="impact-cell">
+                  <div className="impact-num">{s.n}</div>
+                  <div className="impact-label">{s.l}</div>
+                  <p className="impact-desc">{s.d}</p>
+                </div>
+              </FI>
+            ))}
+          </div>
+          <div style={{display:'grid',gridTemplateColumns:'1fr 2fr',gap:'56px',alignItems:'start'}}>
+            <FI>
+              <div>
+                <div className="label" style={{marginBottom:'14px'}}>Domain expertise</div>
+                <p style={{fontSize:'15px',lineHeight:'1.8',color:'var(--muted)'}}>{content.impact_domain}</p>
+              </div>
+            </FI>
+            <div className="skills-grid">
+              {Object.entries(SKILLS).map(([cat,items],i)=>(
+                <FI key={cat} delay={i*.07}>
+                  <div className="skill-card">
+                    <div className="skill-cat">{cat}</div>
+                    <div className="tags">{items.map(s=><span key={s} className="tag">{s}</span>)}</div>
+                  </div>
+                </FI>
+              ))}
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* ═══ 03. FEATURED WORK ═══ */}
+      <section id="feature" className="section editable-section">
+        <EditBtn label="CyberArk" onClick={()=>openDrawer('feature')}/>
+        <div className="wrap">
+          <FI>
+            <div style={{display:'flex',alignItems:'baseline',gap:'18px',marginBottom:'56px'}}>
+              <div className="accent-rule"></div>
+              <h2 className="display-sm">Featured work</h2>
+              <span className="label" style={{marginLeft:'auto'}}>03 / CyberArk</span>
+            </div>
+          </FI>
+          <div className="feature-card">
+            <FI delay={.05}>
+              <span className="feature-title">{content.feature_title}</span>
+              <span className="feature-sub">{content.feature_sub}</span>
+            </FI>
+            <FI delay={.12}><p className="feature-desc">{content.feature_desc}</p></FI>
+            <FI delay={.16}>
+              <div className="feature-meta">
+                {[{k:'Platforms',v:'Android · iOS'},{k:'Primitives',v:'TEE · Secure Enclave · Biometric'},{k:'Scope',v:'Architecture · Implementation · Standards'}].map(m=>(
+                  <div key={m.k}><div className="fm-k">{m.k}</div><div className="fm-v">{m.v}</div></div>
+                ))}
+              </div>
+            </FI>
+            <FI delay={.2}>
+              <div className="impact-callout">
+                <div className="ic-label">What this means at a principal level</div>
+                <p className="ic-text">{content.feature_callout}</p>
+              </div>
+            </FI>
+            <FI delay={.24}>
+              <div style={{display:'flex',gap:'8px',flexWrap:'wrap'}}>
+                {['TEE-backed key storage','Hardware-bound encryption','Biometric unlock flows','Secure enclave integration','Cross-platform parity','Threat modelling'].map(t=>(
+                  <span key={t} style={{padding:'3px 12px',border:'1px solid rgba(192,57,31,.35)',background:'rgba(192,57,31,.09)',borderRadius:'2px',fontFamily:'DM Mono,monospace',fontSize:'10px',color:'#e07060',letterSpacing:'.06em',textTransform:'uppercase'}}>{t}</span>
+                ))}
+              </div>
+            </FI>
+          </div>
+          <div style={{display:'grid',gridTemplateColumns:'1fr 1fr',gap:'14px',marginTop:'24px'}}>
+            {[
+              {title:'AI Similarity',desc:'Maps Android/iOS APIs side-by-side — helps engineers quickly translate concepts across both mobile ecosystems.',tech:['Android','iOS','Kotlin','Swift'],link:'https://69a65ad8cce3d69888c55e89--aquamarine-starship-b124cd.netlify.app/'},
+              {title:'CodeForumBlogs',desc:'Community platform for technical writing with real-time collaboration, code highlighting, and developer knowledge sharing.',tech:['React','Node.js','MongoDB'],link:'https://www.codeforumblogs.com'},
+            ].map((p,i)=>(
+              <FI key={i} delay={i*.08}>
+                <div className="proj-card">
+                  <div style={{fontFamily:'DM Serif Display,serif',fontSize:'22px',marginBottom:'8px'}}>{p.title}</div>
+                  <p style={{fontSize:'13px',lineHeight:'1.7',color:'var(--muted)',marginBottom:'14px'}}>{p.desc}</p>
+                  <div className="tags" style={{marginBottom:'18px'}}>{p.tech.map(t=><span key={t} className="tag">{t}</span>)}</div>
+                  <a href={p.link} target="_blank" rel="noopener noreferrer" style={{fontFamily:'DM Mono,monospace',fontSize:'10px',textTransform:'uppercase',letterSpacing:'.1em',color:'var(--accent)'}}>View project →</a>
+                </div>
+              </FI>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* ═══ 04. WRITING ═══ */}
+      <section id="writing" className="section section-alt editable-section">
+        <EditBtn label="Writing" onClick={()=>openDrawer('writing')}/>
+        <div className="wrap">
+          <FI>
+            <div style={{display:'flex',alignItems:'baseline',gap:'18px',marginBottom:'56px'}}>
+              <div className="accent-rule"></div>
+              <h2 className="display-sm">Writing</h2>
+              <span className="label" style={{marginLeft:'auto'}}>04 / Thought leadership</span>
+            </div>
+          </FI>
+          <div className="blog-list">
+            {content.blogs.map((b,i)=>(
+              <FI key={i} delay={i*.06}>
+                <a href={b.link} target="_blank" rel="noopener noreferrer" style={{display:'block',color:'inherit'}}>
+                  <div className="blog-row">
+                    <div>
+                      <div style={{display:'flex',alignItems:'center',gap:'10px',marginBottom:'8px'}}><span className="tag tag-accent">{b.tag}</span></div>
+                      <div className="blog-title">{b.title}</div>
+                      <div className="blog-desc">{b.desc}</div>
+                    </div>
+                    <span className="arrow">→</span>
+                  </div>
+                </a>
+              </FI>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* ═══ 05. WORK ═══ */}
+      <section id="work" className="section editable-section">
+        <EditBtn label="Career" onClick={()=>openDrawer('work')}/>
+        <div className="wrap">
+          <FI>
+            <div style={{display:'flex',alignItems:'baseline',gap:'18px',marginBottom:'56px'}}>
+              <div className="accent-rule"></div>
+              <h2 className="display-sm">Career</h2>
+              <span className="label" style={{marginLeft:'auto'}}>05 / Timeline</span>
+            </div>
+          </FI>
+          <div className="timeline">
+            {content.timeline.map((t,i)=>(
+              <FI key={i} delay={i*.07}>
+                <div className="tl-item">
+                  <div className="tl-dot"></div>
+                  <div className="tl-head">
+                    <div><span className="tl-role">{t.role}</span><span className="tl-co">@ {t.co}</span></div>
+                    <div style={{display:'flex',gap:'8px',alignItems:'center'}}>
+                      <span className="tag">{t.tag}</span>
+                      <span className="tl-period">{t.period}</span>
+                    </div>
+                  </div>
+                  <ul className="tl-bullets">
+                    {t.bullets.filter(b=>b.trim()).map((b,j)=><li key={j} className="tl-bullet"><span className="tl-dash">–</span>{b}</li>)}
+                  </ul>
+                </div>
+              </FI>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* ═══ 06. TRAINING ═══ */}
+      <section id="training" className="section section-alt editable-section">
+        <EditBtn label="Training" onClick={()=>openDrawer('training')}/>
+        <div className="wrap">
+          <FI>
+            <div style={{display:'flex',alignItems:'baseline',gap:'18px',marginBottom:'56px'}}>
+              <div className="accent-rule"></div>
+              <h2 className="display-sm">Teaching</h2>
+              <span className="label" style={{marginLeft:'auto'}}>06 / Training</span>
+            </div>
+          </FI>
+          <div style={{display:'grid',gridTemplateColumns:'1fr 1fr',gap:'48px',alignItems:'start'}}>
+            <FI>
+              <div>
+                <div className="big-num">{content.training_count}</div>
+                <div className="label" style={{marginTop:'6px',marginBottom:'20px'}}>{content.training_sub}</div>
+                <p style={{fontSize:'15px',lineHeight:'1.8',color:'var(--muted)',marginBottom:'24px'}}>{content.training_body}</p>
+                <div style={{display:'flex',gap:'16px',alignItems:'center'}}>
+                  <img src="https://www.gstatic.com/marketing-cms/assets/images/f5/d3/a7f9db7045429cb6dc6be56bdcbe/google-logo-about.svg" alt="Google" style={{height:'22px',objectFit:'contain',opacity:.65}}/>
+                  <span style={{color:'var(--borderl)'}}>×</span>
+                  <img src="https://www.ltm.com/content/dam/ltimcorporatewebsite/refresh-images/LTM-Logo.svg" alt="LTIMindtree" style={{height:'22px',objectFit:'contain',opacity:.65}}/>
+                </div>
+              </div>
+            </FI>
+            <FI delay={.1}>
+              <div style={{display:'flex',flexDirection:'column',gap:'10px'}}>
+                {[
+                  {n:'01',title:'Android Fundamentals',   desc:'Core SDK, architecture components, lifecycle management'},
+                  {n:'02',title:'Kotlin & Coroutines',    desc:'Modern language features, Flow API, structured concurrency'},
+                  {n:'03',title:'Jetpack & Security',      desc:'Compose, Room, DataStore, encryption, biometric flows'},
+                  {n:'04',title:'Production Capstone',    desc:'Google-approved applications + industry portfolio review'},
+                ].map(m=>(
+                  <div key={m.n} className="module-item">
+                    <div className="module-n">{m.n}</div>
+                    <div>
+                      <div style={{fontSize:'13px',fontWeight:'700',marginBottom:'3px'}}>{m.title}</div>
+                      <div style={{fontSize:'12px',color:'var(--muted)'}}>{m.desc}</div>
+                    </div>
+                  </div>
+                ))}
+              </div>
+            </FI>
+          </div>
+        </div>
+      </section>
+
+      {/* ═══ 07. MUSIC ═══ */}
+      <section id="music" className="section section-dark editable-section">
+        <EditBtn label="Music" onClick={()=>openDrawer('music')}/>
+        <div className="wrap">
+          <FI>
+            <div style={{display:'flex',alignItems:'baseline',gap:'18px',marginBottom:'56px'}}>
+              <div className="accent-rule"></div>
+              <h2 className="display-sm" style={{color:'var(--paper)'}}>DJ Rellow</h2>
+              <span className="label" style={{marginLeft:'auto',color:'rgba(255,255,255,.28)'}}>07 / Music</span>
+            </div>
+          </FI>
+          <div style={{display:'grid',gridTemplateColumns:'1fr 1fr',gap:'48px',alignItems:'center'}}>
+            <FI>
+              <div>
+                <p style={{fontSize:'16px',lineHeight:'1.8',color:'rgba(245,242,236,.62)',marginBottom:'26px'}}>{content.music_bio}</p>
+                <div style={{display:'flex',flexDirection:'column',gap:'8px',marginBottom:'28px'}}>
+                  {[{k:'Genre',v:'House · Deep House · Techno · Ambient'},{k:'Tools',v:'Ableton Live · Native Instruments'},{k:'BPM range',v:'120–128'}].map(s=>(
+                    <div key={s.k} style={{display:'flex',gap:'14px',fontSize:'13px'}}>
+                      <span className="label" style={{minWidth:'72px',paddingTop:'2px',color:'rgba(255,255,255,.28)'}}>{s.k}</span>
+                      <span style={{color:'rgba(245,242,236,.6)'}}>{s.v}</span>
+                    </div>
+                  ))}
+                </div>
+                <a href="/rellow.html" className="btn-inv">Open DJ Portal →</a>
+              </div>
+            </FI>
+            <FI delay={.1}>
+              <div style={{display:'grid',gridTemplateColumns:'1fr 1fr 1fr',gap:'8px'}}>
+                {[{title:'Neon Dreams',year:'2026'},{title:'Digital Horizon',year:'2025'},{title:'Midnight Frequencies',year:'2025'}].map((t,i)=>(
+                  <div key={i} style={{background:'rgba(255,255,255,.04)',border:'1px solid rgba(255,255,255,.08)',borderRadius:'2px',padding:'20px 14px',textAlign:'center'}}>
+                    <div style={{fontSize:'22px',marginBottom:'10px'}}>♫</div>
+                    <div style={{fontSize:'13px',fontWeight:'500',color:'var(--paper)',marginBottom:'4px'}}>{t.title}</div>
+                    <div className="label" style={{color:'rgba(255,255,255,.28)'}}>{t.year}</div>
+                  </div>
+                ))}
+              </div>
+            </FI>
+          </div>
+        </div>
+      </section>
+
+      {/* ═══ 08. ABOUT ═══ */}
+      <section id="about" className="section ruled editable-section">
+        <EditBtn label="About" onClick={()=>openDrawer('about')}/>
+        <div className="wrap">
+          <FI>
+            <div style={{display:'flex',alignItems:'baseline',gap:'18px',marginBottom:'56px'}}>
+              <div className="accent-rule"></div>
+              <h2 className="display-sm">About</h2>
+              <span className="label" style={{marginLeft:'auto'}}>08 / Human</span>
+            </div>
+          </FI>
+          <div style={{display:'grid',gridTemplateColumns:'2fr 1fr',gap:'72px',alignItems:'start'}}>
+            <FI>
+              <div>
+                <p style={{fontSize:'18px',lineHeight:'1.85',marginBottom:'20px'}}>{content.about_p1}</p>
+                <p style={{fontSize:'15px',lineHeight:'1.85',color:'var(--muted)',marginBottom:'20px'}}>{content.about_p2}</p>
+                <p style={{fontSize:'15px',lineHeight:'1.85',color:'var(--muted)'}}>{content.about_p3}</p>
+                <div style={{marginTop:'32px',display:'flex',gap:'10px'}}>
+                  <a href={`mailto:${content.hero_email}`} className="btn btn-solid">{content.hero_email}</a>
+                  <a href="/resume.pdf" download className="btn btn-ghost">Download CV</a>
+                </div>
+              </div>
+            </FI>
+            <FI delay={.1}>
+              <div>
+                {[
+                  {k:'Education',v:'M.Tech, Computer Science',sub:'BITS Pilani'},
+                  {k:'Based in',v:'Hyderabad, India'},
+                  {k:'Currently',v:'CyberArk',sub:'Staff → Principal'},
+                ].map((s,i)=>(
+                  <div key={i} style={{borderTop:'1px solid var(--border)',paddingTop:'16px',paddingBottom:'20px'}}>
+                    <div className="label" style={{marginBottom:'8px'}}>{s.k}</div>
+                    <div style={{fontSize:'14px',fontWeight:'600'}}>{s.v}</div>
+                    {s.sub&&<div style={{fontSize:'13px',color:'var(--muted)'}}>{s.sub}</div>}
+                  </div>
+                ))}
+                <div style={{borderTop:'1px solid var(--border)',paddingTop:'16px'}}>
+                  <div className="label" style={{marginBottom:'12px'}}>Elsewhere</div>
+                  <div style={{display:'flex',flexWrap:'wrap',gap:'10px'}}>
+                    {[['LinkedIn','https://www.linkedin.com/in/therahulpahuja/'],['GitHub','https://github.com/rahulpahuja'],['X / Twitter','https://www.x.com/ourpea91'],['Instagram','https://www.instagram.com/therahulpahuja'],['YouTube','https://www.youtube.com/rahulpahuja1991']].map(([l,h])=>(
+                      <a key={l} href={h} target="_blank" rel="noopener noreferrer"
+                        style={{fontFamily:'DM Mono,monospace',fontSize:'10px',textTransform:'uppercase',letterSpacing:'.1em',color:'var(--muted)',borderBottom:'1px solid var(--border)',paddingBottom:'1px',transition:'color .18s,border-color .18s'}}
+                        onMouseEnter={e=>{e.target.style.color='var(--accent)';e.target.style.borderColor='var(--accent)';}}
+                        onMouseLeave={e=>{e.target.style.color='var(--muted)';e.target.style.borderColor='var(--border)';}}
+                      >{l}</a>
+                    ))}
+                  </div>
+                </div>
+              </div>
+            </FI>
+          </div>
+        </div>
+      </section>
+
+      {/* FOOTER */}
+      <footer style={{borderTop:'1px solid var(--border)',padding:'22px 40px',display:'flex',justifyContent:'space-between',alignItems:'center',background:'var(--paper)',fontFamily:'DM Mono,monospace',fontSize:'10px',color:'var(--muted)',letterSpacing:'.1em',textTransform:'uppercase'}}>
+        <span>© 2026 Rahul Pahuja</span>
+        <span>Principal Mobile Engineer · Hyderabad</span>
+        <div style={{display:'flex',gap:'18px'}}>
+          {[['GitHub','https://github.com/rahulpahuja'],['LinkedIn','https://linkedin.com/in/therahulpahuja'],['Email',`mailto:${content.hero_email}`]].map(([l,h])=>(
+            <a key={l} href={h} target="_blank" rel="noopener noreferrer"
+              style={{color:'var(--muted)',transition:'color .18s'}}
+              onMouseEnter={e=>e.target.style.color='var(--accent)'}
+              onMouseLeave={e=>e.target.style.color='var(--muted)'}
+            >{l}</a>
+          ))}
+        </div>
+      </footer>
+    </main>
+  </div>;
+};
+
+ReactDOM.createRoot(document.getElementById('root')).render(<App/>);
+</script>
+</body>
+</html>
+<!-- 
+
+
+<!DOCTYPE html>
+<html lang="en">
 
 <head>
     <meta charset="UTF-8">
@@ -980,4 +2023,4 @@
     </script>
 </body>
 
-</html>
+</html> -->
