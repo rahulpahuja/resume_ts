@@ -21,45 +21,55 @@
 
         viewer.id = "cyberpunk-blog"
 
-        viewer.className = "fixed inset-0 z-[9999] hidden bg-black/95 overflow-y-auto"
+        viewer.className = "fixed inset-0 z-[9999] hidden"
+        viewer.style.cssText = "background:rgba(0,0,0,0.95);overflow:hidden;"
 
         viewer.innerHTML = `
 
 <style>
 
-.grid-bg{
+#cyberpunk-blog .grid-bg{
 background-image:radial-gradient(circle at 1px 1px,rgba(0,242,255,.06) 1px,transparent 1px);
 background-size:40px 40px;
 }
 
 #matrix-bg{
-position:fixed;
+position:absolute;
 top:0;
 left:0;
 width:100%;
 height:100%;
-z-index:-2;
+z-index:1;
 opacity:.25;
+pointer-events:none;
 }
 
 #neural-bg{
-position:fixed;
+position:absolute;
 top:0;
 left:0;
 width:100%;
 height:100%;
-z-index:-1;
+z-index:2;
+pointer-events:none;
 }
 
 #reading-progress{
-position:fixed;
+position:absolute;
 top:0;
 left:0;
 height:3px;
 width:0%;
 background:#00f2ff;
 box-shadow:0 0 12px #00f2ff;
-z-index:10000;
+z-index:10;
+}
+
+#blog-scroll{
+position:relative;
+z-index:3;
+height:100%;
+overflow-y:auto;
 }
 
 /* readability fix */
@@ -97,11 +107,11 @@ padding-left:12px;
 
 </style>
 
-<div id="reading-progress"></div>
-
 <canvas id="matrix-bg"></canvas>
 <canvas id="neural-bg"></canvas>
+<div id="reading-progress"></div>
 
+<div id="blog-scroll">
 <div class="grid-bg p-10 max-w-4xl mx-auto">
 
 <header class="glass border border-purple-500/40 p-6 mb-8 flex justify-between">
@@ -130,6 +140,7 @@ Exit
 <article id="blog-content"
 class="prose prose-invert max-w-none"></article>
 
+</div>
 </div>
 `
 
@@ -252,11 +263,11 @@ class="prose prose-invert max-w-none"></article>
     function progressHUD() {
 
         const bar = document.getElementById("reading-progress")
+        const scrollEl = document.getElementById("blog-scroll")
 
-        window.addEventListener("scroll", () => {
+        scrollEl.addEventListener("scroll", () => {
 
-            const h = document.documentElement
-            const scrolled = h.scrollTop / (h.scrollHeight - h.clientHeight)
+            const scrolled = scrollEl.scrollTop / (scrollEl.scrollHeight - scrollEl.clientHeight)
 
             bar.style.width = scrolled * 100 + "%"
 
@@ -483,7 +494,7 @@ Stop
             typeParagraphs()
             activateSections()
 
-            window.scrollTo(0, 0)
+            document.getElementById("blog-scroll").scrollTo(0, 0)
 
         } catch (e) {
             console.error(`Error loading blog ${slug}:`, e)
