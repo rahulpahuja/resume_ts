@@ -167,7 +167,7 @@ class="prose prose-invert max-w-none"></article>
         canvas.width = window.innerWidth
         canvas.height = window.innerHeight
 
-        const letters = "यंत्र • रक्षा • बुद्धि"
+        const letters = "यंत्र • रक्षा • बुद्धि • शक्ति • डेटा • नेटवर्क • सुरक्षा • कोड • हैक • सिस्टम • कृत्रिम • तंत्रिका".split(" ")
         const fontSize = 14
         const columns = Math.floor(canvas.width / fontSize)
         const drops = [...Array(columns)].fill(1)
