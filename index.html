@@ -497,6 +497,17 @@ const App=()=>{
     showToast();
   };
 
+  /* ── SYNC BLOGS FROM blogs.js ── */
+  useEffect(()=>{
+    const handler=(e)=>{
+      const blogs=e.detail;
+      if(blogs&&blogs.length>0)setContent(prev=>({...prev,blogs}));
+    };
+    window.addEventListener('blogsLoaded',handler);
+    if(window.BLOGS&&window.BLOGS.length>0)setContent(prev=>({...prev,blogs:window.BLOGS}));
+    return()=>window.removeEventListener('blogsLoaded',handler);
+  },[]);
+
   /* ── DRAFT FIELD HELPER ── */
   const dset=(key,val)=>setDraft(d=>({...d,[key]:val}));
 
@@ -836,7 +847,7 @@ const App=()=>{
           <div className="blog-list">
             {content.blogs.map((b,i)=>(
               <FI key={i} delay={i*.06}>
-                <a href={b.link} target="_blank" rel="noopener noreferrer" style={{display:'block',color:'inherit'}}>
+                <a href={b.link} {...(b.link&&b.link.startsWith('/blog/')?{}:{target:'_blank',rel:'noopener noreferrer'})} style={{display:'block',color:'inherit'}}>
                   <div className="blog-row">
                     <div>
                       <div style={{display:'flex',alignItems:'center',gap:'10px',marginBottom:'8px'}}><span className="tag tag-accent">{b.tag}</span></div>
@@ -1046,5 +1057,8 @@ const App=()=>{
 
 ReactDOM.createRoot(document.getElementById('root')).render(<App/>);
 </script>
+<script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+<script src="blogs.js"></script>
+<script src="blog-read.js"></script>
 </body>
 </html>
