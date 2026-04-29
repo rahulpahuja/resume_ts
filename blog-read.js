@@ -430,47 +430,58 @@ Stop
 
         const url = `https://raw.githubusercontent.com/${OWNER}/${REPO}/main/${BLOG_DIR}/${slug}.md`
 
-        const res = await fetch(url)
+        try {
+            const res = await fetch(url)
+            
+            if (!res.ok) {
+                console.error(`Blog not found: ${slug}`)
+                return
+            }
 
-        const md = await res.text()
+            const md = await res.text()
 
-        const clean = md
-            .replace(/title:.*\n/, "")
-            .replace(/tag:.*\n/, "")
-            .replace(/description:.*\n/, "")
+            const clean = md
+                .replace(/title:.*\n/, "")
+                .replace(/tag:.*\n/, "")
+                .replace(/description:.*\n/, "")
 
-        marked.setOptions({ gfm: true, breaks: true })
+            marked.setOptions({ gfm: true, breaks: true })
 
-        const html = marked.parse(clean)
+            const html = marked.parse(clean)
 
-        document.getElementById("blog-title").innerText =
-            md.match(/title:\s*(.*)/)?.[1] || slug
+            document.getElementById("blog-title").innerText =
+                md.match(/title:\s*(.*)/)?.[1] || slug
 
-        document.getElementById("blog-content").innerHTML = html
+            document.getElementById("blog-content").innerHTML = html
 
-        /* FIX spacing bug */
+            /* FIX spacing bug */
 
-        const text = clean
-            .replace(/[#>*`]/g, "")
-            .replace(/\n+/g, " ")
-            .replace(/\s+/g, " ")
-            .trim()
+            const text = clean
+                .replace(/[#>*`]/g, "")
+                .replace(/\n+/g, " ")
+                .replace(/\s+/g, " ")
+                .trim()
 
-        renderSummary(generateSummary(text))
+            renderSummary(generateSummary(text))
 
-        renderVoice(text)
+            renderVoice(text)
 
-        highlight()
+            highlight()
 
-        matrixRain()
-        neuralBackground()
+            matrixRain()
+            neuralBackground()
 
-        progressHUD()
+            progressHUD()
 
-        typeParagraphs()
-        activateSections()
+            typeParagraphs()
+            activateSections()
 
-        window.scrollTo(0, 0)
+            window.scrollTo(0, 0)
+
+        } catch (e) {
+            console.error(`Error loading blog ${slug}:`, e)
+            viewer.classList.add("hidden")
+        }
 
     }
 
@@ -485,11 +496,15 @@ Stop
             const link = e.target.closest("a")
 
             if (!link) return
-            if (!link.href.includes("/blogs/")) return
+            
+            const href = link.href || ""
+            
+            // Check if link is a blog link (/blog/slug format)
+            if (!href.includes("/blog/")) return
 
             e.preventDefault()
 
-            const slug = link.href.split("/").pop().replace(".md", "")
+            const slug = href.split("/blog/").pop()
 
             history.pushState({}, "", BLOG_PREFIX + slug)
 
@@ -509,9 +524,11 @@ Stop
 
         if (!path.startsWith(BLOG_PREFIX)) return
 
-        const slug = path.replace(BLOG_PREFIX, "")
+        const slug = path.replace(BLOG_PREFIX, "").split("?")[0] // Remove query params
 
-        openBlog(slug)
+        if (slug) {
+            openBlog(slug)
+        }
 
     }
 
