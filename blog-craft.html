@@ -19,191 +19,108 @@
   --accent:#00f2ff;
   --red:#c0391f;
   --green:#00ff9c;
+  --amber:#f5a623;
   --text:#e2e2f0;
   --muted:#6060a0;
   --muted2:#4a4a7a;
 }
 
-body{
-  background:var(--bg);
-  color:var(--text);
-  font-family:'DM Mono',monospace;
-  height:100vh;
-  overflow:hidden;
-  display:flex;
-  flex-direction:column;
-}
+body{background:var(--bg);color:var(--text);font-family:'DM Mono',monospace;height:100vh;overflow:hidden;display:flex;flex-direction:column}
 
 /* ── Login ── */
 #login-screen{
-  position:fixed;inset:0;
-  display:flex;align-items:center;justify-content:center;
+  position:fixed;inset:0;display:flex;align-items:center;justify-content:center;
   background:rgba(6,6,10,.97);
   background-image:radial-gradient(circle at 1px 1px,rgba(0,242,255,.04) 1px,transparent 1px);
-  background-size:36px 36px;
-  z-index:999;
+  background-size:36px 36px;z-index:999;
 }
-
-.login-box{
-  background:var(--surface);
-  border:1px solid var(--border);
-  padding:48px 44px;
-  width:420px;max-width:92vw;
-}
-
-.login-eyebrow{
-  font-size:9px;color:var(--accent);
-  text-transform:uppercase;letter-spacing:.22em;margin-bottom:10px;
-}
-
-.login-title{
-  font-family:'Syne',sans-serif;font-weight:800;font-size:26px;
-  color:var(--text);margin-bottom:36px;line-height:1.15;
-}
-
+.login-box{background:var(--surface);border:1px solid var(--border);padding:48px 44px;width:420px;max-width:92vw}
+.login-eyebrow{font-size:9px;color:var(--accent);text-transform:uppercase;letter-spacing:.22em;margin-bottom:10px}
+.login-title{font-family:'Syne',sans-serif;font-weight:800;font-size:26px;color:var(--text);margin-bottom:36px;line-height:1.15}
 .field{margin-bottom:18px}
-
-.field label{
-  display:block;font-size:9px;color:var(--muted);
-  text-transform:uppercase;letter-spacing:.18em;margin-bottom:5px;
-}
-
-.field input{
-  width:100%;background:var(--bg);
-  border:1px solid var(--border);color:var(--text);
-  padding:11px 13px;font-family:'DM Mono',monospace;font-size:12.5px;
-  outline:none;transition:border-color .2s;
-}
+.field label{display:block;font-size:9px;color:var(--muted);text-transform:uppercase;letter-spacing:.18em;margin-bottom:5px}
+.field input{width:100%;background:var(--bg);border:1px solid var(--border);color:var(--text);padding:11px 13px;font-family:'DM Mono',monospace;font-size:12.5px;outline:none;transition:border-color .2s}
 .field input:focus{border-color:var(--accent)}
 .field input::placeholder{color:var(--muted2)}
-
 .field-hint{font-size:9.5px;color:var(--muted2);margin-top:5px;line-height:1.5}
-
-.login-btn{
-  width:100%;padding:13px;background:var(--accent);color:var(--bg);
-  font-family:'DM Mono',monospace;font-size:11px;font-weight:500;
-  text-transform:uppercase;letter-spacing:.18em;border:none;cursor:pointer;
-  margin-top:6px;transition:opacity .2s;
-}
+.login-btn{width:100%;padding:13px;background:var(--accent);color:var(--bg);font-family:'DM Mono',monospace;font-size:11px;font-weight:500;text-transform:uppercase;letter-spacing:.18em;border:none;cursor:pointer;margin-top:6px;transition:opacity .2s}
 .login-btn:hover{opacity:.85}
-
-.login-error{
-  display:none;color:#ff5555;font-size:10.5px;margin-top:12px;
-  padding:8px 12px;border:1px solid rgba(255,85,85,.25);background:rgba(255,85,85,.06);
-}
+.login-error{display:none;color:#ff5555;font-size:10.5px;margin-top:12px;padding:8px 12px;border:1px solid rgba(255,85,85,.25);background:rgba(255,85,85,.06)}
 
 /* ── Main shell ── */
 #editor-screen{display:none;flex-direction:column;height:100vh}
 #editor-screen.active{display:flex}
 
 /* ── Header ── */
-.hdr{
-  background:var(--surface);border-bottom:1px solid var(--border);
-  height:48px;padding:0 20px;
-  display:flex;align-items:center;justify-content:space-between;flex-shrink:0;
-}
+.hdr{background:var(--surface);border-bottom:1px solid var(--border);height:48px;padding:0 20px;display:flex;align-items:center;justify-content:space-between;flex-shrink:0}
 .hdr-left{display:flex;align-items:center;gap:14px}
 .hdr-brand{font-family:'Syne',sans-serif;font-weight:800;font-size:13px;color:var(--accent);letter-spacing:.06em;text-transform:uppercase}
 .hdr-tag{font-size:9px;color:var(--muted);text-transform:uppercase;letter-spacing:.16em}
-.hdr-right{display:flex;align-items:center;gap:14px}
+.edit-mode-badge{
+  font-size:9px;color:var(--amber);background:rgba(245,166,35,.1);
+  border:1px solid rgba(245,166,35,.3);padding:2px 8px;border-radius:2px;
+  display:none;
+}
+.edit-mode-badge.active{display:inline-block}
+.hdr-right{display:flex;align-items:center;gap:10px}
 .save-badge{font-size:9px;color:var(--muted);display:flex;align-items:center;gap:5px}
 .save-dot{width:5px;height:5px;border-radius:50%;background:var(--green);flex-shrink:0}
-.ghost-btn{
-  background:none;border:1px solid var(--border);color:var(--muted);
-  font-family:'DM Mono',monospace;font-size:9px;text-transform:uppercase;
-  letter-spacing:.12em;padding:5px 11px;cursor:pointer;transition:all .18s;
-}
+.ghost-btn{background:none;border:1px solid var(--border);color:var(--muted);font-family:'DM Mono',monospace;font-size:9px;text-transform:uppercase;letter-spacing:.12em;padding:5px 11px;cursor:pointer;transition:all .18s}
 .ghost-btn:hover{border-color:var(--accent);color:var(--accent)}
+.ghost-btn.amber{border-color:rgba(245,166,35,.35);color:var(--amber)}
+.ghost-btn.amber:hover{border-color:var(--amber)}
 
 /* ── Meta bar ── */
-.meta-bar{
-  background:var(--surface2);border-bottom:1px solid var(--border);
-  padding:12px 20px;display:flex;gap:12px;flex-shrink:0;
-}
+.meta-bar{background:var(--surface2);border-bottom:1px solid var(--border);padding:12px 20px;display:flex;gap:12px;flex-shrink:0}
 .meta-field{flex:1;min-width:0}
 .meta-field.wide{flex:2.5}
-.meta-field label{
-  display:block;font-size:8.5px;color:var(--muted);
-  text-transform:uppercase;letter-spacing:.16em;margin-bottom:4px;
-}
-.meta-field input{
-  width:100%;background:var(--bg);border:1px solid var(--border2);
-  color:var(--text);padding:7px 10px;
-  font-family:'DM Mono',monospace;font-size:12px;outline:none;transition:border-color .18s;
-}
+.meta-field label{display:block;font-size:8.5px;color:var(--muted);text-transform:uppercase;letter-spacing:.16em;margin-bottom:4px}
+.meta-field input{width:100%;background:var(--bg);border:1px solid var(--border2);color:var(--text);padding:7px 10px;font-family:'DM Mono',monospace;font-size:12px;outline:none;transition:border-color .18s}
 .meta-field input:focus{border-color:var(--accent)}
 .meta-field input::placeholder{color:var(--muted2)}
+.slug-preview{font-size:8.5px;color:var(--muted2);margin-top:4px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.slug-preview.edit{color:var(--amber)}
 
-/* ── Editor container ── */
-.editor-wrap{flex:1;overflow:hidden;display:flex;flex-direction:column;min-height:0}
+/* ── Editor ── */
+.editor-wrap{flex:1;overflow:hidden;display:flex;flex-direction:column;min-height:0;position:relative}
+
+/* Upload overlay */
+#upload-overlay{
+  position:absolute;inset:0;background:rgba(6,6,10,.92);
+  display:none;align-items:center;justify-content:center;
+  z-index:100;flex-direction:column;gap:16px;
+}
+#upload-overlay.active{display:flex}
+.upload-spinner{
+  width:36px;height:36px;border:2px solid var(--border);
+  border-top-color:var(--accent);border-radius:50%;
+  animation:spin .8s linear infinite;
+}
+@keyframes spin{to{transform:rotate(360deg)}}
+.upload-label{font-size:11px;color:var(--accent);letter-spacing:.1em}
+.upload-progress{font-size:9px;color:var(--muted);margin-top:4px}
 
 /* ── EasyMDE overrides ── */
 .EasyMDEContainer{display:flex;flex-direction:column;height:100%;overflow:hidden}
-.EasyMDEContainer .CodeMirror{
-  background:var(--bg) !important;color:var(--text) !important;
-  font-family:'DM Mono',monospace !important;font-size:14px !important;
-  line-height:1.85 !important;height:100% !important;border:none !important;
-}
+.EasyMDEContainer .CodeMirror{background:var(--bg) !important;color:var(--text) !important;font-family:'DM Mono',monospace !important;font-size:14px !important;line-height:1.85 !important;height:100% !important;border:none !important}
 .EasyMDEContainer .CodeMirror-scroll{height:100% !important}
-
-.editor-toolbar{
-  background:var(--surface3) !important;
-  border-top:none !important;border-bottom:1px solid var(--border) !important;
-  padding:3px 10px !important;flex-shrink:0 !important;
-}
-.editor-toolbar button,.editor-toolbar button.active{
-  color:var(--muted) !important;border:none !important;
-  background:none !important;border-radius:2px !important;
-  transition:color .15s,background .15s !important;
-  font-size:13px !important;height:26px !important;
-}
+.editor-toolbar{background:var(--surface3) !important;border-top:none !important;border-bottom:1px solid var(--border) !important;padding:3px 10px !important;flex-shrink:0 !important}
+.editor-toolbar button,.editor-toolbar button.active{color:var(--muted) !important;border:none !important;background:none !important;border-radius:2px !important;transition:color .15s,background .15s !important;font-size:13px !important;height:26px !important}
 .editor-toolbar button:hover{color:var(--accent) !important;background:var(--surface2) !important}
 .editor-toolbar button.active{color:var(--accent) !important}
 .editor-toolbar i.separator{border-left:1px solid var(--border) !important;border-right:none !important}
-
-.editor-toolbar .custom-btn{
-  font-size:9px !important;padding:0 6px !important;
-  color:var(--muted) !important;border:1px solid var(--border) !important;
-  border-radius:2px !important;height:22px !important;margin:2px 1px !important;
-  cursor:pointer !important;display:inline-flex !important;align-items:center !important;gap:4px !important;
-  transition:all .15s !important;letter-spacing:.05em !important;
-  background:none !important;font-family:'DM Mono',monospace !important;
-}
+.editor-toolbar .custom-btn{font-size:9px !important;padding:0 6px !important;color:var(--muted) !important;border:1px solid var(--border) !important;border-radius:2px !important;height:22px !important;margin:2px 1px !important;cursor:pointer !important;display:inline-flex !important;align-items:center !important;gap:4px !important;transition:all .15s !important;letter-spacing:.05em !important;background:none !important;font-family:'DM Mono',monospace !important}
 .editor-toolbar .custom-btn:hover{color:var(--accent) !important;border-color:var(--accent) !important}
-
-.editor-preview-side,.editor-preview{
-  background:var(--surface2) !important;color:var(--text) !important;
-  border-left:1px solid var(--border) !important;
-  padding:32px 36px !important;
-  font-family:'DM Mono',monospace !important;line-height:1.8 !important;
-  overflow-y:auto !important;font-size:13.5px !important;
-}
-.editor-preview h1,.editor-preview h2,.editor-preview h3,
-.editor-preview-side h1,.editor-preview-side h2,.editor-preview-side h3{
-  font-family:'Syne',sans-serif !important;color:var(--accent) !important;
-  margin:28px 0 12px !important;
-}
+.editor-toolbar .custom-btn.upload-btn{color:rgba(0,255,156,.7) !important;border-color:rgba(0,255,156,.25) !important}
+.editor-toolbar .custom-btn.upload-btn:hover{color:var(--green) !important;border-color:var(--green) !important}
+.editor-preview-side,.editor-preview{background:var(--surface2) !important;color:var(--text) !important;border-left:1px solid var(--border) !important;padding:32px 36px !important;font-family:'DM Mono',monospace !important;line-height:1.8 !important;overflow-y:auto !important;font-size:13.5px !important}
+.editor-preview h1,.editor-preview h2,.editor-preview h3,.editor-preview-side h1,.editor-preview-side h2,.editor-preview-side h3{font-family:'Syne',sans-serif !important;color:var(--accent) !important;margin:28px 0 12px !important}
 .editor-preview a,.editor-preview-side a{color:var(--accent) !important}
-.editor-preview code,.editor-preview-side code{
-  background:rgba(0,0,0,.5) !important;color:var(--green) !important;
-  padding:2px 5px !important;border-radius:3px !important;font-size:12.5px !important;
-}
-.editor-preview pre,.editor-preview-side pre{
-  background:rgba(0,0,0,.5) !important;border:1px solid var(--border) !important;
-  padding:16px !important;border-radius:4px !important;overflow:auto !important;
-}
-.editor-preview blockquote,.editor-preview-side blockquote{
-  border-left:3px solid var(--accent) !important;
-  padding-left:16px !important;color:var(--muted) !important;margin:16px 0 !important;
-}
+.editor-preview code,.editor-preview-side code{background:rgba(0,0,0,.5) !important;color:var(--green) !important;padding:2px 5px !important;border-radius:3px !important;font-size:12.5px !important}
+.editor-preview pre,.editor-preview-side pre{background:rgba(0,0,0,.5) !important;border:1px solid var(--border) !important;padding:16px !important;border-radius:4px !important;overflow:auto !important}
+.editor-preview blockquote,.editor-preview-side blockquote{border-left:3px solid var(--accent) !important;padding-left:16px !important;color:var(--muted) !important;margin:16px 0 !important}
 .editor-preview img,.editor-preview-side img{max-width:100% !important;border-radius:4px !important}
-
-.editor-statusbar{
-  background:var(--surface) !important;border-top:1px solid var(--border) !important;
-  color:var(--muted) !important;font-family:'DM Mono',monospace !important;
-  font-size:9.5px !important;padding:4px 14px !important;flex-shrink:0 !important;
-}
-
+.editor-statusbar{background:var(--surface) !important;border-top:1px solid var(--border) !important;color:var(--muted) !important;font-family:'DM Mono',monospace !important;font-size:9.5px !important;padding:4px 14px !important;flex-shrink:0 !important}
 .cm-s-default .cm-header{color:var(--accent) !important;font-weight:bold !important}
 .cm-s-default .cm-link{color:var(--accent) !important}
 .cm-s-default .cm-url{color:var(--muted) !important}
@@ -212,79 +129,68 @@ body{
 .cm-s-default .cm-em{color:#c9c9e8 !important;font-style:italic !important}
 .cm-s-default .cm-comment{color:var(--muted) !important}
 .cm-s-default .cm-quote{color:var(--muted) !important}
-
 .CodeMirror-cursor{border-left:2px solid var(--accent) !important}
 .CodeMirror-selected{background:rgba(0,242,255,.1) !important}
 .CodeMirror-focused .CodeMirror-selected{background:rgba(0,242,255,.1) !important}
 
 /* ── Publish bar ── */
-.pub-bar{
-  background:var(--surface);border-top:1px solid var(--border);
-  padding:10px 20px;display:flex;align-items:center;
-  justify-content:space-between;flex-shrink:0;
-}
+.pub-bar{background:var(--surface);border-top:1px solid var(--border);padding:10px 20px;display:flex;align-items:center;justify-content:space-between;flex-shrink:0}
 .pub-info{font-size:9px;color:var(--muted)}
-.pub-info code{
-  color:var(--accent);background:rgba(0,242,255,.07);
-  padding:2px 6px;border-radius:2px;font-size:9px;
-}
+.pub-info code{color:var(--accent);background:rgba(0,242,255,.07);padding:2px 6px;border-radius:2px;font-size:9px}
+.pub-info.edit-info code{color:var(--amber);background:rgba(245,166,35,.07)}
 .pub-right{display:flex;align-items:center;gap:14px}
 .status{font-size:10px;color:var(--muted);max-width:340px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
-.status.ok{color:var(--green)}
-.status.err{color:#ff5555}
-.pub-btn{
-  background:var(--red);color:#fff;border:none;
-  padding:9px 24px;font-family:'DM Mono',monospace;font-size:10px;
-  text-transform:uppercase;letter-spacing:.16em;cursor:pointer;transition:opacity .2s;
-}
+.status.ok{color:var(--green)}.status.err{color:#ff5555}
+.pub-btn{background:var(--red);color:#fff;border:none;padding:9px 24px;font-family:'DM Mono',monospace;font-size:10px;text-transform:uppercase;letter-spacing:.16em;cursor:pointer;transition:all .2s}
 .pub-btn:hover:not(:disabled){opacity:.82}
 .pub-btn:disabled{opacity:.38;cursor:not-allowed}
+.pub-btn.update{background:#7c4f00;border:1px solid var(--amber);color:var(--amber)}
+.pub-btn.update:hover:not(:disabled){background:rgba(245,166,35,.15)}
 
-/* ── Slug preview ── */
-.slug-preview{
-  font-size:8.5px;color:var(--muted2);margin-top:4px;
-  overflow:hidden;text-overflow:ellipsis;white-space:nowrap;
-}
-
-/* ── Modal ── */
-.modal-bg{
-  position:fixed;inset:0;background:rgba(0,0,0,.88);
-  display:flex;align-items:center;justify-content:center;z-index:2000;
-}
-.modal{
-  background:var(--surface);border:1px solid var(--border);
-  padding:32px;width:480px;max-width:94vw;
-}
-.modal-title{
-  font-family:'Syne',sans-serif;font-weight:700;font-size:17px;
-  color:var(--text);margin-bottom:22px;
-}
+/* ── Modals ── */
+.modal-bg{position:fixed;inset:0;background:rgba(0,0,0,.88);display:flex;align-items:center;justify-content:center;z-index:2000}
+.modal{background:var(--surface);border:1px solid var(--border);padding:32px;width:480px;max-width:94vw}
+.modal.wide{width:600px}
+.modal-title{font-family:'Syne',sans-serif;font-weight:700;font-size:17px;color:var(--text);margin-bottom:22px;display:flex;align-items:center;justify-content:space-between}
+.modal-title span{font-size:9px;color:var(--muted);font-family:'DM Mono',monospace;font-weight:400}
 .modal-field{margin-bottom:14px}
-.modal-field label{
-  display:block;font-size:8.5px;color:var(--muted);
-  text-transform:uppercase;letter-spacing:.15em;margin-bottom:4px;
-}
-.modal-field input{
-  width:100%;background:var(--bg);border:1px solid var(--border);
-  color:var(--text);padding:9px 12px;
-  font-family:'DM Mono',monospace;font-size:12.5px;outline:none;transition:border-color .18s;
-}
+.modal-field label{display:block;font-size:8.5px;color:var(--muted);text-transform:uppercase;letter-spacing:.15em;margin-bottom:4px}
+.modal-field input{width:100%;background:var(--bg);border:1px solid var(--border);color:var(--text);padding:9px 12px;font-family:'DM Mono',monospace;font-size:12.5px;outline:none;transition:border-color .18s}
 .modal-field input:focus{border-color:var(--accent)}
 .modal-field input::placeholder{color:var(--muted2)}
 .modal-hint{font-size:9px;color:var(--muted2);margin-top:4px}
 .modal-actions{display:flex;justify-content:flex-end;gap:10px;margin-top:22px}
-.modal-cancel{
-  background:none;border:1px solid var(--border);color:var(--muted);
-  font-family:'DM Mono',monospace;font-size:9.5px;text-transform:uppercase;
-  letter-spacing:.12em;padding:7px 18px;cursor:pointer;transition:all .15s;
-}
+.modal-cancel{background:none;border:1px solid var(--border);color:var(--muted);font-family:'DM Mono',monospace;font-size:9.5px;text-transform:uppercase;letter-spacing:.12em;padding:7px 18px;cursor:pointer;transition:all .15s}
 .modal-cancel:hover{border-color:var(--accent);color:var(--accent)}
-.modal-ok{
-  background:var(--accent);color:var(--bg);border:none;
-  font-family:'DM Mono',monospace;font-size:9.5px;text-transform:uppercase;
-  letter-spacing:.12em;padding:7px 20px;cursor:pointer;transition:opacity .15s;
-}
+.modal-ok{background:var(--accent);color:var(--bg);border:none;font-family:'DM Mono',monospace;font-size:9.5px;text-transform:uppercase;letter-spacing:.12em;padding:7px 20px;cursor:pointer;transition:opacity .15s}
 .modal-ok:hover{opacity:.82}
+
+/* Blog list in edit modal */
+.blog-list-scroll{max-height:320px;overflow-y:auto;margin:-4px 0 4px;border:1px solid var(--border2)}
+.blog-list-empty{padding:32px;text-align:center;color:var(--muted);font-size:11px}
+.blog-list-loading{padding:24px;text-align:center;color:var(--muted);font-size:11px}
+.blog-item{
+  padding:12px 14px;border-bottom:1px solid var(--border2);
+  display:flex;align-items:center;justify-content:space-between;gap:12px;
+  cursor:pointer;transition:background .15s;
+}
+.blog-item:last-child{border-bottom:none}
+.blog-item:hover{background:rgba(0,242,255,.04)}
+.blog-item-name{font-size:11px;color:var(--text);flex:1;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.blog-item-date{font-size:9px;color:var(--muted);flex-shrink:0}
+.blog-item-load{
+  background:none;border:1px solid var(--border);color:var(--muted);
+  font-family:'DM Mono',monospace;font-size:9px;text-transform:uppercase;
+  letter-spacing:.1em;padding:4px 10px;cursor:pointer;flex-shrink:0;transition:all .15s;
+}
+.blog-item-load:hover{border-color:var(--accent);color:var(--accent)}
+
+/* New post indicator */
+.new-indicator{
+  display:inline-block;font-size:8px;color:var(--green);
+  background:rgba(0,255,156,.08);border:1px solid rgba(0,255,156,.2);
+  padding:1px 7px;border-radius:2px;margin-left:6px;
+}
 </style>
 </head>
 <body>
@@ -294,23 +200,19 @@ body{
   <div class="login-box">
     <div class="login-eyebrow">Rahul Pahuja · Private Access</div>
     <h1 class="login-title">Blog Crafter</h1>
-
     <div class="field">
       <label>Username</label>
       <input id="f-user" type="text" autocomplete="off" placeholder="username" spellcheck="false">
     </div>
-
     <div class="field">
       <label>Password</label>
       <input id="f-pass" type="password" placeholder="••••••••">
     </div>
-
     <div class="field">
       <label>GitHub Personal Access Token</label>
       <input id="f-token" type="password" placeholder="ghp_xxxxxxxxxxxxxxxxxxxx" spellcheck="false">
-      <p class="field-hint">Requires <code style="color:var(--accent);font-size:9px">repo</code> write access. Held in sessionStorage — cleared when tab closes.</p>
+      <p class="field-hint">Requires <code style="color:var(--accent);font-size:9px">repo</code> write access. Held in sessionStorage only.</p>
     </div>
-
     <button class="login-btn" id="login-btn">Enter Crafter →</button>
     <div class="login-error" id="login-err"></div>
   </div>
@@ -323,10 +225,13 @@ body{
     <div class="hdr-left">
       <span class="hdr-brand">Blog Crafter</span>
       <span class="hdr-tag">github.com/rahulpahuja/resume_ts</span>
+      <span class="edit-mode-badge" id="edit-badge">Editing</span>
     </div>
     <div class="hdr-right">
       <div class="save-badge"><div class="save-dot"></div><span id="save-label">Draft autosaved</span></div>
-      <button class="ghost-btn" id="clear-btn">Clear draft</button>
+      <button class="ghost-btn amber" id="edit-post-btn">Edit Post</button>
+      <button class="ghost-btn" id="new-post-btn" style="display:none">+ New Post</button>
+      <button class="ghost-btn" id="clear-btn">Clear</button>
       <button class="ghost-btn" id="logout-btn">Logout</button>
     </div>
   </div>
@@ -348,11 +253,17 @@ body{
   </div>
 
   <div class="editor-wrap">
+    <!-- Upload progress overlay -->
+    <div id="upload-overlay">
+      <div class="upload-spinner"></div>
+      <div class="upload-label">Uploading image…</div>
+      <div class="upload-progress" id="upload-progress-text"></div>
+    </div>
     <textarea id="blog-ta"></textarea>
   </div>
 
   <div class="pub-bar">
-    <div class="pub-info">Commits to <code>blogs/YYYY-MM-DD-slug.md</code> on <code>main</code></div>
+    <div class="pub-info" id="pub-info">Commits to <code>blogs/YYYY-MM-DD-slug.md</code> on <code>main</code></div>
     <div class="pub-right">
       <span class="status" id="pub-status"></span>
       <button class="pub-btn" id="pub-btn">Publish →</button>
@@ -362,7 +273,7 @@ body{
 </div>
 
 <!-- ═══ MEDIA MODAL ═══ -->
-<div class="modal-bg" id="modal" style="display:none" aria-modal="true">
+<div class="modal-bg" id="modal" style="display:none">
   <div class="modal">
     <div class="modal-title" id="modal-title">Insert</div>
     <div class="modal-field">
@@ -381,38 +292,53 @@ body{
   </div>
 </div>
 
+<!-- ═══ EDIT BLOG MODAL ═══ -->
+<div class="modal-bg" id="edit-modal" style="display:none">
+  <div class="modal wide">
+    <div class="modal-title">
+      Edit Existing Post
+      <span id="edit-modal-count"></span>
+    </div>
+    <div class="blog-list-scroll" id="blog-list">
+      <div class="blog-list-loading">Loading posts…</div>
+    </div>
+    <div class="modal-actions">
+      <button class="modal-cancel" id="edit-modal-cancel">Cancel</button>
+    </div>
+  </div>
+</div>
+
+<!-- Hidden file input for image upload -->
+<input type="file" id="img-file-input" accept="image/*" style="display:none">
+
 <script src="https://cdn.jsdelivr.net/npm/marked@4.3.0/marked.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/easymde@2.18.0/dist/easymde.min.js"></script>
 <script>
 'use strict'
 
 // ─── Config ───────────────────────────────────────────────────
-const OWNER = 'rahulpahuja'
-const REPO  = 'resume_ts'
-const CREDS = { user: 'rahul', pass: 'rellow2026' }
+const OWNER    = 'rahulpahuja'
+const REPO     = 'resume_ts'
+const CREDS    = { user: 'rahul', pass: 'rellow2026' }
 const LS_DRAFT = 'bc_draft_v1'
 const SS_TOKEN = 'bc_token'
+const IMG_DIR  = 'public/blog-images'
+
+// ─── State ────────────────────────────────────────────────────
+let ghToken     = sessionStorage.getItem(SS_TOKEN) || ''
+let mde         = null
+let editingFile = null  // { name, sha } when editing an existing post
 
 // ─── Auth ─────────────────────────────────────────────────────
-let ghToken = sessionStorage.getItem(SS_TOKEN) || ''
-
 function attemptLogin() {
   const user  = document.getElementById('f-user').value.trim()
   const pass  = document.getElementById('f-pass').value
   const token = document.getElementById('f-token').value.trim()
-  const errEl = document.getElementById('login-err')
-
-  if (user !== CREDS.user || pass !== CREDS.pass) {
-    showLoginErr('Invalid username or password.')
-    return
-  }
-  if (!token) {
-    showLoginErr('GitHub Personal Access Token is required.')
-    return
-  }
+  if (user !== CREDS.user || pass !== CREDS.pass) { showLoginErr('Invalid username or password.'); return }
+  if (!token) { showLoginErr('GitHub Personal Access Token is required.'); return }
   ghToken = token
   sessionStorage.setItem(SS_TOKEN, token)
-  errEl.style.display = 'none'
+  document.getElementById('login-err').style.display = 'none'
   enterEditor()
 }
 
@@ -439,51 +365,169 @@ document.getElementById('logout-btn').addEventListener('click', () => {
   document.getElementById('editor-screen').classList.remove('active')
 })
 
-// Auto-login if token exists in session
 if (ghToken) enterEditor()
+
+// ─── Edit / New mode ──────────────────────────────────────────
+function setEditMode(file) {
+  editingFile = file  // { name, sha }
+  document.getElementById('edit-badge').classList.add('active')
+  document.getElementById('new-post-btn').style.display = 'inline-block'
+  document.getElementById('edit-post-btn').style.display = 'none'
+  document.getElementById('pub-btn').textContent = 'Update →'
+  document.getElementById('pub-btn').className = 'pub-btn update'
+  const slugEl = document.getElementById('slug-preview')
+  slugEl.textContent = 'blogs/' + file.name
+  slugEl.className = 'slug-preview edit'
+  const info = document.getElementById('pub-info')
+  info.innerHTML = `Updating <code>${file.name}</code> on <code>main</code>`
+  info.className = 'pub-info edit-info'
+}
+
+function setNewMode() {
+  editingFile = null
+  document.getElementById('edit-badge').classList.remove('active')
+  document.getElementById('new-post-btn').style.display = 'none'
+  document.getElementById('edit-post-btn').style.display = 'inline-block'
+  document.getElementById('pub-btn').textContent = 'Publish →'
+  document.getElementById('pub-btn').className = 'pub-btn'
+  document.getElementById('slug-preview').className = 'slug-preview'
+  document.getElementById('pub-info').innerHTML = 'Commits to <code>blogs/YYYY-MM-DD-slug.md</code> on <code>main</code>'
+  document.getElementById('pub-info').className = 'pub-info'
+  // Clear fields
+  if (mde) mde.value('')
+  ;['m-title','m-tag','m-desc'].forEach(id => document.getElementById(id).value = '')
+  document.getElementById('slug-preview').textContent = ''
+}
+
+document.getElementById('new-post-btn').addEventListener('click', setNewMode)
 
 // ─── Slug util ────────────────────────────────────────────────
 function toSlug(title) {
   const date = new Date().toISOString().split('T')[0]
   const slug = title.toLowerCase()
-    .replace(/[^a-z0-9\s-]/g, '')
-    .trim()
-    .replace(/\s+/g, '-')
-    .replace(/-+/g, '-')
-    .substring(0, 90)
+    .replace(/[^a-z0-9\s-]/g, '').trim()
+    .replace(/\s+/g, '-').replace(/-+/g, '-').substring(0, 90)
   return `${date}-${slug}`
 }
 
-// Slug preview
 document.getElementById('m-title').addEventListener('input', function () {
+  if (editingFile) return  // don't overwrite slug when editing
   const slug = this.value.trim() ? toSlug(this.value) + '.md' : ''
   document.getElementById('slug-preview').textContent = slug ? 'blogs/' + slug : ''
 })
 
-// ─── Editor ───────────────────────────────────────────────────
-let mde = null
+// ─── GitHub API helpers ───────────────────────────────────────
+const GH_HEADERS = () => ({
+  'Authorization': `Bearer ${ghToken}`,
+  'Accept': 'application/vnd.github+json',
+  'Content-Type': 'application/json'
+})
 
+async function githubGetSha(path) {
+  try {
+    const r = await fetch(`https://api.github.com/repos/${OWNER}/${REPO}/contents/${path}`, { headers: GH_HEADERS() })
+    if (r.ok) return (await r.json()).sha
+  } catch {}
+  return null
+}
+
+async function githubPut(path, base64Content, message) {
+  const sha = await githubGetSha(path)
+  const body = { message, content: base64Content, branch: 'main' }
+  if (sha) body.sha = sha
+  return fetch(`https://api.github.com/repos/${OWNER}/${REPO}/contents/${path}`, {
+    method: 'PUT', headers: GH_HEADERS(), body: JSON.stringify(body)
+  })
+}
+
+function textToBase64(str) {
+  return btoa(unescape(encodeURIComponent(str)))
+}
+
+// ─── Image Upload ─────────────────────────────────────────────
+function triggerImageUpload() {
+  document.getElementById('img-file-input').click()
+}
+
+document.getElementById('img-file-input').addEventListener('change', async function () {
+  const file = this.files[0]
+  if (!file) return
+  this.value = ''  // reset so same file can be re-selected
+
+  // Show upload overlay
+  const overlay = document.getElementById('upload-overlay')
+  overlay.classList.add('active')
+  document.getElementById('upload-progress-text').textContent = file.name + ' (' + (file.size / 1024).toFixed(1) + ' KB)'
+
+  try {
+    const url = await uploadImageToGithub(file)
+    overlay.classList.remove('active')
+
+    // Ask for optional caption
+    openModal({
+      title: 'Image Uploaded',
+      lbl1: 'Image URL (auto-filled)',
+      ph1: url,
+      hint1: 'Uploaded to ' + IMG_DIR + '/' + file.name,
+      lbl2: 'Caption (optional)',
+      showF2: true,
+      onInsert(_, caption) {
+        const alt = caption || file.name.replace(/\.[^.]+$/, '')
+        const cap = caption ? `<figcaption style="text-align:center;font-size:11px;color:#6060a0;margin-top:6px">${caption}</figcaption>` : ''
+        insertMd(`\n<figure style="margin:28px 0">\n<img src="${url}" alt="${alt}" style="max-width:100%;border-radius:4px;display:block;margin:0 auto">\n${cap}\n</figure>\n`)
+      }
+    })
+    // Pre-fill the URL field
+    setTimeout(() => { document.getElementById('modal-in1').value = url }, 30)
+
+  } catch (err) {
+    overlay.classList.remove('active')
+    setStatus('✗ Upload failed: ' + err.message, 'err')
+  }
+})
+
+async function uploadImageToGithub(file) {
+  return new Promise((resolve, reject) => {
+    const reader = new FileReader()
+    reader.onerror = () => reject(new Error('File read failed'))
+    reader.onload = async (e) => {
+      try {
+        // Strip "data:image/png;base64," prefix
+        const base64 = e.target.result.split(',')[1]
+        const ext = file.name.split('.').pop().toLowerCase()
+        const safeName = Date.now() + '-' + file.name.replace(/[^a-z0-9._-]/gi, '-').toLowerCase()
+        const path = `${IMG_DIR}/${safeName}`
+
+        const res = await githubPut(path, base64, `Upload image: ${safeName}`)
+        if (!res.ok) {
+          const d = await res.json().catch(() => ({}))
+          throw new Error(d.message || res.status)
+        }
+        // Return the raw URL
+        resolve(`https://raw.githubusercontent.com/${OWNER}/${REPO}/main/${path}`)
+      } catch (err) {
+        reject(err)
+      }
+    }
+    reader.readAsDataURL(file)
+  })
+}
+
+// ─── Editor init ──────────────────────────────────────────────
 function insertMd(text) {
   if (!mde) return
   const cm = mde.codemirror
-  const cur = cm.getCursor()
-  cm.replaceRange(text, cur)
+  cm.replaceRange(text, cm.getCursor())
   cm.focus()
 }
 
-// ── Custom toolbar action builders ──
-function mediaAction(fn) {
-  return function(editor) { fn(editor) }
-}
+function mediaAction(fn) { return editor => fn(editor) }
 
-function promptYouTube(editor) {
+function promptYouTube() {
   openModal({
-    title: 'Insert YouTube Video',
-    lbl1: 'YouTube URL or video ID',
-    ph1:  'https://www.youtube.com/watch?v=dQw4w9WgXcQ',
-    hint1:'Paste the full URL or just the video ID',
-    lbl2: 'Caption (optional)',
-    showF2: true,
+    title: 'Insert YouTube Video', lbl1: 'YouTube URL or video ID',
+    ph1: 'https://www.youtube.com/watch?v=…', hint1: 'Full URL or just the video ID',
+    lbl2: 'Caption (optional)', showF2: true,
     onInsert(url, caption) {
       if (!url) return
       const match = url.match(/(?:v=|youtu\.be\/|embed\/)([a-zA-Z0-9_-]{11})/)
@@ -494,37 +538,27 @@ function promptYouTube(editor) {
   })
 }
 
-function promptAudio(editor) {
+function promptAudio() {
   openModal({
-    title: 'Insert Audio',
-    lbl1: 'Audio URL or SoundCloud track URL',
-    ph1:  'https://soundcloud.com/… or https://…/track.mp3',
-    hint1:'Direct .mp3/.ogg/.wav or a SoundCloud URL',
-    lbl2: 'Title (optional)',
-    showF2: true,
+    title: 'Insert Audio', lbl1: 'SoundCloud URL or direct audio URL',
+    ph1: 'https://soundcloud.com/… or https://…/track.mp3', hint1: 'SoundCloud embeds as a player widget; .mp3/.ogg/.wav uses HTML5 audio',
+    lbl2: 'Title (optional)', showF2: true,
     onInsert(url, title) {
       if (!url) return
       const cap = title ? `<figcaption style="font-size:11px;color:#6060a0;margin-bottom:6px">${title}</figcaption>` : ''
-      let snippet
-      if (url.includes('soundcloud.com')) {
-        const enc = encodeURIComponent(url)
-        snippet = `\n<figure style="margin:28px 0">\n${cap}\n<iframe width="100%" height="166" scrolling="no" frameborder="no" src="https://w.soundcloud.com/player/?url=${enc}&color=%2300f2ff&auto_play=false&hide_related=true&show_comments=false&show_user=true&show_reposts=false"></iframe>\n</figure>\n`
-      } else {
-        snippet = `\n<figure style="margin:28px 0">\n${cap}\n<audio controls style="width:100%"><source src="${url}"></audio>\n</figure>\n`
-      }
+      const snippet = url.includes('soundcloud.com')
+        ? `\n<figure style="margin:28px 0">\n${cap}\n<iframe width="100%" height="166" scrolling="no" frameborder="no" src="https://w.soundcloud.com/player/?url=${encodeURIComponent(url)}&color=%2300f2ff&auto_play=false&hide_related=true&show_comments=false&show_user=true&show_reposts=false"></iframe>\n</figure>\n`
+        : `\n<figure style="margin:28px 0">\n${cap}\n<audio controls style="width:100%"><source src="${url}"></audio>\n</figure>\n`
       insertMd(snippet)
     }
   })
 }
 
-function promptVideo(editor) {
+function promptVideo() {
   openModal({
-    title: 'Insert Video File',
-    lbl1: 'Video file URL (.mp4, .webm, .ogg)',
-    ph1:  'https://example.com/clip.mp4',
-    hint1:'Direct link to a hosted video file',
-    lbl2: 'Caption (optional)',
-    showF2: true,
+    title: 'Insert Video File', lbl1: 'Video file URL (.mp4, .webm, .ogg)',
+    ph1: 'https://example.com/clip.mp4', hint1: 'Direct link to a hosted video file',
+    lbl2: 'Caption (optional)', showF2: true,
     onInsert(url, caption) {
       if (!url) return
       const cap = caption ? `<figcaption style="text-align:center;font-size:11px;color:#6060a0;margin-top:8px">${caption}</figcaption>` : ''
@@ -533,36 +567,23 @@ function promptVideo(editor) {
   })
 }
 
-function promptLink(editor) {
+function promptLink() {
   openModal({
-    title: 'Insert Hyperlink',
-    lbl1: 'URL',
-    ph1:  'https://example.com',
-    hint1:'',
-    lbl2: 'Link text',
-    showF2: true,
+    title: 'Insert Hyperlink', lbl1: 'URL', ph1: 'https://example.com', hint1: '',
+    lbl2: 'Link text', showF2: true,
     onInsert(url, text) {
       if (!url) return
-      const label = text || url
       const cm = mde.codemirror
       const sel = cm.getSelection()
-      if (sel) {
-        cm.replaceSelection(`[${sel}](${url})`)
-      } else {
-        insertMd(`[${label}](${url})`)
-      }
+      sel ? cm.replaceSelection(`[${sel}](${url})`) : insertMd(`[${text || url}](${url})`)
     }
   })
 }
 
-function promptImage(editor) {
+function promptImageUrl() {
   openModal({
-    title: 'Insert Image',
-    lbl1: 'Image URL',
-    ph1:  'https://example.com/image.png',
-    hint1:'Direct link to an image',
-    lbl2: 'Alt text / caption (optional)',
-    showF2: true,
+    title: 'Insert Image by URL', lbl1: 'Image URL', ph1: 'https://example.com/image.png', hint1: 'Or use ⬆ Upload to upload from your machine',
+    lbl2: 'Alt text / caption (optional)', showF2: true,
     onInsert(url, alt) {
       if (!url) return
       const a = alt || 'image'
@@ -578,60 +599,26 @@ function initEditor() {
   mde = new EasyMDE({
     element: document.getElementById('blog-ta'),
     spellChecker: false,
-    autosave: {
-      enabled: true,
-      uniqueId: LS_DRAFT,
-      delay: 2500,
-      text: 'Autosaved — '
-    },
-    placeholder: 'Start writing…\n\nUse **bold**, *italic*, # headings, - lists, ```code blocks```, and the toolbar for images, links, and media.',
+    autosave: { enabled: true, uniqueId: LS_DRAFT, delay: 2500, text: 'Autosaved — ' },
+    placeholder: 'Start writing…\n\nUse **bold**, *italic*, # headings, - lists, ```code blocks```, and the toolbar for media.',
     toolbar: [
       'bold','italic','strikethrough','|',
       'heading-1','heading-2','heading-3','|',
       'quote','code','table','|',
       'unordered-list','ordered-list','|',
-      {
-        name:'link',
-        action: mediaAction(promptLink),
-        className:'fa fa-link',
-        title:'Insert Link'
-      },
-      {
-        name:'img',
-        action: mediaAction(promptImage),
-        className:'fa fa-image',
-        title:'Insert Image'
-      },
+      { name:'link',   action: mediaAction(promptLink),     className:'fa fa-link',  title:'Insert Link' },
+      { name:'imgurl', action: mediaAction(promptImageUrl), className:'fa fa-image', title:'Insert Image by URL' },
+      { name:'upload', action: () => triggerImageUpload(),  title:'Upload Image from Machine', text:'⬆ Upload', className:'custom-btn upload-btn' },
       '|',
-      {
-        name:'youtube',
-        action: mediaAction(promptYouTube),
-        title:'YouTube',
-        text:'▶ YouTube',
-        className:'custom-btn'
-      },
-      {
-        name:'audio',
-        action: mediaAction(promptAudio),
-        title:'Audio / SoundCloud',
-        text:'♪ Audio',
-        className:'custom-btn'
-      },
-      {
-        name:'video',
-        action: mediaAction(promptVideo),
-        title:'Video file',
-        text:'⬛ Video',
-        className:'custom-btn'
-      },
+      { name:'youtube', action: mediaAction(promptYouTube), title:'YouTube Video',       text:'▶ YouTube', className:'custom-btn' },
+      { name:'audio',   action: mediaAction(promptAudio),   title:'Audio / SoundCloud',  text:'♪ Audio',   className:'custom-btn' },
+      { name:'video',   action: mediaAction(promptVideo),   title:'Video File',           text:'⬛ Video',   className:'custom-btn' },
       '|',
       'preview','side-by-side','fullscreen'
     ],
     status: ['autosave','lines','words','cursor'],
-    previewRender(plain) {
-      return marked.parse(plain)
-    },
-    renderingConfig:{ singleLineBreaks:false }
+    previewRender: plain => marked.parse(plain),
+    renderingConfig: { singleLineBreaks: false }
   })
 
   // Restore saved meta
@@ -642,7 +629,6 @@ function initEditor() {
     if (saved.desc)  document.getElementById('m-desc').value  = saved.desc
   }
 
-  // Autosave meta alongside content
   ;['m-title','m-tag','m-desc'].forEach(id => {
     document.getElementById(id).addEventListener('input', saveMeta)
   })
@@ -654,25 +640,107 @@ function getSavedDraft() {
 }
 
 function saveMeta() {
-  const data = {
+  localStorage.setItem(LS_DRAFT + '_meta', JSON.stringify({
     title: document.getElementById('m-title').value,
     tag:   document.getElementById('m-tag').value,
     desc:  document.getElementById('m-desc').value
-  }
-  localStorage.setItem(LS_DRAFT + '_meta', JSON.stringify(data))
+  }))
   document.getElementById('save-label').textContent = 'Draft saved'
 }
 
 document.getElementById('clear-btn').addEventListener('click', () => {
-  if (!confirm('Clear this draft?')) return
-  if (mde) mde.value('')
-  ;['m-title','m-tag','m-desc'].forEach(id => document.getElementById(id).value = '')
-  document.getElementById('slug-preview').textContent = ''
+  if (!confirm('Clear draft and reset to new post?')) return
+  setNewMode()
   localStorage.removeItem(LS_DRAFT + '_meta')
   localStorage.removeItem('smde_' + LS_DRAFT)
 })
 
-// ─── Modal ────────────────────────────────────────────────────
+// ─── Edit post modal ──────────────────────────────────────────
+document.getElementById('edit-post-btn').addEventListener('click', openEditModal)
+document.getElementById('edit-modal-cancel').addEventListener('click', () => {
+  document.getElementById('edit-modal').style.display = 'none'
+})
+document.getElementById('edit-modal').addEventListener('click', e => {
+  if (e.target === e.currentTarget) document.getElementById('edit-modal').style.display = 'none'
+})
+
+async function openEditModal() {
+  const modal = document.getElementById('edit-modal')
+  const list  = document.getElementById('blog-list')
+  modal.style.display = 'flex'
+  list.innerHTML = '<div class="blog-list-loading">Fetching posts from GitHub…</div>'
+  document.getElementById('edit-modal-count').textContent = ''
+
+  try {
+    const res = await fetch(
+      `https://api.github.com/repos/${OWNER}/${REPO}/contents/blogs`,
+      { headers: GH_HEADERS() }
+    )
+    if (!res.ok) throw new Error('GitHub API error: ' + res.status)
+    const files = (await res.json())
+      .filter(f => f.name.endsWith('.md'))
+      .sort((a, b) => b.name.localeCompare(a.name))
+
+    document.getElementById('edit-modal-count').textContent = files.length + ' posts'
+
+    if (!files.length) {
+      list.innerHTML = '<div class="blog-list-empty">No blog posts found.</div>'
+      return
+    }
+
+    list.innerHTML = files.map(f => {
+      const date = f.name.match(/^(\d{4}-\d{2}-\d{2})/)?.[1] || ''
+      const title = f.name.replace(/^\d{4}-\d{2}-\d{2}-/, '').replace(/.md$/, '').replace(/-/g, ' ')
+      return `<div class="blog-item" data-name="${f.name}" data-sha="${f.sha}" data-url="${f.download_url}">
+        <div class="blog-item-name" title="${f.name}">${title}</div>
+        <div class="blog-item-date">${date}</div>
+        <button class="blog-item-load" onclick="loadPost('${f.name}','${f.sha}','${f.download_url}')">Load →</button>
+      </div>`
+    }).join('')
+
+  } catch (err) {
+    list.innerHTML = `<div class="blog-list-empty" style="color:#ff5555">✗ ${err.message}</div>`
+  }
+}
+
+async function loadPost(name, sha, downloadUrl) {
+  document.getElementById('edit-modal').style.display = 'none'
+  setStatus('Loading post…')
+
+  try {
+    const res = await fetch(downloadUrl)
+    if (!res.ok) throw new Error('Fetch failed')
+    const raw = await res.text()
+
+    // Parse frontmatter
+    const title = raw.match(/^title:\s*(.+)/m)?.[1]?.trim() || ''
+    const tag   = raw.match(/^tag:\s*(.+)/m)?.[1]?.trim()   || ''
+    const desc  = raw.match(/^description:\s*(.+)/m)?.[1]?.trim() || ''
+
+    // Strip frontmatter lines and leading blank lines
+    const content = raw
+      .replace(/^title:.*\n/m, '')
+      .replace(/^tag:.*\n/m, '')
+      .replace(/^description:.*\n/m, '')
+      .replace(/^\s*\n/, '')
+
+    document.getElementById('m-title').value = title
+    document.getElementById('m-tag').value   = tag
+    document.getElementById('m-desc').value  = desc
+    if (mde) mde.value(content)
+
+    setEditMode({ name, sha })
+    setStatus(`✓ Loaded: ${name}`, 'ok')
+
+  } catch (err) {
+    setStatus('✗ Load failed: ' + err.message, 'err')
+  }
+}
+
+// Expose to onclick in dynamic HTML
+window.loadPost = loadPost
+
+// ─── Media modal ──────────────────────────────────────────────
 let _modalCb = null
 
 function openModal({ title, lbl1, ph1, hint1, lbl2, showF2, onInsert }) {
@@ -683,8 +751,8 @@ function openModal({ title, lbl1, ph1, hint1, lbl2, showF2, onInsert }) {
   document.getElementById('modal-hint1').textContent = hint1 || ''
   document.getElementById('modal-f2').style.display  = showF2 ? 'block' : 'none'
   if (showF2) {
-    document.getElementById('modal-lbl2').textContent  = lbl2 || 'Optional'
-    document.getElementById('modal-in2').value         = ''
+    document.getElementById('modal-lbl2').textContent = lbl2 || 'Optional'
+    document.getElementById('modal-in2').value = ''
   }
   document.getElementById('modal').style.display = 'flex'
   setTimeout(() => document.getElementById('modal-in1').focus(), 30)
@@ -705,47 +773,18 @@ document.getElementById('modal-ok').addEventListener('click', () => {
   )
   closeModal()
 })
-document.getElementById('modal-in2').addEventListener('keydown', e => {
-  if (e.key === 'Enter') document.getElementById('modal-ok').click()
-})
 document.getElementById('modal-in1').addEventListener('keydown', e => {
   if (e.key === 'Enter') {
     const f2 = document.getElementById('modal-f2')
-    if (f2.style.display !== 'none') document.getElementById('modal-in2').focus()
-    else document.getElementById('modal-ok').click()
+    f2.style.display !== 'none' ? document.getElementById('modal-in2').focus() : document.getElementById('modal-ok').click()
   }
 })
+document.getElementById('modal-in2').addEventListener('keydown', e => {
+  if (e.key === 'Enter') document.getElementById('modal-ok').click()
+})
 
-// ─── GitHub commit ────────────────────────────────────────────
-function toBase64Unicode(str) {
-  return btoa(unescape(encodeURIComponent(str)))
-}
-
-async function githubPut(path, content, message) {
-  const url = `https://api.github.com/repos/${OWNER}/${REPO}/contents/${path}`
-  const headers = {
-    'Authorization': `Bearer ${ghToken}`,
-    'Accept': 'application/vnd.github+json',
-    'Content-Type': 'application/json'
-  }
-
-  // Check if file exists (needed for SHA to update)
-  let sha = null
-  try {
-    const check = await fetch(url, { headers })
-    if (check.ok) { sha = (await check.json()).sha }
-  } catch {}
-
-  const body = { message, content: toBase64Unicode(content), branch: 'main' }
-  if (sha) body.sha = sha
-
-  return fetch(url, { method: 'PUT', headers, body: JSON.stringify(body) })
-}
-
-// ─── Publish ──────────────────────────────────────────────────
+// ─── Publish / Update ─────────────────────────────────────────
 document.getElementById('pub-btn').addEventListener('click', publishBlog)
-
-// Cmd/Ctrl + Enter to publish
 document.addEventListener('keydown', e => {
   if ((e.metaKey || e.ctrlKey) && e.key === 'Enter') publishBlog()
 })
@@ -755,35 +794,32 @@ async function publishBlog() {
   const tag     = document.getElementById('m-tag').value.trim()
   const desc    = document.getElementById('m-desc').value.trim()
   const content = mde ? mde.value().trim() : ''
+  const btn     = document.getElementById('pub-btn')
 
-  const statusEl = document.getElementById('pub-status')
-  const btn      = document.getElementById('pub-btn')
-
-  statusEl.className = 'status'
-
-  if (!title) { setStatus('✗ Title is required', 'err'); return }
+  if (!title)   { setStatus('✗ Title is required', 'err'); return }
   if (!content) { setStatus('✗ Content is empty', 'err'); return }
   if (!ghToken) { setStatus('✗ No token — please log in again', 'err'); return }
 
   btn.disabled = true
-  setStatus('Publishing…')
+  setStatus(editingFile ? 'Updating…' : 'Publishing…')
 
-  const filename = toSlug(title) + '.md'
-  const fileContent = `title: ${title}
-tag: ${tag || 'Blog'}
-description: ${desc}
-
-${content}`
+  const filename = editingFile ? editingFile.name : toSlug(title) + '.md'
+  const fileContent = `title: ${title}\ntag: ${tag || 'Blog'}\ndescription: ${desc}\n\n${content}`
 
   try {
-    const res = await githubPut(`blogs/${filename}`, fileContent, `Add blog: ${title}`)
+    const res = await githubPut(`blogs/${filename}`, textToBase64(fileContent),
+      editingFile ? `Update blog: ${title}` : `Add blog: ${title}`)
+
     if (res.ok) {
-      setStatus(`✓ Published → blogs/${filename}`, 'ok')
-      localStorage.removeItem('smde_' + LS_DRAFT)
-      localStorage.removeItem(LS_DRAFT + '_meta')
+      const action = editingFile ? 'Updated' : 'Published'
+      setStatus(`✓ ${action} → blogs/${filename}`, 'ok')
+      if (!editingFile) {
+        localStorage.removeItem('smde_' + LS_DRAFT)
+        localStorage.removeItem(LS_DRAFT + '_meta')
+      }
     } else {
-      const data = await res.json().catch(() => ({}))
-      setStatus(`✗ GitHub: ${data.message || res.status}`, 'err')
+      const d = await res.json().catch(() => ({}))
+      setStatus(`✗ GitHub: ${d.message || res.status}`, 'err')
     }
   } catch (e) {
     setStatus(`✗ Network error: ${e.message}`, 'err')
