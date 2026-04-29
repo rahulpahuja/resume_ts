@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+
+  <!-- Main site -->
+  <url>
+    <loc>https://therahulpahuja.com/</loc>
+    <lastmod>2026-04-29</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>1.0</priority>
+  </url>
+
+  <!-- Blog posts -->
+  <url>
+    <loc>https://therahulpahuja.com/blog/2026-03-15-secure-data-at-scale-designing-a-robust-storage-stack-with-teesdk-encrypted-data-stores-and-intelligent-caching</loc>
+    <lastmod>2026-03-15</lastmod>
+    <changefreq>yearly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <url>
+    <loc>https://therahulpahuja.com/blog/2026-04-29-mcp-servers-resources-and-tools-explained-without-the-hype</loc>
+    <lastmod>2026-04-29</lastmod>
+    <changefreq>yearly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+</urlset>

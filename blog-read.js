@@ -72,37 +72,156 @@ height:100%;
 overflow-y:auto;
 }
 
-/* readability fix */
+/* ── Typography ── */
 
 #blog-content{
-line-height:1.7;
-word-spacing:.05em;
-letter-spacing:.01em;
+line-height:1.8;
+font-size:15px;
+color:#d4d4e8;
 }
 
+#blog-content h1{
+font-size:1.9em;font-weight:800;
+color:#00f2ff;
+margin:1.6em 0 .5em;
+line-height:1.2;
+}
+
+#blog-content h2{
+font-size:1.4em;font-weight:700;
+color:#00f2ff;
+margin:1.4em 0 .45em;
+padding-bottom:.3em;
+border-bottom:1px solid rgba(0,242,255,.18);
+}
+
+#blog-content h3{
+font-size:1.15em;font-weight:600;
+color:#a0c8ff;
+margin:1.2em 0 .4em;
+}
+
+#blog-content h4,#blog-content h5,#blog-content h6{
+font-size:1em;font-weight:600;color:#8888cc;
+margin:1em 0 .35em;
+}
+
+#blog-content p{
+margin:0 0 1.1em;
+}
+
+#blog-content a{
+color:#00f2ff;
+text-decoration:underline;
+text-underline-offset:3px;
+}
+#blog-content a:hover{opacity:.75}
+
+#blog-content strong{color:#fff;font-weight:700}
+#blog-content em{color:#c8c8f0;font-style:italic}
+#blog-content s{color:#888}
+
+#blog-content ul,#blog-content ol{
+padding-left:1.6em;
+margin:0 0 1.1em;
+}
+#blog-content ul{list-style:disc}
+#blog-content ol{list-style:decimal}
+
+#blog-content li{
+margin:.3em 0;
+color:#d4d4e8;
+background:none !important;
+display:list-item !important;
+padding:0 !important;
+border:none !important;
+border-radius:0 !important;
+}
+#blog-content li::marker{color:#00f2ff}
+
+#blog-content li p{margin:0}
+
+#blog-content blockquote{
+border-left:3px solid #00f2ff;
+margin:1.2em 0;
+padding:.6em 1.1em;
+background:rgba(0,242,255,.05);
+color:#a8a8d0;
+border-radius:0 4px 4px 0;
+}
+#blog-content blockquote p{margin:0}
+
+#blog-content hr{
+border:none;
+border-top:1px solid rgba(0,242,255,.18);
+margin:2em 0;
+}
+
+#blog-content img{
+max-width:100%;
+border-radius:6px;
+display:block;
+margin:1.2em auto;
+}
+
+#blog-content figure{margin:1.5em 0}
+#blog-content figcaption{
+font-size:11px;color:#6060a0;
+text-align:center;margin-top:6px;
+}
+
+#blog-content table{
+width:100%;border-collapse:collapse;
+margin:1.2em 0;font-size:13.5px;
+}
+#blog-content th{
+border:1px solid rgba(0,242,255,.22);
+padding:8px 12px;
+background:rgba(0,242,255,.08);
+color:#00f2ff;text-align:left;font-weight:600;
+}
+#blog-content td{
+border:1px solid rgba(0,242,255,.1);
+padding:8px 12px;color:#c8c8e8;
+}
+#blog-content tr:nth-child(even) td{background:rgba(0,242,255,.03)}
+
+/* ── Code ── */
+
 #blog-content code{
-background:#000;
+background:rgba(0,0,0,.6);
 color:#00ff9c;
-padding:4px 6px;
+padding:3px 7px;
 border-radius:4px;
-font-family:"JetBrains Mono",monospace;
+font-family:"JetBrains Mono",ui-monospace,monospace;
+font-size:.88em;
 }
 
 #blog-content pre{
-background:#020202;
-border:1px solid rgba(0,255,150,.2);
-padding:20px;
+background:#050508;
+border:1px solid rgba(0,255,150,.18);
+padding:20px 22px;
 border-radius:8px;
-overflow:auto;
-white-space:pre-wrap;
-word-break:break-word;
+overflow-x:auto;
+white-space:pre;
+word-break:normal;
+margin:1.2em 0;
+}
+
+#blog-content pre code{
+background:none;
+color:#00ff9c;
+padding:0;
+border-radius:0;
+font-size:.87em;
 }
 
 /* section highlight */
 
-#blog-content section.active{
+#blog-content h2.active{
 border-left:3px solid #00f2ff;
 padding-left:12px;
+transition:padding-left .2s;
 }
 
 </style>
@@ -137,8 +256,7 @@ Exit
 
 <div id="voice-controls"></div>
 
-<article id="blog-content"
-class="prose prose-invert max-w-none"></article>
+<article id="blog-content"></article>
 
 </div>
 </div>
@@ -491,7 +609,6 @@ Stop
 
             progressHUD()
 
-            typeParagraphs()
             activateSections()
 
             document.getElementById("blog-scroll").scrollTo(0, 0)
