@@ -158,7 +158,7 @@ class="prose prose-invert max-w-none"></article>
 
         const letters = "01アイウエオカキクケコ"
         const fontSize = 14
-        const columns = canvas.width / fontSize
+        const columns = Math.floor(canvas.width / fontSize)
         const drops = [...Array(columns)].fill(1)
 
         function draw() {
@@ -405,16 +405,25 @@ Stop
 
     async function highlight() {
 
-        const { getHighlighter } = await import("https://unpkg.com/shiki@1.0.0/dist/index.mjs")
+        try {
 
-        const highlighter = await getHighlighter({ theme: "nord" })
+            const { getHighlighter } = await import("https://esm.sh/shiki@0.14.7")
 
-        document.querySelectorAll("pre code").forEach(block => {
+            const highlighter = await getHighlighter({ theme: "nord", langs: ["javascript", "typescript", "bash", "python"] })
 
-            const html = highlighter.codeToHtml(block.innerText, { lang: "javascript" })
-            block.parentElement.outerHTML = html
+            document.querySelectorAll("pre code").forEach(block => {
 
-        })
+                const lang = block.className.replace("language-", "") || "javascript"
+                const html = highlighter.codeToHtml(block.innerText, { lang: highlighter.getLoadedLanguages().includes(lang) ? lang : "javascript" })
+                block.parentElement.outerHTML = html
+
+            })
+
+        } catch (e) {
+
+            console.warn("Syntax highlight unavailable:", e)
+
+        }
 
     }
 
@@ -445,9 +454,7 @@ Stop
                 .replace(/tag:.*\n/, "")
                 .replace(/description:.*\n/, "")
 
-            marked.setOptions({ gfm: true, breaks: true })
-
-            const html = marked.parse(clean)
+            const html = marked.parse(clean, { gfm: true, breaks: true })
 
             document.getElementById("blog-title").innerText =
                 md.match(/title:\s*(.*)/)?.[1] || slug
