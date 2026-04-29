@@ -1,0 +1,802 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Blog Crafter</title>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/easymde@2.18.0/dist/easymde.min.css">
+<link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@300;400;500&family=Syne:wght@400;500;700;800&display=swap" rel="stylesheet">
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+
+:root{
+  --bg:#0a0a0f;
+  --surface:#111118;
+  --surface2:#16161f;
+  --surface3:#1c1c28;
+  --border:rgba(0,242,255,.13);
+  --border2:rgba(0,242,255,.06);
+  --accent:#00f2ff;
+  --red:#c0391f;
+  --green:#00ff9c;
+  --text:#e2e2f0;
+  --muted:#6060a0;
+  --muted2:#4a4a7a;
+}
+
+body{
+  background:var(--bg);
+  color:var(--text);
+  font-family:'DM Mono',monospace;
+  height:100vh;
+  overflow:hidden;
+  display:flex;
+  flex-direction:column;
+}
+
+/* ── Login ── */
+#login-screen{
+  position:fixed;inset:0;
+  display:flex;align-items:center;justify-content:center;
+  background:rgba(6,6,10,.97);
+  background-image:radial-gradient(circle at 1px 1px,rgba(0,242,255,.04) 1px,transparent 1px);
+  background-size:36px 36px;
+  z-index:999;
+}
+
+.login-box{
+  background:var(--surface);
+  border:1px solid var(--border);
+  padding:48px 44px;
+  width:420px;max-width:92vw;
+}
+
+.login-eyebrow{
+  font-size:9px;color:var(--accent);
+  text-transform:uppercase;letter-spacing:.22em;margin-bottom:10px;
+}
+
+.login-title{
+  font-family:'Syne',sans-serif;font-weight:800;font-size:26px;
+  color:var(--text);margin-bottom:36px;line-height:1.15;
+}
+
+.field{margin-bottom:18px}
+
+.field label{
+  display:block;font-size:9px;color:var(--muted);
+  text-transform:uppercase;letter-spacing:.18em;margin-bottom:5px;
+}
+
+.field input{
+  width:100%;background:var(--bg);
+  border:1px solid var(--border);color:var(--text);
+  padding:11px 13px;font-family:'DM Mono',monospace;font-size:12.5px;
+  outline:none;transition:border-color .2s;
+}
+.field input:focus{border-color:var(--accent)}
+.field input::placeholder{color:var(--muted2)}
+
+.field-hint{font-size:9.5px;color:var(--muted2);margin-top:5px;line-height:1.5}
+
+.login-btn{
+  width:100%;padding:13px;background:var(--accent);color:var(--bg);
+  font-family:'DM Mono',monospace;font-size:11px;font-weight:500;
+  text-transform:uppercase;letter-spacing:.18em;border:none;cursor:pointer;
+  margin-top:6px;transition:opacity .2s;
+}
+.login-btn:hover{opacity:.85}
+
+.login-error{
+  display:none;color:#ff5555;font-size:10.5px;margin-top:12px;
+  padding:8px 12px;border:1px solid rgba(255,85,85,.25);background:rgba(255,85,85,.06);
+}
+
+/* ── Main shell ── */
+#editor-screen{display:none;flex-direction:column;height:100vh}
+#editor-screen.active{display:flex}
+
+/* ── Header ── */
+.hdr{
+  background:var(--surface);border-bottom:1px solid var(--border);
+  height:48px;padding:0 20px;
+  display:flex;align-items:center;justify-content:space-between;flex-shrink:0;
+}
+.hdr-left{display:flex;align-items:center;gap:14px}
+.hdr-brand{font-family:'Syne',sans-serif;font-weight:800;font-size:13px;color:var(--accent);letter-spacing:.06em;text-transform:uppercase}
+.hdr-tag{font-size:9px;color:var(--muted);text-transform:uppercase;letter-spacing:.16em}
+.hdr-right{display:flex;align-items:center;gap:14px}
+.save-badge{font-size:9px;color:var(--muted);display:flex;align-items:center;gap:5px}
+.save-dot{width:5px;height:5px;border-radius:50%;background:var(--green);flex-shrink:0}
+.ghost-btn{
+  background:none;border:1px solid var(--border);color:var(--muted);
+  font-family:'DM Mono',monospace;font-size:9px;text-transform:uppercase;
+  letter-spacing:.12em;padding:5px 11px;cursor:pointer;transition:all .18s;
+}
+.ghost-btn:hover{border-color:var(--accent);color:var(--accent)}
+
+/* ── Meta bar ── */
+.meta-bar{
+  background:var(--surface2);border-bottom:1px solid var(--border);
+  padding:12px 20px;display:flex;gap:12px;flex-shrink:0;
+}
+.meta-field{flex:1;min-width:0}
+.meta-field.wide{flex:2.5}
+.meta-field label{
+  display:block;font-size:8.5px;color:var(--muted);
+  text-transform:uppercase;letter-spacing:.16em;margin-bottom:4px;
+}
+.meta-field input{
+  width:100%;background:var(--bg);border:1px solid var(--border2);
+  color:var(--text);padding:7px 10px;
+  font-family:'DM Mono',monospace;font-size:12px;outline:none;transition:border-color .18s;
+}
+.meta-field input:focus{border-color:var(--accent)}
+.meta-field input::placeholder{color:var(--muted2)}
+
+/* ── Editor container ── */
+.editor-wrap{flex:1;overflow:hidden;display:flex;flex-direction:column;min-height:0}
+
+/* ── EasyMDE overrides ── */
+.EasyMDEContainer{display:flex;flex-direction:column;height:100%;overflow:hidden}
+.EasyMDEContainer .CodeMirror{
+  background:var(--bg) !important;color:var(--text) !important;
+  font-family:'DM Mono',monospace !important;font-size:14px !important;
+  line-height:1.85 !important;height:100% !important;border:none !important;
+}
+.EasyMDEContainer .CodeMirror-scroll{height:100% !important}
+
+.editor-toolbar{
+  background:var(--surface3) !important;
+  border-top:none !important;border-bottom:1px solid var(--border) !important;
+  padding:3px 10px !important;flex-shrink:0 !important;
+}
+.editor-toolbar button,.editor-toolbar button.active{
+  color:var(--muted) !important;border:none !important;
+  background:none !important;border-radius:2px !important;
+  transition:color .15s,background .15s !important;
+  font-size:13px !important;height:26px !important;
+}
+.editor-toolbar button:hover{color:var(--accent) !important;background:var(--surface2) !important}
+.editor-toolbar button.active{color:var(--accent) !important}
+.editor-toolbar i.separator{border-left:1px solid var(--border) !important;border-right:none !important}
+
+.editor-toolbar .custom-btn{
+  font-size:9px !important;padding:0 6px !important;
+  color:var(--muted) !important;border:1px solid var(--border) !important;
+  border-radius:2px !important;height:22px !important;margin:2px 1px !important;
+  cursor:pointer !important;display:inline-flex !important;align-items:center !important;gap:4px !important;
+  transition:all .15s !important;letter-spacing:.05em !important;
+  background:none !important;font-family:'DM Mono',monospace !important;
+}
+.editor-toolbar .custom-btn:hover{color:var(--accent) !important;border-color:var(--accent) !important}
+
+.editor-preview-side,.editor-preview{
+  background:var(--surface2) !important;color:var(--text) !important;
+  border-left:1px solid var(--border) !important;
+  padding:32px 36px !important;
+  font-family:'DM Mono',monospace !important;line-height:1.8 !important;
+  overflow-y:auto !important;font-size:13.5px !important;
+}
+.editor-preview h1,.editor-preview h2,.editor-preview h3,
+.editor-preview-side h1,.editor-preview-side h2,.editor-preview-side h3{
+  font-family:'Syne',sans-serif !important;color:var(--accent) !important;
+  margin:28px 0 12px !important;
+}
+.editor-preview a,.editor-preview-side a{color:var(--accent) !important}
+.editor-preview code,.editor-preview-side code{
+  background:rgba(0,0,0,.5) !important;color:var(--green) !important;
+  padding:2px 5px !important;border-radius:3px !important;font-size:12.5px !important;
+}
+.editor-preview pre,.editor-preview-side pre{
+  background:rgba(0,0,0,.5) !important;border:1px solid var(--border) !important;
+  padding:16px !important;border-radius:4px !important;overflow:auto !important;
+}
+.editor-preview blockquote,.editor-preview-side blockquote{
+  border-left:3px solid var(--accent) !important;
+  padding-left:16px !important;color:var(--muted) !important;margin:16px 0 !important;
+}
+.editor-preview img,.editor-preview-side img{max-width:100% !important;border-radius:4px !important}
+
+.editor-statusbar{
+  background:var(--surface) !important;border-top:1px solid var(--border) !important;
+  color:var(--muted) !important;font-family:'DM Mono',monospace !important;
+  font-size:9.5px !important;padding:4px 14px !important;flex-shrink:0 !important;
+}
+
+.cm-s-default .cm-header{color:var(--accent) !important;font-weight:bold !important}
+.cm-s-default .cm-link{color:var(--accent) !important}
+.cm-s-default .cm-url{color:var(--muted) !important}
+.cm-s-default .cm-string{color:var(--green) !important}
+.cm-s-default .cm-strong{color:var(--text) !important;font-weight:bold !important}
+.cm-s-default .cm-em{color:#c9c9e8 !important;font-style:italic !important}
+.cm-s-default .cm-comment{color:var(--muted) !important}
+.cm-s-default .cm-quote{color:var(--muted) !important}
+
+.CodeMirror-cursor{border-left:2px solid var(--accent) !important}
+.CodeMirror-selected{background:rgba(0,242,255,.1) !important}
+.CodeMirror-focused .CodeMirror-selected{background:rgba(0,242,255,.1) !important}
+
+/* ── Publish bar ── */
+.pub-bar{
+  background:var(--surface);border-top:1px solid var(--border);
+  padding:10px 20px;display:flex;align-items:center;
+  justify-content:space-between;flex-shrink:0;
+}
+.pub-info{font-size:9px;color:var(--muted)}
+.pub-info code{
+  color:var(--accent);background:rgba(0,242,255,.07);
+  padding:2px 6px;border-radius:2px;font-size:9px;
+}
+.pub-right{display:flex;align-items:center;gap:14px}
+.status{font-size:10px;color:var(--muted);max-width:340px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.status.ok{color:var(--green)}
+.status.err{color:#ff5555}
+.pub-btn{
+  background:var(--red);color:#fff;border:none;
+  padding:9px 24px;font-family:'DM Mono',monospace;font-size:10px;
+  text-transform:uppercase;letter-spacing:.16em;cursor:pointer;transition:opacity .2s;
+}
+.pub-btn:hover:not(:disabled){opacity:.82}
+.pub-btn:disabled{opacity:.38;cursor:not-allowed}
+
+/* ── Slug preview ── */
+.slug-preview{
+  font-size:8.5px;color:var(--muted2);margin-top:4px;
+  overflow:hidden;text-overflow:ellipsis;white-space:nowrap;
+}
+
+/* ── Modal ── */
+.modal-bg{
+  position:fixed;inset:0;background:rgba(0,0,0,.88);
+  display:flex;align-items:center;justify-content:center;z-index:2000;
+}
+.modal{
+  background:var(--surface);border:1px solid var(--border);
+  padding:32px;width:480px;max-width:94vw;
+}
+.modal-title{
+  font-family:'Syne',sans-serif;font-weight:700;font-size:17px;
+  color:var(--text);margin-bottom:22px;
+}
+.modal-field{margin-bottom:14px}
+.modal-field label{
+  display:block;font-size:8.5px;color:var(--muted);
+  text-transform:uppercase;letter-spacing:.15em;margin-bottom:4px;
+}
+.modal-field input{
+  width:100%;background:var(--bg);border:1px solid var(--border);
+  color:var(--text);padding:9px 12px;
+  font-family:'DM Mono',monospace;font-size:12.5px;outline:none;transition:border-color .18s;
+}
+.modal-field input:focus{border-color:var(--accent)}
+.modal-field input::placeholder{color:var(--muted2)}
+.modal-hint{font-size:9px;color:var(--muted2);margin-top:4px}
+.modal-actions{display:flex;justify-content:flex-end;gap:10px;margin-top:22px}
+.modal-cancel{
+  background:none;border:1px solid var(--border);color:var(--muted);
+  font-family:'DM Mono',monospace;font-size:9.5px;text-transform:uppercase;
+  letter-spacing:.12em;padding:7px 18px;cursor:pointer;transition:all .15s;
+}
+.modal-cancel:hover{border-color:var(--accent);color:var(--accent)}
+.modal-ok{
+  background:var(--accent);color:var(--bg);border:none;
+  font-family:'DM Mono',monospace;font-size:9.5px;text-transform:uppercase;
+  letter-spacing:.12em;padding:7px 20px;cursor:pointer;transition:opacity .15s;
+}
+.modal-ok:hover{opacity:.82}
+</style>
+</head>
+<body>
+
+<!-- ═══ LOGIN ═══ -->
+<div id="login-screen">
+  <div class="login-box">
+    <div class="login-eyebrow">Rahul Pahuja · Private Access</div>
+    <h1 class="login-title">Blog Crafter</h1>
+
+    <div class="field">
+      <label>Username</label>
+      <input id="f-user" type="text" autocomplete="off" placeholder="username" spellcheck="false">
+    </div>
+
+    <div class="field">
+      <label>Password</label>
+      <input id="f-pass" type="password" placeholder="••••••••">
+    </div>
+
+    <div class="field">
+      <label>GitHub Personal Access Token</label>
+      <input id="f-token" type="password" placeholder="ghp_xxxxxxxxxxxxxxxxxxxx" spellcheck="false">
+      <p class="field-hint">Requires <code style="color:var(--accent);font-size:9px">repo</code> write access. Held in sessionStorage — cleared when tab closes.</p>
+    </div>
+
+    <button class="login-btn" id="login-btn">Enter Crafter →</button>
+    <div class="login-error" id="login-err"></div>
+  </div>
+</div>
+
+<!-- ═══ EDITOR ═══ -->
+<div id="editor-screen">
+
+  <div class="hdr">
+    <div class="hdr-left">
+      <span class="hdr-brand">Blog Crafter</span>
+      <span class="hdr-tag">github.com/rahulpahuja/resume_ts</span>
+    </div>
+    <div class="hdr-right">
+      <div class="save-badge"><div class="save-dot"></div><span id="save-label">Draft autosaved</span></div>
+      <button class="ghost-btn" id="clear-btn">Clear draft</button>
+      <button class="ghost-btn" id="logout-btn">Logout</button>
+    </div>
+  </div>
+
+  <div class="meta-bar">
+    <div class="meta-field wide">
+      <label>Title</label>
+      <input id="m-title" type="text" placeholder="Blog post title…">
+      <div class="slug-preview" id="slug-preview"></div>
+    </div>
+    <div class="meta-field">
+      <label>Tag</label>
+      <input id="m-tag" type="text" placeholder="Security">
+    </div>
+    <div class="meta-field" style="flex:2">
+      <label>Description (listing preview)</label>
+      <input id="m-desc" type="text" placeholder="One-liner shown on the home page…">
+    </div>
+  </div>
+
+  <div class="editor-wrap">
+    <textarea id="blog-ta"></textarea>
+  </div>
+
+  <div class="pub-bar">
+    <div class="pub-info">Commits to <code>blogs/YYYY-MM-DD-slug.md</code> on <code>main</code></div>
+    <div class="pub-right">
+      <span class="status" id="pub-status"></span>
+      <button class="pub-btn" id="pub-btn">Publish →</button>
+    </div>
+  </div>
+
+</div>
+
+<!-- ═══ MEDIA MODAL ═══ -->
+<div class="modal-bg" id="modal" style="display:none" aria-modal="true">
+  <div class="modal">
+    <div class="modal-title" id="modal-title">Insert</div>
+    <div class="modal-field">
+      <label id="modal-lbl1">URL</label>
+      <input id="modal-in1" type="text" placeholder="">
+      <div class="modal-hint" id="modal-hint1"></div>
+    </div>
+    <div class="modal-field" id="modal-f2" style="display:none">
+      <label id="modal-lbl2">Caption (optional)</label>
+      <input id="modal-in2" type="text" placeholder="">
+    </div>
+    <div class="modal-actions">
+      <button class="modal-cancel" id="modal-cancel">Cancel</button>
+      <button class="modal-ok" id="modal-ok">Insert</button>
+    </div>
+  </div>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/marked@4.3.0/marked.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/easymde@2.18.0/dist/easymde.min.js"></script>
+<script>
+'use strict'
+
+// ─── Config ───────────────────────────────────────────────────
+const OWNER = 'rahulpahuja'
+const REPO  = 'resume_ts'
+const CREDS = { user: 'rahul', pass: 'rellow2026' }
+const LS_DRAFT = 'bc_draft_v1'
+const SS_TOKEN = 'bc_token'
+
+// ─── Auth ─────────────────────────────────────────────────────
+let ghToken = sessionStorage.getItem(SS_TOKEN) || ''
+
+function attemptLogin() {
+  const user  = document.getElementById('f-user').value.trim()
+  const pass  = document.getElementById('f-pass').value
+  const token = document.getElementById('f-token').value.trim()
+  const errEl = document.getElementById('login-err')
+
+  if (user !== CREDS.user || pass !== CREDS.pass) {
+    showLoginErr('Invalid username or password.')
+    return
+  }
+  if (!token) {
+    showLoginErr('GitHub Personal Access Token is required.')
+    return
+  }
+  ghToken = token
+  sessionStorage.setItem(SS_TOKEN, token)
+  errEl.style.display = 'none'
+  enterEditor()
+}
+
+function showLoginErr(msg) {
+  const el = document.getElementById('login-err')
+  el.textContent = msg
+  el.style.display = 'block'
+}
+
+document.getElementById('login-btn').addEventListener('click', attemptLogin)
+document.getElementById('f-pass').addEventListener('keydown', e => { if (e.key === 'Enter') attemptLogin() })
+document.getElementById('f-token').addEventListener('keydown', e => { if (e.key === 'Enter') attemptLogin() })
+
+function enterEditor() {
+  document.getElementById('login-screen').style.display = 'none'
+  document.getElementById('editor-screen').classList.add('active')
+  if (!mde) initEditor()
+}
+
+document.getElementById('logout-btn').addEventListener('click', () => {
+  sessionStorage.removeItem(SS_TOKEN)
+  ghToken = ''
+  document.getElementById('login-screen').style.display = 'flex'
+  document.getElementById('editor-screen').classList.remove('active')
+})
+
+// Auto-login if token exists in session
+if (ghToken) enterEditor()
+
+// ─── Slug util ────────────────────────────────────────────────
+function toSlug(title) {
+  const date = new Date().toISOString().split('T')[0]
+  const slug = title.toLowerCase()
+    .replace(/[^a-z0-9\s-]/g, '')
+    .trim()
+    .replace(/\s+/g, '-')
+    .replace(/-+/g, '-')
+    .substring(0, 90)
+  return `${date}-${slug}`
+}
+
+// Slug preview
+document.getElementById('m-title').addEventListener('input', function () {
+  const slug = this.value.trim() ? toSlug(this.value) + '.md' : ''
+  document.getElementById('slug-preview').textContent = slug ? 'blogs/' + slug : ''
+})
+
+// ─── Editor ───────────────────────────────────────────────────
+let mde = null
+
+function insertMd(text) {
+  if (!mde) return
+  const cm = mde.codemirror
+  const cur = cm.getCursor()
+  cm.replaceRange(text, cur)
+  cm.focus()
+}
+
+// ── Custom toolbar action builders ──
+function mediaAction(fn) {
+  return function(editor) { fn(editor) }
+}
+
+function promptYouTube(editor) {
+  openModal({
+    title: 'Insert YouTube Video',
+    lbl1: 'YouTube URL or video ID',
+    ph1:  'https://www.youtube.com/watch?v=dQw4w9WgXcQ',
+    hint1:'Paste the full URL or just the video ID',
+    lbl2: 'Caption (optional)',
+    showF2: true,
+    onInsert(url, caption) {
+      if (!url) return
+      const match = url.match(/(?:v=|youtu\.be\/|embed\/)([a-zA-Z0-9_-]{11})/)
+      const id = match ? match[1] : url.trim()
+      const cap = caption ? `<figcaption style="text-align:center;font-size:11px;color:#6060a0;margin-top:8px">${caption}</figcaption>` : ''
+      insertMd(`\n<figure style="margin:28px 0">\n<iframe width="100%" height="400" src="https://www.youtube.com/embed/${id}" frameborder="0" allowfullscreen style="border-radius:4px;display:block"></iframe>\n${cap}\n</figure>\n`)
+    }
+  })
+}
+
+function promptAudio(editor) {
+  openModal({
+    title: 'Insert Audio',
+    lbl1: 'Audio URL or SoundCloud track URL',
+    ph1:  'https://soundcloud.com/… or https://…/track.mp3',
+    hint1:'Direct .mp3/.ogg/.wav or a SoundCloud URL',
+    lbl2: 'Title (optional)',
+    showF2: true,
+    onInsert(url, title) {
+      if (!url) return
+      const cap = title ? `<figcaption style="font-size:11px;color:#6060a0;margin-bottom:6px">${title}</figcaption>` : ''
+      let snippet
+      if (url.includes('soundcloud.com')) {
+        const enc = encodeURIComponent(url)
+        snippet = `\n<figure style="margin:28px 0">\n${cap}\n<iframe width="100%" height="166" scrolling="no" frameborder="no" src="https://w.soundcloud.com/player/?url=${enc}&color=%2300f2ff&auto_play=false&hide_related=true&show_comments=false&show_user=true&show_reposts=false"></iframe>\n</figure>\n`
+      } else {
+        snippet = `\n<figure style="margin:28px 0">\n${cap}\n<audio controls style="width:100%"><source src="${url}"></audio>\n</figure>\n`
+      }
+      insertMd(snippet)
+    }
+  })
+}
+
+function promptVideo(editor) {
+  openModal({
+    title: 'Insert Video File',
+    lbl1: 'Video file URL (.mp4, .webm, .ogg)',
+    ph1:  'https://example.com/clip.mp4',
+    hint1:'Direct link to a hosted video file',
+    lbl2: 'Caption (optional)',
+    showF2: true,
+    onInsert(url, caption) {
+      if (!url) return
+      const cap = caption ? `<figcaption style="text-align:center;font-size:11px;color:#6060a0;margin-top:8px">${caption}</figcaption>` : ''
+      insertMd(`\n<figure style="margin:28px 0">\n<video controls style="width:100%;border-radius:4px;display:block"><source src="${url}"></video>\n${cap}\n</figure>\n`)
+    }
+  })
+}
+
+function promptLink(editor) {
+  openModal({
+    title: 'Insert Hyperlink',
+    lbl1: 'URL',
+    ph1:  'https://example.com',
+    hint1:'',
+    lbl2: 'Link text',
+    showF2: true,
+    onInsert(url, text) {
+      if (!url) return
+      const label = text || url
+      const cm = mde.codemirror
+      const sel = cm.getSelection()
+      if (sel) {
+        cm.replaceSelection(`[${sel}](${url})`)
+      } else {
+        insertMd(`[${label}](${url})`)
+      }
+    }
+  })
+}
+
+function promptImage(editor) {
+  openModal({
+    title: 'Insert Image',
+    lbl1: 'Image URL',
+    ph1:  'https://example.com/image.png',
+    hint1:'Direct link to an image',
+    lbl2: 'Alt text / caption (optional)',
+    showF2: true,
+    onInsert(url, alt) {
+      if (!url) return
+      const a = alt || 'image'
+      const cap = alt ? `<figcaption style="text-align:center;font-size:11px;color:#6060a0;margin-top:6px">${alt}</figcaption>` : ''
+      insertMd(`\n<figure style="margin:28px 0">\n<img src="${url}" alt="${a}" style="max-width:100%;border-radius:4px;display:block;margin:0 auto">\n${cap}\n</figure>\n`)
+    }
+  })
+}
+
+function initEditor() {
+  marked.setOptions({ gfm: true, breaks: true })
+
+  mde = new EasyMDE({
+    element: document.getElementById('blog-ta'),
+    spellChecker: false,
+    autosave: {
+      enabled: true,
+      uniqueId: LS_DRAFT,
+      delay: 2500,
+      text: 'Autosaved — '
+    },
+    placeholder: 'Start writing…\n\nUse **bold**, *italic*, # headings, - lists, ```code blocks```, and the toolbar for images, links, and media.',
+    toolbar: [
+      'bold','italic','strikethrough','|',
+      'heading-1','heading-2','heading-3','|',
+      'quote','code','table','|',
+      'unordered-list','ordered-list','|',
+      {
+        name:'link',
+        action: mediaAction(promptLink),
+        className:'fa fa-link',
+        title:'Insert Link'
+      },
+      {
+        name:'img',
+        action: mediaAction(promptImage),
+        className:'fa fa-image',
+        title:'Insert Image'
+      },
+      '|',
+      {
+        name:'youtube',
+        action: mediaAction(promptYouTube),
+        title:'YouTube',
+        text:'▶ YouTube',
+        className:'custom-btn'
+      },
+      {
+        name:'audio',
+        action: mediaAction(promptAudio),
+        title:'Audio / SoundCloud',
+        text:'♪ Audio',
+        className:'custom-btn'
+      },
+      {
+        name:'video',
+        action: mediaAction(promptVideo),
+        title:'Video file',
+        text:'⬛ Video',
+        className:'custom-btn'
+      },
+      '|',
+      'preview','side-by-side','fullscreen'
+    ],
+    status: ['autosave','lines','words','cursor'],
+    previewRender(plain) {
+      return marked.parse(plain)
+    },
+    renderingConfig:{ singleLineBreaks:false }
+  })
+
+  // Restore saved meta
+  const saved = getSavedDraft()
+  if (saved) {
+    if (saved.title) document.getElementById('m-title').value = saved.title
+    if (saved.tag)   document.getElementById('m-tag').value   = saved.tag
+    if (saved.desc)  document.getElementById('m-desc').value  = saved.desc
+  }
+
+  // Autosave meta alongside content
+  ;['m-title','m-tag','m-desc'].forEach(id => {
+    document.getElementById(id).addEventListener('input', saveMeta)
+  })
+  mde.codemirror.on('change', saveMeta)
+}
+
+function getSavedDraft() {
+  try { return JSON.parse(localStorage.getItem(LS_DRAFT + '_meta') || 'null') } catch { return null }
+}
+
+function saveMeta() {
+  const data = {
+    title: document.getElementById('m-title').value,
+    tag:   document.getElementById('m-tag').value,
+    desc:  document.getElementById('m-desc').value
+  }
+  localStorage.setItem(LS_DRAFT + '_meta', JSON.stringify(data))
+  document.getElementById('save-label').textContent = 'Draft saved'
+}
+
+document.getElementById('clear-btn').addEventListener('click', () => {
+  if (!confirm('Clear this draft?')) return
+  if (mde) mde.value('')
+  ;['m-title','m-tag','m-desc'].forEach(id => document.getElementById(id).value = '')
+  document.getElementById('slug-preview').textContent = ''
+  localStorage.removeItem(LS_DRAFT + '_meta')
+  localStorage.removeItem('smde_' + LS_DRAFT)
+})
+
+// ─── Modal ────────────────────────────────────────────────────
+let _modalCb = null
+
+function openModal({ title, lbl1, ph1, hint1, lbl2, showF2, onInsert }) {
+  document.getElementById('modal-title').textContent = title
+  document.getElementById('modal-lbl1').textContent  = lbl1
+  document.getElementById('modal-in1').placeholder   = ph1
+  document.getElementById('modal-in1').value         = ''
+  document.getElementById('modal-hint1').textContent = hint1 || ''
+  document.getElementById('modal-f2').style.display  = showF2 ? 'block' : 'none'
+  if (showF2) {
+    document.getElementById('modal-lbl2').textContent  = lbl2 || 'Optional'
+    document.getElementById('modal-in2').value         = ''
+  }
+  document.getElementById('modal').style.display = 'flex'
+  setTimeout(() => document.getElementById('modal-in1').focus(), 30)
+  _modalCb = onInsert
+}
+
+function closeModal() {
+  document.getElementById('modal').style.display = 'none'
+  _modalCb = null
+}
+
+document.getElementById('modal-cancel').addEventListener('click', closeModal)
+document.getElementById('modal').addEventListener('click', e => { if (e.target === e.currentTarget) closeModal() })
+document.getElementById('modal-ok').addEventListener('click', () => {
+  if (_modalCb) _modalCb(
+    document.getElementById('modal-in1').value.trim(),
+    document.getElementById('modal-in2').value.trim()
+  )
+  closeModal()
+})
+document.getElementById('modal-in2').addEventListener('keydown', e => {
+  if (e.key === 'Enter') document.getElementById('modal-ok').click()
+})
+document.getElementById('modal-in1').addEventListener('keydown', e => {
+  if (e.key === 'Enter') {
+    const f2 = document.getElementById('modal-f2')
+    if (f2.style.display !== 'none') document.getElementById('modal-in2').focus()
+    else document.getElementById('modal-ok').click()
+  }
+})
+
+// ─── GitHub commit ────────────────────────────────────────────
+function toBase64Unicode(str) {
+  return btoa(unescape(encodeURIComponent(str)))
+}
+
+async function githubPut(path, content, message) {
+  const url = `https://api.github.com/repos/${OWNER}/${REPO}/contents/${path}`
+  const headers = {
+    'Authorization': `Bearer ${ghToken}`,
+    'Accept': 'application/vnd.github+json',
+    'Content-Type': 'application/json'
+  }
+
+  // Check if file exists (needed for SHA to update)
+  let sha = null
+  try {
+    const check = await fetch(url, { headers })
+    if (check.ok) { sha = (await check.json()).sha }
+  } catch {}
+
+  const body = { message, content: toBase64Unicode(content), branch: 'main' }
+  if (sha) body.sha = sha
+
+  return fetch(url, { method: 'PUT', headers, body: JSON.stringify(body) })
+}
+
+// ─── Publish ──────────────────────────────────────────────────
+document.getElementById('pub-btn').addEventListener('click', publishBlog)
+
+// Cmd/Ctrl + Enter to publish
+document.addEventListener('keydown', e => {
+  if ((e.metaKey || e.ctrlKey) && e.key === 'Enter') publishBlog()
+})
+
+async function publishBlog() {
+  const title   = document.getElementById('m-title').value.trim()
+  const tag     = document.getElementById('m-tag').value.trim()
+  const desc    = document.getElementById('m-desc').value.trim()
+  const content = mde ? mde.value().trim() : ''
+
+  const statusEl = document.getElementById('pub-status')
+  const btn      = document.getElementById('pub-btn')
+
+  statusEl.className = 'status'
+
+  if (!title) { setStatus('✗ Title is required', 'err'); return }
+  if (!content) { setStatus('✗ Content is empty', 'err'); return }
+  if (!ghToken) { setStatus('✗ No token — please log in again', 'err'); return }
+
+  btn.disabled = true
+  setStatus('Publishing…')
+
+  const filename = toSlug(title) + '.md'
+  const fileContent = `title: ${title}
+tag: ${tag || 'Blog'}
+description: ${desc}
+
+${content}`
+
+  try {
+    const res = await githubPut(`blogs/${filename}`, fileContent, `Add blog: ${title}`)
+    if (res.ok) {
+      setStatus(`✓ Published → blogs/${filename}`, 'ok')
+      localStorage.removeItem('smde_' + LS_DRAFT)
+      localStorage.removeItem(LS_DRAFT + '_meta')
+    } else {
+      const data = await res.json().catch(() => ({}))
+      setStatus(`✗ GitHub: ${data.message || res.status}`, 'err')
+    }
+  } catch (e) {
+    setStatus(`✗ Network error: ${e.message}`, 'err')
+  } finally {
+    btn.disabled = false
+  }
+}
+
+function setStatus(msg, cls) {
+  const el = document.getElementById('pub-status')
+  el.textContent = msg
+  el.className = 'status' + (cls ? ' ' + cls : '')
+}
+</script>
+</body>
+</html>

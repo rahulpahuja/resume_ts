@@ -167,7 +167,7 @@ class="prose prose-invert max-w-none"></article>
         canvas.width = window.innerWidth
         canvas.height = window.innerHeight
 
-        const letters = "01アイウエオカキクケコ"
+        const letters = "यंत्र • रक्षा • बुद्धि"
         const fontSize = 14
         const columns = Math.floor(canvas.width / fontSize)
         const drops = [...Array(columns)].fill(1)
