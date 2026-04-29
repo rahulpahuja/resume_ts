@@ -25,23 +25,24 @@
                         const title = text.match(/title:\s*(.*)/)?.[1] || file.name
                         const tag = text.match(/tag:\s*(.*)/)?.[1] || "blog"
                         const desc = text.match(/description:\s*(.*)/)?.[1] || ""
+                        const slug = file.name.replace(".md", "")
 
                         return {
                             title,
                             tag,
                             desc,
-                            link: file.download_url
+                            link: `/blog/${slug}`
                         }
 
                     })
 
             )
 
-            return blogs
+            return blogs.sort((a, b) => b.title.localeCompare(a.title))
 
         } catch (e) {
 
-            console.warn("Blog loading failed")
+            console.warn("Blog loading failed:", e)
 
             return []
 
@@ -52,8 +53,6 @@
     async function injectBlogs() {
 
         const blogs = await loadBlogs()
-
-        if (!blogs.length) return
 
         window.BLOGS = blogs
 
