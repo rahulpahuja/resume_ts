@@ -467,6 +467,36 @@ function renderSummary(summary) {
 
     const box = document.getElementById("ai-summary");
 
+    let parsedSummary = summary;
+
+    try {
+
+        // Convert markdown -> HTML
+        if (window.marked) {
+
+            parsedSummary = marked.parse(summary, {
+                gfm: true,
+                breaks: true
+            });
+
+        } else {
+
+            // fallback for plain text
+            parsedSummary = summary.replace(/\n/g, "<br>");
+
+        }
+
+        // sanitize if DOMPurify available
+        if (window.DOMPurify) {
+            parsedSummary = DOMPurify.sanitize(parsedSummary);
+        }
+
+    } catch (e) {
+
+        console.warn("Summary parsing failed:", e);
+
+    }
+
     box.innerHTML = `
         <div class="glass border border-yellow-500/30 p-6 mb-6 overflow-x-auto">
 
@@ -474,8 +504,8 @@ function renderSummary(summary) {
                 AI Summary
             </p>
 
-            <div class="text-gray-300 text-sm leading-relaxed prose prose-invert max-w-none">
-                ${summary}
+            <div class="summary-content text-gray-300 text-sm leading-relaxed max-w-none">
+                ${parsedSummary}
             </div>
 
         </div>
@@ -678,4 +708,6 @@ Stop
 
     window.addEventListener("popstate", handleRoute)
 
+
+    
 })()
