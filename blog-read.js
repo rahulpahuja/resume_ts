@@ -463,26 +463,24 @@ Exit
 
     }
 
-    function renderSummary(summary) {
+function renderSummary(summary) {
 
-        const box = document.getElementById("ai-summary")
+    const box = document.getElementById("ai-summary");
 
-        box.innerHTML = `
+    box.innerHTML = `
+        <div class="glass border border-yellow-500/30 p-6 mb-6 overflow-x-auto">
 
-<div class="glass border border-yellow-500/30 p-6 mb-6">
+            <p class="text-yellow-400 font-mono text-xs uppercase mb-4">
+                AI Summary
+            </p>
 
-<p class="text-yellow-400 font-mono text-xs uppercase mb-2">
-AI Summary
-</p>
+            <div class="text-gray-300 text-sm leading-relaxed prose prose-invert max-w-none">
+                ${summary}
+            </div>
 
-<p class="text-gray-300 text-sm leading-relaxed">
-${summary}
-</p>
-
-</div>
-`
-
-    }
+        </div>
+    `;
+}
 
     /* -------------------------
        Voice narration
