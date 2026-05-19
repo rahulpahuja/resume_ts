@@ -74,8 +74,6 @@ That is a massive platform shift.
 
 # Screenshots
 
-[Insert Google I/O Ask YouTube Screenshot Here]
-
 The UI looks simple.
 
 The infrastructure behind it is absolutely not.
