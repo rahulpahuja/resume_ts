@@ -1,9 +1,14 @@
 title: MCP Servers, Resources, and Tools: Explained Without the Hype
 tag: Blog
-description: 
+description: *A no-nonsense, implementation-level guide for builders creating AI agents, copilots, and automation systems.*
 
 *A no-nonsense, implementation-level guide for builders creating AI agents, copilots, and automation systems.*
 
+
+<figure style="margin:28px 0">
+<img src="https://raw.githubusercontent.com/rahulpahuja/resume_ts/main/public/blog-images/1777457213170-mcp.png" alt="MCP" style="max-width:100%;border-radius:4px;display:block;margin:0 auto">
+
+</figure>
 
 
 Everyone is throwing around terms like MCP, tools, resources, agents, and prompt orchestration as if they’re self-explanatory. 

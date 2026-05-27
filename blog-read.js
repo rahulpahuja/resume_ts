@@ -463,26 +463,54 @@ Exit
 
     }
 
-    function renderSummary(summary) {
+function renderSummary(summary) {
 
-        const box = document.getElementById("ai-summary")
+    const box = document.getElementById("ai-summary");
 
-        box.innerHTML = `
+    let parsedSummary = summary;
 
-<div class="glass border border-yellow-500/30 p-6 mb-6">
+    try {
 
-<p class="text-yellow-400 font-mono text-xs uppercase mb-2">
-AI Summary
-</p>
+        // Convert markdown -> HTML
+        if (window.marked) {
 
-<p class="text-gray-300 text-sm leading-relaxed">
-${summary}
-</p>
+            parsedSummary = marked.parse(summary, {
+                gfm: true,
+                breaks: true
+            });
 
-</div>
-`
+        } else {
+
+            // fallback for plain text
+            parsedSummary = summary.replace(/\n/g, "<br>");
+
+        }
+
+        // sanitize if DOMPurify available
+        if (window.DOMPurify) {
+            parsedSummary = DOMPurify.sanitize(parsedSummary);
+        }
+
+    } catch (e) {
+
+        console.warn("Summary parsing failed:", e);
 
     }
+
+    box.innerHTML = `
+        <div class="glass border border-yellow-500/30 p-6 mb-6 overflow-x-auto">
+
+            <p class="text-yellow-400 font-mono text-xs uppercase mb-4">
+                AI Summary
+            </p>
+
+            <div class="summary-content text-gray-300 text-sm leading-relaxed max-w-none">
+                ${parsedSummary}
+            </div>
+
+        </div>
+    `;
+}
 
     /* -------------------------
        Voice narration
@@ -680,4 +708,6 @@ Stop
 
     window.addEventListener("popstate", handleRoute)
 
+
+    
 })()
