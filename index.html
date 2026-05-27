@@ -831,6 +831,33 @@ const App=()=>{
               </FI>
             ))}
           </div>
+          <FI delay={.18}>
+            <div className="proj-card" style={{marginTop:'14px'}}>
+              <div style={{display:'flex',justifyContent:'space-between',alignItems:'flex-start',flexWrap:'wrap',gap:'12px',marginBottom:'20px'}}>
+                <div style={{flex:1,minWidth:'260px'}}>
+                  <div style={{display:'flex',alignItems:'center',gap:'12px',marginBottom:'10px'}}>
+                    <div style={{fontFamily:'DM Serif Display,serif',fontSize:'22px'}}>DeDup</div>
+                    <span className="tag tag-accent">Android</span>
+                    <span className="tag" style={{color:'#2a7d4f',borderColor:'rgba(42,125,79,.35)',background:'rgba(42,125,79,.08)'}}>Early Access — Play Store</span>
+                  </div>
+                  <p style={{fontSize:'13px',lineHeight:'1.7',color:'var(--muted)',marginBottom:'14px',maxWidth:'560px'}}>AI-powered duplicate file cleaner for Android — detects and removes duplicate photos, videos, APKs, memes, and WhatsApp clutter through intelligent local media analysis. Privacy-first: all processing stays on-device with zero cloud uploads.</p>
+                  <div className="tags" style={{marginBottom:'18px'}}>{['Kotlin','Android','Jetpack','Room','MediaStore','Coroutines'].map(t=><span key={t} className="tag">{t}</span>)}</div>
+                  <a href="https://github.com/rahulpahuja/dedup" target="_blank" rel="noopener noreferrer" style={{fontFamily:'DM Mono,monospace',fontSize:'10px',textTransform:'uppercase',letterSpacing:'.1em',color:'var(--accent)',display:'inline-flex',alignItems:'center',gap:'6px'}}>
+                    <svg viewBox="0 0 24 24" style={{width:'11px',height:'11px',fill:'currentColor'}}><path d="M12 .5A12 12 0 0 0 8.2 23.4C8.8 23.5 9 23.2 9 22.9V21C5.7 21.7 5 19.5 5 19.5C4.5 18.3 3.8 18 3.8 18C2.8 17.3 3.9 17.3 3.9 17.3C5 17.4 5.6 18.5 5.6 18.5C6.6 20.1 8.3 19.7 9 19.4C9.1 18.7 9.4 18.2 9.8 17.9C7.1 17.6 4.3 16.5 4.3 11.7C4.3 10.3 4.8 9.2 5.7 8.3C5.6 8 5.1 6.7 5.8 5C5.8 5 6.8 4.7 9 6.3C10 6 11 5.9 12 5.9C13 5.9 14 6 15 6.3C17.2 4.7 18.2 5 18.2 5C18.9 6.7 18.4 8 18.3 8.3C19.2 9.2 19.7 10.3 19.7 11.7C19.7 16.5 16.9 17.6 14.2 17.9C14.7 18.3 15 19 15 20V22.9C15 23.2 15.2 23.5 15.8 23.4A12 12 0 0 0 12 .5Z"/></svg>
+                    View on GitHub →
+                  </a>
+                </div>
+              </div>
+              <div style={{display:'grid',gridTemplateColumns:'repeat(3,1fr)',gap:'10px'}}>
+                {[['Media Analysis','1'],['Files','2'],['Settings','3']].map(([label,n])=>(
+                  <div key={n} style={{borderRadius:'2px',overflow:'hidden',border:'1px solid var(--border)',background:'var(--p2)'}}>
+                    <img src={`https://raw.githubusercontent.com/rahulpahuja/dedup/main/screenshots/${n}.png`} alt={`DeDup — ${label}`} style={{width:'100%',height:'auto',display:'block'}} loading="lazy"/>
+                    <div style={{padding:'6px 10px',fontFamily:'DM Mono,monospace',fontSize:'10px',textTransform:'uppercase',letterSpacing:'.1em',color:'var(--muted)'}}>{label}</div>
+                  </div>
+                ))}
+              </div>
+            </div>
+          </FI>
         </div>
       </section>
 
