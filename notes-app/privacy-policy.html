@@ -1,0 +1,248 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Privacy Policy — Notes</title>
+<style>
+  :root {
+    color-scheme: light dark;
+    --bg: #ffffff;
+    --fg: #1a1a1a;
+    --muted: #5f5f5f;
+    --border: #e3e3e3;
+    --accent: #3a5edc;
+    --card: #f7f7f8;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root {
+      --bg: #14151a;
+      --fg: #eaeaea;
+      --muted: #a3a3a3;
+      --border: #2a2b31;
+      --accent: #8ab0ff;
+      --card: #1c1d23;
+    }
+  }
+  * { box-sizing: border-box; }
+  body {
+    margin: 0;
+    background: var(--bg);
+    color: var(--fg);
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+    line-height: 1.6;
+  }
+  .wrap {
+    max-width: 760px;
+    margin: 0 auto;
+    padding: 48px 20px 96px;
+  }
+  h1 {
+    font-size: 1.9rem;
+    margin-bottom: 4px;
+  }
+  .updated {
+    color: var(--muted);
+    font-size: 0.9rem;
+    margin-bottom: 40px;
+  }
+  h2 {
+    font-size: 1.15rem;
+    margin-top: 40px;
+    margin-bottom: 10px;
+    padding-bottom: 6px;
+    border-bottom: 1px solid var(--border);
+  }
+  p { margin: 10px 0; }
+  ul { margin: 10px 0; padding-left: 22px; }
+  li { margin: 6px 0; }
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 16px 0;
+    font-size: 0.92rem;
+  }
+  th, td {
+    text-align: left;
+    padding: 10px 12px;
+    border: 1px solid var(--border);
+    vertical-align: top;
+  }
+  th {
+    background: var(--card);
+    font-weight: 600;
+  }
+  a { color: var(--accent); }
+  .card {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    padding: 16px 20px;
+    margin: 16px 0;
+  }
+  code {
+    background: var(--card);
+    padding: 1px 6px;
+    border-radius: 4px;
+    font-size: 0.9em;
+  }
+  footer {
+    margin-top: 56px;
+    padding-top: 20px;
+    border-top: 1px solid var(--border);
+    color: var(--muted);
+    font-size: 0.85rem;
+  }
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <h1>Privacy Policy</h1>
+  <div class="updated">Notes app &middot; Effective date: July 8, 2026</div>
+
+  <p>
+    This policy explains what data the Notes app ("the app", "we") collects, how it is used,
+    and the choices you have. Notes is developed and maintained by an individual developer.
+    If you have questions, contact <a href="mailto:therahulpahuja@gmail.com">therahulpahuja@gmail.com</a>.
+  </p>
+
+  <h2>1. Your notes stay on your device</h2>
+  <p>
+    Note content — titles, text, tags, categories, images, drawings, and voice recordings you
+    create — is stored locally on your device in the app's own database. We do not upload your
+    note content to our servers, and we do not sell your data to anyone.
+  </p>
+  <p>
+    Note content only leaves your device in two cases, both of which you control:
+  </p>
+  <ul>
+    <li>
+      <strong>Optional cloud AI features.</strong> If you enable <em>Magic Sort (cloud AI)</em>
+      or <em>AI meeting summaries</em> in Settings, the relevant note or meeting transcript text
+      is sent to Google's Gemini API for processing and is subject to
+      <a href="https://policies.google.com/privacy" target="_blank" rel="noopener">Google's Privacy Policy</a>.
+      These features are off unless you turn them on; when off, sorting and summaries run
+      entirely on-device.
+    </li>
+    <li>
+      <strong>Importing from Google Keep.</strong> If you use the "Import Keep" feature, notes
+      are read from your Google Keep account only when you initiate the import.
+    </li>
+  </ul>
+
+  <h2>2. Account information</h2>
+  <p>
+    Signing in uses Google Sign-In (via Firebase Authentication). We receive your Google account's
+    name, email address, and profile photo to identify your account within the app. We do not
+    receive your Google password.
+  </p>
+
+  <h2>3. Data we collect and why</h2>
+  <table>
+    <tr><th>Data</th><th>Purpose</th><th>Service used</th></tr>
+    <tr>
+      <td>Name, email, profile photo</td>
+      <td>Sign-in and identifying your account</td>
+      <td>Firebase Authentication</td>
+    </tr>
+    <tr>
+      <td>App usage events (e.g. note created, feature used, search performed) and note
+        metadata flags (e.g. whether a note has a title, image, or reminder — never the
+        note's actual text or images)</td>
+      <td>Understanding feature usage to improve the app</td>
+      <td>Firebase Analytics</td>
+    </tr>
+    <tr>
+      <td>Crash logs and diagnostic data</td>
+      <td>Finding and fixing bugs</td>
+      <td>Firebase Crashlytics</td>
+    </tr>
+    <tr>
+      <td>Push notification token, linked to your account ID</td>
+      <td>Delivering reminders and notifications to your device</td>
+      <td>Firebase Cloud Messaging</td>
+    </tr>
+    <tr>
+      <td>Feature flag values (no personal data)</td>
+      <td>Rolling out and toggling features remotely without an app update</td>
+      <td>Firebase Remote Config</td>
+    </tr>
+    <tr>
+      <td>Your account ID, email, and message text — only if you submit feedback or a
+        feature request</td>
+      <td>Reviewing feedback and feature requests</td>
+      <td>Firebase Realtime Database</td>
+    </tr>
+    <tr>
+      <td>Note or meeting transcript text — only when you enable a cloud AI feature
+        (see Section&nbsp;1)</td>
+      <td>Generating AI sort suggestions or meeting summaries</td>
+      <td>Google Generative AI (Gemini API)</td>
+    </tr>
+  </table>
+
+  <h2>4. Device permissions</h2>
+  <div class="card">
+    <ul>
+      <li><strong>Microphone</strong> — to record voice notes, meeting audio, and power live speech-to-text.</li>
+      <li><strong>Camera</strong> — to attach photos or scans to a note.</li>
+      <li><strong>Notifications</strong> — to show reminder and update notifications.</li>
+      <li><strong>Exact alarms</strong> — to trigger reminders at the precise time you set.</li>
+    </ul>
+    <p style="margin-bottom:0;">
+      Speech-to-text is performed using Android's built-in speech recognition service on your
+      device or through your device's default assistant/TTS service — audio is not sent to our
+      servers for this purpose.
+    </p>
+  </div>
+
+  <h2>5. Data sharing</h2>
+  <p>
+    We do not sell your personal data. Data described above is shared only with the service
+    providers necessary to operate the app — Google/Firebase (authentication, analytics, crash
+    reporting, push notifications, remote config, database) and, only when you opt in, Google's
+    Generative AI API. These providers process data on our behalf under their own security and
+    privacy commitments.
+  </p>
+
+  <h2>6. Data retention and deletion</h2>
+  <p>
+    Notes remain on your device until you delete them or uninstall the app. To request deletion
+    of account-linked data we hold (such as submitted feedback or your push notification token),
+    email <a href="mailto:therahulpahuja@gmail.com">therahulpahuja@gmail.com</a> from the account
+    in question and we will remove it.
+  </p>
+
+  <h2>7. Children's privacy</h2>
+  <p>
+    Notes is not directed at children under 13, and we do not knowingly collect personal
+    information from children under 13.
+  </p>
+
+  <h2>8. Security</h2>
+  <p>
+    We rely on Firebase's security infrastructure (encryption in transit, access-controlled
+    cloud storage) to protect the data described above. No method of transmission or storage is
+    100% secure, so we cannot guarantee absolute security.
+  </p>
+
+  <h2>9. Changes to this policy</h2>
+  <p>
+    We may update this policy as the app changes. Material changes will be reflected by updating
+    the effective date above.
+  </p>
+
+  <h2>10. Contact</h2>
+  <p>
+    Questions about this policy or your data? Email
+    <a href="mailto:therahulpahuja@gmail.com">therahulpahuja@gmail.com</a>.
+  </p>
+
+  <footer>
+    &copy; 2026 Notes. This page is served as a static privacy policy for Google Play Store compliance.
+  </footer>
+
+</div>
+</body>
+</html>

@@ -863,6 +863,31 @@ const App=()=>{
               </div>
             </div>
           </FI>
+          <FI delay={.22}>
+            <div className="proj-card" style={{marginTop:'14px'}}>
+              <div style={{display:'flex',justifyContent:'space-between',alignItems:'flex-start',flexWrap:'wrap',gap:'12px',marginBottom:'20px'}}>
+                <div style={{flex:1,minWidth:'260px'}}>
+                  <div style={{display:'flex',alignItems:'center',gap:'12px',marginBottom:'10px'}}>
+                    <div style={{fontFamily:'DM Serif Display,serif',fontSize:'22px'}}>Notes — The Modern Archivist</div>
+                    <span className="tag tag-accent">Android</span>
+                  </div>
+                  <p style={{fontSize:'13px',lineHeight:'1.7',color:'var(--muted)',marginBottom:'14px',maxWidth:'560px'}}>An offline-first notes app with voice memos, live speech-to-text, drawings, image OCR, and reminders — everything stored locally on-device. Optional cloud AI (Gemini) can sort notes or summarize meetings, but only when you turn it on; Google Sign-In keeps notes synced across devices.</p>
+                  <div className="tags" style={{marginBottom:'18px'}}>{['Kotlin','Android','Jetpack Compose','Room','Firebase','Gemini API'].map(t=><span key={t} className="tag">{t}</span>)}</div>
+                  <div style={{display:'flex',gap:'10px',flexWrap:'wrap',alignItems:'center'}}>
+                    <a href="notes-app/privacy-policy.html" target="_blank" rel="noopener noreferrer" className="btn btn-ghost" style={{fontSize:'10px',padding:'9px 18px'}}>Privacy Policy →</a>
+                  </div>
+                </div>
+              </div>
+              <div style={{display:'grid',gridTemplateColumns:'repeat(3,1fr)',gap:'10px'}}>
+                {[['Home','Screenshot_20260708_214637.png'],['Editor','Screenshot_20260708_214659.png'],['Sync & Settings','Screenshot_20260708_214725.png']].map(([label,file])=>(
+                  <div key={file} style={{borderRadius:'2px',overflow:'hidden',border:'1px solid var(--border)',background:'var(--p2)'}}>
+                    <img src={`notes-app/ss/${file}`} alt={`Notes — ${label}`} style={{width:'100%',height:'auto',display:'block'}} loading="lazy"/>
+                    <div style={{padding:'6px 10px',fontFamily:'DM Mono,monospace',fontSize:'10px',textTransform:'uppercase',letterSpacing:'.1em',color:'var(--muted)'}}>{label}</div>
+                  </div>
+                ))}
+              </div>
+            </div>
+          </FI>
         </div>
       </section>
 
