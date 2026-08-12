@@ -1,0 +1,58 @@
+# Rahul Pahuja
+
+> Principal-track Mobile Engineer specializing in mobile security architecture. Creator of the Secured Storage layer at CyberArk. 10+ years building mobile infrastructure across CyberArk, Bankwest, and Conviva.
+
+Rahul Pahuja is a mobile engineer based in Hyderabad, India, currently Staff → Principal at CyberArk. He designs and builds security-critical mobile infrastructure: credential vaults, observability SDKs at billions-of-events scale, and digital banking platforms.
+
+## Identity
+
+- Full name: Rahul Pahuja
+- Also known as: therahulpahuja
+- Role: Principal Mobile Engineer
+- Location: Hyderabad, India
+- Education: M.Tech, Computer Science, BITS Pilani
+- Email: therahulpahuja@gmail.com
+- Phone: +91 88190 91000
+- Website: https://www.therahulpahuja.com/
+
+## Career
+
+- **CyberArk** — Staff Software Engineer (2024–2025). Designed and built CyberArk's Secured Storage layer, the cryptographic foundation protecting enterprise credentials on Android and iOS (TEE-backed key storage, hardware-bound encryption, biometric unlock, secure enclave integration).
+- **Coforge — Bankwest (Commonwealth Bank of Australia)** — Android & iOS Technical Lead (2024). Technical lead for Bankwest's digital banking app, used by millions of daily active users.
+- **Conviva** — Senior Engineer, Android Sensors (2022–2023). Built Android/iOS observability sensors processing 12B+ metric computations per minute; owned ExoPlayer and BrightCove integrations.
+- **Intellicus Technologies** — Senior Software Engineer (2019–2022). Developed the Intellicus Mobile SDK, embedded analytics and BI reporting for Android.
+- **Wipro** — Unified Mobile App Developer (2014–2019). Built an award-winning travel app on Wipro's Contextual & Open Banking Platform.
+
+## Skills
+
+Mobile: Android, iOS, Kotlin, Swift, Jetpack Compose, UIKit, React Native, Flutter
+Security: Secured Storage, TEE / Secure Enclave, Biometric Auth, Encryption, Snyk
+Backend: Java, Python, Node.js, Spring Boot, Firebase, REST APIs
+Infra: Jenkins, TeamCity, CircleCI, GitHub Actions, Docker
+
+## Projects
+
+- [DeDup](https://dedup.space) — AI-powered duplicate file cleaner for Android; on-device media analysis, zero cloud uploads.
+- [Mobile1x](https://mobile1x.com) — side venture.
+- [CodeForumBlogs](https://www.codeforumblogs.com) — community platform for technical writing with real-time collaboration and code highlighting.
+- AI Similarity — maps Android/iOS APIs side-by-side for cross-platform translation.
+
+## Writing
+
+- [Jetpack Compose: A Staff Engineer's Perspective](https://www.linkedin.com/pulse/jetpack-compose-staff-android-engineers-perspective-rahul-pahuja-zauif)
+- Building Enterprise Security with Secured Storage
+- Real-time Analytics: Conviva SDK Architecture
+- Mobile Banking: Lessons from Bankwest
+- LLM Poisoning: A Cybersecurity Threat Most Companies Are Ignoring
+
+## Other
+
+Produces and DJs electronic music as Rellow (house, deep house, ambient).
+
+## Elsewhere
+
+- LinkedIn: https://www.linkedin.com/in/therahulpahuja/
+- GitHub: https://github.com/rahulpahuja
+- X / Twitter: https://www.x.com/therahulpahuja
+- Instagram: https://www.instagram.com/therahulpahuja
+- YouTube: https://www.youtube.com/rahulpahuja1991
