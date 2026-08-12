@@ -43,13 +43,13 @@
     },
     "worksFor": {
       "@type": "Organization",
-      "name": "CyberArk"
+      "name": "Independent — DeDup & Notes"
     },
     "alumniOf": {
       "@type": "CollegeOrUniversity",
       "name": "BITS Pilani"
     },
-    "knowsAbout": ["Mobile Security", "Android", "iOS", "Kotlin", "Swift", "Secured Storage", "TEE / Secure Enclave", "Biometric Authentication", "Encryption", "Jetpack Compose", "Mobile Architecture", "SDK Design"],
+    "knowsAbout": ["Mobile Security", "Android", "iOS", "Android SDK", "iOS SDK", "Kotlin", "Swift", "Objective-C", "SwiftUI", "Secured Storage", "TEE / Secure Enclave", "Biometric Authentication", "Encryption", "Jetpack Compose", "MVVM", "MVI", "MVC", "Clean Architecture", "Dependency Injection", "Mobile Architecture", "SDK Design"],
     "sameAs": [
       "https://www.linkedin.com/in/therahulpahuja/",
       "https://github.com/rahulpahuja",
@@ -353,7 +353,7 @@
 
   <section style="margin-top:40px">
     <h2 class="display-sm" style="font-size:1.6rem">Secured Storage — CyberArk</h2>
-    <p class="label" style="margin:6px 0 14px">Android & iOS · 2022 — Present</p>
+    <p class="label" style="margin:6px 0 14px">Android & iOS · Nov 2024 — Dec 2025</p>
     <p>CyberArk protects the most sensitive credentials in the world. I designed and built the Secured Storage layer — the cryptographic foundation that ensures those credentials stay protected on mobile devices, regardless of what the device, OS, or attacker throws at them.</p>
   </section>
 
@@ -371,7 +371,7 @@
   <section style="margin-top:40px">
     <h2 class="display-sm" style="font-size:1.6rem">Career</h2>
     <ul style="margin-top:12px;padding-left:20px;list-style:none">
-      <li style="margin-bottom:18px"><strong>Staff Software Engineer, CyberArk</strong> (2024 — 2025) — Designed and built CyberArk's Secured Storage layer, the cryptographic foundation protecting enterprise credentials on Android and iOS.</li>
+      <li style="margin-bottom:18px"><strong>Staff Software Engineer, CyberArk</strong> (Nov 2024 — Dec 2025) — Designed and built CyberArk's Secured Storage layer, the cryptographic foundation protecting enterprise credentials on Android and iOS.</li>
       <li style="margin-bottom:18px"><strong>Android & iOS Technical Lead, Coforge — Bankwest</strong> (2024) — Technical lead for Bankwest's digital banking app, a Commonwealth Bank subsidiary with millions of daily active users.</li>
       <li style="margin-bottom:18px"><strong>Senior Engineer — Android Sensors, Conviva</strong> (2022 — 2023) — Built and maintained Android/iOS observability sensors processing 12B+ metric computations per minute.</li>
       <li style="margin-bottom:18px"><strong>Senior Software Engineer, Intellicus Technologies</strong> (2019 — 2022) — Developed the Intellicus Mobile SDK, bringing embedded analytics and BI reporting to Android.</li>
@@ -393,7 +393,7 @@
     <h2 class="display-sm" style="font-size:1.6rem">About</h2>
     <p style="margin-bottom:14px">I'm a principal-track mobile engineer who works on problems that require deep context — the kind where understanding the threat model, the hardware limitations, and the business constraints all at once is what separates a good solution from one that will cause an incident in 18 months.</p>
     <p style="margin-bottom:14px">I hold an M.Tech from BITS Pilani and have worked across Hyderabad, Bengaluru, and remotely for organizations from Wipro and Conviva through to CBA's Bankwest and CyberArk.</p>
-    <p>Skills: Android, iOS, Kotlin, Swift, Jetpack Compose, UIKit, React Native, Flutter, Secured Storage, TEE / Secure Enclave, Biometric Auth, Encryption, Java, Python, Node.js, Spring Boot.</p>
+    <p>Skills: Android, iOS, Android SDK, iOS SDK, Kotlin, Java, Swift, Objective-C, Jetpack Compose, SwiftUI, UIKit, AVFoundation, ExoPlayer, BrightCove, React Native, Flutter, MVVM, MVI, MVC, Clean Architecture, Dependency Injection (Hilt, Dagger, Koin), Architectural Decision Records (ADRs), Secured Storage, TEE / Secure Enclave, Biometric Auth, Encryption, Node.js, Spring Boot.</p>
   </section>
 </div>
 <script>document.getElementById('static-content').style.display='none';</script>
@@ -535,7 +535,7 @@ const COMPANIES=["CyberArk","Bankwest","CBA","Conviva","Intellicus","Wipro","Che
 
 const TIMELINE=[
   {
-    role:"Staff Software Engineer",co:"CyberArk",period:"2024 — 2025",tag:"Mobile Security",
+    role:"Staff Software Engineer",co:"CyberArk",period:"Nov 2024 — Dec 2025",tag:"Mobile Security",
     bullets:[
       "Designed and built CyberArk's Secured Storage layer — the cryptographic foundation protecting enterprise credentials on Android and iOS.",
       "Made core architecture decisions: TEE-backed key storage, hardware-bound encryption, biometric unlock flows, and secure enclave integration.",
@@ -589,10 +589,11 @@ const BLOGS=[
 ];
 
 const SKILLS={
-  "Mobile":   ["Android","iOS","Kotlin","Swift","Jetpack Compose","UIKit","React Native","Flutter"],
-  "Security": ["Secured Storage","TEE / Secure Enclave","Biometric Auth","Encryption","Snyk"],
-  "Backend":  ["Java","Python","Node.js","Spring Boot","Firebase","REST APIs"],
-  "Infra":    ["Jenkins","TeamCity","CircleCI","GitHub Actions","Docker"],
+  "Mobile":       ["Android","iOS","Android SDK","iOS SDK","Kotlin","Java","Swift","Objective-C","Jetpack Compose","SwiftUI","UIKit","AVFoundation","ExoPlayer","BrightCove","Android Services","Content Providers","Broadcast Receivers","React Native","Flutter"],
+  "Architecture": ["MVVM","MVI","MVC","Clean Architecture","Dependency Injection (Hilt, Dagger, Koin)","Architectural Decision Records (ADRs)"],
+  "Security":     ["Secured Storage","TEE / Secure Enclave","Biometric Auth","Encryption","Snyk"],
+  "Backend":      ["Java","Python","Node.js","Spring Boot","Firebase","REST APIs"],
+  "Infra":        ["Jenkins","TeamCity","CircleCI","GitHub Actions","Docker"],
 };
 
 function useFI(delay=0){
@@ -627,7 +628,7 @@ const DEFAULT_CONTENT={
   impact_domain:'Three deep specialisms — mobile security, observability at scale, and mobile banking — developed across a decade of production systems.',
 
   feature_title:'Secured Storage',
-  feature_sub:'CyberArk · Android & iOS · 2022 — Present',
+  feature_sub:'CyberArk · Android & iOS · Nov 2024 — Dec 2025',
   feature_desc:'CyberArk protects the most sensitive credentials in the world. I designed and built the Secured Storage layer — the cryptographic foundation that ensures those credentials stay protected on mobile devices, regardless of what the device, OS, or attacker throws at them.',
   feature_callout:'This isn\'t a wrapper around a keychain API. It\'s a system-level design problem: which primitives to trust, how to bind keys to device identity, what the degradation path is when hardware security is unavailable, how to design an API surface that future engineers can\'t misuse. These are the decisions that outlast the sprint they were made in — and they were mine to make.',
 
@@ -919,7 +920,7 @@ const App=()=>{
                 </div>
                 <div style={{textAlign:'center'}}>
                   <div style={{fontFamily:'DM Serif Display,serif',fontSize:'17px'}}>Rahul Pahuja</div>
-                  <div className="label" style={{marginTop:'4px'}}>Staff → Principal · CyberArk</div>
+                  <div className="label" style={{marginTop:'4px'}}>Building DeDup & Notes</div>
                 </div>
               </div>
             </FI>
@@ -1010,7 +1011,7 @@ const App=()=>{
             </FI>
             <FI delay={.24}>
               <div style={{display:'flex',gap:'8px',flexWrap:'wrap'}}>
-                {['TEE-backed key storage','Hardware-bound encryption','Biometric unlock flows','Secure enclave integration','Cross-platform parity','Threat modelling'].map(t=>(
+                {['TEE-backed key storage','Hardware-bound encryption','Biometric unlock flows','Secure enclave integration','Cross-platform parity','Threat modelling','Clean Architecture','Dependency Injection'].map(t=>(
                   <span key={t} style={{padding:'3px 12px',border:'1px solid rgba(192,57,31,.35)',background:'rgba(192,57,31,.09)',borderRadius:'2px',fontFamily:'DM Mono,monospace',fontSize:'10px',color:'#e07060',letterSpacing:'.06em',textTransform:'uppercase'}}>{t}</span>
                 ))}
               </div>
@@ -1041,7 +1042,7 @@ const App=()=>{
                     <span className="tag" style={{color:'#2a7d4f',borderColor:'rgba(42,125,79,.35)',background:'rgba(42,125,79,.08)'}}>Early Access — Play Store</span>
                   </div>
                   <p style={{fontSize:'13px',lineHeight:'1.7',color:'var(--muted)',marginBottom:'14px',maxWidth:'560px'}}>AI-powered duplicate file cleaner for Android — detects and removes duplicate photos, videos, APKs, memes, and WhatsApp clutter through intelligent local media analysis. Privacy-first: all processing stays on-device with zero cloud uploads.</p>
-                  <div className="tags" style={{marginBottom:'18px'}}>{['Kotlin','Android','Jetpack','Room','MediaStore','Coroutines'].map(t=><span key={t} className="tag">{t}</span>)}</div>
+                  <div className="tags" style={{marginBottom:'18px'}}>{['Kotlin','Android','Jetpack','Room','MediaStore','Coroutines','MVVM','Clean Architecture'].map(t=><span key={t} className="tag">{t}</span>)}</div>
                   <div style={{display:'flex',gap:'10px',flexWrap:'wrap',alignItems:'center'}}>
                     <a href="https://dedup.space" target="_blank" rel="noopener noreferrer" className="btn btn-solid" style={{fontSize:'10px',padding:'9px 18px'}}>Visit Website →</a>
                     <a href="https://forms.gle/V4UjUQjfNxbEuRWb9" target="_blank" rel="noopener noreferrer" className="btn btn-ghost" style={{fontSize:'10px',padding:'9px 18px'}}>Become an early tester today →</a>
@@ -1071,7 +1072,7 @@ const App=()=>{
                     <span className="tag tag-accent">Android</span>
                   </div>
                   <p style={{fontSize:'13px',lineHeight:'1.7',color:'var(--muted)',marginBottom:'14px',maxWidth:'560px'}}>An offline-first notes app with voice memos, live speech-to-text, drawings, image OCR, and reminders — everything stored locally on-device. Optional cloud AI (Gemini) can sort notes or summarize meetings, but only when you turn it on; Google Sign-In keeps notes synced across devices.</p>
-                  <div className="tags" style={{marginBottom:'18px'}}>{['Kotlin','Android','Jetpack Compose','Room','Firebase','Gemini API'].map(t=><span key={t} className="tag">{t}</span>)}</div>
+                  <div className="tags" style={{marginBottom:'18px'}}>{['Kotlin','Android','Jetpack Compose','Room','Firebase','Gemini API','MVVM','Dependency Injection'].map(t=><span key={t} className="tag">{t}</span>)}</div>
                   <div style={{display:'flex',gap:'10px',flexWrap:'wrap',alignItems:'center'}}>
                     <a href="notes-app/privacy-policy.html" target="_blank" rel="noopener noreferrer" className="btn btn-ghost" style={{fontSize:'10px',padding:'9px 18px'}}>Privacy Policy →</a>
                   </div>
@@ -1268,7 +1269,7 @@ const App=()=>{
                 {[
                   {k:'Education',v:'M.Tech, Computer Science',sub:'BITS Pilani'},
                   {k:'Based in',v:'Indore, India'},
-                  {k:'Currently',v:'CyberArk',sub:'Staff → Principal'},
+                  {k:'Currently',v:'Independent',sub:'Building DeDup & Notes'},
                 ].map((s,i)=>(
                   <div key={i} style={{borderTop:'1px solid var(--border)',paddingTop:'16px',paddingBottom:'20px'}}>
                     <div className="label" style={{marginBottom:'8px'}}>{s.k}</div>

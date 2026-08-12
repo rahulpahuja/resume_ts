@@ -2,7 +2,7 @@
 
 > Principal-track Mobile Engineer specializing in mobile security architecture. Creator of the Secured Storage layer at CyberArk. 10+ years building mobile infrastructure across CyberArk, Bankwest, and Conviva.
 
-Rahul Pahuja is a mobile engineer based in Hyderabad, India, currently Staff → Principal at CyberArk. He designs and builds security-critical mobile infrastructure: credential vaults, observability SDKs at billions-of-events scale, and digital banking platforms.
+Rahul Pahuja is a mobile engineer based in Hyderabad, India. Most recently Staff Software Engineer at CyberArk (Nov 2024 – Dec 2025); currently building independently as the creator of DeDup and Notes. He designs and builds security-critical mobile infrastructure: credential vaults, observability SDKs at billions-of-events scale, and digital banking platforms.
 
 ## Identity
 
@@ -17,7 +17,8 @@ Rahul Pahuja is a mobile engineer based in Hyderabad, India, currently Staff →
 
 ## Career
 
-- **CyberArk** — Staff Software Engineer (2024–2025). Designed and built CyberArk's Secured Storage layer, the cryptographic foundation protecting enterprise credentials on Android and iOS (TEE-backed key storage, hardware-bound encryption, biometric unlock, secure enclave integration).
+- **Independent** (Dec 2025 – Present) — Building DeDup and Notes, two consumer Android apps, on his own.
+- **CyberArk** — Staff Software Engineer (Nov 2024 – Dec 2025). Designed and built CyberArk's Secured Storage layer, the cryptographic foundation protecting enterprise credentials on Android and iOS (TEE-backed key storage, hardware-bound encryption, biometric unlock, secure enclave integration, MVVM/Clean Architecture, dependency injection with Hilt).
 - **Coforge — Bankwest (Commonwealth Bank of Australia)** — Android & iOS Technical Lead (2024). Technical lead for Bankwest's digital banking app, used by millions of daily active users.
 - **Conviva** — Senior Engineer, Android Sensors (2022–2023). Built Android/iOS observability sensors processing 12B+ metric computations per minute; owned ExoPlayer and BrightCove integrations.
 - **Intellicus Technologies** — Senior Software Engineer (2019–2022). Developed the Intellicus Mobile SDK, embedded analytics and BI reporting for Android.
@@ -25,14 +26,15 @@ Rahul Pahuja is a mobile engineer based in Hyderabad, India, currently Staff →
 
 ## Skills
 
-Mobile: Android, iOS, Kotlin, Swift, Jetpack Compose, UIKit, React Native, Flutter
+Mobile: Android, iOS, Android SDK, iOS SDK, Kotlin, Java, Swift, Objective-C, Jetpack Compose, SwiftUI, UIKit, AVFoundation, ExoPlayer, BrightCove, Android Services, Content Providers, Broadcast Receivers, React Native, Flutter
+Architecture: MVVM, MVI, MVC, Clean Architecture, Dependency Injection (Hilt, Dagger, Koin), Architectural Decision Records (ADRs)
 Security: Secured Storage, TEE / Secure Enclave, Biometric Auth, Encryption, Snyk
 Backend: Java, Python, Node.js, Spring Boot, Firebase, REST APIs
 Infra: Jenkins, TeamCity, CircleCI, GitHub Actions, Docker
 
 ## Projects
 
-- [DeDup](https://dedup.space) — AI-powered duplicate file cleaner for Android; on-device media analysis, zero cloud uploads.
+- [DeDup](https://dedup.space) — AI-powered duplicate file cleaner for Android; on-device media analysis, zero cloud uploads. Built with Kotlin, Jetpack Compose, MVVM, and Clean Architecture.
 - [Mobile1x](https://mobile1x.com) — side venture.
 - [CodeForumBlogs](https://www.codeforumblogs.com) — community platform for technical writing with real-time collaboration and code highlighting.
 - AI Similarity — maps Android/iOS APIs side-by-side for cross-platform translation.
