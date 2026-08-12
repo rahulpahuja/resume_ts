@@ -212,6 +212,62 @@
     ::-webkit-scrollbar{width:3px}
     ::-webkit-scrollbar-track{background:var(--p2)}
     ::-webkit-scrollbar-thumb{background:var(--borderl);border-radius:2px}
+
+    /* ══════════════════════════════════════════════════════
+       RESPONSIVE / MOBILE
+    ══════════════════════════════════════════════════════ */
+    @media (max-width:768px){
+      .wrap{padding:0 20px}
+      .section{padding:100px 0 64px}
+
+      #site-header{padding:14px 18px}
+      .header-role{display:none}
+      .header-socials{display:none!important}
+      .btn{padding:8px 15px;font-size:9px}
+
+      #site-nav{max-width:calc(100vw - 20px);overflow-x:auto;justify-content:flex-start;-webkit-overflow-scrolling:touch;scrollbar-width:none}
+      #site-nav::-webkit-scrollbar{display:none}
+      .nav-btn{flex-shrink:0}
+
+      #enableAudio{bottom:76px;right:16px;padding:7px 12px;font-size:9px}
+
+      .hero-grid{grid-template-columns:1fr!important;gap:36px!important}
+      .hero-grid>div:first-child{order:1}
+      .hero-grid>div:last-child{order:2}
+      .profile-ring{width:168px;height:168px}
+      .hero-stats{gap:22px!important;flex-wrap:wrap;row-gap:16px}
+
+      .impact-grid{grid-template-columns:1fr}
+      .impact-cell{padding:26px 22px}
+      .impact-domain-grid{grid-template-columns:1fr!important;gap:28px!important}
+
+      .skills-grid{grid-template-columns:1fr}
+
+      .feature-card{padding:32px 24px}
+      .feature-meta{gap:20px}
+
+      .proj-grid{grid-template-columns:1fr!important}
+      .shot-grid{grid-template-columns:repeat(2,1fr)!important}
+
+      .training-grid{grid-template-columns:1fr!important;gap:32px!important}
+      .music-grid{grid-template-columns:1fr!important;gap:32px!important}
+      .releases-grid{grid-template-columns:repeat(2,1fr)!important}
+
+      .about-grid{grid-template-columns:1fr!important;gap:36px!important}
+
+      .site-footer{flex-direction:column!important;gap:14px;text-align:center;padding:22px 20px 92px!important}
+
+      .timeline{padding-left:22px}
+      .tl-dot{left:-26px}
+    }
+
+    @media (max-width:480px){
+      .display{font-size:clamp(2.3rem,10vw,3.4rem)}
+      .display-sm{font-size:clamp(1.7rem,7vw,2.4rem)}
+      .header-name{font-size:16px}
+      .impact-num{font-size:clamp(2.2rem,10vw,3.2rem)}
+      .releases-grid{grid-template-columns:1fr!important}
+    }
   </style>
 </head>
 <body>
@@ -763,7 +819,7 @@ const App=()=>{
         <span className="header-role">Principal Mobile Engineer</span>
       </div>
       <div style={{display:'flex',gap:'10px',alignItems:'center'}}>
-        <div style={{display:'flex',gap:'8px'}}>
+        <div className="header-socials" style={{display:'flex',gap:'8px'}}>
           <a href="https://www.linkedin.com/in/therahulpahuja/" target="_blank" rel="noopener noreferrer" className="si"><LI/></a>
           <a href="https://github.com/rahulpahuja" target="_blank" rel="noopener noreferrer" className="si"><GH/></a>
         </div>
@@ -783,7 +839,7 @@ const App=()=>{
       <section id="hero" className="section ruled editable-section">
         <EditBtn label="Hero" onClick={()=>openDrawer('hero')}/>
         <div className="wrap">
-          <div style={{display:'grid',gridTemplateColumns:'1fr auto',gap:'56px',alignItems:'center'}}>
+          <div className="hero-grid" style={{display:'grid',gridTemplateColumns:'1fr auto',gap:'56px',alignItems:'center'}}>
             <div>
               <FI><div className="label" style={{marginBottom:'24px'}}>// Principal_engineer — Hyderabad, IN</div></FI>
               <FI delay={.1}>
@@ -804,7 +860,7 @@ const App=()=>{
                 </div>
               </FI>
               <FI delay={.38}>
-                <div style={{display:'flex',gap:'40px'}}>
+                <div className="hero-stats" style={{display:'flex',gap:'40px'}}>
                   {[{n:'10+',l:'Years in mobile'},{n:'12B+',l:'Events/min — Conviva'},{n:'M+',l:'Banking users — Bankwest'}].map(s=>(
                     <div key={s.n}>
                       <div style={{fontFamily:'DM Serif Display,serif',fontSize:'26px',color:'var(--accent)',lineHeight:1}}>{s.n}</div>
@@ -860,7 +916,7 @@ const App=()=>{
               </FI>
             ))}
           </div>
-          <div style={{display:'grid',gridTemplateColumns:'1fr 2fr',gap:'56px',alignItems:'start'}}>
+          <div className="impact-domain-grid" style={{display:'grid',gridTemplateColumns:'1fr 2fr',gap:'56px',alignItems:'start'}}>
             <FI>
               <div>
                 <div className="label" style={{marginBottom:'14px'}}>Domain expertise</div>
@@ -919,7 +975,7 @@ const App=()=>{
               </div>
             </FI>
           </div>
-          <div style={{display:'grid',gridTemplateColumns:'1fr 1fr',gap:'14px',marginTop:'24px'}}>
+          <div className="proj-grid" style={{display:'grid',gridTemplateColumns:'1fr 1fr',gap:'14px',marginTop:'24px'}}>
             {[
               {title:'AI Similarity',desc:'Maps Android/iOS APIs side-by-side — helps engineers quickly translate concepts across both mobile ecosystems.',tech:['Android','iOS','Kotlin','Swift'],link:'https://69a65ad8cce3d69888c55e89--aquamarine-starship-b124cd.netlify.app/'},
               {title:'CodeForumBlogs',desc:'Community platform for technical writing with real-time collaboration, code highlighting, and developer knowledge sharing.',tech:['React','Node.js','MongoDB'],link:'https://www.codeforumblogs.com'},
@@ -955,7 +1011,7 @@ const App=()=>{
                   </div>
                 </div>
               </div>
-              <div style={{display:'grid',gridTemplateColumns:'repeat(3,1fr)',gap:'10px'}}>
+              <div className="shot-grid" style={{display:'grid',gridTemplateColumns:'repeat(3,1fr)',gap:'10px'}}>
                 {[['Media Analysis','1'],['Files','2'],['Settings','3']].map(([label,n])=>(
                   <div key={n} style={{borderRadius:'2px',overflow:'hidden',border:'1px solid var(--border)',background:'var(--p2)'}}>
                     <img src={`https://raw.githubusercontent.com/rahulpahuja/dedup/main/screenshots/${n}.png`} alt={`DeDup — ${label}`} style={{width:'100%',height:'auto',display:'block'}} loading="lazy"/>
@@ -980,7 +1036,7 @@ const App=()=>{
                   </div>
                 </div>
               </div>
-              <div style={{display:'grid',gridTemplateColumns:'repeat(3,1fr)',gap:'10px'}}>
+              <div className="shot-grid" style={{display:'grid',gridTemplateColumns:'repeat(3,1fr)',gap:'10px'}}>
                 {[['Home','Screenshot_20260708_214637.png'],['Editor','Screenshot_20260708_214659.png'],['Sync & Settings','Screenshot_20260708_214725.png']].map(([label,file])=>(
                   <div key={file} style={{borderRadius:'2px',overflow:'hidden',border:'1px solid var(--border)',background:'var(--p2)'}}>
                     <img src={`notes-app/ss/${file}`} alt={`Notes — ${label}`} style={{width:'100%',height:'auto',display:'block'}} loading="lazy"/>
@@ -1067,7 +1123,7 @@ const App=()=>{
               <span className="label" style={{marginLeft:'auto'}}>06 / Training</span>
             </div>
           </FI>
-          <div style={{display:'grid',gridTemplateColumns:'1fr 1fr',gap:'48px',alignItems:'start'}}>
+          <div className="training-grid" style={{display:'grid',gridTemplateColumns:'1fr 1fr',gap:'48px',alignItems:'start'}}>
             <FI>
               <div>
                 <div className="big-num">{content.training_count}</div>
@@ -1113,7 +1169,7 @@ const App=()=>{
               <span className="label" style={{marginLeft:'auto',color:'rgba(255,255,255,.28)'}}>07 / Music</span>
             </div>
           </FI>
-          <div style={{display:'grid',gridTemplateColumns:'1fr 1fr',gap:'48px',alignItems:'center'}}>
+          <div className="music-grid" style={{display:'grid',gridTemplateColumns:'1fr 1fr',gap:'48px',alignItems:'center'}}>
             <FI>
               <div>
                 <p style={{fontSize:'16px',lineHeight:'1.8',color:'rgba(245,242,236,.62)',marginBottom:'26px'}}>{content.music_bio}</p>
@@ -1129,7 +1185,7 @@ const App=()=>{
               </div>
             </FI>
             <FI delay={.1}>
-              <div style={{display:'grid',gridTemplateColumns:'1fr 1fr 1fr',gap:'8px'}}>
+              <div className="releases-grid" style={{display:'grid',gridTemplateColumns:'1fr 1fr 1fr',gap:'8px'}}>
                 {[{title:'Neon Dreams',year:'2026'},{title:'Digital Horizon',year:'2025'},{title:'Midnight Frequencies',year:'2025'}].map((t,i)=>(
                   <div key={i} style={{background:'rgba(255,255,255,.04)',border:'1px solid rgba(255,255,255,.08)',borderRadius:'2px',padding:'20px 14px',textAlign:'center'}}>
                     <div style={{fontSize:'22px',marginBottom:'10px'}}>♫</div>
@@ -1154,7 +1210,7 @@ const App=()=>{
               <span className="label" style={{marginLeft:'auto'}}>08 / Human</span>
             </div>
           </FI>
-          <div style={{display:'grid',gridTemplateColumns:'2fr 1fr',gap:'72px',alignItems:'start'}}>
+          <div className="about-grid" style={{display:'grid',gridTemplateColumns:'2fr 1fr',gap:'72px',alignItems:'start'}}>
             <FI>
               <div>
                 <p style={{fontSize:'18px',lineHeight:'1.85',marginBottom:'20px'}}>{content.about_p1}</p>
@@ -1198,7 +1254,7 @@ const App=()=>{
       </section>
 
       {/* FOOTER */}
-      <footer style={{borderTop:'1px solid var(--border)',padding:'22px 40px',display:'flex',justifyContent:'space-between',alignItems:'center',background:'var(--paper)',fontFamily:'DM Mono,monospace',fontSize:'10px',color:'var(--muted)',letterSpacing:'.1em',textTransform:'uppercase'}}>
+      <footer className="site-footer" style={{borderTop:'1px solid var(--border)',padding:'22px 40px',display:'flex',justifyContent:'space-between',alignItems:'center',background:'var(--paper)',fontFamily:'DM Mono,monospace',fontSize:'10px',color:'var(--muted)',letterSpacing:'.1em',textTransform:'uppercase'}}>
         <span>© 2026 Rahul Pahuja</span>
         <span>Principal Mobile Engineer · Hyderabad</span>
         <div style={{display:'flex',gap:'18px'}}>
