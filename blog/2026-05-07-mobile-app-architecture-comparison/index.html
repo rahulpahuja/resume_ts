@@ -1,0 +1,539 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Mobile App Architecture Comparison — Rahul Pahuja</title>
+<meta name="description" content="# Mobile App Architecture Comparison">
+<link rel="canonical" href="https://www.therahulpahuja.com/blog/2026-05-07-mobile-app-architecture-comparison">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Mobile App Architecture Comparison">
+<meta property="og:description" content="# Mobile App Architecture Comparison">
+<meta property="og:url" content="https://www.therahulpahuja.com/blog/2026-05-07-mobile-app-architecture-comparison">
+<meta property="og:image" content="https://www.therahulpahuja.com/public/og-image.jpg">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Mobile App Architecture Comparison">
+<meta name="twitter:description" content="# Mobile App Architecture Comparison">
+<meta name="twitter:image" content="https://www.therahulpahuja.com/public/og-image.jpg">
+<link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Mono:wght@300;400;500&family=Syne:wght@400;500;700;800&display=swap" rel="stylesheet">
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BlogPosting",
+  "headline": "Mobile App Architecture Comparison",
+  "description": "# Mobile App Architecture Comparison",
+  "author": {
+    "@type": "Person",
+    "name": "Rahul Pahuja",
+    "url": "https://www.therahulpahuja.com/"
+  },
+  "datePublished": "2026-05-07",
+  "url": "https://www.therahulpahuja.com/blog/2026-05-07-mobile-app-architecture-comparison",
+  "image": "https://www.therahulpahuja.com/public/og-image.jpg"
+}
+</script>
+<style>
+:root{--ink:#0c0b09;--paper:#f5f2ec;--accent:#c0391f;--muted:#7c7670;--border:rgba(12,11,9,.09)}
+*{box-sizing:border-box}
+body{margin:0;background:var(--paper);color:var(--ink);font-family:'Syne',sans-serif;line-height:1.75}
+.wrap{max-width:720px;margin:0 auto;padding:56px 24px 100px}
+a{color:var(--accent)}
+.back{display:inline-block;margin-bottom:36px;font-family:'DM Mono',monospace;font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);text-decoration:none}
+.back:hover{color:var(--accent)}
+.tag{font-family:'DM Mono',monospace;font-size:10px;letter-spacing:.1em;text-transform:uppercase;color:var(--accent);border:1px solid rgba(192,57,31,.35);background:rgba(192,57,31,.08);padding:3px 10px;border-radius:2px;display:inline-block;margin-bottom:18px}
+h1{font-family:'DM Serif Display',serif;font-size:clamp(1.8rem,5vw,2.8rem);line-height:1.15;margin:0 0 12px;letter-spacing:-.01em}
+.meta{font-family:'DM Mono',monospace;font-size:11px;color:var(--muted);letter-spacing:.05em;margin-bottom:40px}
+article{font-size:17px}
+article h1,article h2,article h3{font-family:'DM Serif Display',serif;margin-top:1.6em;margin-bottom:.5em;line-height:1.25}
+article p{margin:0 0 1.2em}
+article img{max-width:100%;border-radius:4px;display:block;margin:28px auto;border:1px solid var(--border)}
+article figure{margin:28px 0}
+article pre{background:#1b1a17;color:#f5f2ec;padding:18px;border-radius:6px;border:1px solid rgba(255,255,255,.08);overflow-x:auto}
+article code{background:rgba(12,11,9,.06);padding:2px 6px;border-radius:3px;font-family:'DM Mono',monospace;font-size:.85em}
+article pre code{background:none;padding:0;font-size:.85em;line-height:1.6}
+article a{color:var(--accent)}
+article ul,article ol{padding-left:1.4em}
+article li{margin-bottom:.4em}
+article hr{border:none;border-top:1px solid var(--border);margin:2.4em 0}
+article blockquote{margin:1.6em 0;padding:4px 20px;border-left:3px solid var(--accent);color:var(--muted)}
+.table-wrap{overflow-x:auto;margin:28px 0;border:1px solid var(--border);border-radius:6px}
+article table{border-collapse:collapse;width:100%;font-size:.88em;margin:0}
+article th,article td{border:1px solid var(--border);padding:10px 14px;text-align:left;vertical-align:top;white-space:normal}
+article th{background:rgba(12,11,9,.05);font-family:'DM Mono',monospace;font-size:.78em;text-transform:uppercase;letter-spacing:.05em;white-space:nowrap}
+article tr:nth-child(even) td{background:rgba(12,11,9,.02)}
+</style>
+</head>
+<body>
+<div class="wrap">
+<a class="back" href="/">&larr; Rahul Pahuja</a>
+<div class="tag">Blog</div>
+<h1>Mobile App Architecture Comparison</h1>
+<div class="meta">2026-05-07</div>
+<article>
+<div class="table-wrap"><table>
+<thead>
+<tr>
+<th>Architecture</th>
+<th>Core Idea</th>
+<th>Best For</th>
+<th>Strengths</th>
+<th>Drawbacks</th>
+<th>Learning Curve</th>
+<th>Testability</th>
+<th>Maintainability</th>
+<th>Security Considerations</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>MVC</td>
+<td>Controller manages UI + business logic</td>
+<td>Small/simple apps</td>
+<td>Fast to start, minimal boilerplate</td>
+<td>Massive ViewController/Activity problem, tight coupling</td>
+<td>Low</td>
+<td>Low-Medium</td>
+<td>Poor at scale</td>
+<td>Business logic often leaks into UI layer, harder to isolate sensitive logic</td>
+</tr>
+<tr>
+<td>MVP</td>
+<td>Presenter handles logic, View is passive</td>
+<td>Enterprise Android legacy apps</td>
+<td>Better separation than MVC, easier unit testing</td>
+<td>Presenter becomes huge over time</td>
+<td>Medium</td>
+<td>High</td>
+<td>Medium</td>
+<td>Easier validation/sanitization before UI rendering</td>
+</tr>
+<tr>
+<td>MVVM</td>
+<td>ViewModel exposes state to View</td>
+<td>Modern Android/iOS apps</td>
+<td>Reactive, scalable, works well with Jetpack Compose/SwiftUI</td>
+<td>State synchronization/debugging can become tricky</td>
+<td>Medium</td>
+<td>High</td>
+<td>High</td>
+<td>Clear state boundaries reduce accidental exposure</td>
+</tr>
+<tr>
+<td>MVI</td>
+<td>Unidirectional data flow with immutable state</td>
+<td>Complex state-heavy apps</td>
+<td>Predictable state, debugging/time travel possible</td>
+<td>Boilerplate-heavy, can over-engineer simple apps</td>
+<td>High</td>
+<td>Very High</td>
+<td>Very High</td>
+<td>Immutable state reduces side-effect vulnerabilities</td>
+</tr>
+<tr>
+<td>VIPER</td>
+<td>Strict separation into modules</td>
+<td>Large iOS enterprise apps</td>
+<td>Extremely modular, scalable, highly testable</td>
+<td>Massive boilerplate, slow feature development</td>
+<td>Very High</td>
+<td>Very High</td>
+<td>Very High</td>
+<td>Strong separation improves security auditing</td>
+</tr>
+<tr>
+<td>TCA</td>
+<td>Functional unidirectional architecture</td>
+<td>SwiftUI large-scale apps</td>
+<td>Deterministic state, dependency injection, powerful testing</td>
+<td>Steep learning curve, verbose</td>
+<td>Very High</td>
+<td>Excellent</td>
+<td>Excellent</td>
+<td>Centralized effects handling improves control/security</td>
+</tr>
+</tbody></table></div>
+<hr>
+<h1>1. MVC (Model View Controller)</h1>
+<h2>Flow</h2>
+<pre><code class="language-text">View &lt;-&gt; Controller &lt;-&gt; Model
+</code></pre>
+<h2>Example</h2>
+<ul>
+<li><p>Android Activity handling:</p>
+<ul>
+<li>Button click</li>
+<li>API call</li>
+<li>Validation</li>
+<li>Navigation</li>
+<li>UI updates</li>
+</ul>
+</li>
+</ul>
+<p>All inside one file.</p>
+<h2>Pros</h2>
+<ul>
+<li>Simple</li>
+<li>Fast prototyping</li>
+<li>Minimal abstraction</li>
+</ul>
+<h2>Cons</h2>
+<ul>
+<li>Massive Activity/ViewController issue</li>
+<li>Difficult to scale</li>
+<li>Hard to test UI/business logic separately</li>
+<li>Tight coupling</li>
+</ul>
+<h2>Security Concerns</h2>
+<ul>
+<li>Sensitive logic often mixed with UI</li>
+<li>Harder to isolate auth/token handling</li>
+<li>Increased accidental exposure risk</li>
+</ul>
+<h2>Best Use</h2>
+<ul>
+<li>POCs</li>
+<li>Very small apps</li>
+<li>Internal tools</li>
+</ul>
+<hr>
+<h1>2. MVP (Model View Presenter)</h1>
+<h2>Flow</h2>
+<pre><code class="language-text">View -&gt; Presenter -&gt; Model
+Presenter -&gt; View
+</code></pre>
+<h2>Example</h2>
+<pre><code class="language-kotlin">interface LoginView {
+   fun showError()
+}
+
+class LoginPresenter {
+   fun login(user, pass)
+}
+</code></pre>
+<h2>Pros</h2>
+<ul>
+<li>Easier testing</li>
+<li>Better separation</li>
+<li>View becomes dumb</li>
+</ul>
+<h2>Cons</h2>
+<ul>
+<li>Presenter grows huge</li>
+<li>Manual UI updates</li>
+<li>Boilerplate interfaces</li>
+</ul>
+<h2>Security</h2>
+<ul>
+<li>Validation centralized in presenter</li>
+<li>Easier to sanitize inputs</li>
+</ul>
+<h2>Best Use</h2>
+<ul>
+<li>Legacy Android</li>
+<li>Java-heavy ecosystems</li>
+</ul>
+<hr>
+<h1>3. MVVM (Model View ViewModel)</h1>
+<h2>Flow</h2>
+<pre><code class="language-text">View &lt;-&gt; ViewModel &lt;-&gt; Repository/Model
+</code></pre>
+<h2>Example</h2>
+<pre><code class="language-kotlin">val userState = MutableStateFlow&lt;User&gt;()
+</code></pre>
+<p>UI observes state.</p>
+<h2>Pros</h2>
+<ul>
+<li>Excellent with reactive UI</li>
+<li>Compose/SwiftUI friendly</li>
+<li>Cleaner lifecycle handling</li>
+<li>Good separation</li>
+</ul>
+<h2>Cons</h2>
+<ul>
+<li>Two-way binding complexity</li>
+<li>Event handling confusion</li>
+<li>State debugging harder</li>
+</ul>
+<h2>Security</h2>
+<ul>
+<li>State isolation helps</li>
+<li>Easier encryption/auth layer separation</li>
+<li>Repositories centralize secure data access</li>
+</ul>
+<h2>Best Use</h2>
+<ul>
+<li>Modern Android</li>
+<li>SwiftUI</li>
+<li>Flutter Bloc-like patterns</li>
+</ul>
+<hr>
+<h1>4. MVI (Model View Intent)</h1>
+<h2>Flow</h2>
+<pre><code class="language-text">Intent -&gt; Reducer -&gt; New State -&gt; View
+</code></pre>
+<p>Single immutable state object.</p>
+<h2>Example</h2>
+<pre><code class="language-kotlin">data class LoginState(
+   val loading: Boolean,
+   val error: String?
+)
+</code></pre>
+<h2>Pros</h2>
+<ul>
+<li>Predictable state</li>
+<li>Easy debugging</li>
+<li>Time-travel debugging possible</li>
+<li>Excellent concurrency handling</li>
+</ul>
+<h2>Cons</h2>
+<ul>
+<li>Heavy boilerplate</li>
+<li>Overkill for CRUD apps</li>
+<li>Learning reducers/events takes time</li>
+</ul>
+<h2>Security</h2>
+<ul>
+<li>Immutable state prevents accidental mutation</li>
+<li>Easier audit trails</li>
+<li>Side effects centralized</li>
+</ul>
+<h2>Best Use</h2>
+<ul>
+<li>Fintech</li>
+<li>Streaming apps</li>
+<li>Real-time systems</li>
+<li>Highly reactive apps</li>
+</ul>
+<hr>
+<h1>5. VIPER</h1>
+<h2>Components</h2>
+<pre><code class="language-text">View
+Interactor
+Presenter
+Entity
+Router
+</code></pre>
+<h2>Example</h2>
+<ul>
+<li>Router handles navigation</li>
+<li>Interactor handles business logic</li>
+<li>Presenter formats UI data</li>
+</ul>
+<h2>Pros</h2>
+<ul>
+<li>Very modular</li>
+<li>Huge team scalability</li>
+<li>Easy ownership boundaries</li>
+<li>Excellent testing</li>
+</ul>
+<h2>Cons</h2>
+<ul>
+<li>Too many files</li>
+<li>Slow development</li>
+<li>Very verbose</li>
+</ul>
+<h2>Security</h2>
+<ul>
+<li>Strong boundaries</li>
+<li>Easier penetration/security reviews</li>
+<li>Critical logic isolated</li>
+</ul>
+<h2>Best Use</h2>
+<ul>
+<li>Large iOS enterprise apps</li>
+<li>Banking/Healthcare</li>
+</ul>
+<hr>
+<h1>6. TCA (The Composable Architecture)</h1>
+<p>Mostly used in SwiftUI.</p>
+<h2>Flow</h2>
+<pre><code class="language-text">Action -&gt; Reducer -&gt; State
+</code></pre>
+<p>Inspired by Redux + Functional Programming.</p>
+<h2>Example</h2>
+<pre><code class="language-swift">struct AppState {}
+enum AppAction {}
+let reducer = Reducer&lt;AppState, AppAction&gt;
+</code></pre>
+<h2>Pros</h2>
+<ul>
+<li>Deterministic</li>
+<li>Powerful testing</li>
+<li>Dependency injection built-in</li>
+<li>Excellent state composition</li>
+</ul>
+<h2>Cons</h2>
+<ul>
+<li>Verbose</li>
+<li>Hard for beginners</li>
+<li>Functional mindset required</li>
+</ul>
+<h2>Security</h2>
+<ul>
+<li>Centralized effect management</li>
+<li>Easier secure dependency injection</li>
+<li>Predictable side effects</li>
+</ul>
+<h2>Best Use</h2>
+<ul>
+<li>Large SwiftUI apps</li>
+<li>Teams needing strict consistency</li>
+</ul>
+<hr>
+<h1>Overall Comparison</h1>
+<div class="table-wrap"><table>
+<thead>
+<tr>
+<th>Factor</th>
+<th>Best Choice</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Fast Development</td>
+<td>MVC</td>
+</tr>
+<tr>
+<td>Beginner Friendly</td>
+<td>MVC / MVVM</td>
+</tr>
+<tr>
+<td>Enterprise Scale</td>
+<td>VIPER / TCA</td>
+</tr>
+<tr>
+<td>Modern Android</td>
+<td>MVVM / MVI</td>
+</tr>
+<tr>
+<td>Modern iOS</td>
+<td>MVVM / TCA</td>
+</tr>
+<tr>
+<td>Predictable State</td>
+<td>MVI / TCA</td>
+</tr>
+<tr>
+<td>Lowest Boilerplate</td>
+<td>MVC</td>
+</tr>
+<tr>
+<td>Highest Testability</td>
+<td>TCA / VIPER / MVI</td>
+</tr>
+<tr>
+<td>Best for Fintech</td>
+<td>MVI / VIPER / TCA</td>
+</tr>
+<tr>
+<td>Best Performance Debugging</td>
+<td>MVI</td>
+</tr>
+<tr>
+<td>Best SwiftUI Fit</td>
+<td>TCA</td>
+</tr>
+<tr>
+<td>Best Compose Fit</td>
+<td>MVVM + MVI Hybrid</td>
+</tr>
+</tbody></table></div>
+<hr>
+<h1>What Big Companies Usually Use</h1>
+<div class="table-wrap"><table>
+<thead>
+<tr>
+<th>Company Type</th>
+<th>Common Architecture</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Startups</td>
+<td>MVVM</td>
+</tr>
+<tr>
+<td>Enterprise Android</td>
+<td>MVVM + Clean Architecture</td>
+</tr>
+<tr>
+<td>Enterprise iOS</td>
+<td>VIPER / TCA</td>
+</tr>
+<tr>
+<td>Fintech</td>
+<td>MVI</td>
+</tr>
+<tr>
+<td>Streaming Apps</td>
+<td>MVI</td>
+</tr>
+<tr>
+<td>Banking Apps</td>
+<td>MVVM + Clean</td>
+</tr>
+<tr>
+<td>Large Cross-Platform Teams</td>
+<td>Redux/MVI-like</td>
+</tr>
+</tbody></table></div>
+<hr>
+<h1>My Recommendation by Scenario</h1>
+<div class="table-wrap"><table>
+<thead>
+<tr>
+<th>Scenario</th>
+<th>Recommendation</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Small app</td>
+<td>MVC</td>
+</tr>
+<tr>
+<td>Medium scalable app</td>
+<td>MVVM</td>
+</tr>
+<tr>
+<td>Enterprise Android</td>
+<td>MVVM + Clean</td>
+</tr>
+<tr>
+<td>Enterprise iOS</td>
+<td>TCA or VIPER</td>
+</tr>
+<tr>
+<td>Highly reactive apps</td>
+<td>MVI</td>
+</tr>
+<tr>
+<td>Banking/secure systems</td>
+<td>MVI + Clean</td>
+</tr>
+<tr>
+<td>SwiftUI production app</td>
+<td>TCA</td>
+</tr>
+<tr>
+<td>Team with junior devs</td>
+<td>MVVM</td>
+</tr>
+</tbody></table></div>
+<hr>
+<h1>Real Industry Reality</h1>
+<p>Most production apps are actually:</p>
+<pre><code class="language-text">MVVM + Clean Architecture + Repository Pattern
+</code></pre>
+<p>And sometimes:</p>
+<pre><code class="language-text">MVVM + MVI hybrid
+</code></pre>
+<p>Because pure architectures are often too rigid.</p>
+<p>Example:</p>
+<ul>
+<li>UI = MVVM</li>
+<li>State = MVI</li>
+<li>Domain = Clean Architecture</li>
+<li>Data = Repository Pattern</li>
+</ul>
+<p>That combination currently dominates enterprise mobile engineering.</p>
+</article>
+</div>
+</body>
+</html>
