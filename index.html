@@ -201,6 +201,89 @@
   </style>
 </head>
 <body>
+<!--
+  Static content shell for crawlers/clients that don't execute JS
+  (the app below is client-rendered via in-browser Babel/React).
+  Hidden immediately by the inline script once JS confirms it can render the real app.
+-->
+<div id="static-content" class="wrap" style="padding-top:60px;padding-bottom:60px;max-width:760px">
+  <header>
+    <h1 class="display-sm" style="margin-bottom:6px">Rahul Pahuja</h1>
+    <p class="label" style="margin-bottom:28px">Principal Mobile Engineer — Hyderabad, IN</p>
+  </header>
+
+  <nav aria-label="Sections" style="margin-bottom:36px">
+    <a href="#hero">Home</a> · <a href="#impact">Impact</a> · <a href="#feature">CyberArk</a> ·
+    <a href="#writing">Writing</a> · <a href="#work">Work</a> · <a href="#training">Training</a> ·
+    <a href="#music">Music</a> · <a href="#about">About</a>
+  </nav>
+
+  <section>
+    <p>I design the security layer enterprises build on top of. 10+ years building mobile infrastructure at depth — from designing the credential vault protecting enterprise identities at CyberArk, to observability sensors processing billions of events at Conviva, to the digital banking platform at Bankwest.</p>
+    <p style="margin-top:16px">
+      <a href="mailto:therahulpahuja@gmail.com">therahulpahuja@gmail.com</a> ·
+      <a href="/Rahul_Pahuja_Resume.pdf" download>Download CV</a> ·
+      <a href="https://www.linkedin.com/in/therahulpahuja/">LinkedIn</a> ·
+      <a href="https://github.com/rahulpahuja">GitHub</a>
+    </p>
+  </section>
+
+  <section style="margin-top:40px">
+    <h2 class="display-sm" style="font-size:1.6rem">Impact at scale</h2>
+    <ul style="margin-top:12px;padding-left:20px">
+      <li><strong>12B+</strong> events per minute — Conviva SDK, measuring streaming quality at video platform scale across ExoPlayer and BrightCove integrations.</li>
+      <li><strong>M+</strong> daily banking users — Bankwest (Commonwealth Bank subsidiary), technical lead for Android and iOS self-service features.</li>
+      <li><strong>Secured Storage</strong> — CyberArk's cryptographic foundation protecting privileged credentials on every enterprise mobile deployment.</li>
+    </ul>
+  </section>
+
+  <section style="margin-top:40px">
+    <h2 class="display-sm" style="font-size:1.6rem">Secured Storage — CyberArk</h2>
+    <p class="label" style="margin:6px 0 14px">Android & iOS · 2022 — Present</p>
+    <p>CyberArk protects the most sensitive credentials in the world. I designed and built the Secured Storage layer — the cryptographic foundation that ensures those credentials stay protected on mobile devices, regardless of what the device, OS, or attacker throws at them.</p>
+  </section>
+
+  <section style="margin-top:40px">
+    <h2 class="display-sm" style="font-size:1.6rem">Writing</h2>
+    <ul style="margin-top:12px;padding-left:20px">
+      <li><a href="https://www.linkedin.com/pulse/jetpack-compose-staff-android-engineers-perspective-rahul-pahuja-zauif">Jetpack Compose: A Staff Engineer's Perspective</a> — evaluating Compose for production adoption: performance, migration risk, and team decisions.</li>
+      <li>Building Enterprise Security with Secured Storage — architecture decisions behind hardware-backed credential protection.</li>
+      <li>Real-time Analytics: Conviva SDK Architecture — processing 12 billion metric computations per minute.</li>
+      <li>Mobile Banking: Lessons from Bankwest — building secure self-service features for millions of banking customers.</li>
+      <li>LLM Poisoning: A Cybersecurity Threat Most Companies Are Ignoring — adversarial data injection into training pipelines.</li>
+    </ul>
+  </section>
+
+  <section style="margin-top:40px">
+    <h2 class="display-sm" style="font-size:1.6rem">Career</h2>
+    <ul style="margin-top:12px;padding-left:20px;list-style:none">
+      <li style="margin-bottom:18px"><strong>Staff Software Engineer, CyberArk</strong> (2024 — 2025) — Designed and built CyberArk's Secured Storage layer, the cryptographic foundation protecting enterprise credentials on Android and iOS.</li>
+      <li style="margin-bottom:18px"><strong>Android & iOS Technical Lead, Coforge — Bankwest</strong> (2024) — Technical lead for Bankwest's digital banking app, a Commonwealth Bank subsidiary with millions of daily active users.</li>
+      <li style="margin-bottom:18px"><strong>Senior Engineer — Android Sensors, Conviva</strong> (2022 — 2023) — Built and maintained Android/iOS observability sensors processing 12B+ metric computations per minute.</li>
+      <li style="margin-bottom:18px"><strong>Senior Software Engineer, Intellicus Technologies</strong> (2019 — 2022) — Developed the Intellicus Mobile SDK, bringing embedded analytics and BI reporting to Android.</li>
+      <li style="margin-bottom:18px"><strong>Unified Mobile App Developer, Wipro</strong> (2014 — 2019) — Built award-winning travel app on Wipro's Contextual & Open Banking Platform.</li>
+    </ul>
+  </section>
+
+  <section style="margin-top:40px">
+    <h2 class="display-sm" style="font-size:1.6rem">Training</h2>
+    <p>Ran a Google-affiliated Android bootcamp in partnership with LTIMindtree — 41 engineers trained, 100% placed. Full curriculum from fundamentals through production-grade development.</p>
+  </section>
+
+  <section style="margin-top:40px">
+    <h2 class="display-sm" style="font-size:1.6rem">Music</h2>
+    <p>Outside of systems architecture, I produce and DJ as Rellow — blending house, deep house, and ambient electronics.</p>
+  </section>
+
+  <section style="margin-top:40px">
+    <h2 class="display-sm" style="font-size:1.6rem">About</h2>
+    <p style="margin-bottom:14px">I'm a principal-track mobile engineer who works on problems that require deep context — the kind where understanding the threat model, the hardware limitations, and the business constraints all at once is what separates a good solution from one that will cause an incident in 18 months.</p>
+    <p style="margin-bottom:14px">I hold an M.Tech from BITS Pilani and have worked across Hyderabad, Bengaluru, and remotely for organizations from Wipro and Conviva through to CBA's Bankwest and CyberArk.</p>
+    <p>Skills: Android, iOS, Kotlin, Swift, Jetpack Compose, UIKit, React Native, Flutter, Secured Storage, TEE / Secure Enclave, Biometric Auth, Encryption, Java, Python, Node.js, Spring Boot.</p>
+  </section>
+</div>
+<script>document.getElementById('static-content').style.display='none';</script>
+
 <div id="root"></div>
 <button id="enableAudio">⟳ Sound</button>
 

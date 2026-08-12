@@ -1,0 +1,6 @@
+User-agent: *
+Disallow: /resume.pdf
+Disallow: /Rahul_Pahuja_Resume.pdf
+Disallow: /Rahul%20Pahuja%20%E2%80%94%20Resume.pdf
+
+Sitemap: https://www.therahulpahuja.com/sitemap.xml
