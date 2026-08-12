@@ -3,23 +3,58 @@
 
   <!-- Main site -->
   <url>
-    <loc>https://therahulpahuja.com/</loc>
-    <lastmod>2026-04-29</lastmod>
+    <loc>https://www.therahulpahuja.com/</loc>
+    <lastmod>2026-08-13</lastmod>
     <changefreq>monthly</changefreq>
     <priority>1.0</priority>
   </url>
 
   <!-- Blog posts -->
   <url>
-    <loc>https://therahulpahuja.com/blog/2026-03-15-secure-data-at-scale-designing-a-robust-storage-stack-with-teesdk-encrypted-data-stores-and-intelligent-caching</loc>
+    <loc>https://www.therahulpahuja.com/blog/2026-03-15-secure-data-at-scale-designing-a-robust-storage-stack-with-teesdk-encrypted-data-stores-and-intelligent-caching</loc>
     <lastmod>2026-03-15</lastmod>
     <changefreq>yearly</changefreq>
     <priority>0.8</priority>
   </url>
 
   <url>
-    <loc>https://therahulpahuja.com/blog/2026-04-29-mcp-servers-resources-and-tools-explained-without-the-hype</loc>
+    <loc>https://www.therahulpahuja.com/blog/2026-04-29-mcp-servers-resources-and-tools-explained-without-the-hype</loc>
     <lastmod>2026-04-29</lastmod>
+    <changefreq>yearly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <url>
+    <loc>https://www.therahulpahuja.com/blog/2026-05-07-mobile-app-architecture-comparison</loc>
+    <lastmod>2026-05-07</lastmod>
+    <changefreq>yearly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <url>
+    <loc>https://www.therahulpahuja.com/blog/2026-05-07-optimistic-state-and-rib-architecture-for-mobile-app</loc>
+    <lastmod>2026-05-07</lastmod>
+    <changefreq>yearly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <url>
+    <loc>https://www.therahulpahuja.com/blog/2026-05-07-secure-db-proposal</loc>
+    <lastmod>2026-05-07</lastmod>
+    <changefreq>yearly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <url>
+    <loc>https://www.therahulpahuja.com/blog/2026-05-19-google-just-changed-the-future-of-search-with-ask-youtube-and-almost-nobody-is-talking-abo</loc>
+    <lastmod>2026-05-19</lastmod>
+    <changefreq>yearly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <url>
+    <loc>https://www.therahulpahuja.com/blog/2026-05-19-google-just-crossed-a-line-at-io-that-changes-the-future-of-ai-forever</loc>
+    <lastmod>2026-05-19</lastmod>
     <changefreq>yearly</changefreq>
     <priority>0.8</priority>
   </url>
