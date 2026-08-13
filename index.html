@@ -62,8 +62,11 @@
   }
   </script>
 
-  <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/dompurify@3.0.8/dist/purify.min.js"></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="preconnect" href="https://unpkg.com">
+  <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Mono:wght@300;400;500&family=Syne:wght@400;500;700;800&display=swap" rel="stylesheet">
+  <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js" defer></script>
 <!-- Google tag (gtag.js) -->
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-QS8D87DMKZ"></script>
 <script>
@@ -73,11 +76,9 @@
 
   gtag('config', 'G-QS8D87DMKZ');
 </script>
-  <script src="https://cdn.tailwindcss.com"></script>
-  <script src="https://unpkg.com/react@18/umd/react.production.min.js"></script>
-  <script src="https://unpkg.com/react-dom@18/umd/react-dom.production.min.js"></script>
-  <script src="https://unpkg.com/@babel/standalone@7.21.4/babel.min.js"></script>
-  <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Mono:wght@300;400;500&family=Syne:wght@400;500;700;800&display=swap" rel="stylesheet">
+  <script src="https://unpkg.com/react@18/umd/react.production.min.js" defer></script>
+  <script src="https://unpkg.com/react-dom@18/umd/react-dom.production.min.js" defer></script>
+  <script src="https://unpkg.com/@babel/standalone@7.21.4/babel.min.js" defer></script>
 
   <style>
     :root {
@@ -112,6 +113,10 @@
     .btn{display:inline-flex;align-items:center;gap:7px;font-family:'DM Mono',monospace;font-size:10px;letter-spacing:.1em;text-transform:uppercase;padding:9px 20px;border-radius:2px;border:none;cursor:pointer;transition:.18s}
     .btn-solid{background:var(--ink);color:var(--paper)}.btn-solid:hover{background:#1d1c19}
     .btn-ghost{background:transparent;color:var(--ink);border:1px solid var(--borderl)}.btn-ghost:hover{background:rgba(12,11,9,.04);border-color:var(--ink)}
+    .btn-accent{background:var(--accent);color:var(--paper);box-shadow:0 2px 14px rgba(192,57,31,.35);animation:btn-pulse 2.6s ease-in-out infinite}
+    .btn-accent:hover{background:#a52e19;animation-play-state:paused;box-shadow:0 2px 18px rgba(192,57,31,.55)}
+    @keyframes btn-pulse{0%,100%{box-shadow:0 2px 14px rgba(192,57,31,.35),0 0 0 0 rgba(192,57,31,.35)}50%{box-shadow:0 2px 14px rgba(192,57,31,.35),0 0 0 7px rgba(192,57,31,0)}}
+    @media (prefers-reduced-motion:reduce){.btn-accent{animation:none}}
     .btn-inv{display:inline-flex;align-items:center;gap:8px;background:var(--paper);color:var(--ink);padding:11px 22px;border-radius:2px;font-family:'DM Mono',monospace;font-size:10px;letter-spacing:.1em;text-transform:uppercase;transition:.18s}.btn-inv:hover{background:#eae7e0}
 
     /* social */
@@ -332,7 +337,7 @@
   <section>
     <p>I design the security layer enterprises build on top of. 10+ years building mobile infrastructure at depth — from designing the credential vault protecting enterprise identities at CyberArk, to observability sensors processing billions of events at Conviva, to the digital banking platform at Bankwest.</p>
     <p style="margin-top:16px">
-      <a href="tel:+918819091000">Call: +91 88190 91000</a> ·
+      <a href="tel:+918819091000" class="btn btn-accent" style="margin-right:8px">Call: +91 88190 91000</a>
       <a href="mailto:therahulpahuja@gmail.com">therahulpahuja@gmail.com</a> ·
       <a href="/Rahul_Pahuja_Resume.pdf" download>Download CV</a> ·
       <a href="https://www.linkedin.com/in/therahulpahuja/">LinkedIn</a> ·
@@ -865,7 +870,7 @@ const App=()=>{
           <a href="https://www.linkedin.com/in/therahulpahuja/" target="_blank" rel="noopener noreferrer" className="si"><LI/></a>
           <a href="https://github.com/rahulpahuja" target="_blank" rel="noopener noreferrer" className="si"><GH/></a>
         </div>
-        <a href="tel:+918819091000" className="btn btn-ghost">Call me →</a>
+        <a href="tel:+918819091000" className="btn btn-accent">Call me →</a>
         <a href="/Rahul_Pahuja_Resume.pdf" download className="btn btn-solid">Download CV</a>
       </div>
     </header>
@@ -896,7 +901,7 @@ const App=()=>{
               </FI>
               <FI delay={.3}>
                 <div style={{display:'flex',gap:'10px',flexWrap:'wrap',marginBottom:'44px'}}>
-                  <a href="tel:+918819091000" className="btn btn-solid">Call me →</a>
+                  <a href="tel:+918819091000" className="btn btn-accent">Call me →</a>
                   <a href={`mailto:${content.hero_email}`} className="btn btn-ghost">Get in touch →</a>
                   <button onClick={()=>go('feature')} className="btn btn-ghost">Secured Storage ↓</button>
                 </div>
@@ -1172,9 +1177,9 @@ const App=()=>{
                 <div className="label" style={{marginTop:'6px',marginBottom:'20px'}}>{content.training_sub}</div>
                 <p style={{fontSize:'15px',lineHeight:'1.8',color:'var(--muted)',marginBottom:'24px'}}>{content.training_body}</p>
                 <div style={{display:'flex',gap:'16px',alignItems:'center'}}>
-                  <img src="https://www.gstatic.com/marketing-cms/assets/images/f5/d3/a7f9db7045429cb6dc6be56bdcbe/google-logo-about.svg" alt="Google" style={{height:'22px',objectFit:'contain',opacity:.65}}/>
+                  <img src="https://www.gstatic.com/marketing-cms/assets/images/f5/d3/a7f9db7045429cb6dc6be56bdcbe/google-logo-about.svg" alt="Google" loading="lazy" style={{height:'22px',objectFit:'contain',opacity:.65}}/>
                   <span style={{color:'var(--borderl)'}}>×</span>
-                  <img src="https://www.ltm.com/content/dam/ltimcorporatewebsite/refresh-images/LTM-Logo.svg" alt="LTIMindtree" style={{height:'22px',objectFit:'contain',opacity:.65}}/>
+                  <img src="https://www.ltm.com/content/dam/ltimcorporatewebsite/refresh-images/LTM-Logo.svg" alt="LTIMindtree" loading="lazy" style={{height:'22px',objectFit:'contain',opacity:.65}}/>
                 </div>
               </div>
             </FI>
@@ -1315,8 +1320,7 @@ const App=()=>{
 
 ReactDOM.createRoot(document.getElementById('root')).render(<App/>);
 </script>
-<script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
-<script src="blogs.js"></script>
-<script src="blog-read.js"></script>
+<script src="blogs.js" defer></script>
+<script src="blog-read.js" defer></script>
 </body>
 </html>
