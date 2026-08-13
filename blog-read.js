@@ -22,11 +22,18 @@
         viewer.id = "cyberpunk-blog"
 
         viewer.className = "fixed inset-0 z-[9999] hidden"
-        viewer.style.cssText = "background:rgba(0,0,0,0.95);overflow:hidden;"
+        viewer.style.cssText = "position:fixed;inset:0;z-index:9999;background:#020202;overflow:hidden;"
 
         viewer.innerHTML = `
 
 <style>
+
+/* Critical layout set inline above too — Tailwind's CDN JIT injects
+   rules for "fixed inset-0 z-[9999] hidden" asynchronously, which
+   left a one-frame flash of unstyled (non-covering) overlay on first
+   use. These rules make sure show/hide always works even if Tailwind
+   hasn't caught up yet. */
+#cyberpunk-blog.hidden{display:none!important}
 
 #cyberpunk-blog .grid-bg{
 background-image:radial-gradient(circle at 1px 1px,rgba(0,242,255,.06) 1px,transparent 1px);
