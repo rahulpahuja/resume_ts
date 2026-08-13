@@ -80,6 +80,7 @@
 
   gtag('config', 'G-QS8D87DMKZ');
 </script>
+  <script src="https://cdn.tailwindcss.com" defer></script>
   <script src="https://unpkg.com/react@18/umd/react.production.min.js" defer></script>
   <script src="https://unpkg.com/react-dom@18/umd/react-dom.production.min.js" defer></script>
   <script src="https://unpkg.com/@babel/standalone@7.21.4/babel.min.js" defer></script>
@@ -207,10 +208,6 @@
     .proj-card:hover{border-color:var(--borderl);box-shadow:0 4px 24px rgba(0,0,0,.06)}
     .shot-grid{max-width:520px;justify-content:start}
 
-    /* sound btn */
-    #enableAudio{position:fixed;bottom:24px;right:24px;z-index:600;background:var(--ink);color:var(--paper);font-family:'DM Mono',monospace;font-size:10px;letter-spacing:.1em;text-transform:uppercase;padding:9px 16px;border:none;border-radius:2px;cursor:pointer;opacity:.6;transition:opacity .2s}
-    #enableAudio:hover{opacity:1}
-
     /* ── ADMIN SYSTEM ── */
 
     /* Login modal overlay */
@@ -278,8 +275,6 @@
       #site-nav{max-width:calc(100vw - 20px);overflow-x:auto;justify-content:flex-start;-webkit-overflow-scrolling:touch;scrollbar-width:none}
       #site-nav::-webkit-scrollbar{display:none}
       .nav-btn{flex-shrink:0}
-
-      #enableAudio{bottom:76px;right:16px;padding:7px 12px;font-size:9px}
 
       .hero-grid{grid-template-columns:1fr!important;gap:36px!important}
       .hero-grid>div:first-child{order:1}
@@ -408,55 +403,8 @@
 <script>document.getElementById('static-content').style.display='none';</script>
 
 <div id="root"></div>
-<button id="enableAudio">⟳ Sound</button>
 
 <script type="text/babel" data-presets="react">
-/* ── Tone.js lazy loader ── */
-let _toneReady=false;
-async function ensureTone(){
-  if(_toneReady)return true;
-  if(typeof Tone!=='undefined'){_toneReady=true;return true;}
-  return new Promise(resolve=>{
-    const s=document.createElement('script');
-    s.src='https://unpkg.com/tone@14.8.49/build/Tone.js';
-    s.onload=()=>{_toneReady=true;resolve(true);};
-    s.onerror=()=>resolve(false);
-    document.head.appendChild(s);
-  });
-}
-
-const ScrollMusicEngine=(()=>{
-  let pad,bass,melody,hat,pl,bl,ml,hl;
-  const S={
-    hero:    {bpm:72, chords:[["C3","G3","A3"],["D3","A3","C4"],["A2","E3","G3"],["F3","C4","A3"]]},
-    impact:  {bpm:82, chords:[["C3","E3","G3"],["A2","C3","E3"],["F3","A3","C4"],["G3","B3","D4"]]},
-    feature: {bpm:96, chords:[["C4","E4","G4"],["D4","F4","A4"],["A3","C4","E4"],["G3","B3","D4"]]},
-    writing: {bpm:68, chords:[["E3","G3","B3"],["C3","E3","G3"],["D3","F3","A3"],["G3","B3","D4"]]},
-    work:    {bpm:88, chords:[["C3","E3","G3"],["A2","C3","E3"],["F3","A3","C4"],["G3","B3","D4"]]},
-    training:{bpm:74, chords:[["C3","F3","A3"],["D3","G3","A3"],["F3","A3","C4"],["G3","B3","D4"]]},
-    music:   {bpm:120,chords:[["C4","E4","G4"],["G3","B3","D4"],["A3","C4","E4"],["F3","A3","C4"]]},
-    about:   {bpm:60, chords:[["C4","G4","A4"],["E4","B4","G4"],["D4","A4","F4"],["A3","E4","C4"]]}
-  };
-  function mk(){
-    pad=new Tone.PolySynth(Tone.Synth,{oscillator:{type:"sine"},envelope:{attack:2,release:4}}).toDestination();
-    bass=new Tone.MonoSynth({oscillator:{type:"triangle"},envelope:{attack:.1,release:.8}}).toDestination();
-    melody=new Tone.Synth({oscillator:{type:"triangle"},envelope:{attack:.05,release:.5}}).toDestination();
-    hat=new Tone.NoiseSynth({noise:{type:"white"},envelope:{attack:.001,decay:.1,sustain:0}}).toDestination();
-    pad.volume.value=-20;bass.volume.value=-16;melody.volume.value=-18;hat.volume.value=-32;
-  }
-  function stop(){pl?.dispose();bl?.dispose();ml?.dispose();hl?.dispose();}
-  function play(id){
-    const d=S[id];if(!d)return;
-    Tone.Transport.bpm.value=d.bpm;stop();
-    let step=0;
-    pl=new Tone.Loop(t=>{pad.triggerAttackRelease(d.chords[step%d.chords.length],"2n",t);step++;},"2n").start(0);
-    bl=new Tone.Loop(t=>{bass.triggerAttackRelease(d.chords[step%d.chords.length][0],"8n",t);},"4n").start(0);
-    ml=new Tone.Loop(t=>{const c=d.chords[step%d.chords.length];melody.triggerAttackRelease(c[Math.floor(Math.random()*c.length)],"16n",t);},"8n").start(0);
-    hl=new Tone.Loop(t=>{hat.triggerAttackRelease("16n",t);},"8n").start(0);
-  }
-  return{init(){mk();Tone.Transport.start();},play};
-})();
-
 const {useState,useEffect,useRef,useCallback}=React;
 
 /* ══════════════════════════════════════════════════════
@@ -720,30 +668,13 @@ const App=()=>{
   /* ── DRAFT FIELD HELPER ── */
   const dset=(key,val)=>setDraft(d=>({...d,[key]:val}));
 
-  /* ── SCROLL + AUDIO ── */
+  /* ── SCROLL ── */
   useEffect(()=>{
     const obs=new IntersectionObserver(entries=>{
-      entries.forEach(e=>{if(e.isIntersecting){setActive(e.target.id);if(window.audioStarted)ScrollMusicEngine.play(e.target.id);}});
+      entries.forEach(e=>{if(e.isIntersecting){setActive(e.target.id);}});
     },{threshold:.35});
     document.querySelectorAll('section[id]').forEach(s=>obs.observe(s));
     return()=>obs.disconnect();
-  },[]);
-  useEffect(()=>{
-    const unlock=async()=>{
-      if(window.audioStarted)return;
-      try{
-        const ok=await ensureTone();
-        if(!ok)return;
-        const ctx=Tone.getContext();
-        if(ctx.state!=='running')await ctx.resume();
-        await Tone.start();
-        ScrollMusicEngine.init();
-        ScrollMusicEngine.play('hero');
-        window.audioStarted=true;
-      }catch(e){}
-    };
-    ['click','scroll','touchstart','keydown'].forEach(ev=>document.addEventListener(ev,unlock,{once:true}));
-    document.getElementById('enableAudio').addEventListener('click',unlock);
   },[]);
   const go=id=>document.getElementById(id)?.scrollIntoView({behavior:'smooth'});
 
