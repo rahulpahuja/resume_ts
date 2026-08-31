@@ -513,7 +513,7 @@ const TIMELINE=[
     bullets:[
       "Founded Mobile1x — an independent studio shipping privacy-first, on-device mobile products end to end: product, architecture, and release. (mobile1x.com)",
       "DeDup — AI-powered duplicate file cleaner for Android; fully on-device media analysis for photos, videos, APKs, memes and WhatsApp clutter. In Early Access on the Play Store. (dedup.space)",
-      "Notes — The Modern Archivist — offline-first notes app with voice memos, live speech-to-text, drawings, image OCR and reminders; optional opt-in cloud AI (Gemini) for sorting and meeting summaries, Google Sign-In sync.",
+      "Notes — The Modern Archivist — offline-first notes app with voice memos, live speech-to-text, drawings, image OCR and reminders; optional opt-in cloud AI (Gemini) for sorting and meeting summaries, Google Sign-In sync. Android + iOS. (mobile1x.com/notes)",
       "AI Similarity — developer reference that maps Android and iOS APIs side by side to speed cross-platform translation. (aisimilarity.com)",
     ]
   },
@@ -1064,7 +1064,9 @@ const App=()=>{
                   <p style={{fontSize:'13px',lineHeight:'1.7',color:'var(--muted)',marginBottom:'14px',maxWidth:'560px'}}>An offline-first notes app with voice memos, live speech-to-text, drawings, image OCR, and reminders — everything stored locally on-device. Optional cloud AI (Gemini) can sort notes or summarize meetings, but only when you turn it on; Google Sign-In keeps notes synced across devices.</p>
                   <div className="tags" style={{marginBottom:'18px'}}>{['Kotlin','Android','iOS','Jetpack Compose','Room','Firebase','Gemini API','MVVM','Dependency Injection'].map(t=><span key={t} className="tag">{t}</span>)}</div>
                   <div style={{display:'flex',gap:'10px',flexWrap:'wrap',alignItems:'center'}}>
-                    <a href="https://apps.apple.com/co/app/notes-archive-reflect/id6798175378" target="_blank" rel="noopener noreferrer" className="btn btn-solid" style={{fontSize:'10px',padding:'9px 18px'}}>App Store →</a>
+                    <a href="https://mobile1x.com/notes/" target="_blank" rel="noopener noreferrer" className="btn btn-solid" style={{fontSize:'10px',padding:'9px 18px'}}>Visit Website →</a>
+                    <a href="https://play.google.com/store/apps/details?id=com.rp.notes" target="_blank" rel="noopener noreferrer" className="btn btn-ghost" style={{fontSize:'10px',padding:'9px 18px'}}>Play Store →</a>
+                    <a href="https://apps.apple.com/co/app/notes-archive-reflect/id6798175378" target="_blank" rel="noopener noreferrer" className="btn btn-ghost" style={{fontSize:'10px',padding:'9px 18px'}}>App Store →</a>
                     <a href="notes-app/privacy-policy.html" target="_blank" rel="noopener noreferrer" className="btn btn-ghost" style={{fontSize:'10px',padding:'9px 18px'}}>Privacy Policy →</a>
                   </div>
                 </div>
