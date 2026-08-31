@@ -5,13 +5,24 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Secure DB Proposal — Rahul Pahuja</title>
 <meta name="description" content="We propose a reactive, coroutine-native embedded database runtime for mobile (Android/iOS) that unifies storage, sync, event streams, analytics, vector search, and security in one lightweight engine. It builds on proven ideas (e.g. MVCC snapshots, actor-based concurrency, CRDT sync) and modern mobile platforms (Kotlin Multiplatform + Swift). Unlike plain SQLite/Room, this runtime offers built‑in RBAC/row-level security, a push-button sync queue, immutable event streaming, vector search for AI, and a user-friendly DSL for DDL/DML. Phased development (V1–V4) gradually layers features: starting with a coroutine/Flow-first ORM on SQLite, then adding sync, security and analytics, then vector/AI support, and finally optionally a custom storage engine. Key trade-offs include using SQLite (ubiquitous, small) vs. a new MVCC/LSM engine (high performance, complexity). We outline architecture diagrams, data models, concurrency and transaction semantics, and pipelines for sync and analytics. We compare against Room/SQLite, Realm, ObjectBox, SQLDelight, etc. This design addresses modern needs (offline-first, edge-AI, privacy) while minimizing boilerplate.">
+<meta name="author" content="Rahul Pahuja">
+<meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1">
+<link rel="alternate" type="application/rss+xml" title="Rahul Pahuja — Writing" href="/feed.xml">
 <link rel="canonical" href="https://www.therahulpahuja.com/blog/2026-05-07-secure-db-proposal">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Secure DB Proposal">
 <meta property="og:description" content="We propose a reactive, coroutine-native embedded database runtime for mobile (Android/iOS) that unifies storage, sync, event streams, analytics, vector search, and security in one lightweight engine. It builds on proven ideas (e.g. MVCC snapshots, actor-based concurrency, CRDT sync) and modern mobile platforms (Kotlin Multiplatform + Swift). Unlike plain SQLite/Room, this runtime offers built‑in RBAC/row-level security, a push-button sync queue, immutable event streaming, vector search for AI, and a user-friendly DSL for DDL/DML. Phased development (V1–V4) gradually layers features: starting with a coroutine/Flow-first ORM on SQLite, then adding sync, security and analytics, then vector/AI support, and finally optionally a custom storage engine. Key trade-offs include using SQLite (ubiquitous, small) vs. a new MVCC/LSM engine (high performance, complexity). We outline architecture diagrams, data models, concurrency and transaction semantics, and pipelines for sync and analytics. We compare against Room/SQLite, Realm, ObjectBox, SQLDelight, etc. This design addresses modern needs (offline-first, edge-AI, privacy) while minimizing boilerplate.">
 <meta property="og:url" content="https://www.therahulpahuja.com/blog/2026-05-07-secure-db-proposal">
+<meta property="og:site_name" content="Rahul Pahuja">
+<meta property="og:locale" content="en_US">
+<meta property="article:published_time" content="2026-05-07">
+<meta property="article:modified_time" content="2026-08-31">
+<meta property="article:author" content="https://www.linkedin.com/in/therahulpahuja/">
+<meta property="article:section" content="Blog">
 <meta property="og:image" content="https://www.therahulpahuja.com/public/og-image.jpg">
 <meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:site" content="@therahulpahuja">
+<meta name="twitter:creator" content="@therahulpahuja">
 <meta name="twitter:title" content="Secure DB Proposal">
 <meta name="twitter:description" content="We propose a reactive, coroutine-native embedded database runtime for mobile (Android/iOS) that unifies storage, sync, event streams, analytics, vector search, and security in one lightweight engine. It builds on proven ideas (e.g. MVCC snapshots, actor-based concurrency, CRDT sync) and modern mobile platforms (Kotlin Multiplatform + Swift). Unlike plain SQLite/Room, this runtime offers built‑in RBAC/row-level security, a push-button sync queue, immutable event streaming, vector search for AI, and a user-friendly DSL for DDL/DML. Phased development (V1–V4) gradually layers features: starting with a coroutine/Flow-first ORM on SQLite, then adding sync, security and analytics, then vector/AI support, and finally optionally a custom storage engine. Key trade-offs include using SQLite (ubiquitous, small) vs. a new MVCC/LSM engine (high performance, complexity). We outline architecture diagrams, data models, concurrency and transaction semantics, and pipelines for sync and analytics. We compare against Room/SQLite, Realm, ObjectBox, SQLDelight, etc. This design addresses modern needs (offline-first, edge-AI, privacy) while minimizing boilerplate.">
 <meta name="twitter:image" content="https://www.therahulpahuja.com/public/og-image.jpg">
@@ -19,17 +30,78 @@
 <script type="application/ld+json">
 {
   "@context": "https://schema.org",
-  "@type": "BlogPosting",
-  "headline": "Secure DB Proposal",
-  "description": "We propose a reactive, coroutine-native embedded database runtime for mobile (Android/iOS) that unifies storage, sync, event streams, analytics, vector search, and security in one lightweight engine. It builds on proven ideas (e.g. MVCC snapshots, actor-based concurrency, CRDT sync) and modern mobile platforms (Kotlin Multiplatform + Swift). Unlike plain SQLite/Room, this runtime offers built‑in RBAC/row-level security, a push-button sync queue, immutable event streaming, vector search for AI, and a user-friendly DSL for DDL/DML. Phased development (V1–V4) gradually layers features: starting with a coroutine/Flow-first ORM on SQLite, then adding sync, security and analytics, then vector/AI support, and finally optionally a custom storage engine. Key trade-offs include using SQLite (ubiquitous, small) vs. a new MVCC/LSM engine (high performance, complexity). We outline architecture diagrams, data models, concurrency and transaction semantics, and pipelines for sync and analytics. We compare against Room/SQLite, Realm, ObjectBox, SQLDelight, etc. This design addresses modern needs (offline-first, edge-AI, privacy) while minimizing boilerplate.",
-  "author": {
-    "@type": "Person",
-    "name": "Rahul Pahuja",
-    "url": "https://www.therahulpahuja.com/"
-  },
-  "datePublished": "2026-05-07",
-  "url": "https://www.therahulpahuja.com/blog/2026-05-07-secure-db-proposal",
-  "image": "https://www.therahulpahuja.com/public/og-image.jpg"
+  "@graph": [
+    {
+      "@type": "BlogPosting",
+      "@id": "https://www.therahulpahuja.com/blog/2026-05-07-secure-db-proposal#article",
+      "headline": "Secure DB Proposal",
+      "description": "We propose a reactive, coroutine-native embedded database runtime for mobile (Android/iOS) that unifies storage, sync, event streams, analytics, vector search, and security in one lightweight engine. It builds on proven ideas (e.g. MVCC snapshots, actor-based concurrency, CRDT sync) and modern mobile platforms (Kotlin Multiplatform + Swift). Unlike plain SQLite/Room, this runtime offers built‑in RBAC/row-level security, a push-button sync queue, immutable event streaming, vector search for AI, and a user-friendly DSL for DDL/DML. Phased development (V1–V4) gradually layers features: starting with a coroutine/Flow-first ORM on SQLite, then adding sync, security and analytics, then vector/AI support, and finally optionally a custom storage engine. Key trade-offs include using SQLite (ubiquitous, small) vs. a new MVCC/LSM engine (high performance, complexity). We outline architecture diagrams, data models, concurrency and transaction semantics, and pipelines for sync and analytics. We compare against Room/SQLite, Realm, ObjectBox, SQLDelight, etc. This design addresses modern needs (offline-first, edge-AI, privacy) while minimizing boilerplate.",
+      "url": "https://www.therahulpahuja.com/blog/2026-05-07-secure-db-proposal",
+      "datePublished": "2026-05-07",
+      "dateModified": "2026-08-31",
+      "inLanguage": "en",
+      "keywords": "Blog",
+      "image": "https://www.therahulpahuja.com/public/og-image.jpg",
+      "author": {
+        "@id": "https://www.therahulpahuja.com/#person"
+      },
+      "publisher": {
+        "@id": "https://www.therahulpahuja.com/#person"
+      },
+      "mainEntityOfPage": {
+        "@type": "WebPage",
+        "@id": "https://www.therahulpahuja.com/blog/2026-05-07-secure-db-proposal"
+      },
+      "isPartOf": {
+        "@id": "https://www.therahulpahuja.com/#website"
+      }
+    },
+    {
+      "@type": "Person",
+      "@id": "https://www.therahulpahuja.com/#person",
+      "name": "Rahul Pahuja",
+      "url": "https://www.therahulpahuja.com/",
+      "jobTitle": "Principal Mobile Engineer",
+      "image": "https://www.therahulpahuja.com/public/og-image.jpg",
+      "sameAs": [
+        "https://www.linkedin.com/in/therahulpahuja/",
+        "https://github.com/rahulpahuja",
+        "https://www.x.com/therahulpahuja"
+      ]
+    },
+    {
+      "@type": "WebSite",
+      "@id": "https://www.therahulpahuja.com/#website",
+      "url": "https://www.therahulpahuja.com/",
+      "name": "Rahul Pahuja",
+      "publisher": {
+        "@id": "https://www.therahulpahuja.com/#person"
+      }
+    },
+    {
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "name": "Home",
+          "item": "https://www.therahulpahuja.com/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 2,
+          "name": "Writing",
+          "item": "https://www.therahulpahuja.com/#writing"
+        },
+        {
+          "@type": "ListItem",
+          "position": 3,
+          "name": "Secure DB Proposal",
+          "item": "https://www.therahulpahuja.com/blog/2026-05-07-secure-db-proposal"
+        }
+      ]
+    }
+  ]
 }
 </script>
 <style>

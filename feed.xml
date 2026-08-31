@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Rahul Pahuja — Writing</title>
+    <link>https://www.therahulpahuja.com/</link>
+    <atom:link href="https://www.therahulpahuja.com/feed.xml" rel="self" type="application/rss+xml"/>
+    <description>Essays on mobile security architecture, SDK design, and AI by Rahul Pahuja — Principal Mobile Engineer and founder of Mobile1x.</description>
+    <language>en</language>
+    <managingEditor>therahulpahuja@gmail.com (Rahul Pahuja)</managingEditor>
+    <webMaster>therahulpahuja@gmail.com (Rahul Pahuja)</webMaster>
+    <lastBuildDate>Mon, 31 Aug 2026 06:51:10 GMT</lastBuildDate>
+    <item>
+      <title>Google just changed the future of Search with “Ask YouTube” — and almost nobody is talking about the engineering implications.</title>
+      <link>https://www.therahulpahuja.com/blog/2026-05-19-google-just-changed-the-future-of-search-with-ask-youtube-and-almost-nobody-is-talking-abo</link>
+      <guid isPermaLink="true">https://www.therahulpahuja.com/blog/2026-05-19-google-just-changed-the-future-of-search-with-ask-youtube-and-almost-nobody-is-talking-abo</guid>
+      <pubDate>Tue, 19 May 2026 09:00:00 GMT</pubDate>
+      <description>At Google I/O, “Ask YouTube” quietly signalled the shift to conversational video search, AI-native discovery, and multi-modal retrieval systems — here's why it matters.</description>
+    </item>
+    <item>
+      <title>Google just crossed a line at I/O that changes the future of AI forever.</title>
+      <link>https://www.therahulpahuja.com/blog/2026-05-19-google-just-crossed-a-line-at-io-that-changes-the-future-of-ai-forever</link>
+      <guid isPermaLink="true">https://www.therahulpahuja.com/blog/2026-05-19-google-just-crossed-a-line-at-io-that-changes-the-future-of-ai-forever</guid>
+      <pubDate>Tue, 19 May 2026 09:00:00 GMT</pubDate>
+      <description>Google's Gemini Omni Flash, shown at I/O, moves past generating content to altering reality itself — and the engineering and trust implications that follow.</description>
+    </item>
+    <item>
+      <title>Mobile App Architecture Comparison</title>
+      <link>https://www.therahulpahuja.com/blog/2026-05-07-mobile-app-architecture-comparison</link>
+      <guid isPermaLink="true">https://www.therahulpahuja.com/blog/2026-05-07-mobile-app-architecture-comparison</guid>
+      <pubDate>Thu, 07 May 2026 09:00:00 GMT</pubDate>
+      <description>MVC, MVP, MVVM, MVI, VIPER, and TCA compared for mobile apps: core idea, strengths, drawbacks, learning curve, testability, maintainability, and security considerations.</description>
+    </item>
+    <item>
+      <title>Secure DB Proposal</title>
+      <link>https://www.therahulpahuja.com/blog/2026-05-07-secure-db-proposal</link>
+      <guid isPermaLink="true">https://www.therahulpahuja.com/blog/2026-05-07-secure-db-proposal</guid>
+      <pubDate>Thu, 07 May 2026 09:00:00 GMT</pubDate>
+      <description>We propose a reactive, coroutine-native embedded database runtime for mobile (Android/iOS) that unifies storage, sync, event streams, analytics, vector search, and security in one lightweight engine. It builds on proven ideas (e.g. MVCC snapshots, actor-based concurrency, CRDT sync) and modern mobile platforms (Kotlin Multiplatform + Swift). Unlike plain SQLite/Room, this runtime offers built‑in RBAC/row-level security, a push-button sync queue, immutable event streaming, vector search for…</description>
+    </item>
+    <item>
+      <title>MCP Servers, Resources, and Tools: Explained Without the Hype</title>
+      <link>https://www.therahulpahuja.com/blog/2026-04-29-mcp-servers-resources-and-tools-explained-without-the-hype</link>
+      <guid isPermaLink="true">https://www.therahulpahuja.com/blog/2026-04-29-mcp-servers-resources-and-tools-explained-without-the-hype</guid>
+      <pubDate>Wed, 29 Apr 2026 09:00:00 GMT</pubDate>
+      <description>A no-nonsense, implementation-level guide for builders creating AI agents, copilots, and automation systems.</description>
+    </item>
+    <item>
+      <title>Secure Data at Scale: Designing a Robust Storage Stack with TEESDK, Encrypted Data Stores, and Intelligent Caching</title>
+      <link>https://www.therahulpahuja.com/blog/2026-03-15-secure-data-at-scale-designing-a-robust-storage-stack-with-teesdk-encrypted-data-stores-and-intelligent-caching</link>
+      <guid isPermaLink="true">https://www.therahulpahuja.com/blog/2026-03-15-secure-data-at-scale-designing-a-robust-storage-stack-with-teesdk-encrypted-data-stores-and-intelligent-caching</guid>
+      <pubDate>Sun, 15 Mar 2026 09:00:00 GMT</pubDate>
+      <description>Architecture decisions behind hardware-backed secure storage — TEE design, encrypted data stores, and the intelligent caching layer that ties it all together.</description>
+    </item>
+  </channel>
+</rss>

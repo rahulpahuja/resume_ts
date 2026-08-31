@@ -1,51 +1,63 @@
 # Rahul Pahuja
 
-> Principal-track Mobile Engineer specializing in mobile security architecture. Creator of the Secured Storage layer at CyberArk. 10+ years building mobile infrastructure across CyberArk, Bankwest, and Conviva.
+> Principal Mobile Engineer specializing in mobile security architecture, and founder of Mobile1x. Creator of the Secured Storage layer at CyberArk. 10+ years building mobile infrastructure across CyberArk, Bankwest, and Conviva.
 
-Rahul Pahuja is a mobile engineer based in Hyderabad, India. Most recently Staff Software Engineer at CyberArk (Nov 2024 – Dec 2025); currently building independently as the creator of DeDup and Notes. He designs and builds security-critical mobile infrastructure: credential vaults, observability SDKs at billions-of-events scale, and digital banking platforms.
+Rahul Pahuja is a mobile engineer based in Indore, India. He was most recently Staff Software Engineer at CyberArk (Nov 2024 – Dec 2025), where he designed and built the Secured Storage layer — the cryptographic foundation that protects enterprise credentials on Android and iOS. He now runs Mobile1x, an independent studio building privacy-first, on-device mobile apps (DeDup, Notes, AI Similarity). Over a decade he has built security-critical mobile infrastructure: credential vaults, observability SDKs operating at billions of events per minute, and digital banking platforms used by millions.
+
+## Now
+
+As of 2026, Rahul is building independently as founder and principal engineer of Mobile1x. Current products: DeDup (AI duplicate file cleaner, Android, Early Access on the Play Store) and Notes — The Modern Archivist (offline-first notes app, live on the Play Store and App Store). He also maintains AI Similarity, a developer reference that maps Android and iOS APIs side by side.
 
 ## Identity
 
 - Full name: Rahul Pahuja
 - Also known as: therahulpahuja
-- Role: Principal Mobile Engineer
-- Location: Hyderabad, India
+- Role: Principal Mobile Engineer; Founder & Principal Engineer at Mobile1x
+- Location: Indore, Madhya Pradesh, India
 - Education: M.Tech, Computer Science, BITS Pilani
 - Email: therahulpahuja@gmail.com
 - Phone: +91 88190 91000
 - Website: https://www.therahulpahuja.com/
+- Languages: English, Hindi
 
 ## Career
 
-- **Independent** (Dec 2025 – Present) — Building DeDup and Notes, two consumer Android apps, on his own.
-- **CyberArk** — Staff Software Engineer (Nov 2024 – Dec 2025). Designed and built CyberArk's Secured Storage layer, the cryptographic foundation protecting enterprise credentials on Android and iOS (TEE-backed key storage, hardware-bound encryption, biometric unlock, secure enclave integration, MVVM/Clean Architecture, dependency injection with Hilt).
-- **Coforge — Bankwest (Commonwealth Bank of Australia)** — Android & iOS Technical Lead (2024). Technical lead for Bankwest's digital banking app, used by millions of daily active users.
-- **Conviva** — Senior Engineer, Android Sensors (2022–2023). Built Android/iOS observability sensors processing 12B+ metric computations per minute; owned ExoPlayer and BrightCove integrations.
-- **Intellicus Technologies** — Senior Software Engineer (2019–2022). Developed the Intellicus Mobile SDK, embedded analytics and BI reporting for Android.
-- **Wipro** — Unified Mobile App Developer (2014–2019). Built an award-winning travel app on Wipro's Contextual & Open Banking Platform.
+- **Mobile1x** — Founder & Principal Engineer (2025 – Present). Independent mobile product studio. Builds privacy-first, on-device apps end to end: product, architecture, and release. Products: DeDup, Notes, AI Similarity.
+- **CyberArk** — Staff Software Engineer (Nov 2024 – Dec 2025). Designed and built CyberArk's Secured Storage layer, the cryptographic foundation protecting enterprise credentials on Android and iOS: TEE-backed key storage, hardware-bound encryption, biometric unlock, secure enclave integration. Drove mobile security standards adopted across the product org. Stack: Kotlin, Swift, MVVM/Clean Architecture, dependency injection with Hilt.
+- **Coforge — Bankwest (Commonwealth Bank of Australia)** — Android & iOS Technical Lead (2024). Technical lead for Bankwest's digital banking app, used by millions of daily active users. Architected self-service features (password reset, currency conversion, account management); established code coverage standards and CI test pipelines.
+- **Conviva** — Senior Engineer, Android Sensors (2022 – 2023). Built and maintained Android/iOS observability sensors processing 12B+ metric computations per minute; owned ExoPlayer and BrightCove integrations for audience quality measurement at streaming-platform scale.
+- **Intellicus Technologies** — Senior Software Engineer (2019 – 2022). Developed the Intellicus Mobile SDK — embedded analytics and BI reporting for Android; integrated on-premise and cloud data sources for enterprise customers including Chevron and Shell.
+- **Wipro** — Unified Mobile App Developer (2014 – 2019). Built an award-winning travel app on Wipro's Contextual & Open Banking Platform; set Material Design-first UI standards across Android.
+
+## Training
+
+Ran a Google-affiliated Android bootcamp in partnership with LTIMindtree — 41 engineers trained, 100% placed. Full curriculum from fundamentals through production-grade development.
 
 ## Skills
 
-Mobile: Android, iOS, Android SDK, iOS SDK, Kotlin, Java, Swift, Objective-C, Jetpack Compose, SwiftUI, UIKit, AVFoundation, ExoPlayer, BrightCove, Android Services, Content Providers, Broadcast Receivers, React Native, Flutter
-Architecture: MVVM, MVI, MVC, Clean Architecture, Dependency Injection (Hilt, Dagger, Koin), Architectural Decision Records (ADRs)
-Security: Secured Storage, TEE / Secure Enclave, Biometric Auth, Encryption, Snyk
-Backend: Java, Python, Node.js, Spring Boot, Firebase, REST APIs
-Infra: Jenkins, TeamCity, CircleCI, GitHub Actions, Docker
+- Mobile: Android, iOS, Android SDK, iOS SDK, Kotlin, Java, Swift, Objective-C, Jetpack Compose, SwiftUI, UIKit, AVFoundation, ExoPlayer, BrightCove, Android Services, Content Providers, Broadcast Receivers, React Native, Flutter
+- Architecture: MVVM, MVI, MVC, Clean Architecture, Dependency Injection (Hilt, Dagger, Koin), Architectural Decision Records (ADRs)
+- Security: Secured Storage, TEE / Secure Enclave, Biometric Auth, hardware-bound encryption, Snyk
+- Backend: Java, Python, Node.js, Spring Boot, Firebase, REST APIs
+- Infra: Jenkins, TeamCity, CircleCI, GitHub Actions, Docker
 
 ## Projects
 
-- [DeDup](https://dedup.space) — AI-powered duplicate file cleaner for Android; on-device media analysis, zero cloud uploads. Built with Kotlin, Jetpack Compose, MVVM, and Clean Architecture.
-- [Mobile1x](https://mobile1x.com) — side venture.
+- [Mobile1x](https://mobile1x.com) — independent mobile product studio; parent of DeDup, Notes, and AI Similarity.
+- [DeDup](https://dedup.space) — AI-powered duplicate file cleaner for Android. Detects and removes duplicate photos, videos, APKs, memes, and WhatsApp clutter through on-device media analysis. Privacy-first: zero cloud uploads. In Early Access on the Play Store. Built with Kotlin, Jetpack Compose, Room, MediaStore, Coroutines, MVVM, Clean Architecture.
+- [Notes — The Modern Archivist](https://mobile1x.com/notes/) — offline-first notes app for Android and iOS. Voice memos, live speech-to-text, drawings, image OCR, reminders; everything stored locally on-device. Optional opt-in cloud AI (Gemini) for sorting notes and summarizing meetings; Google Sign-In sync. Play Store: https://play.google.com/store/apps/details?id=com.rp.notes — App Store: https://apps.apple.com/co/app/notes-archive-reflect/id6798175378
+- [AI Similarity](https://www.aisimilarity.com) — developer reference that maps Android and iOS APIs side by side to speed cross-platform translation.
 - [CodeForumBlogs](https://www.codeforumblogs.com) — community platform for technical writing with real-time collaboration and code highlighting.
-- AI Similarity — maps Android/iOS APIs side-by-side for cross-platform translation.
 
 ## Writing
 
+- [Google just crossed a line at I/O that changes the future of AI forever](https://www.therahulpahuja.com/blog/2026-05-19-google-just-crossed-a-line-at-io-that-changes-the-future-of-ai-forever)
+- [Google just changed the future of Search with "Ask YouTube"](https://www.therahulpahuja.com/blog/2026-05-19-google-just-changed-the-future-of-search-with-ask-youtube-and-almost-nobody-is-talking-abo)
+- [Secure DB Proposal](https://www.therahulpahuja.com/blog/2026-05-07-secure-db-proposal) — a reactive, coroutine-native embedded database runtime for mobile that unifies storage, sync, event streams, analytics, vector search, and security.
+- [Mobile App Architecture Comparison](https://www.therahulpahuja.com/blog/2026-05-07-mobile-app-architecture-comparison) — MVC, MVP, MVVM, MVI, VIPER, and TCA compared for mobile.
+- [MCP Servers, Resources, and Tools: Explained Without the Hype](https://www.therahulpahuja.com/blog/2026-04-29-mcp-servers-resources-and-tools-explained-without-the-hype) — an implementation-level guide to the Model Context Protocol.
+- [Secure Data at Scale: Designing a Robust Storage Stack with TEESDK, Encrypted Data Stores, and Intelligent Caching](https://www.therahulpahuja.com/blog/2026-03-15-secure-data-at-scale-designing-a-robust-storage-stack-with-teesdk-encrypted-data-stores-and-intelligent-caching)
 - [Jetpack Compose: A Staff Engineer's Perspective](https://www.linkedin.com/pulse/jetpack-compose-staff-android-engineers-perspective-rahul-pahuja-zauif)
-- Building Enterprise Security with Secured Storage
-- Real-time Analytics: Conviva SDK Architecture
-- Mobile Banking: Lessons from Bankwest
-- LLM Poisoning: A Cybersecurity Threat Most Companies Are Ignoring
 
 ## Other
 
@@ -58,3 +70,6 @@ Produces and DJs electronic music as Rellow (house, deep house, ambient).
 - X / Twitter: https://www.x.com/therahulpahuja
 - Instagram: https://www.instagram.com/therahulpahuja
 - YouTube: https://www.youtube.com/rahulpahuja1991
+- Mobile1x: https://mobile1x.com
+- DeDup: https://dedup.space
+- AI Similarity: https://www.aisimilarity.com

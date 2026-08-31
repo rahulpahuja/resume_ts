@@ -1,6 +1,6 @@
 title: Google just crossed a line at I/O that changes the future of AI forever.
 tag: Blog
-description: 
+description: Google's Gemini Omni Flash, shown at I/O, moves past generating content to altering reality itself — and the engineering and trust implications that follow.
 
 <figure style="margin:28px 0">
 <img src="https://raw.githubusercontent.com/rahulpahuja/resume_ts/main/public/blog-images/1779211282649-screenshot-2026-05-19-at-10.47.40-pm.png" alt="Screenshot 2026-05-19 at 10.47.40 PM" style="max-width:100%;border-radius:4px;display:block;margin:0 auto">

@@ -1,6 +1,6 @@
 title: Mobile App Architecture Comparison
 tag: Blog
-description: 
+description: MVC, MVP, MVVM, MVI, VIPER, and TCA compared for mobile apps: core idea, strengths, drawbacks, learning curve, testability, maintainability, and security considerations.
 
 # Mobile App Architecture Comparison
 

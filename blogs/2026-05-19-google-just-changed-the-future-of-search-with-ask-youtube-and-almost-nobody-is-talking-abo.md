@@ -1,6 +1,6 @@
 title: Google just changed the future of Search with “Ask YouTube” — and almost nobody is talking about the engineering implications.
 tag: Blog
-description: 
+description: At Google I/O, "Ask YouTube" quietly signalled the shift to conversational video search, AI-native discovery, and multi-modal retrieval systems.
 
 <figure style="margin:28px 0">
 <img src="https://raw.githubusercontent.com/rahulpahuja/resume_ts/main/public/blog-images/1779210795241-screenshot-2026-05-19-at-10.38.41-pm.png" alt="Screenshot 2026-05-19 at 10.38.41 PM" style="max-width:100%;border-radius:4px;display:block;margin:0 auto">
