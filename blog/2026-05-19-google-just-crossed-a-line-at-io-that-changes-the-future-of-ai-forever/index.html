@@ -15,7 +15,7 @@
 <meta name="twitter:title" content="Google just crossed a line at I/O that changes the future of AI forever.">
 <meta name="twitter:description" content="&lt;figure style=&quot;margin:28px 0&quot;&gt;">
 <meta name="twitter:image" content="https://raw.githubusercontent.com/rahulpahuja/resume_ts/main/public/blog-images/1779211282649-screenshot-2026-05-19-at-10.47.40-pm.png">
-<link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Mono:wght@300;400;500&family=Syne:wght@400;500;700;800&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
 <script type="application/ld+json">
 {
   "@context": "https://schema.org",
@@ -33,34 +33,38 @@
 }
 </script>
 <style>
-:root{--ink:#0c0b09;--paper:#f5f2ec;--accent:#c0391f;--muted:#7c7670;--border:rgba(12,11,9,.09)}
+:root{--ink:#0f172a;--paper:#fafafa;--card:#fff;--accent:#2563eb;--accent-dark:#1d4ed8;--muted:#5b6472;--border:#e4e7ec}
 *{box-sizing:border-box}
-body{margin:0;background:var(--paper);color:var(--ink);font-family:'Syne',sans-serif;line-height:1.75}
-.wrap{max-width:720px;margin:0 auto;padding:56px 24px 100px}
-a{color:var(--accent)}
-.back{display:inline-block;margin-bottom:36px;font-family:'DM Mono',monospace;font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);text-decoration:none}
-.back:hover{color:var(--accent)}
-.tag{font-family:'DM Mono',monospace;font-size:10px;letter-spacing:.1em;text-transform:uppercase;color:var(--accent);border:1px solid rgba(192,57,31,.35);background:rgba(192,57,31,.08);padding:3px 10px;border-radius:2px;display:inline-block;margin-bottom:18px}
-h1{font-family:'DM Serif Display',serif;font-size:clamp(1.8rem,5vw,2.8rem);line-height:1.15;margin:0 0 12px;letter-spacing:-.01em}
-.meta{font-family:'DM Mono',monospace;font-size:11px;color:var(--muted);letter-spacing:.05em;margin-bottom:40px}
+html{scroll-behavior:smooth}
+body{margin:0;background:var(--paper);color:var(--ink);font-family:'Inter',system-ui,-apple-system,sans-serif;line-height:1.75;-webkit-font-smoothing:antialiased;-moz-osx-font-smoothing:grayscale}
+.wrap{max-width:720px;margin:0 auto;padding:56px 24px 120px}
+a{color:var(--accent);text-decoration:none}
+a:hover{text-decoration:underline}
+.back{display:inline-flex;align-items:center;gap:7px;margin-bottom:40px;font-family:'JetBrains Mono',monospace;font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--muted);text-decoration:none}
+.back:hover{color:var(--accent);text-decoration:none}
+.tag{font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:.1em;text-transform:uppercase;color:var(--accent);border:1px solid rgba(37,99,235,.28);background:rgba(37,99,235,.08);padding:4px 10px;border-radius:6px;display:inline-block;margin-bottom:20px}
+h1{font-family:'Space Grotesk','Inter',sans-serif;font-weight:700;font-size:clamp(1.9rem,5vw,2.9rem);line-height:1.12;margin:0 0 14px;letter-spacing:-.03em}
+.meta{font-family:'JetBrains Mono',monospace;font-size:11px;color:var(--muted);letter-spacing:.06em;margin-bottom:44px;padding-bottom:28px;border-bottom:1px solid var(--border)}
 article{font-size:17px}
-article h1,article h2,article h3{font-family:'DM Serif Display',serif;margin-top:1.6em;margin-bottom:.5em;line-height:1.25}
-article p{margin:0 0 1.2em}
-article img{max-width:100%;border-radius:4px;display:block;margin:28px auto;border:1px solid var(--border)}
+article h1,article h2,article h3,article h4{font-family:'Space Grotesk','Inter',sans-serif;font-weight:600;letter-spacing:-.02em;margin-top:1.8em;margin-bottom:.5em;line-height:1.25}
+article h2{font-size:1.5rem}
+article h3{font-size:1.2rem}
+article p{margin:0 0 1.25em}
+article img{max-width:100%;border-radius:10px;display:block;margin:28px auto;border:1px solid var(--border)}
 article figure{margin:28px 0}
-article pre{background:#1b1a17;color:#f5f2ec;padding:18px;border-radius:6px;border:1px solid rgba(255,255,255,.08);overflow-x:auto}
-article code{background:rgba(12,11,9,.06);padding:2px 6px;border-radius:3px;font-family:'DM Mono',monospace;font-size:.85em}
-article pre code{background:none;padding:0;font-size:.85em;line-height:1.6}
+article pre{background:#0f172a;color:#e2e8f0;padding:20px;border-radius:10px;border:1px solid rgba(15,23,42,.2);overflow-x:auto;font-size:.86em;line-height:1.6}
+article code{background:rgba(37,99,235,.08);color:var(--accent-dark);padding:2px 6px;border-radius:4px;font-family:'JetBrains Mono',monospace;font-size:.85em}
+article pre code{background:none;padding:0;color:inherit;font-size:1em}
 article a{color:var(--accent)}
 article ul,article ol{padding-left:1.4em}
-article li{margin-bottom:.4em}
-article hr{border:none;border-top:1px solid var(--border);margin:2.4em 0}
-article blockquote{margin:1.6em 0;padding:4px 20px;border-left:3px solid var(--accent);color:var(--muted)}
-.table-wrap{overflow-x:auto;margin:28px 0;border:1px solid var(--border);border-radius:6px}
+article li{margin-bottom:.45em}
+article hr{border:none;border-top:1px solid var(--border);margin:2.6em 0}
+article blockquote{margin:1.8em 0;padding:6px 22px;border-left:3px solid var(--accent);color:var(--muted)}
+.table-wrap{overflow-x:auto;margin:28px 0;border:1px solid var(--border);border-radius:10px}
 article table{border-collapse:collapse;width:100%;font-size:.88em;margin:0}
 article th,article td{border:1px solid var(--border);padding:10px 14px;text-align:left;vertical-align:top;white-space:normal}
-article th{background:rgba(12,11,9,.05);font-family:'DM Mono',monospace;font-size:.78em;text-transform:uppercase;letter-spacing:.05em;white-space:nowrap}
-article tr:nth-child(even) td{background:rgba(12,11,9,.02)}
+article th{background:#f1f4f8;font-family:'JetBrains Mono',monospace;font-size:.76em;text-transform:uppercase;letter-spacing:.06em;white-space:nowrap}
+article tr:nth-child(even) td{background:#f6f8fa}
 </style>
 </head>
 <body>

@@ -42,7 +42,7 @@
     "telephone": "+91-88190-91000",
     "address": {
       "@type": "PostalAddress",
-      "addressLocality": "Hyderabad",
+      "addressLocality": "Indore",
       "addressCountry": "IN"
     },
     "worksFor": {
@@ -69,7 +69,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link rel="preconnect" href="https://unpkg.com">
-  <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Mono:wght@300;400;500&family=Syne:wght@400;500;700;800&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
   <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js" defer></script>
 <!-- Google tag (gtag.js) -->
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-QS8D87DMKZ"></script>
@@ -87,58 +87,60 @@
 
   <style>
     :root {
-      --ink:#0c0b09; --paper:#f5f2ec; --p2:#edeae2;
-      --accent:#c0391f; --adim:rgba(192,57,31,.10); --amid:rgba(192,57,31,.32);
-      --muted:#7c7670; --border:rgba(12,11,9,.09); --borderl:rgba(12,11,9,.18);
+      --ink:#0f172a; --paper:#fafafa; --p2:#f1f4f8;
+      --card:#ffffff;
+      --accent:#2563eb; --accent-dark:#1d4ed8; --adim:rgba(37,99,235,.08); --amid:rgba(37,99,235,.28);
+      --muted:#5b6472; --border:#e4e7ec; --borderl:#cfd5de;
+      --radius:10px;
+      --shadow-sm:0 1px 2px rgba(15,23,42,.04),0 1px 3px rgba(15,23,42,.06);
+      --shadow-md:0 4px 12px -2px rgba(15,23,42,.08),0 16px 32px -12px rgba(15,23,42,.14);
     }
     *,*::before,*::after{margin:0;padding:0;box-sizing:border-box}
     html{scroll-behavior:smooth}
-    body{background:var(--paper);color:var(--ink);font-family:'Syne',sans-serif;overflow-x:hidden;line-height:1.6}
-    body::after{content:'';position:fixed;inset:0;pointer-events:none;z-index:9000;
-      background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='300' height='300'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='300' height='300' filter='url(%23n)' opacity='.035'/%3E%3C/svg%3E");opacity:.5}
+    body{background:var(--paper);color:var(--ink);font-family:'Inter',sans-serif;overflow-x:hidden;line-height:1.65;
+      -webkit-font-smoothing:antialiased;-moz-osx-font-smoothing:grayscale;font-feature-settings:'cv05','cv08','ss01'}
     img{display:block;max-width:100%}
     a{color:inherit;text-decoration:none}
-    .serif{font-family:'DM Serif Display',serif}
-    .mono{font-family:'DM Mono',monospace}
-    .label{font-family:'DM Mono',monospace;font-size:10px;letter-spacing:.25em;text-transform:uppercase;color:var(--muted)}
-    .display{font-family:'DM Serif Display',serif;font-size:clamp(3rem,7vw,6.5rem);line-height:.96;letter-spacing:-.02em}
-    .display-sm{font-family:'DM Serif Display',serif;font-size:clamp(2.2rem,5vw,4.5rem);line-height:.98;letter-spacing:-.02em}
+    .serif{font-family:'Space Grotesk',sans-serif;font-weight:600}
+    .mono{font-family:'JetBrains Mono',monospace}
+    .label{font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:.22em;text-transform:uppercase;color:var(--muted)}
+    .display{font-family:'Space Grotesk',sans-serif;font-weight:700;font-size:clamp(2.9rem,6.6vw,6rem);line-height:1.02;letter-spacing:-.035em}
+    .display-sm{font-family:'Space Grotesk',sans-serif;font-weight:700;font-size:clamp(2.1rem,4.8vw,4rem);line-height:1.04;letter-spacing:-.03em}
+    .display em,.display-sm em{font-style:normal;color:var(--accent)}
     .wrap{max-width:1180px;margin:0 auto;padding:0 40px}
     .section{min-height:100vh;padding:130px 0 100px}
     .section-alt{background:var(--p2)}
     .section-dark{background:var(--ink);color:var(--paper)}
-    .ruled{background-image:repeating-linear-gradient(to bottom,transparent,transparent 39px,var(--border) 39px,var(--border) 40px)}
+    .ruled{background-image:none}
 
     /* header */
-    #site-header{position:fixed;top:0;left:0;right:0;z-index:500;display:flex;justify-content:space-between;align-items:center;padding:18px 40px;background:rgba(245,242,236,.92);backdrop-filter:blur(18px);border-bottom:1px solid var(--border)}
-    .header-name{font-family:'DM Serif Display',serif;font-size:19px;letter-spacing:-.02em}
-    .header-role{font-family:'DM Mono',monospace;font-size:10px;letter-spacing:.18em;text-transform:uppercase;color:var(--muted);margin-left:14px}
+    #site-header{position:fixed;top:0;left:0;right:0;z-index:500;display:flex;justify-content:space-between;align-items:center;padding:16px 40px;background:rgba(250,250,250,.82);backdrop-filter:blur(18px);border-bottom:1px solid var(--border)}
+    .header-name{font-family:'Space Grotesk',sans-serif;font-weight:600;font-size:18px;letter-spacing:-.02em}
+    .header-role{font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:.16em;text-transform:uppercase;color:var(--muted);margin-left:14px}
 
     /* buttons */
-    .btn{display:inline-flex;align-items:center;gap:7px;font-family:'DM Mono',monospace;font-size:10px;letter-spacing:.1em;text-transform:uppercase;padding:9px 20px;border-radius:2px;border:none;cursor:pointer;transition:.18s}
-    .btn-solid{background:var(--ink);color:var(--paper)}.btn-solid:hover{background:#1d1c19}
-    .btn-ghost{background:transparent;color:var(--ink);border:1px solid var(--borderl)}.btn-ghost:hover{background:rgba(12,11,9,.04);border-color:var(--ink)}
-    .btn-accent{background:var(--accent);color:var(--paper);box-shadow:0 2px 14px rgba(192,57,31,.35);animation:btn-pulse 2.6s ease-in-out infinite}
-    .btn-accent:hover{background:#a52e19;animation-play-state:paused;box-shadow:0 2px 18px rgba(192,57,31,.55)}
-    @keyframes btn-pulse{0%,100%{box-shadow:0 2px 14px rgba(192,57,31,.35),0 0 0 0 rgba(192,57,31,.35)}50%{box-shadow:0 2px 14px rgba(192,57,31,.35),0 0 0 7px rgba(192,57,31,0)}}
-    @media (prefers-reduced-motion:reduce){.btn-accent{animation:none}}
-    .btn-inv{display:inline-flex;align-items:center;gap:8px;background:var(--paper);color:var(--ink);padding:11px 22px;border-radius:2px;font-family:'DM Mono',monospace;font-size:10px;letter-spacing:.1em;text-transform:uppercase;transition:.18s}.btn-inv:hover{background:#eae7e0}
+    .btn{display:inline-flex;align-items:center;gap:8px;font-family:'Inter',sans-serif;font-weight:600;font-size:13px;letter-spacing:0;padding:11px 20px;border-radius:8px;border:none;cursor:pointer;transition:transform .16s ease,box-shadow .16s ease,background-color .16s ease}
+    .btn-solid{background:var(--ink);color:#fff}.btn-solid:hover{background:#1e293b;transform:translateY(-1px)}
+    .btn-ghost{background:var(--card);color:var(--ink);border:1px solid var(--borderl);box-shadow:var(--shadow-sm)}.btn-ghost:hover{border-color:var(--ink);transform:translateY(-1px)}
+    .btn-accent{background:var(--accent);color:#fff;box-shadow:0 1px 2px rgba(37,99,235,.28),0 10px 24px -8px rgba(37,99,235,.5)}
+    .btn-accent:hover{background:var(--accent-dark);transform:translateY(-1px);box-shadow:0 2px 4px rgba(37,99,235,.3),0 14px 30px -8px rgba(37,99,235,.6)}
+    @media (prefers-reduced-motion:reduce){.btn,.btn:hover{transform:none}}
+    .btn-inv{display:inline-flex;align-items:center;gap:8px;background:#fff;color:var(--ink);padding:12px 22px;border-radius:8px;font-family:'Inter',sans-serif;font-weight:600;font-size:13px;transition:.16s}.btn-inv:hover{background:#eef1f5}
 
     /* social */
-    .si{width:32px;height:32px;border:1px solid var(--borderl);border-radius:2px;display:flex;align-items:center;justify-content:center;color:var(--muted);transition:.18s}
-    .si:hover{color:var(--accent);border-color:var(--accent);background:var(--adim)}
-    .si svg{width:13px;height:13px;fill:currentColor}
+    .si{width:34px;height:34px;border:1px solid var(--border);border-radius:8px;background:var(--card);display:flex;align-items:center;justify-content:center;color:var(--muted);transition:.16s;box-shadow:var(--shadow-sm)}
+    .si:hover{color:var(--accent);border-color:var(--amid);background:var(--adim)}
+    .si svg{width:14px;height:14px;fill:currentColor}
 
     /* nav */
-    #site-nav{position:fixed;bottom:26px;left:50%;transform:translateX(-50%);z-index:500;background:rgba(12,11,9,.93);backdrop-filter:blur(20px);border:1px solid rgba(255,255,255,.08);border-radius:999px;padding:4px;display:flex;gap:2px}
-    .nav-btn{padding:7px 15px;border-radius:999px;border:none;background:transparent;color:rgba(255,255,255,.4);font-family:'DM Mono',monospace;font-size:9px;letter-spacing:.1em;text-transform:uppercase;cursor:pointer;transition:all .28s}
-    .nav-btn.active{background:#fff;color:var(--ink);font-weight:500}
+    #site-nav{position:fixed;bottom:24px;left:50%;transform:translateX(-50%);z-index:500;background:rgba(15,23,42,.92);backdrop-filter:blur(20px);border:1px solid rgba(255,255,255,.1);border-radius:12px;padding:5px;display:flex;gap:2px;box-shadow:var(--shadow-md)}
+    .nav-btn{padding:8px 15px;border-radius:8px;border:none;background:transparent;color:rgba(255,255,255,.5);font-family:'JetBrains Mono',monospace;font-size:9px;letter-spacing:.1em;text-transform:uppercase;cursor:pointer;transition:all .22s}
+    .nav-btn.active{background:#fff;color:var(--ink);font-weight:600}
 
     /* profile */
-    .profile-ring{width:252px;height:252px;border-radius:50%;border:1.5px solid var(--accent);overflow:hidden;position:relative;flex-shrink:0}
-    .profile-ring::after{content:'';position:absolute;inset:0;border-radius:50%;box-shadow:inset 0 0 36px rgba(192,57,31,.12)}
-    .scan-bar{position:absolute;width:100%;height:2px;background:linear-gradient(90deg,transparent,var(--accent),transparent);top:0;animation:scan 4s linear infinite;z-index:10}
-    @keyframes scan{0%{top:-2%}100%{top:102%}}
+    .profile-ring{width:252px;height:252px;border-radius:18px;border:1px solid var(--border);background:#fff;overflow:hidden;position:relative;flex-shrink:0;box-shadow:var(--shadow-md)}
+    .profile-ring::after{content:'';position:absolute;left:0;right:0;bottom:0;height:4px;background:var(--accent)}
+    .scan-bar{display:none}
 
     /* ticker */
     .ticker-wrap{overflow:hidden}
@@ -146,42 +148,42 @@
     @keyframes ticker{from{transform:translateX(0)}to{transform:translateX(-50%)}}
 
     .accent-rule{width:36px;height:2px;background:var(--accent);flex-shrink:0}
-    .tag{font-family:'DM Mono',monospace;font-size:10px;letter-spacing:.05em;text-transform:uppercase;color:var(--muted);padding:2px 9px;border:1px solid var(--borderl);border-radius:2px;display:inline-block}
+    .tag{font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:.04em;text-transform:uppercase;color:var(--muted);padding:3px 9px;border:1px solid var(--border);border-radius:6px;background:var(--card);display:inline-block}
     .tag-accent{color:var(--accent);border-color:var(--amid);background:var(--adim)}
 
     /* impact */
-    .impact-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:var(--border);margin-bottom:72px}
-    .impact-cell{background:var(--paper);padding:36px 30px}
-    .impact-num{font-family:'DM Serif Display',serif;font-size:clamp(2.8rem,6vw,5rem);line-height:1;color:var(--accent)}
-    .impact-label{font-family:'DM Mono',monospace;font-size:10px;text-transform:uppercase;letter-spacing:.1em;color:var(--muted);margin-top:6px;margin-bottom:14px}
+    .impact-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin-bottom:72px}
+    .impact-cell{background:var(--card);border:1px solid var(--border);border-top:3px solid var(--accent);border-radius:var(--radius);padding:32px 28px;box-shadow:var(--shadow-sm)}
+    .impact-num{font-family:'Space Grotesk',sans-serif;font-weight:700;font-size:clamp(2.6rem,5.6vw,4.6rem);line-height:1;letter-spacing:-.03em;color:var(--ink)}
+    .impact-label{font-family:'JetBrains Mono',monospace;font-size:10px;text-transform:uppercase;letter-spacing:.1em;color:var(--accent);margin-top:8px;margin-bottom:14px}
     .impact-desc{font-size:13px;line-height:1.7;color:var(--muted)}
 
     /* skills */
-    .skills-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px}
-    .skill-card{background:rgba(255,255,255,.6);border:1px solid var(--border);border-radius:2px;padding:18px 20px;transition:.2s}
-    .skill-card:hover{border-color:var(--borderl);box-shadow:0 3px 20px rgba(0,0,0,.05)}
-    .skill-cat{font-family:'DM Mono',monospace;font-size:10px;text-transform:uppercase;letter-spacing:.15em;color:var(--muted);margin-bottom:12px}
-    .tags{display:flex;flex-wrap:wrap;gap:5px}
+    .skills-grid{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+    .skill-card{background:var(--card);border:1px solid var(--border);border-radius:var(--radius);padding:20px 22px;transition:transform .18s ease,box-shadow .18s ease,border-color .18s ease;box-shadow:var(--shadow-sm)}
+    .skill-card:hover{border-color:var(--borderl);box-shadow:var(--shadow-md);transform:translateY(-2px)}
+    .skill-cat{font-family:'JetBrains Mono',monospace;font-size:10px;text-transform:uppercase;letter-spacing:.14em;color:var(--muted);margin-bottom:12px}
+    .tags{display:flex;flex-wrap:wrap;gap:6px}
 
     /* featured work (dark card) */
-    .feature-card{background:var(--ink);color:var(--paper);border-radius:2px;padding:52px 48px;margin-bottom:24px;position:relative;overflow:hidden}
-    .feature-card::before{content:'';position:absolute;top:-80px;right:-80px;width:260px;height:260px;border-radius:50%;background:radial-gradient(circle,rgba(192,57,31,.28) 0%,transparent 70%);pointer-events:none}
-    .feature-title{font-family:'DM Serif Display',serif;font-size:clamp(2rem,5vw,3.8rem);letter-spacing:-.02em;color:var(--paper);margin-bottom:8px;display:block;line-height:1}
-    .feature-sub{font-family:'DM Mono',monospace;font-size:10px;text-transform:uppercase;letter-spacing:.2em;color:rgba(255,255,255,.32);margin-bottom:24px;display:block}
-    .feature-desc{font-size:15px;line-height:1.8;color:rgba(245,242,236,.65);max-width:560px;margin-bottom:28px}
+    .feature-card{background:var(--ink);color:var(--paper);border-radius:16px;padding:52px 48px;margin-bottom:24px;position:relative;overflow:hidden;box-shadow:var(--shadow-md)}
+    .feature-card::before{content:'';position:absolute;top:-100px;right:-100px;width:300px;height:300px;border-radius:50%;background:radial-gradient(circle,rgba(37,99,235,.35) 0%,transparent 70%);pointer-events:none}
+    .feature-title{font-family:'Space Grotesk',sans-serif;font-size:clamp(2rem,5vw,3.8rem);letter-spacing:-.02em;color:var(--paper);margin-bottom:8px;display:block;line-height:1}
+    .feature-sub{font-family:'JetBrains Mono',monospace;font-size:10px;text-transform:uppercase;letter-spacing:.2em;color:rgba(255,255,255,.32);margin-bottom:24px;display:block}
+    .feature-desc{font-size:15px;line-height:1.8;color:rgba(244,246,249,.65);max-width:560px;margin-bottom:28px}
     .feature-meta{display:flex;gap:32px;margin-bottom:32px;flex-wrap:wrap}
-    .fm-k{font-family:'DM Mono',monospace;font-size:10px;text-transform:uppercase;letter-spacing:.1em;color:rgba(245,242,236,.32);margin-bottom:3px}
+    .fm-k{font-family:'JetBrains Mono',monospace;font-size:10px;text-transform:uppercase;letter-spacing:.1em;color:rgba(244,246,249,.32);margin-bottom:3px}
     .fm-v{font-size:13px;font-weight:500;color:var(--paper)}
     .impact-callout{padding:20px 22px;background:rgba(255,255,255,.05);border-left:2px solid var(--accent);margin-bottom:32px}
-    .ic-label{font-family:'DM Mono',monospace;font-size:10px;text-transform:uppercase;letter-spacing:.1em;color:rgba(255,255,255,.28);margin-bottom:10px}
-    .ic-text{font-size:14px;line-height:1.75;color:rgba(245,242,236,.68)}
+    .ic-label{font-family:'JetBrains Mono',monospace;font-size:10px;text-transform:uppercase;letter-spacing:.1em;color:rgba(255,255,255,.28);margin-bottom:10px}
+    .ic-text{font-size:14px;line-height:1.75;color:rgba(244,246,249,.68)}
 
     /* blog rows */
     .blog-list{border-top:1px solid var(--border)}
     .blog-row{border-bottom:1px solid var(--border);padding:26px 0;display:flex;justify-content:space-between;align-items:center;gap:20px;cursor:pointer;transition:padding-left .2s}
     .blog-row:hover{padding-left:8px}
     .blog-row:hover .arrow{transform:translateX(5px)}
-    .blog-title{font-family:'DM Serif Display',serif;font-size:21px;margin-bottom:5px}
+    .blog-title{font-family:'Space Grotesk',sans-serif;font-size:21px;margin-bottom:5px}
     .blog-desc{font-size:13px;color:var(--muted);line-height:1.6}
     .arrow{display:inline-block;font-size:18px;color:var(--muted);transition:transform .2s;flex-shrink:0}
 
@@ -191,47 +193,47 @@
     .tl-item{position:relative;margin-bottom:52px}
     .tl-dot{position:absolute;left:-32px;top:14px;width:8px;height:8px;border-radius:50%;background:var(--accent);border:2px solid var(--paper)}
     .tl-head{display:flex;justify-content:space-between;align-items:baseline;flex-wrap:wrap;gap:8px;margin-bottom:10px}
-    .tl-role{font-family:'DM Serif Display',serif;font-size:20px}
+    .tl-role{font-family:'Space Grotesk',sans-serif;font-size:20px}
     .tl-co{color:var(--accent);font-weight:700;font-size:15px;margin-left:10px}
-    .tl-period{font-family:'DM Mono',monospace;font-size:10px;color:var(--muted);letter-spacing:.05em}
+    .tl-period{font-family:'JetBrains Mono',monospace;font-size:10px;color:var(--muted);letter-spacing:.05em}
     .tl-bullets{list-style:none;display:flex;flex-direction:column;gap:7px;margin-top:8px}
     .tl-bullet{display:flex;gap:10px;font-size:14px;line-height:1.65;color:var(--muted)}
     .tl-dash{color:var(--accent);flex-shrink:0;margin-top:1px}
 
     /* training */
-    .big-num{font-family:'DM Serif Display',serif;font-size:clamp(4rem,10vw,7rem);line-height:1;color:var(--accent)}
-    .module-item{background:rgba(255,255,255,.55);border:1px solid var(--border);border-radius:2px;padding:15px 18px;display:flex;gap:14px}
-    .module-n{font-family:'DM Mono',monospace;font-size:11px;color:var(--accent);flex-shrink:0;margin-top:1px}
+    .big-num{font-family:'Space Grotesk',sans-serif;font-weight:700;font-size:clamp(4rem,10vw,7rem);line-height:1;letter-spacing:-.04em;color:var(--ink)}
+    .module-item{background:var(--card);border:1px solid var(--border);border-radius:var(--radius);padding:16px 18px;display:flex;gap:14px;box-shadow:var(--shadow-sm)}
+    .module-n{font-family:'JetBrains Mono',monospace;font-size:11px;color:var(--accent);flex-shrink:0;margin-top:1px}
 
     /* proj */
-    .proj-card{background:rgba(255,255,255,.55);border:1px solid var(--border);border-radius:2px;padding:26px;transition:.2s}
-    .proj-card:hover{border-color:var(--borderl);box-shadow:0 4px 24px rgba(0,0,0,.06)}
-    .shot-grid{max-width:520px;justify-content:start}
+    .proj-card{background:var(--card);border:1px solid var(--border);border-radius:var(--radius);padding:26px;transition:transform .18s ease,box-shadow .18s ease,border-color .18s ease;box-shadow:var(--shadow-sm)}
+    .proj-card:hover{border-color:var(--borderl);box-shadow:var(--shadow-md);transform:translateY(-2px)}
+    .shot-grid{max-width:360px;justify-content:start}
 
     /* ── ADMIN SYSTEM ── */
 
     /* Login modal overlay */
-    .admin-overlay{position:fixed;inset:0;z-index:2000;background:rgba(12,11,9,.7);backdrop-filter:blur(8px);display:flex;align-items:center;justify-content:center}
+    .admin-overlay{position:fixed;inset:0;z-index:2000;background:rgba(14,21,32,.7);backdrop-filter:blur(8px);display:flex;align-items:center;justify-content:center}
     .admin-modal{background:var(--paper);border:1px solid var(--borderl);border-radius:2px;padding:40px;width:340px;position:relative}
-    .admin-modal-title{font-family:'DM Serif Display',serif;font-size:24px;margin-bottom:6px}
-    .admin-modal-sub{font-family:'DM Mono',monospace;font-size:10px;text-transform:uppercase;letter-spacing:.2em;color:var(--muted);margin-bottom:28px}
-    .admin-input{width:100%;padding:11px 14px;border:1px solid var(--borderl);border-radius:2px;font-family:'DM Mono',monospace;font-size:13px;background:var(--paper);color:var(--ink);outline:none;transition:border-color .18s;margin-bottom:10px}
+    .admin-modal-title{font-family:'Space Grotesk',sans-serif;font-size:24px;margin-bottom:6px}
+    .admin-modal-sub{font-family:'JetBrains Mono',monospace;font-size:10px;text-transform:uppercase;letter-spacing:.2em;color:var(--muted);margin-bottom:28px}
+    .admin-input{width:100%;padding:11px 14px;border:1px solid var(--borderl);border-radius:2px;font-family:'JetBrains Mono',monospace;font-size:13px;background:var(--paper);color:var(--ink);outline:none;transition:border-color .18s;margin-bottom:10px}
     .admin-input:focus{border-color:var(--ink)}
     .admin-input-err{border-color:var(--accent)!important}
-    .admin-err{font-family:'DM Mono',monospace;font-size:10px;color:var(--accent);text-transform:uppercase;letter-spacing:.1em;margin-bottom:14px;height:14px}
+    .admin-err{font-family:'JetBrains Mono',monospace;font-size:10px;color:var(--accent);text-transform:uppercase;letter-spacing:.1em;margin-bottom:14px;height:14px}
     .admin-modal-close{position:absolute;top:14px;right:14px;background:none;border:none;cursor:pointer;color:var(--muted);font-size:18px;line-height:1;padding:4px}
     .admin-modal-close:hover{color:var(--ink)}
 
     /* Admin mode bar */
-    #admin-bar{position:fixed;top:0;left:0;right:0;z-index:900;background:var(--accent);color:#fff;font-family:'DM Mono',monospace;font-size:10px;letter-spacing:.18em;text-transform:uppercase;padding:7px 40px;display:flex;justify-content:space-between;align-items:center;transform:translateY(-100%);transition:transform .3s}
+    #admin-bar{position:fixed;top:0;left:0;right:0;z-index:900;background:var(--accent);color:#fff;font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:.18em;text-transform:uppercase;padding:7px 40px;display:flex;justify-content:space-between;align-items:center;transform:translateY(-100%);transition:transform .3s}
     #admin-bar.visible{transform:translateY(0)}
-    #admin-bar button{background:rgba(255,255,255,.2);border:1px solid rgba(255,255,255,.4);color:#fff;font-family:'DM Mono',monospace;font-size:10px;letter-spacing:.1em;text-transform:uppercase;padding:4px 14px;border-radius:2px;cursor:pointer;transition:.18s}
+    #admin-bar button{background:rgba(255,255,255,.2);border:1px solid rgba(255,255,255,.4);color:#fff;font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:.1em;text-transform:uppercase;padding:4px 14px;border-radius:2px;cursor:pointer;transition:.18s}
     #admin-bar button:hover{background:rgba(255,255,255,.35)}
 
     /* Section edit trigger — appears on hover when in admin mode */
     .editable-section{position:relative}
-    .edit-btn{position:absolute;top:20px;right:20px;z-index:300;display:none;align-items:center;gap:6px;background:var(--accent);color:#fff;border:none;font-family:'DM Mono',monospace;font-size:10px;letter-spacing:.12em;text-transform:uppercase;padding:8px 16px;border-radius:2px;cursor:pointer;transition:.18s;box-shadow:0 2px 12px rgba(192,57,31,.35)}
-    .edit-btn:hover{background:#a02e17;transform:translateY(-1px)}
+    .edit-btn{position:absolute;top:20px;right:20px;z-index:300;display:none;align-items:center;gap:6px;background:var(--accent);color:#fff;border:none;font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:.12em;text-transform:uppercase;padding:8px 16px;border-radius:2px;cursor:pointer;transition:.18s;box-shadow:0 2px 12px rgba(31,95,174,.35)}
+    .edit-btn:hover{background:#184e90;transform:translateY(-1px)}
     .edit-btn svg{width:12px;height:12px;fill:currentColor;flex-shrink:0}
     body.admin-mode .edit-btn{display:flex}
 
@@ -239,23 +241,38 @@
     .edit-drawer{position:fixed;top:0;right:0;bottom:0;z-index:1500;width:480px;max-width:95vw;background:var(--paper);border-left:1px solid var(--borderl);display:flex;flex-direction:column;transform:translateX(100%);transition:transform .32s cubic-bezier(.4,0,.2,1);box-shadow:-8px 0 40px rgba(0,0,0,.12)}
     .edit-drawer.open{transform:translateX(0)}
     .drawer-header{padding:24px 28px 20px;border-bottom:1px solid var(--border);display:flex;justify-content:space-between;align-items:center;flex-shrink:0}
-    .drawer-title{font-family:'DM Serif Display',serif;font-size:20px}
+    .drawer-title{font-family:'Space Grotesk',sans-serif;font-size:20px}
     .drawer-close{background:none;border:none;cursor:pointer;color:var(--muted);font-size:20px;padding:4px;transition:color .18s}
     .drawer-close:hover{color:var(--ink)}
     .drawer-body{flex:1;overflow-y:auto;padding:24px 28px}
     .drawer-footer{padding:20px 28px;border-top:1px solid var(--border);display:flex;gap:10px;flex-shrink:0}
     .field-group{margin-bottom:20px}
-    .field-label{font-family:'DM Mono',monospace;font-size:10px;text-transform:uppercase;letter-spacing:.15em;color:var(--muted);margin-bottom:7px;display:block}
-    .field-input{width:100%;padding:9px 12px;border:1px solid var(--borderl);border-radius:2px;font-family:'Syne',sans-serif;font-size:13px;background:var(--paper);color:var(--ink);outline:none;resize:vertical;transition:border-color .18s;line-height:1.5}
+    .field-label{font-family:'JetBrains Mono',monospace;font-size:10px;text-transform:uppercase;letter-spacing:.15em;color:var(--muted);margin-bottom:7px;display:block}
+    .field-input{width:100%;padding:9px 12px;border:1px solid var(--borderl);border-radius:2px;font-family:'Inter',sans-serif;font-size:13px;background:var(--paper);color:var(--ink);outline:none;resize:vertical;transition:border-color .18s;line-height:1.5}
     .field-input:focus{border-color:var(--ink)}
     .field-sep{height:1px;background:var(--border);margin:24px 0}
-    .field-section-head{font-family:'DM Mono',monospace;font-size:10px;text-transform:uppercase;letter-spacing:.2em;color:var(--accent);margin-bottom:16px;margin-top:4px}
-    .saved-toast{position:fixed;bottom:80px;left:50%;transform:translateX(-50%) translateY(20px);z-index:2100;background:var(--ink);color:var(--paper);font-family:'DM Mono',monospace;font-size:11px;letter-spacing:.12em;text-transform:uppercase;padding:10px 22px;border-radius:2px;opacity:0;transition:opacity .25s,transform .25s;pointer-events:none}
+    .field-section-head{font-family:'JetBrains Mono',monospace;font-size:10px;text-transform:uppercase;letter-spacing:.2em;color:var(--accent);margin-bottom:16px;margin-top:4px}
+    .saved-toast{position:fixed;bottom:80px;left:50%;transform:translateX(-50%) translateY(20px);z-index:2100;background:var(--ink);color:var(--paper);font-family:'JetBrains Mono',monospace;font-size:11px;letter-spacing:.12em;text-transform:uppercase;padding:10px 22px;border-radius:2px;opacity:0;transition:opacity .25s,transform .25s;pointer-events:none}
     .saved-toast.show{opacity:1;transform:translateX(-50%) translateY(0)}
 
-    /* fade-in */
-    .fi{opacity:0;transform:translateY(20px);transition:opacity .65s ease,transform .65s ease}
+    /* scroll progress */
+    #scroll-progress{position:fixed;top:0;left:0;right:0;height:2px;z-index:600;background:var(--accent);transform:scaleX(0);transform-origin:0 50%;will-change:transform}
+
+    /* reveal on scroll */
+    .fi{opacity:0;transform:translateY(28px);transition:opacity .7s cubic-bezier(.16,1,.3,1),transform .7s cubic-bezier(.16,1,.3,1);will-change:opacity,transform}
     .fi.in{opacity:1;transform:translateY(0)}
+    section.in-view .impact-cell,section.in-view .skill-card,section.in-view .proj-card,section.in-view .module-item{animation:card-rise .6s cubic-bezier(.16,1,.3,1) both}
+    section.in-view .impact-cell:nth-child(2),section.in-view .skill-card:nth-child(2),section.in-view .proj-card:nth-child(2){animation-delay:.07s}
+    section.in-view .impact-cell:nth-child(3),section.in-view .skill-card:nth-child(3),section.in-view .proj-card:nth-child(3){animation-delay:.14s}
+    section.in-view .impact-cell:nth-child(n+4),section.in-view .skill-card:nth-child(n+4),section.in-view .proj-card:nth-child(n+4){animation-delay:.2s}
+    @keyframes card-rise{from{opacity:0;transform:translateY(22px)}to{opacity:1;transform:translateY(0)}}
+    .si,.btn{will-change:transform}
+    @media (prefers-reduced-motion:reduce){
+      .fi{opacity:1!important;transform:none!important;transition:none!important}
+      section.in-view .impact-cell,section.in-view .skill-card,section.in-view .proj-card,section.in-view .module-item{animation:none}
+      #scroll-progress{display:none}
+      html{scroll-behavior:auto}
+    }
     ::-webkit-scrollbar{width:3px}
     ::-webkit-scrollbar-track{background:var(--p2)}
     ::-webkit-scrollbar-thumb{background:var(--borderl);border-radius:2px}
@@ -324,7 +341,7 @@
 <div id="static-content" class="wrap" style="padding-top:60px;padding-bottom:60px;max-width:760px">
   <header>
     <h1 class="display-sm" style="margin-bottom:6px">Rahul Pahuja</h1>
-    <p class="label" style="margin-bottom:28px">Principal Mobile Engineer — Hyderabad, IN</p>
+    <p class="label" style="margin-bottom:28px">Principal Engineer — Indore, IN</p>
   </header>
 
   <nav aria-label="Sections" style="margin-bottom:36px">
@@ -491,6 +508,15 @@ const NAV=[
 const COMPANIES=["CyberArk","Bankwest","CBA","Conviva","Intellicus","Wipro","Chevron","Shell","Coforge","LTIMindtree"];
 
 const TIMELINE=[
+  {
+    role:"Founder & Principal Engineer",co:"Mobile1x",period:"2025 — Present",tag:"Founder · Indie Apps",
+    bullets:[
+      "Founded Mobile1x — an independent studio shipping privacy-first, on-device mobile products end to end: product, architecture, and release. (mobile1x.com)",
+      "DeDup — AI-powered duplicate file cleaner for Android; fully on-device media analysis for photos, videos, APKs, memes and WhatsApp clutter. In Early Access on the Play Store. (dedup.space)",
+      "Notes — The Modern Archivist — offline-first notes app with voice memos, live speech-to-text, drawings, image OCR and reminders; optional opt-in cloud AI (Gemini) for sorting and meeting summaries, Google Sign-In sync.",
+      "AI Similarity — developer reference that maps Android and iOS APIs side by side to speed cross-platform translation. (aisimilarity.com)",
+    ]
+  },
   {
     role:"Staff Software Engineer",co:"CyberArk",period:"Nov 2024 — Dec 2025",tag:"Mobile Security",
     bullets:[
@@ -674,11 +700,34 @@ const App=()=>{
       entries.forEach(e=>{if(e.isIntersecting){setActive(e.target.id);}});
     },{threshold:.35});
     document.querySelectorAll('section[id]').forEach(s=>obs.observe(s));
-    return()=>obs.disconnect();
+
+    /* stagger-reveal cards when their section enters */
+    const rev=new IntersectionObserver(entries=>{
+      entries.forEach(e=>{if(e.isIntersecting){e.target.classList.add('in-view');rev.unobserve(e.target);}});
+    },{threshold:.12,rootMargin:'0px 0px -8% 0px'});
+    document.querySelectorAll('section').forEach(s=>rev.observe(s));
+    const safety=setTimeout(()=>document.querySelectorAll('section').forEach(s=>s.classList.add('in-view')),2500);
+
+    /* top scroll-progress bar */
+    const bar=document.getElementById('scroll-progress');
+    let ticking=false;
+    const onScroll=()=>{
+      if(ticking)return;ticking=true;
+      requestAnimationFrame(()=>{
+        const h=document.documentElement;
+        const p=h.scrollHeight-h.clientHeight;
+        if(bar)bar.style.transform='scaleX('+(p>0?Math.min(h.scrollTop/p,1):0)+')';
+        ticking=false;
+      });
+    };
+    window.addEventListener('scroll',onScroll,{passive:true});onScroll();
+    return()=>{obs.disconnect();rev.disconnect();clearTimeout(safety);window.removeEventListener('scroll',onScroll);};
   },[]);
   const go=id=>document.getElementById(id)?.scrollIntoView({behavior:'smooth'});
 
   return <div>
+
+    <div id="scroll-progress"></div>
 
     {/* ── ADMIN BAR ── */}
     <div id="admin-bar">
@@ -712,7 +761,7 @@ const App=()=>{
         <div className="field-section-head">Three impact stats</div>
         {draft.impact_stats.map((s,i)=>(
           <div key={i} style={{marginBottom:'20px',padding:'16px',border:'1px solid var(--border)',borderRadius:'2px'}}>
-            <div style={{fontFamily:'DM Mono,monospace',fontSize:'10px',color:'var(--muted)',textTransform:'uppercase',letterSpacing:'.1em',marginBottom:'10px'}}>Stat {i+1}</div>
+            <div style={{fontFamily:'JetBrains Mono,monospace',fontSize:'10px',color:'var(--muted)',textTransform:'uppercase',letterSpacing:'.1em',marginBottom:'10px'}}>Stat {i+1}</div>
             <Field label="Number" value={s.n} onChange={v=>{const a=[...draft.impact_stats];a[i]={...a[i],n:v};dset('impact_stats',a);}}/>
             <Field label="Label" value={s.l} onChange={v=>{const a=[...draft.impact_stats];a[i]={...a[i],l:v};dset('impact_stats',a);}}/>
             <Field label="Description" value={s.d} onChange={v=>{const a=[...draft.impact_stats];a[i]={...a[i],d:v};dset('impact_stats',a);}} rows={2}/>
@@ -738,7 +787,7 @@ const App=()=>{
       {draft&&<>
         {draft.blogs.map((b,i)=>(
           <div key={i} style={{marginBottom:'20px',padding:'16px',border:'1px solid var(--border)',borderRadius:'2px'}}>
-            <div style={{fontFamily:'DM Mono,monospace',fontSize:'10px',color:'var(--muted)',textTransform:'uppercase',letterSpacing:'.1em',marginBottom:'10px'}}>Article {i+1}</div>
+            <div style={{fontFamily:'JetBrains Mono,monospace',fontSize:'10px',color:'var(--muted)',textTransform:'uppercase',letterSpacing:'.1em',marginBottom:'10px'}}>Article {i+1}</div>
             <Field label="Tag" value={b.tag} onChange={v=>{const a=[...draft.blogs];a[i]={...a[i],tag:v};dset('blogs',a);}}/>
             <Field label="Title" value={b.title} onChange={v=>{const a=[...draft.blogs];a[i]={...a[i],title:v};dset('blogs',a);}}/>
             <Field label="Description" value={b.desc} onChange={v=>{const a=[...draft.blogs];a[i]={...a[i],desc:v};dset('blogs',a);}} rows={2}/>
@@ -753,7 +802,7 @@ const App=()=>{
       {draft&&<>
         {draft.timeline.map((t,i)=>(
           <div key={i} style={{marginBottom:'24px',padding:'16px',border:'1px solid var(--border)',borderRadius:'2px'}}>
-            <div style={{fontFamily:'DM Mono,monospace',fontSize:'10px',color:'var(--muted)',textTransform:'uppercase',letterSpacing:'.1em',marginBottom:'10px'}}>Role {i+1}</div>
+            <div style={{fontFamily:'JetBrains Mono,monospace',fontSize:'10px',color:'var(--muted)',textTransform:'uppercase',letterSpacing:'.1em',marginBottom:'10px'}}>Role {i+1}</div>
             <Field label="Role title" value={t.role} onChange={v=>{const a=[...draft.timeline];a[i]={...a[i],role:v};dset('timeline',a);}}/>
             <Field label="Company" value={t.co} onChange={v=>{const a=[...draft.timeline];a[i]={...a[i],co:v};dset('timeline',a);}}/>
             <Field label="Period" value={t.period} onChange={v=>{const a=[...draft.timeline];a[i]={...a[i],period:v};dset('timeline',a);}}/>
@@ -798,14 +847,14 @@ const App=()=>{
     <header id="site-header">
       <div style={{display:'flex',alignItems:'baseline'}}>
         <span className="header-name">Rahul Pahuja</span>
-        <span className="header-role">Principal Mobile Engineer</span>
+        <span className="header-role">Secured Storage · CyberArk</span>
       </div>
       <div style={{display:'flex',gap:'10px',alignItems:'center'}}>
         <div className="header-socials" style={{display:'flex',gap:'8px'}}>
           <a href="https://www.linkedin.com/in/therahulpahuja/" target="_blank" rel="noopener noreferrer" className="si"><LI/></a>
           <a href="https://github.com/rahulpahuja" target="_blank" rel="noopener noreferrer" className="si"><GH/></a>
         </div>
-        <a href="tel:+918819091000" className="btn btn-accent">Call me →</a>
+        <a href="tel:+918819091000" className="btn btn-accent">Contact me →</a>
         <a href="/Rahul_Pahuja_Resume.pdf" download className="btn btn-solid">Download CV</a>
       </div>
     </header>
@@ -823,7 +872,7 @@ const App=()=>{
         <div className="wrap">
           <div className="hero-grid" style={{display:'grid',gridTemplateColumns:'1fr auto',gap:'56px',alignItems:'center'}}>
             <div>
-              <FI><div className="label" style={{marginBottom:'24px'}}>// Principal_engineer — Hyderabad, IN</div></FI>
+              <FI><div className="label" style={{marginBottom:'24px'}}>// Principal_engineer — Indore, IN</div></FI>
               <FI delay={.1}>
                 <h1 className="display" style={{marginBottom:'28px'}}>
                   {content.hero_headline.split('\n').map((line,i,arr)=>(
@@ -836,7 +885,7 @@ const App=()=>{
               </FI>
               <FI delay={.3}>
                 <div style={{display:'flex',gap:'10px',flexWrap:'wrap',marginBottom:'44px'}}>
-                  <a href="tel:+918819091000" className="btn btn-accent">Call me →</a>
+                  <a href="tel:+918819091000" className="btn btn-accent">Contact me →</a>
                   <a href={`mailto:${content.hero_email}`} className="btn btn-ghost">Get in touch →</a>
                   <button onClick={()=>go('feature')} className="btn btn-ghost">Secured Storage ↓</button>
                 </div>
@@ -845,7 +894,7 @@ const App=()=>{
                 <div className="hero-stats" style={{display:'flex',gap:'40px'}}>
                   {[{n:'10+',l:'Years in mobile'},{n:'12B+',l:'Events/min — Conviva'},{n:'M+',l:'Banking users — Bankwest'}].map(s=>(
                     <div key={s.n}>
-                      <div style={{fontFamily:'DM Serif Display,serif',fontSize:'26px',color:'var(--accent)',lineHeight:1}}>{s.n}</div>
+                      <div style={{fontFamily:'Space Grotesk,sans-serif',fontSize:'26px',color:'var(--accent)',lineHeight:1}}>{s.n}</div>
                       <div className="label" style={{marginTop:'4px'}}>{s.l}</div>
                     </div>
                   ))}
@@ -859,7 +908,7 @@ const App=()=>{
                   <img src="public/profile-thumb.jpg" alt="Rahul Pahuja" style={{width:'100%',height:'100%',objectFit:'cover'}}/>
                 </div>
                 <div style={{textAlign:'center'}}>
-                  <div style={{fontFamily:'DM Serif Display,serif',fontSize:'17px'}}>Rahul Pahuja</div>
+                  <div style={{fontFamily:'Space Grotesk,sans-serif',fontSize:'17px'}}>Rahul Pahuja</div>
                   <div className="label" style={{marginTop:'4px'}}>Building DeDup & Notes</div>
                 </div>
               </div>
@@ -869,7 +918,7 @@ const App=()=>{
             <div className="label" style={{marginBottom:'12px'}}>Experience across</div>
             <div className="ticker-inner">
               {[...COMPANIES,...COMPANIES].map((c,i)=>(
-                <span key={i} style={{fontFamily:'DM Mono,monospace',fontSize:'12px',letterSpacing:'.15em',textTransform:'uppercase',color:'var(--muted)',whiteSpace:'nowrap'}}>{c}&nbsp;&nbsp;·&nbsp;&nbsp;</span>
+                <span key={i} style={{fontFamily:'JetBrains Mono,monospace',fontSize:'12px',letterSpacing:'.15em',textTransform:'uppercase',color:'var(--muted)',whiteSpace:'nowrap'}}>{c}&nbsp;&nbsp;·&nbsp;&nbsp;</span>
               ))}
             </div>
           </div>
@@ -952,22 +1001,22 @@ const App=()=>{
             <FI delay={.24}>
               <div style={{display:'flex',gap:'8px',flexWrap:'wrap'}}>
                 {['TEE-backed key storage','Hardware-bound encryption','Biometric unlock flows','Secure enclave integration','Cross-platform parity','Threat modelling','Clean Architecture','Dependency Injection'].map(t=>(
-                  <span key={t} style={{padding:'3px 12px',border:'1px solid rgba(192,57,31,.35)',background:'rgba(192,57,31,.09)',borderRadius:'2px',fontFamily:'DM Mono,monospace',fontSize:'10px',color:'#e07060',letterSpacing:'.06em',textTransform:'uppercase'}}>{t}</span>
+                  <span key={t} style={{padding:'3px 12px',border:'1px solid rgba(31,95,174,.35)',background:'rgba(31,95,174,.09)',borderRadius:'2px',fontFamily:'JetBrains Mono,monospace',fontSize:'10px',color:'#7ba9dc',letterSpacing:'.06em',textTransform:'uppercase'}}>{t}</span>
                 ))}
               </div>
             </FI>
           </div>
           <div className="proj-grid" style={{display:'grid',gridTemplateColumns:'1fr 1fr',gap:'14px',marginTop:'24px'}}>
             {[
-              {title:'AI Similarity',desc:'Maps Android/iOS APIs side-by-side — helps engineers quickly translate concepts across both mobile ecosystems.',tech:['Android','iOS','Kotlin','Swift'],link:'https://69a65ad8cce3d69888c55e89--aquamarine-starship-b124cd.netlify.app/'},
+              {title:'AI Similarity',desc:'Maps Android/iOS APIs side-by-side — helps engineers quickly translate concepts across both mobile ecosystems.',tech:['Android','iOS','Kotlin','Swift'],link:'https://www.aisimilarity.com'},
               {title:'CodeForumBlogs',desc:'Community platform for technical writing with real-time collaboration, code highlighting, and developer knowledge sharing.',tech:['React','Node.js','MongoDB'],link:'https://www.codeforumblogs.com'},
             ].map((p,i)=>(
               <FI key={i} delay={i*.08}>
                 <div className="proj-card">
-                  <div style={{fontFamily:'DM Serif Display,serif',fontSize:'22px',marginBottom:'8px'}}>{p.title}</div>
+                  <div style={{fontFamily:'Space Grotesk,sans-serif',fontSize:'22px',marginBottom:'8px'}}>{p.title}</div>
                   <p style={{fontSize:'13px',lineHeight:'1.7',color:'var(--muted)',marginBottom:'14px'}}>{p.desc}</p>
                   <div className="tags" style={{marginBottom:'18px'}}>{p.tech.map(t=><span key={t} className="tag">{t}</span>)}</div>
-                  <a href={p.link} target="_blank" rel="noopener noreferrer" style={{fontFamily:'DM Mono,monospace',fontSize:'10px',textTransform:'uppercase',letterSpacing:'.1em',color:'var(--accent)'}}>View project →</a>
+                  <a href={p.link} target="_blank" rel="noopener noreferrer" style={{fontFamily:'JetBrains Mono,monospace',fontSize:'10px',textTransform:'uppercase',letterSpacing:'.1em',color:'var(--accent)'}}>View project →</a>
                 </div>
               </FI>
             ))}
@@ -977,7 +1026,7 @@ const App=()=>{
               <div style={{display:'flex',justifyContent:'space-between',alignItems:'flex-start',flexWrap:'wrap',gap:'12px',marginBottom:'20px'}}>
                 <div style={{flex:1,minWidth:'260px'}}>
                   <div style={{display:'flex',alignItems:'center',gap:'12px',marginBottom:'10px'}}>
-                    <div style={{fontFamily:'DM Serif Display,serif',fontSize:'22px'}}>DeDup</div>
+                    <div style={{fontFamily:'Space Grotesk,sans-serif',fontSize:'22px'}}>DeDup</div>
                     <span className="tag tag-accent">Android</span>
                     <span className="tag" style={{color:'#2a7d4f',borderColor:'rgba(42,125,79,.35)',background:'rgba(42,125,79,.08)'}}>Early Access — Play Store</span>
                   </div>
@@ -986,7 +1035,7 @@ const App=()=>{
                   <div style={{display:'flex',gap:'10px',flexWrap:'wrap',alignItems:'center'}}>
                     <a href="https://dedup.space" target="_blank" rel="noopener noreferrer" className="btn btn-solid" style={{fontSize:'10px',padding:'9px 18px'}}>Visit Website →</a>
                     <a href="https://forms.gle/V4UjUQjfNxbEuRWb9" target="_blank" rel="noopener noreferrer" className="btn btn-ghost" style={{fontSize:'10px',padding:'9px 18px'}}>Become an early tester today →</a>
-                    <a href="https://github.com/rahulpahuja/dedup" target="_blank" rel="noopener noreferrer" style={{fontFamily:'DM Mono,monospace',fontSize:'10px',textTransform:'uppercase',letterSpacing:'.1em',color:'var(--accent)',display:'inline-flex',alignItems:'center',gap:'6px'}}>
+                    <a href="https://github.com/rahulpahuja/dedup" target="_blank" rel="noopener noreferrer" style={{fontFamily:'JetBrains Mono,monospace',fontSize:'10px',textTransform:'uppercase',letterSpacing:'.1em',color:'var(--accent)',display:'inline-flex',alignItems:'center',gap:'6px'}}>
                       <svg viewBox="0 0 24 24" style={{width:'11px',height:'11px',fill:'currentColor'}}><path d="M12 .5A12 12 0 0 0 8.2 23.4C8.8 23.5 9 23.2 9 22.9V21C5.7 21.7 5 19.5 5 19.5C4.5 18.3 3.8 18 3.8 18C2.8 17.3 3.9 17.3 3.9 17.3C5 17.4 5.6 18.5 5.6 18.5C6.6 20.1 8.3 19.7 9 19.4C9.1 18.7 9.4 18.2 9.8 17.9C7.1 17.6 4.3 16.5 4.3 11.7C4.3 10.3 4.8 9.2 5.7 8.3C5.6 8 5.1 6.7 5.8 5C5.8 5 6.8 4.7 9 6.3C10 6 11 5.9 12 5.9C13 5.9 14 6 15 6.3C17.2 4.7 18.2 5 18.2 5C18.9 6.7 18.4 8 18.3 8.3C19.2 9.2 19.7 10.3 19.7 11.7C19.7 16.5 16.9 17.6 14.2 17.9C14.7 18.3 15 19 15 20V22.9C15 23.2 15.2 23.5 15.8 23.4A12 12 0 0 0 12 .5Z"/></svg>
                       View on GitHub →
                     </a>
@@ -997,7 +1046,7 @@ const App=()=>{
                 {[['Media Analysis','1'],['Files','2'],['Settings','3']].map(([label,n])=>(
                   <div key={n} style={{borderRadius:'2px',overflow:'hidden',border:'1px solid var(--border)',background:'var(--p2)'}}>
                     <img src={`https://raw.githubusercontent.com/rahulpahuja/dedup/main/screenshots/${n}.png`} alt={`DeDup — ${label}`} style={{width:'100%',height:'auto',display:'block'}} loading="lazy"/>
-                    <div style={{padding:'6px 10px',fontFamily:'DM Mono,monospace',fontSize:'10px',textTransform:'uppercase',letterSpacing:'.1em',color:'var(--muted)'}}>{label}</div>
+                    <div style={{padding:'6px 10px',fontFamily:'JetBrains Mono,monospace',fontSize:'10px',textTransform:'uppercase',letterSpacing:'.1em',color:'var(--muted)'}}>{label}</div>
                   </div>
                 ))}
               </div>
@@ -1008,12 +1057,14 @@ const App=()=>{
               <div style={{display:'flex',justifyContent:'space-between',alignItems:'flex-start',flexWrap:'wrap',gap:'12px',marginBottom:'20px'}}>
                 <div style={{flex:1,minWidth:'260px'}}>
                   <div style={{display:'flex',alignItems:'center',gap:'12px',marginBottom:'10px'}}>
-                    <div style={{fontFamily:'DM Serif Display,serif',fontSize:'22px'}}>Notes — The Modern Archivist</div>
+                    <div style={{fontFamily:'Space Grotesk,sans-serif',fontSize:'22px'}}>Notes — The Modern Archivist</div>
                     <span className="tag tag-accent">Android</span>
+                    <span className="tag tag-accent">iOS</span>
                   </div>
                   <p style={{fontSize:'13px',lineHeight:'1.7',color:'var(--muted)',marginBottom:'14px',maxWidth:'560px'}}>An offline-first notes app with voice memos, live speech-to-text, drawings, image OCR, and reminders — everything stored locally on-device. Optional cloud AI (Gemini) can sort notes or summarize meetings, but only when you turn it on; Google Sign-In keeps notes synced across devices.</p>
-                  <div className="tags" style={{marginBottom:'18px'}}>{['Kotlin','Android','Jetpack Compose','Room','Firebase','Gemini API','MVVM','Dependency Injection'].map(t=><span key={t} className="tag">{t}</span>)}</div>
+                  <div className="tags" style={{marginBottom:'18px'}}>{['Kotlin','Android','iOS','Jetpack Compose','Room','Firebase','Gemini API','MVVM','Dependency Injection'].map(t=><span key={t} className="tag">{t}</span>)}</div>
                   <div style={{display:'flex',gap:'10px',flexWrap:'wrap',alignItems:'center'}}>
+                    <a href="https://apps.apple.com/co/app/notes-archive-reflect/id6798175378" target="_blank" rel="noopener noreferrer" className="btn btn-solid" style={{fontSize:'10px',padding:'9px 18px'}}>App Store →</a>
                     <a href="notes-app/privacy-policy.html" target="_blank" rel="noopener noreferrer" className="btn btn-ghost" style={{fontSize:'10px',padding:'9px 18px'}}>Privacy Policy →</a>
                   </div>
                 </div>
@@ -1022,7 +1073,7 @@ const App=()=>{
                 {[['Home','Screenshot_20260708_214637.png'],['Editor','Screenshot_20260708_214659.png'],['Sync & Settings','Screenshot_20260708_214725.png']].map(([label,file])=>(
                   <div key={file} style={{borderRadius:'2px',overflow:'hidden',border:'1px solid var(--border)',background:'var(--p2)'}}>
                     <img src={`notes-app/ss/${file}`} alt={`Notes — ${label}`} style={{width:'100%',height:'auto',display:'block'}} loading="lazy"/>
-                    <div style={{padding:'6px 10px',fontFamily:'DM Mono,monospace',fontSize:'10px',textTransform:'uppercase',letterSpacing:'.1em',color:'var(--muted)'}}>{label}</div>
+                    <div style={{padding:'6px 10px',fontFamily:'JetBrains Mono,monospace',fontSize:'10px',textTransform:'uppercase',letterSpacing:'.1em',color:'var(--muted)'}}>{label}</div>
                   </div>
                 ))}
               </div>
@@ -1154,12 +1205,12 @@ const App=()=>{
           <div className="music-grid" style={{display:'grid',gridTemplateColumns:'1fr 1fr',gap:'48px',alignItems:'center'}}>
             <FI>
               <div>
-                <p style={{fontSize:'16px',lineHeight:'1.8',color:'rgba(245,242,236,.62)',marginBottom:'26px'}}>{content.music_bio}</p>
+                <p style={{fontSize:'16px',lineHeight:'1.8',color:'rgba(244,246,249,.62)',marginBottom:'26px'}}>{content.music_bio}</p>
                 <div style={{display:'flex',flexDirection:'column',gap:'8px',marginBottom:'28px'}}>
                   {[{k:'Genre',v:'House · Deep House · Techno · Ambient'},{k:'Tools',v:'Ableton Live · Native Instruments'},{k:'BPM range',v:'120–128'}].map(s=>(
                     <div key={s.k} style={{display:'flex',gap:'14px',fontSize:'13px'}}>
                       <span className="label" style={{minWidth:'72px',paddingTop:'2px',color:'rgba(255,255,255,.28)'}}>{s.k}</span>
-                      <span style={{color:'rgba(245,242,236,.6)'}}>{s.v}</span>
+                      <span style={{color:'rgba(244,246,249,.6)'}}>{s.v}</span>
                     </div>
                   ))}
                 </div>
@@ -1222,7 +1273,7 @@ const App=()=>{
                   <div style={{display:'flex',flexWrap:'wrap',gap:'10px'}}>
                     {[['LinkedIn','https://www.linkedin.com/in/therahulpahuja/'],['GitHub','https://github.com/rahulpahuja'],['X / Twitter','https://www.x.com/therahulpahuja'],['Instagram','https://www.instagram.com/therahulpahuja'],['YouTube','https://www.youtube.com/rahulpahuja1991'],['DeDup','https://dedup.space'],['Mobile1x','https://mobile1x.com']].map(([l,h])=>(
                       <a key={l} href={h} target="_blank" rel="noopener noreferrer"
-                        style={{fontFamily:'DM Mono,monospace',fontSize:'10px',textTransform:'uppercase',letterSpacing:'.1em',color:'var(--muted)',borderBottom:'1px solid var(--border)',paddingBottom:'1px',transition:'color .18s,border-color .18s'}}
+                        style={{fontFamily:'JetBrains Mono,monospace',fontSize:'10px',textTransform:'uppercase',letterSpacing:'.1em',color:'var(--muted)',borderBottom:'1px solid var(--border)',paddingBottom:'1px',transition:'color .18s,border-color .18s'}}
                         onMouseEnter={e=>{e.target.style.color='var(--accent)';e.target.style.borderColor='var(--accent)';}}
                         onMouseLeave={e=>{e.target.style.color='var(--muted)';e.target.style.borderColor='var(--border)';}}
                       >{l}</a>
@@ -1236,9 +1287,9 @@ const App=()=>{
       </section>
 
       {/* FOOTER */}
-      <footer className="site-footer" style={{borderTop:'1px solid var(--border)',padding:'22px 40px',display:'flex',justifyContent:'space-between',alignItems:'center',background:'var(--paper)',fontFamily:'DM Mono,monospace',fontSize:'10px',color:'var(--muted)',letterSpacing:'.1em',textTransform:'uppercase'}}>
+      <footer className="site-footer" style={{borderTop:'1px solid var(--border)',padding:'22px 40px',display:'flex',justifyContent:'space-between',alignItems:'center',background:'var(--paper)',fontFamily:'JetBrains Mono,monospace',fontSize:'10px',color:'var(--muted)',letterSpacing:'.1em',textTransform:'uppercase'}}>
         <span>© 2026 Rahul Pahuja</span>
-        <span>Principal Mobile Engineer · Hyderabad</span>
+        <span>Principal Engineer · Indore</span>
         <div style={{display:'flex',gap:'18px'}}>
           {[['GitHub','https://github.com/rahulpahuja'],['LinkedIn','https://linkedin.com/in/therahulpahuja'],['Email',`mailto:${content.hero_email}`]].map(([l,h])=>(
             <a key={l} href={h} target="_blank" rel="noopener noreferrer"
@@ -1256,6 +1307,5 @@ const App=()=>{
 ReactDOM.createRoot(document.getElementById('root')).render(<App/>);
 </script>
 <script src="blogs.js" defer></script>
-<script src="blog-read.js" defer></script>
 </body>
 </html>
