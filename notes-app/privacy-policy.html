@@ -169,7 +169,8 @@
   <table>
     <tr><th>Data</th><th>Purpose</th><th>Service used</th></tr>
     <tr>
-      <td>Name, email, profile photo</td>
+      <td>Name, email, profile photo (Android only — iOS sign-in, when enabled, stays
+        local to your device)</td>
       <td>Sign-in and identifying your account</td>
       <td>Firebase Authentication</td>
     </tr>
@@ -195,7 +196,9 @@
       <td>Firebase Crashlytics</td>
     </tr>
     <tr>
-      <td>Push notification token, linked to your account ID</td>
+      <td>Push notification token — linked to your account ID on Android; on iOS this is
+        registered but not currently used to deliver anything, since reminder and
+        save-confirmation notifications there are scheduled locally on your device</td>
       <td>Delivering reminders and notifications to your device</td>
       <td>Firebase Cloud Messaging</td>
     </tr>
@@ -205,14 +208,26 @@
       <td>Firebase Remote Config</td>
     </tr>
     <tr>
-      <td>Your account ID, email, and message text — only if you submit feedback or a
-        feature request</td>
+      <td>Account ID, email, and message text — only if you submit feedback or a feature
+        request while signed in (Android)</td>
       <td>Reviewing feedback and feature requests</td>
       <td>Firebase Realtime Database</td>
     </tr>
     <tr>
+      <td>Message text only, submitted anonymously — no account ID, email, or device
+        identifier attached (iOS "Request a Feature" / "Raise an Issue")</td>
+      <td>Reviewing feedback and feature requests</td>
+      <td>Firebase Realtime Database</td>
+    </tr>
+    <tr>
+      <td>Error category, a short internal context label, and a brief error message —
+        never your note content — submitted anonymously (iOS)</td>
+      <td>Finding and fixing app errors</td>
+      <td>Firebase Realtime Database, Amplitude</td>
+    </tr>
+    <tr>
       <td>Note or meeting transcript text — only when you enable a cloud AI feature
-        (see Section&nbsp;1)</td>
+        (see Section&nbsp;1; Android only, no equivalent exists on iOS)</td>
       <td>Generating AI sort suggestions or meeting summaries</td>
       <td>Google Generative AI (Gemini API)</td>
     </tr>
@@ -220,35 +235,56 @@
 
   <h2>4. Device permissions</h2>
   <div class="card">
+    <p style="margin-top:0;"><strong>Android</strong></p>
     <ul>
       <li><strong>Microphone</strong> — to record voice notes, meeting audio, and power live speech-to-text.</li>
       <li><strong>Camera</strong> — to attach photos or scans to a note.</li>
       <li><strong>Notifications</strong> — to show reminder and update notifications.</li>
       <li><strong>Exact alarms</strong> — to trigger reminders at the precise time you set.</li>
     </ul>
-    <p style="margin-bottom:0;">
+    <p>
       Speech-to-text is performed using Android's built-in speech recognition service on your
       device or through your device's default assistant/TTS service — audio is not sent to our
       servers for this purpose.
+    </p>
+    <p><strong>iOS</strong></p>
+    <ul>
+      <li><strong>Microphone &amp; Speech Recognition</strong> — to record voice memos and meeting audio, and to transcribe speech to text.</li>
+      <li><strong>Camera</strong> — to scan documents or record a video note.</li>
+      <li><strong>Photo Library</strong> — only when you attach, scan, or save an image you pick.</li>
+      <li><strong>Face ID</strong> — to unlock notes you've password- or biometric-protected.</li>
+      <li><strong>Notifications</strong> — to show reminder and save-confirmation alerts.</li>
+    </ul>
+    <p style="margin-bottom:0;">
+      Speech-to-text uses Apple's on-device speech recognition when your selected language
+      supports it. For a language without on-device support, Apple's speech-recognition
+      servers process the audio instead, subject to
+      <a href="https://www.apple.com/legal/privacy/" target="_blank" rel="noopener">Apple's Privacy Policy</a> —
+      audio is never sent to our own servers either way. Reminder and save-confirmation
+      notifications are scheduled locally on your device.
     </p>
   </div>
 
   <h2>5. Data sharing</h2>
   <p>
     We do not sell your personal data. Data described above is shared only with the service
-    providers necessary to operate the app — Google/Firebase (authentication, analytics, crash
-    reporting, push notifications, remote config, database), Amplitude
-    (product analytics; see <a href="https://amplitude.com/privacy" target="_blank" rel="noopener">Amplitude's
-    Privacy Policy</a>), and, only when you opt in, Google's Generative AI API. These providers
-    process data on our behalf under their own security and privacy commitments.
+    providers necessary to operate the app — Google/Firebase (authentication on Android,
+    analytics, crash reporting, push notification registration, remote config, database),
+    Amplitude (product analytics; see
+    <a href="https://amplitude.com/privacy" target="_blank" rel="noopener">Amplitude's Privacy
+    Policy</a>), Apple (on-device intelligence and, for some languages, server-based speech
+    recognition, on iOS), and, only when you opt in on Android, Google's Generative AI API.
+    These providers process data on our behalf under their own security and privacy commitments.
   </p>
 
   <h2>6. Data retention and deletion</h2>
   <p>
     Notes remain on your device until you delete them or uninstall the app. To request deletion
-    of account-linked data we hold (such as submitted feedback or your push notification token),
-    email <a href="mailto:therahulpahuja@gmail.com">therahulpahuja@gmail.com</a> from the account
-    in question and we will remove it.
+    of account-linked data we hold (such as feedback submitted while signed in on Android, or
+    your push notification token), email
+    <a href="mailto:therahulpahuja@gmail.com">therahulpahuja@gmail.com</a> from the account in
+    question and we will remove it. Feedback, feature requests, and error reports submitted from
+    iOS are anonymous and aren't linked to any account we could look them up by.
   </p>
 
   <h2>7. Children's privacy</h2>
@@ -260,14 +296,17 @@
   <h2>8. Security</h2>
   <p>
     We rely on our processors' security infrastructure — Firebase and Amplitude (encryption in
-    transit, access-controlled cloud storage) — to protect the data described above. No method
-    of transmission or storage is 100% secure, so we cannot guarantee absolute security.
+    transit, access-controlled cloud storage) — to protect the data described above. On iOS,
+    note titles and content are additionally encrypted at rest using a key stored in the
+    device's Keychain. No method of transmission or storage is 100% secure, so we cannot
+    guarantee absolute security.
   </p>
 
   <h2>9. Changes to this policy</h2>
   <p>
-    We may update this policy as the app changes. Material changes will be reflected by updating
-    the effective date above.
+    This policy is subject to change as the app evolves. We may update it from time to time
+    without individual notice, so please check back periodically — material changes will be
+    reflected by updating the effective date above.
   </p>
 
   <h2>10. Contact</h2>
@@ -277,7 +316,7 @@
   </p>
 
   <footer>
-    &copy; 2026 Notes. This page is served as a static privacy policy for Google Play Store compliance.
+    &copy; 2026 Notes. This page is served as a static privacy policy for Apple App Store and Google Play Store compliance.
   </footer>
 
 </div>
