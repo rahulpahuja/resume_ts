@@ -99,43 +99,70 @@
 <div class="wrap">
 
   <h1>Privacy Policy</h1>
-  <div class="updated">Notes app &middot; Effective date: September 1, 2026</div>
+  <div class="updated">Notes (iOS &amp; Android) &middot; Effective date: September 5, 2026</div>
 
   <p>
     This policy explains what data the Notes app ("the app", "we") collects, how it is used,
-    and the choices you have. Notes is developed and maintained by an individual developer.
-    If you have questions, contact <a href="mailto:therahulpahuja@gmail.com">therahulpahuja@gmail.com</a>.
+    and the choices you have. It covers both the Android and iOS ("NotesFlow") versions of the
+    app; sections below note where the two platforms differ. Notes is developed and maintained
+    by an individual developer. If you have questions, contact
+    <a href="mailto:therahulpahuja@gmail.com">therahulpahuja@gmail.com</a>.
   </p>
 
   <h2>1. Your notes stay on your device</h2>
   <p>
-    Note content — titles, text, tags, categories, images, drawings, and voice recordings you
-    create — is stored locally on your device in the app's own database. We do not upload your
-    note content to our servers, and we do not sell your data to anyone.
+    Note content — titles, text, tags, categories, images, drawings, file attachments, and voice
+    recordings you create — is stored locally on your device in the app's own database. We do
+    not upload your note content to our servers, and we do not sell your data to anyone. On iOS,
+    note titles and content are additionally encrypted at rest using a key stored in the
+    device's Keychain.
   </p>
   <p>
-    Note content only leaves your device in two cases, both of which you control:
+    Note content only leaves your device in the following cases, all of which you control:
   </p>
   <ul>
     <li>
-      <strong>Optional cloud AI features.</strong> If you enable <em>Magic Sort (cloud AI)</em>
-      or <em>AI meeting summaries</em> in Settings, the relevant note or meeting transcript text
-      is sent to Google's Gemini API for processing and is subject to
-      <a href="https://policies.google.com/privacy" target="_blank" rel="noopener">Google's Privacy Policy</a>.
+      <strong>Optional cloud AI features (Android only).</strong> If you enable
+      <em>Magic Sort (cloud AI)</em> or <em>AI meeting summaries</em> in Settings, the relevant
+      note or meeting transcript text is sent to Google's Gemini API for processing and is
+      subject to <a href="https://policies.google.com/privacy" target="_blank" rel="noopener">Google's Privacy Policy</a>.
       These features are off unless you turn them on; when off, sorting and summaries run
-      entirely on-device.
+      entirely on-device. <strong>On iOS, there is no cloud AI option at all</strong> — semantic
+      search ("Talk to Notes"), summarizing, organizing, converting to a checklist, duplicate
+      detection, and translation all run entirely on-device using Apple's frameworks (Apple
+      Intelligence where available, NaturalLanguage, Translation, Vision). Your note content
+      never leaves an iOS device for any AI feature.
     </li>
     <li>
       <strong>Importing from Google Keep.</strong> If you use the "Import Keep" feature, notes
-      are read from your Google Keep account only when you initiate the import.
+      are read from your Google Keep account only when you initiate the import, and are not
+      retained or transmitted beyond creating the local note.
+    </li>
+    <li>
+      <strong>Feature requests and issue reports (anonymous).</strong> If you use "Request a
+      Feature" or "Raise an Issue" in Settings, the message you type or dictate is sent to our
+      Firebase Realtime Database so we can review it. This is anonymous — no account ID, email,
+      or device identifier is attached, regardless of whether you're signed in.
+    </li>
+    <li>
+      <strong>Error diagnostics.</strong> When the app encounters a handled error, a short
+      diagnostic record (which part of the app, a brief error message — never your note content)
+      is sent to our Firebase Realtime Database and logged as an analytics event, purely to help
+      us find and fix bugs. This is anonymous in the same way feedback submissions are.
     </li>
   </ul>
 
   <h2>2. Account information</h2>
   <p>
-    Signing in uses Google Sign-In (via Firebase Authentication). We receive your Google account's
-    name, email address, and profile photo to identify your account within the app. We do not
-    receive your Google password.
+    <strong>Android:</strong> Signing in uses Google Sign-In (via Firebase Authentication). We
+    receive your Google account's name, email address, and profile photo to identify your
+    account within the app. We do not receive your Google password.
+  </p>
+  <p>
+    <strong>iOS:</strong> Sign in with Apple or Google is optional, and is currently disabled in
+    the shipped app. When enabled, it only prefills a local profile (name, email) shown within
+    the app — that information is stored on your device and is never transmitted to our servers.
+    Signing out deletes the locally saved profile.
   </p>
 
   <h2>3. Data we collect and why</h2>
