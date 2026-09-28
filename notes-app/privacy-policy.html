@@ -162,18 +162,20 @@
     account within the app. We do not receive your Google password.
   </p>
   <p>
-    <strong>iOS:</strong> Sign in with Apple or Google is optional, and is currently disabled in
-    the shipped app. When enabled, it only prefills a local profile (name, email) shown within
-    the app — that information is stored on your device and is never transmitted to our servers.
-    Signing out deletes the locally saved profile.
+    <strong>iOS:</strong> Sign in with Apple or Google is optional. It prefills a local profile
+    (name, email) shown within the app — that information is stored on your device and is never
+    transmitted to our servers. Signing out deletes the locally saved profile. As described in
+    Section&nbsp;3, your account identifier (not your name or email) is sent to Amplitude and
+    Firebase Analytics once you're signed in, to associate app-usage events with your account.
   </p>
 
   <h2>3. Data we collect and why</h2>
   <table>
     <tr><th>Data</th><th>Purpose</th><th>Service used</th></tr>
     <tr>
-      <td>Name, email, profile photo (Android only — iOS sign-in, when enabled, stays
-        local to your device)</td>
+      <td>Name, email, profile photo (Android via Google Sign-In; iOS via Sign in with Apple
+        or Google — on iOS this stays local to your device and is never transmitted to our
+        servers)</td>
       <td>Sign-in and identifying your account</td>
       <td>Firebase Authentication</td>
     </tr>
