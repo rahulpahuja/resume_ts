@@ -99,7 +99,7 @@
 <div class="wrap">
 
   <h1>Privacy Policy</h1>
-  <div class="updated">Notes (iOS &amp; Android) &middot; Effective date: September 7, 2026</div>
+  <div class="updated">Notes (iOS &amp; Android) &middot; Effective date: October 4, 2026</div>
 
   <p>
     This policy explains what data the Notes app ("the app", "we") collects, how it is used,
@@ -231,6 +231,12 @@
       <td>Firebase Realtime Database, Amplitude</td>
     </tr>
     <tr>
+      <td>Speech and Whisper model downloads (iOS) — your IP address and the chosen model, sent
+        only when you download a model; no audio or note content</td>
+      <td>Installing on-device transcription models</td>
+      <td>Apple (language models); Hugging Face (Whisper models)</td>
+    </tr>
+    <tr>
       <td>Note or meeting transcript text — only when you enable a cloud AI feature
         (see Section&nbsp;1; Android only, no equivalent exists on iOS)</td>
       <td>Generating AI sort suggestions or meeting summaries</td>
@@ -268,6 +274,13 @@
       audio is never sent to our own servers either way. Reminder and save-confirmation
       notifications are scheduled locally on your device.
     </p>
+    <p style="margin-bottom:0;">
+      On iOS you can also download speech-recognition models for additional languages, and
+      optional Whisper transcription models. Apple hosts the language models, and the Whisper
+      models are downloaded from Hugging Face. Each download request reveals your IP address and
+      the model you chose to that host. Once downloaded, transcription runs entirely on your
+      device, and no audio or note content is sent with the download.
+    </p>
   </div>
 
   <h2>5. Data sharing</h2>
@@ -278,7 +291,9 @@
     Amplitude (product analytics; see
     <a href="https://amplitude.com/privacy" target="_blank" rel="noopener">Amplitude's Privacy
     Policy</a>), Apple (on-device intelligence and, for some languages, server-based speech
-    recognition, on iOS), and, only when you opt in on Android, Google's Generative AI API.
+    recognition, on iOS), Hugging Face (hosts the optional Whisper model downloads on iOS; see
+    <a href="https://huggingface.co/privacy" target="_blank" rel="noopener">Hugging Face's Privacy
+    Policy</a>), and, only when you opt in on Android, Google's Generative AI API.
     These providers process data on our behalf under their own security and privacy commitments.
   </p>
 
