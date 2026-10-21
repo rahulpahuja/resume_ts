@@ -529,9 +529,9 @@ Stop
 
             e.preventDefault()
 
-            const slug = href.split("/blog/").pop()
+            const slug = href.split("/blog/").pop().split(/[?#]/)[0].replace(/\/$/, "")
 
-            history.pushState({}, "", BLOG_PREFIX + slug)
+            history.pushState({}, "", BLOG_PREFIX + slug + "/")
 
             openBlog(slug)
 
@@ -549,7 +549,7 @@ Stop
 
         if (!path.startsWith(BLOG_PREFIX)) return
 
-        const slug = path.replace(BLOG_PREFIX, "").split("?")[0] // Remove query params
+        const slug = path.replace(BLOG_PREFIX, "").split("?")[0].replace(/\/$/, "") // Remove query params and trailing slash
 
         if (slug) {
             openBlog(slug)

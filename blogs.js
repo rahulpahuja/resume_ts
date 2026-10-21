@@ -31,7 +31,7 @@
                             title,
                             tag,
                             desc,
-                            link: `/blog/${slug}`
+                            link: `/blog/${slug}/`
                         }
 
                     })

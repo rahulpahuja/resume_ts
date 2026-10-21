@@ -6,7 +6,7 @@ description: *A no-nonsense, implementation-level guide for builders creating AI
 
 
 <figure style="margin:28px 0">
-<img src="https://raw.githubusercontent.com/rahulpahuja/resume_ts/main/public/blog-images/1777457213170-mcp.png" alt="MCP" style="max-width:100%;border-radius:4px;display:block;margin:0 auto">
+<img src="https://raw.githubusercontent.com/rahulpahuja/resume_ts/main/public/blog-images/1777457213170-mcp.png" alt="Diagram of MCP server architecture: AI clients such as ChatGPT, Claude Desktop and Cursor connect through an MCP server that exposes resources, tools and prompts to external systems like Google Drive, Slack and GitHub." style="max-width:100%;border-radius:4px;display:block;margin:0 auto">
 
 </figure>
 

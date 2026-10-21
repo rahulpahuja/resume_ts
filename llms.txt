@@ -29,12 +29,12 @@ Rahul Pahuja architects mobile security and high-concurrency client infrastructu
 
 ## Writing
 
-- [Secure Data at Scale: Designing a Robust Storage Stack with TEESDK, Encrypted Data Stores, and Intelligent Caching](https://www.therahulpahuja.com/blog/2026-03-15-secure-data-at-scale-designing-a-robust-storage-stack-with-teesdk-encrypted-data-stores-and-intelligent-caching)
-- [Secure DB Proposal](https://www.therahulpahuja.com/blog/2026-05-07-secure-db-proposal): a reactive, coroutine-native embedded database runtime for mobile.
-- [Mobile App Architecture Comparison](https://www.therahulpahuja.com/blog/2026-05-07-mobile-app-architecture-comparison): MVC, MVP, MVVM, MVI, VIPER and TCA compared.
-- [MCP Servers, Resources, and Tools: Explained Without the Hype](https://www.therahulpahuja.com/blog/2026-04-29-mcp-servers-resources-and-tools-explained-without-the-hype)
-- [Google just crossed a line at I/O that changes the future of AI forever](https://www.therahulpahuja.com/blog/2026-05-19-google-just-crossed-a-line-at-io-that-changes-the-future-of-ai-forever)
-- [Google just changed the future of Search with "Ask YouTube"](https://www.therahulpahuja.com/blog/2026-05-19-google-just-changed-the-future-of-search-with-ask-youtube-and-almost-nobody-is-talking-abo)
+- [Secure Data at Scale: Designing a Robust Storage Stack with TEESDK, Encrypted Data Stores, and Intelligent Caching](https://www.therahulpahuja.com/blog/2026-03-15-secure-data-at-scale-designing-a-robust-storage-stack-with-teesdk-encrypted-data-stores-and-intelligent-caching/)
+- [Secure DB Proposal](https://www.therahulpahuja.com/blog/2026-05-07-secure-db-proposal/): a reactive, coroutine-native embedded database runtime for mobile.
+- [Mobile App Architecture Comparison](https://www.therahulpahuja.com/blog/2026-05-07-mobile-app-architecture-comparison/): MVC, MVP, MVVM, MVI, VIPER and TCA compared.
+- [MCP Servers, Resources, and Tools: Explained Without the Hype](https://www.therahulpahuja.com/blog/2026-04-29-mcp-servers-resources-and-tools-explained-without-the-hype/)
+- [Google just crossed a line at I/O that changes the future of AI forever](https://www.therahulpahuja.com/blog/2026-05-19-google-just-crossed-a-line-at-io-that-changes-the-future-of-ai-forever/)
+- [Google just changed the future of Search with "Ask YouTube"](https://www.therahulpahuja.com/blog/2026-05-19-google-just-changed-the-future-of-search-with-ask-youtube-and-almost-nobody-is-talking-abo/)
 - [Jetpack Compose: A Staff Engineer's Perspective](https://www.linkedin.com/pulse/jetpack-compose-staff-android-engineers-perspective-rahul-pahuja-zauif)
 
 ## Profiles
