@@ -4,7 +4,7 @@
   <!-- Main site -->
   <url>
     <loc>https://www.therahulpahuja.com/</loc>
-    <lastmod>2026-08-31</lastmod>
+    <lastmod>2026-10-22</lastmod>
     <changefreq>weekly</changefreq>
     <priority>1.0</priority>
   </url>
@@ -50,6 +50,17 @@
     <lastmod>2026-08-31</lastmod>
     <changefreq>yearly</changefreq>
     <priority>0.8</priority>
+  </url>
+
+  <!-- App privacy policies -->
+  <url>
+    <loc>https://www.therahulpahuja.com/notes-app/privacy-policy.html</loc>
+    <lastmod>2026-10-04</lastmod>
+  </url>
+
+  <url>
+    <loc>https://www.therahulpahuja.com/public/privacy_dedup.html</loc>
+    <lastmod>2026-05-21</lastmod>
   </url>
 
 </urlset>

@@ -9,3 +9,20 @@
 
 /public/rahul_pahuja_resume.pdf
   X-Robots-Tag: noindex, nofollow
+
+/blog-craft.html
+  X-Robots-Tag: noindex, nofollow
+
+/Blog_Crafter_Documentation.docx
+  X-Robots-Tag: noindex, nofollow
+
+/llms.txt
+  Content-Type: text/plain; charset=utf-8
+  Cache-Control: public, max-age=3600
+
+/llms-full.txt
+  Content-Type: text/plain; charset=utf-8
+  Cache-Control: public, max-age=3600
+
+/robots.txt
+  Content-Type: text/plain; charset=utf-8

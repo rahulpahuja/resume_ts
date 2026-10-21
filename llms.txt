@@ -1,83 +1,52 @@
 # Rahul Pahuja
 
-> Staff / Principal Mobile Systems Architect — enterprise mobile security, hardware-backed cryptography, multi-million dollar scale. Architect of TeeSDK at Idira by Palo Alto Networks (formerly CyberArk). 11+ years across Palo Alto Networks, Bankwest, Conviva, Chevron and Mahindra First Choice Wheels.
+> Staff / Principal Mobile Systems Architect: enterprise mobile security, hardware-backed cryptography, multi-million dollar scale. Architect of TeeSDK at Idira by Palo Alto Networks (formerly CyberArk). 11+ years across Palo Alto Networks, Bankwest, Conviva, Chevron and Mahindra First Choice Wheels. Based in Indore, India; open to Staff / Principal roles (Bangalore, Hyderabad or remote).
 
-Rahul Pahuja is a mobile systems architect based in Indore, India, actively evaluating Staff / Principal Mobile Systems Architect roles (Bangalore, Hyderabad, or Remote) and open for immediate engagement. He was most recently Staff Software Engineer - Mobile Architecture at Idira by Palo Alto Networks (formerly CyberArk) (Nov 2024 – Dec 2025), where he architected TeeSDK, a zero-trust encrypted storage foundation on Android Keystore and iOS Secure Enclave that established the offline baseline to unlock $240M in commercial contract value across 1M+ active enterprise seats. He now runs an independent systems advisory and engineering lab (Mobile1x).
+Rahul Pahuja architects mobile security and high-concurrency client infrastructure. Metrics on this site are as reported by Rahul in his resume and portfolio. The full profile is in [llms-full.txt](https://www.therahulpahuja.com/llms-full.txt).
 
-## Now
+## Key facts
 
-Since Dec 2025 Rahul is Principal Mobile Systems Architect of an Independent Systems Advisory & Engineering Lab (Mobile1x). Current work: DeDup (privacy-first on-device duplicate media cleaner; Google Play and App Store; 600+ combined active users), Notes — Archive & Reflect (offline-first capture, Android and iOS), The A2Z Collection (production e-commerce architecture sustained at 2,500 DAU) and Smart Form Engine (schema-driven JSON forms, 50% faster form creation). He also maintains AI Similarity, a developer reference that maps Android and iOS APIs side by side.
+- Role: Staff / Principal Mobile Systems Architect. Most recent employer: Idira by Palo Alto Networks (formerly CyberArk), Staff Software Engineer - Mobile Architecture, Nov 2024 – Dec 2025.
+- Signature work: TeeSDK, a zero-trust encrypted storage foundation on Android Keystore and iOS Secure Enclave, tied to $240M in commercial contract value across 1M+ active enterprise seats.
+- Other scale: 12B+ events/min on Conviva Android/iOS sensors; 1M+ daily users on Bankwest (Commonwealth Bank of Australia) digital banking; 2,500 DAU on The A2Z Collection e-commerce architecture.
+- Now: Principal Mobile Systems Architect of an Independent Systems Advisory & Engineering Lab (Mobile1x), Dec 2025 – Present.
+- Contact: therahulpahuja@gmail.com, +91 88190 91000.
 
-## Core impact
+## Portfolio
 
-- $240M+ commercial contract pipeline unlocked by the hardware-backed secure storage and offline baseline at Palo Alto Networks.
-- 12B+ events/min processed via Conviva Android/iOS sensors (ExoPlayer, Brightcove).
-- 1M+ DAU: enterprise identities secured at Palo Alto Networks and daily banking users on Bankwest (CBA).
-- 2.5K DAU sustained on a full-stack e-commerce architecture with zero-egress Cloudflare R2 caching.
+- [Home](https://www.therahulpahuja.com/): hero, core impact, Idira spotlight, independent lab, career timeline, skills matrix.
+- [Full profile for LLMs](https://www.therahulpahuja.com/llms-full.txt): career, architectural decisions, projects, skills, FAQ.
+- [Writing feed (RSS)](https://www.therahulpahuja.com/feed.xml)
 
-## Identity
+## Apps and projects
 
-- Full name: Rahul Pahuja
-- Also known as: therahulpahuja
-- Role: Staff / Principal Mobile Systems Architect
-- Location: Indore, Madhya Pradesh, India
-- Education: M.Tech, Computer Science, BITS Pilani
-- Email: therahulpahuja@gmail.com
-- Phone: +91 88190 91000
-- Website: https://www.therahulpahuja.com/
-- Languages: English, Hindi
-
-## Career
-
-- **Independent Systems Advisory & Engineering Lab (Mobile1x)** — Principal Mobile Systems Architect (Dec 2025 – Present). DeDup, Notes, The A2Z Collection, Smart Form Engine.
-- **Idira by Palo Alto Networks (formerly CyberArk)** — Staff Software Engineer - Mobile Architecture (Nov 2024 – Dec 2025). TeeSDK on Android Keystore and iOS Secure Enclave; $240M in commercial contract value across 1M+ enterprise seats; hardware-enforced biometric tampering detection (Keystore CryptoObjects); DexGuard binary hardening; company-wide Preferences vs. Proto DataStore ADR from P50/P95/P99 benchmarks; 28% cold-start latency reduction; C4 modeling, STRIDE threat modeling and SSDLC. iOS: https://apps.apple.com/in/app/idira-identity/id499910663 — Android: https://play.google.com/store/apps/details?id=com.centrify.mdm.samsung&hl=en_IN
-- **Coforge (Contract — Bankwest / Commonwealth Bank of Australia)** — Technical Lead, Android & iOS (Mar 2024 – Nov 2024). Zero production rollbacks across digital banking features serving 1M+ daily users; 35% reduction in password-reset failures. Bankwest iOS: https://apps.apple.com/au/app/bankwest/id419259235 — Android: https://play.google.com/store/apps/details?id=au.com.bankwest.mobile&hl=en_IN
-- **Conviva** — Senior Engineer, Android Sensors (May 2022 – Sep 2023). 12B+ metric computations/min; 45% reduction in playback issues via ExoPlayer and Brightcove integrations.
-- **Intellicus Technologies** — Senior Software Engineer, Mobile SDK (Dec 2019 – Apr 2022). 32% crash-rate reduction and 40% faster dashboard loads via Kotlin modernization and SDK profiling. https://play.google.com/store/apps/details?id=com.intellicus.android&hl=en_IN
-- **Wipro Limited** — Unified Mobile App Developer (Aug 2014 – Dec 2019). Chevron Lubricant Track & Trace (iOS: https://apps.apple.com/in/app/lubricant-trackandtrace/id1534588269); ELCITA Citizen for ELCITA Bengaluru (iOS: https://apps.apple.com/in/app/elcita-citizen/id1473400141); Mahindra First Choice Wheels AutoInsights connected-vehicle telematics (https://www.wipro.com/insurance/solutions/connected-automobiles/).
-
-## Training
-
-Ran a Google-affiliated Android bootcamp in partnership with LTIMindtree — 41 engineers trained, 100% placed. Full curriculum from fundamentals through production-grade development.
-
-## Skills
-
-- Mobile Security & Cryptography: Android Keystore, iOS Secure Enclave, Biometric CryptoObject, DexGuard, STRIDE Threat Modeling, OWASP Mobile Top 10, SSDLC, Zero-Trust Architecture, Snyk
-- Client Architecture & Platforms: Kotlin, Swift, Jetpack Compose, SwiftUI, Coroutines & Flow, Combine, Clean Architecture, MVI, MVVM, Modularization, C4 Architecture Modeling, ADRs
-- Performance & Benchmarking: P50/P95/P99 Tail-Latency Profiling, Preferences vs. Proto DataStore, Cold-Start Optimization, Memory Leak / OOM Profiling, ExoPlayer, AVFoundation
-- Cloud, Infrastructure & Payments: Cloudflare R2, Razorpay, S3-Compatible Object Storage, CI/CD (Fastlane, GitHub Actions, TeamCity), Docker
-- Additional: Java, Objective-C, UIKit, Android SDK, iOS SDK, React Native, Flutter, Node.js, Python, Spring Boot, Firebase, REST APIs, Dependency Injection (Hilt, Dagger, Koin), Jenkins, CircleCI
-
-## Projects
-
-- DeDup — privacy-first on-device duplicate media cleaner (Kotlin, Jetpack Compose, on-device ML, MediaStore, Coroutines Flow). Google Play: https://play.google.com/store/apps/details?id=com.rp.dedup — App Store: https://apps.apple.com/us/app/dedup-ai-photo-cleaner/id6814824281 — Website: https://dedup.space. All scanning and duplicate detection run on-device; user files are not uploaded.
-- Notes — Archive & Reflect — offline-first capture (native Swift and Kotlin, Core ML OCR, speech-to-text, biometric vault, SQLite/Room). Google Play: https://play.google.com/store/apps/details?id=com.rp.notes — App Store: https://apps.apple.com/us/app/notes-archive-reflect/id6798175378 — Website: https://mobile1x.com/notes/. Cloud AI (Android) and Google Sign-In sync are opt-in.
-- The A2Z Collection — production e-commerce architecture (Razorpay, Cloudflare R2, automated carrier shipping APIs, resilient OTP auth), sustained at 2,500 DAU: https://thea2zcollection.com
-- Smart Form Engine — schema-driven dynamic JSON form engine that decouples UI rendering from schema definitions, cutting enterprise form-creation cycles by 50%.
-- [AI Similarity](https://www.aisimilarity.com) — developer reference that maps Android and iOS APIs side by side to speed cross-platform translation.
-- [CodeForumBlogs](https://www.codeforumblogs.com) — community platform for technical writing with real-time collaboration and code highlighting.
+- [DeDup](https://dedup.space): privacy-first on-device duplicate media cleaner. [Google Play](https://play.google.com/store/apps/details?id=com.rp.dedup), [App Store](https://apps.apple.com/us/app/dedup-ai-photo-cleaner/id6814824281). [Privacy policy](https://www.therahulpahuja.com/public/privacy_dedup.html)
+- [Notes: Archive & Reflect](https://mobile1x.com/notes/): offline-first capture app. [Google Play](https://play.google.com/store/apps/details?id=com.rp.notes), [App Store](https://apps.apple.com/us/app/notes-archive-reflect/id6798175378). [Privacy policy](https://www.therahulpahuja.com/notes-app/privacy-policy.html)
+- [The A2Z Collection](https://thea2zcollection.com): production e-commerce (Razorpay, Cloudflare R2, carrier shipping APIs, OTP auth).
+- [AI Similarity](https://www.aisimilarity.com): maps Android and iOS APIs side by side.
+- [CodeForumBlogs](https://www.codeforumblogs.com): community platform for technical writing.
+- [Idira Identity on the App Store](https://apps.apple.com/in/app/idira-identity/id499910663) and [Google Play](https://play.google.com/store/apps/details?id=com.centrify.mdm.samsung&hl=en_IN): enterprise app whose secure storage Rahul architected.
 
 ## Writing
 
+- [Secure Data at Scale: Designing a Robust Storage Stack with TEESDK, Encrypted Data Stores, and Intelligent Caching](https://www.therahulpahuja.com/blog/2026-03-15-secure-data-at-scale-designing-a-robust-storage-stack-with-teesdk-encrypted-data-stores-and-intelligent-caching)
+- [Secure DB Proposal](https://www.therahulpahuja.com/blog/2026-05-07-secure-db-proposal): a reactive, coroutine-native embedded database runtime for mobile.
+- [Mobile App Architecture Comparison](https://www.therahulpahuja.com/blog/2026-05-07-mobile-app-architecture-comparison): MVC, MVP, MVVM, MVI, VIPER and TCA compared.
+- [MCP Servers, Resources, and Tools: Explained Without the Hype](https://www.therahulpahuja.com/blog/2026-04-29-mcp-servers-resources-and-tools-explained-without-the-hype)
 - [Google just crossed a line at I/O that changes the future of AI forever](https://www.therahulpahuja.com/blog/2026-05-19-google-just-crossed-a-line-at-io-that-changes-the-future-of-ai-forever)
 - [Google just changed the future of Search with "Ask YouTube"](https://www.therahulpahuja.com/blog/2026-05-19-google-just-changed-the-future-of-search-with-ask-youtube-and-almost-nobody-is-talking-abo)
-- [Secure DB Proposal](https://www.therahulpahuja.com/blog/2026-05-07-secure-db-proposal) — a reactive, coroutine-native embedded database runtime for mobile that unifies storage, sync, event streams, analytics, vector search, and security.
-- [Mobile App Architecture Comparison](https://www.therahulpahuja.com/blog/2026-05-07-mobile-app-architecture-comparison) — MVC, MVP, MVVM, MVI, VIPER, and TCA compared for mobile.
-- [MCP Servers, Resources, and Tools: Explained Without the Hype](https://www.therahulpahuja.com/blog/2026-04-29-mcp-servers-resources-and-tools-explained-without-the-hype) — an implementation-level guide to the Model Context Protocol.
-- [Secure Data at Scale: Designing a Robust Storage Stack with TEESDK, Encrypted Data Stores, and Intelligent Caching](https://www.therahulpahuja.com/blog/2026-03-15-secure-data-at-scale-designing-a-robust-storage-stack-with-teesdk-encrypted-data-stores-and-intelligent-caching)
 - [Jetpack Compose: A Staff Engineer's Perspective](https://www.linkedin.com/pulse/jetpack-compose-staff-android-engineers-perspective-rahul-pahuja-zauif)
 
-## Other
+## Profiles
 
-Personal & creative pursuits: produces and DJs electronic music as Rellow (house, deep house, ambient).
+- [LinkedIn](https://www.linkedin.com/in/therahulpahuja/)
+- [GitHub](https://github.com/rahulpahuja)
+- [X / Twitter](https://www.x.com/therahulpahuja)
+- [YouTube](https://www.youtube.com/rahulpahuja1991)
+- [Instagram](https://www.instagram.com/therahulpahuja)
 
-## Elsewhere
+## Optional
 
-- LinkedIn: https://www.linkedin.com/in/therahulpahuja/
-- GitHub: https://github.com/rahulpahuja
-- X / Twitter: https://www.x.com/therahulpahuja
-- Instagram: https://www.instagram.com/therahulpahuja
-- YouTube: https://www.youtube.com/rahulpahuja1991
-- Mobile1x: https://mobile1x.com
-- DeDup: https://dedup.space
-- AI Similarity: https://www.aisimilarity.com
+- [Sitemap](https://www.therahulpahuja.com/sitemap.xml)
+- [Mobile1x](https://mobile1x.com): the independent systems advisory and engineering lab.
+- Personal & creative pursuits: produces and DJs electronic music as Rellow (house, deep house, ambient).

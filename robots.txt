@@ -1,13 +1,16 @@
-# Rahul Pahuja — https://www.therahulpahuja.com/
-# Search and AI crawlers are welcome to index and cite this site.
+# robots.txt for https://www.therahulpahuja.com/
+# Search engines and AI answer engines are welcome to crawl, index and cite this site.
+# Older resume PDFs are blocked on purpose; the site and its writing are open.
+# Machine-readable summaries: /llms.txt (index) and /llms-full.txt (detail).
 
 User-agent: *
 Allow: /
 Disallow: /resume.pdf
 Disallow: /Rahul_Pahuja_Resume.pdf
 Disallow: /Rahul%20Pahuja%20%E2%80%94%20Resume.pdf
+Disallow: /public/rahul_pahuja_resume.pdf
 
-# AI answer engines & assistants (retrieval + citation)
+# AI answer engines and assistants (retrieval and citation)
 User-agent: GPTBot
 User-agent: OAI-SearchBot
 User-agent: ChatGPT-User
@@ -27,11 +30,13 @@ User-agent: CCBot
 User-agent: cohere-ai
 User-agent: Meta-ExternalAgent
 User-agent: DuckAssistBot
+User-agent: MistralAI-User
 User-agent: YouBot
 User-agent: Timpibot
 Allow: /
 Disallow: /resume.pdf
 Disallow: /Rahul_Pahuja_Resume.pdf
 Disallow: /Rahul%20Pahuja%20%E2%80%94%20Resume.pdf
+Disallow: /public/rahul_pahuja_resume.pdf
 
 Sitemap: https://www.therahulpahuja.com/sitemap.xml
