@@ -1,0 +1,530 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Rahul Pahuja | 3D Portfolio</title>
+<meta name="description" content="Interactive 3D portfolio of Rahul Pahuja, Staff / Principal Mobile Systems Architect.">
+<link rel="canonical" href="https://www.therahulpahuja.com/">
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-QS8D87DMKZ"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('set', 'user_properties', { ab_variant: '3d' });
+  gtag('config', 'G-QS8D87DMKZ', { ab_variant: '3d' });
+</script>
+<meta name="theme-color" content="#05070d">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;700&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg:#05070d; --ink:#eef2f9; --muted:#9aa7bd; --accent:#3b82f6; --cyan:#22d3ee;
+    --glass:rgba(10,16,30,.62); --line:rgba(148,170,210,.22);
+  }
+  *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+  html{scroll-behavior:smooth}
+  body{background:var(--bg);color:var(--ink);font-family:Inter,system-ui,sans-serif;line-height:1.65;-webkit-font-smoothing:antialiased;overflow-x:hidden}
+  a{color:inherit;text-decoration:none}
+  #bg{position:fixed;inset:0;width:100%;height:100%;z-index:0;display:block}
+  .no-webgl{background:radial-gradient(circle at 70% 30%,#10213f,#05070d 60%)}
+  header{position:fixed;top:0;left:0;right:0;z-index:20;display:flex;justify-content:space-between;align-items:center;padding:16px clamp(16px,4vw,40px);background:linear-gradient(to bottom,rgba(5,7,13,.85),transparent)}
+  .brand{font-family:'Space Grotesk',sans-serif;font-weight:700;letter-spacing:-.02em}
+  .brand small{font-family:'JetBrains Mono',monospace;font-weight:400;font-size:10px;letter-spacing:.14em;text-transform:uppercase;color:var(--muted);margin-left:12px}
+  .hbtns{display:flex;gap:10px}
+  .btn{display:inline-flex;align-items:center;gap:8px;padding:9px 16px;border-radius:8px;font-size:13px;font-weight:600;border:1px solid var(--line);background:rgba(255,255,255,.04);transition:background .16s,border-color .16s,transform .16s}
+  .btn:hover{background:rgba(255,255,255,.1);border-color:rgba(148,170,210,.5);transform:translateY(-1px)}
+  .btn.primary{background:var(--accent);border-color:var(--accent);color:#fff}
+  .btn.primary:hover{background:#2f6fe0}
+  .ext svg{width:.85em;height:.85em;stroke:currentColor;fill:none;stroke-width:2;stroke-linecap:round;stroke-linejoin:round;opacity:.75}
+  .sr-only{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap}
+  nav.dots{position:fixed;right:clamp(10px,2vw,24px);top:50%;transform:translateY(-50%);z-index:20;display:flex;flex-direction:column;gap:12px}
+  nav.dots a{display:block;width:10px;height:10px;border-radius:50%;border:1px solid var(--muted);background:transparent;transition:.2s;position:relative}
+  nav.dots a.on{background:var(--cyan);border-color:var(--cyan);box-shadow:0 0 12px var(--cyan)}
+  nav.dots a span{position:absolute;right:20px;top:50%;transform:translateY(-50%);font:500 10px 'JetBrains Mono',monospace;letter-spacing:.12em;text-transform:uppercase;color:var(--muted);white-space:nowrap;opacity:0;pointer-events:none;transition:opacity .2s}
+  nav.dots a:hover span,nav.dots a:focus-visible span{opacity:1}
+  main{position:relative;z-index:10}
+  section{min-height:100vh;display:flex;align-items:center;padding:110px clamp(16px,6vw,90px) 70px}
+  .panel{max-width:640px;background:var(--glass);backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);border:1px solid var(--line);border-radius:18px;padding:clamp(20px,3vw,36px);box-shadow:0 20px 60px -20px rgba(0,0,0,.6)}
+  .panel.wide{max-width:760px}
+  .label{font:500 10px 'JetBrains Mono',monospace;letter-spacing:.2em;text-transform:uppercase;color:var(--cyan);margin-bottom:14px}
+  h1,h2{font-family:'Space Grotesk',sans-serif;letter-spacing:-.03em;line-height:1.05}
+  h1{font-size:clamp(2.2rem,5vw,3.9rem);margin-bottom:14px}
+  h1 em,h2 em{font-style:normal;color:var(--accent)}
+  h2{font-size:clamp(1.7rem,3.4vw,2.6rem);margin-bottom:16px}
+  .tag{font:500 11px 'JetBrains Mono',monospace;letter-spacing:.06em;text-transform:uppercase;color:var(--cyan);margin-bottom:18px;line-height:1.8}
+  p.lead{color:var(--muted);font-size:15px;margin-bottom:18px}
+  .status{display:inline-block;padding:9px 14px;border:1px solid rgba(34,197,94,.4);background:rgba(34,197,94,.1);border-radius:10px;font-size:13px;margin-bottom:22px}
+  .row{display:flex;flex-wrap:wrap;gap:10px;margin-bottom:12px}
+  .contact{font:400 12px 'JetBrains Mono',monospace;color:var(--muted)}
+  .contact a{color:var(--ink);border-bottom:1px solid var(--line)}
+  .stats{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+  .stat{padding:18px;border:1px solid var(--line);border-top:2px solid var(--accent);border-radius:12px;background:rgba(255,255,255,.03)}
+  .stat b{display:block;font:700 clamp(1.8rem,3.2vw,2.5rem)/1 'Space Grotesk',sans-serif;letter-spacing:-.03em}
+  .stat i{display:block;font:500 10px 'JetBrains Mono',monospace;letter-spacing:.12em;text-transform:uppercase;color:var(--cyan);margin:8px 0 8px;font-style:normal}
+  .stat span{font-size:12.5px;color:var(--muted);line-height:1.6;display:block}
+  .decisions{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:6px}
+  .decision{padding:14px 16px;border-left:2px solid var(--accent);background:rgba(255,255,255,.04);border-radius:0 10px 10px 0}
+  .decision h3{font:600 13.5px 'Space Grotesk',sans-serif;margin-bottom:5px}
+  .decision p{font-size:12px;color:var(--muted);line-height:1.6}
+  .apps{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+  .app{padding:16px;border:1px solid var(--line);border-radius:12px;background:rgba(255,255,255,.03)}
+  .app h3{font:700 17px 'Space Grotesk',sans-serif;margin-bottom:3px}
+  .app .sub{font:500 10px 'JetBrains Mono',monospace;letter-spacing:.1em;text-transform:uppercase;color:var(--cyan);margin-bottom:8px}
+  .app p{font-size:12.5px;color:var(--muted);line-height:1.6;margin-bottom:10px}
+  .app .row{margin:0;gap:8px}
+  .app .btn{padding:6px 11px;font-size:11px}
+  .timeline{list-style:none;display:grid;gap:12px}
+  .timeline li{padding-left:16px;border-left:1px solid var(--line);position:relative}
+  .timeline li::before{content:'';position:absolute;left:-4px;top:7px;width:7px;height:7px;border-radius:50%;background:var(--cyan)}
+  .timeline b{font:600 14px 'Space Grotesk',sans-serif}
+  .timeline em{font-style:normal;color:var(--accent);font-weight:600}
+  .timeline small{display:block;font:400 10.5px 'JetBrains Mono',monospace;color:var(--muted);letter-spacing:.05em;margin:2px 0 3px}
+  .timeline p{font-size:12.5px;color:var(--muted);line-height:1.55}
+  .skills{display:grid;gap:14px}
+  .skills h3{font:500 10px 'JetBrains Mono',monospace;letter-spacing:.16em;text-transform:uppercase;color:var(--muted);margin-bottom:7px}
+  .pills{display:flex;flex-wrap:wrap;gap:6px}
+  .pills span{font:500 10.5px 'JetBrains Mono',monospace;padding:3px 9px;border:1px solid var(--line);border-radius:6px;background:rgba(255,255,255,.04)}
+  footer{position:relative;z-index:10;padding:24px clamp(16px,6vw,90px) 40px;font:400 11px 'JetBrains Mono',monospace;color:var(--muted);display:flex;justify-content:space-between;flex-wrap:wrap;gap:10px}
+  .right{justify-content:flex-end}
+  @media (max-width:860px){
+    section{align-items:flex-end;padding:90px 14px 50px}
+    .panel,.panel.wide{max-width:none;width:100%}
+    .decisions,.apps,.stats{grid-template-columns:1fr}
+    nav.dots{display:none}
+    .brand small{display:none}
+    .right{justify-content:flex-start}
+  }
+  @media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}}
+</style>
+<script type="importmap">{"imports":{"three":"https://cdn.jsdelivr.net/npm/three@0.160.0/build/three.module.js"}}</script>
+</head>
+<body>
+<canvas id="bg" aria-hidden="true"></canvas>
+
+<header>
+  <a class="brand" href="#hero">Rahul Pahuja<small>3D portfolio</small></a>
+  <div class="hbtns">
+    <a class="btn" href="/?v=2d">2D site</a>
+    <a class="btn primary" href="/public/rahul_pahuja_resume.pdf" download>Resume (PDF)</a>
+  </div>
+</header>
+
+<nav class="dots" aria-label="Sections">
+  <a href="#hero" class="on"><span>Home</span><b class="sr-only">Home</b></a>
+  <a href="#impact"><span>Impact</span><b class="sr-only">Impact</b></a>
+  <a href="#idira"><span>Idira</span><b class="sr-only">Idira</b></a>
+  <a href="#lab"><span>Lab</span><b class="sr-only">Lab</b></a>
+  <a href="#career"><span>Career</span><b class="sr-only">Career</b></a>
+  <a href="#skills"><span>Skills</span><b class="sr-only">Skills</b></a>
+</nav>
+
+<main>
+  <section id="hero">
+    <div class="panel">
+      <div class="label">// Indore, India</div>
+      <h1>Rahul Pahuja<br>Staff / Principal<br><em>Mobile Systems Architect</em></h1>
+      <p class="tag">Enterprise Mobile Security • Hardware-Backed Cryptography • Multi-Million Dollar Scale</p>
+      <p class="lead">I architect the foundational security and high-concurrency client infrastructure that global enterprises build upon. 11+ years designing mission-critical mobile systems: from the zero-trust hardware-backed credential vault at Idira by Palo Alto Networks (formerly CyberArk), to real-time observability sensors processing 12B+ events/min at Conviva, to tier-1 digital banking at Bankwest (Commonwealth Bank of Australia), and enterprise supply chain and connected vehicle platforms for Chevron and Mahindra First Choice Wheels.</p>
+      <div class="status">🟢 Actively evaluating Staff / Principal Mobile Systems Architect roles (Bangalore, Hyderabad, or Remote) • Open for Immediate Engagement</div>
+      <div class="row">
+        <a class="btn primary" href="/public/rahul_pahuja_resume.pdf" download>Download Staff Resume (PDF)</a>
+        <a class="btn" href="mailto:therahulpahuja@gmail.com">Get In Touch / Contact</a>
+      </div>
+      <p class="contact"><a href="mailto:therahulpahuja@gmail.com">therahulpahuja@gmail.com</a> | <a href="tel:+918819091000">+91 8819091000</a></p>
+    </div>
+  </section>
+
+  <section id="impact" class="right">
+    <div class="panel wide">
+      <div class="label">02 / Core impact at scale</div>
+      <h2>Numbers that <em>moved</em> the business</h2>
+      <div class="stats">
+        <div class="stat"><b>$240M+</b><i>Contract pipeline unlocked</i><span>Commercial contract pipeline unlocked by architecting the hardware-backed secure storage and offline feature baseline at Palo Alto Networks.</span></div>
+        <div class="stat"><b>12B+</b><i>Events / min</i><span>Events/min processed via Conviva Android/iOS sensors across ExoPlayer and Brightcove streaming pipelines.</span></div>
+        <div class="stat"><b>1M+</b><i>DAU</i><span>Enterprise identities secured at Palo Alto Networks and daily banking users on Bankwest (CBA).</span></div>
+        <div class="stat"><b>2.5K</b><i>DAU</i><span>Daily active users sustained on full-stack client e-commerce architecture with zero-egress Cloudflare R2 caching.</span></div>
+      </div>
+    </div>
+  </section>
+
+  <section id="idira">
+    <div class="panel wide">
+      <div class="label">03 / Featured enterprise spotlight</div>
+      <h2>Idira by Palo Alto Networks <em>(formerly CyberArk)</em></h2>
+      <p class="tag">Staff Software Engineer - Mobile Architecture | Nov 2024 – Dec 2025</p>
+      <div class="row">
+        <a class="btn ext" href="https://apps.apple.com/in/app/idira-identity/id499910663" target="_blank" rel="noopener noreferrer">Idira Identity: iOS App Store <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M7 17 17 7M8 7h9v9"/></svg><span class="sr-only">(opens in new tab)</span></a>
+        <a class="btn ext" href="https://play.google.com/store/apps/details?id=com.centrify.mdm.samsung&amp;hl=en_IN" target="_blank" rel="noopener noreferrer">Google Play Store <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M7 17 17 7M8 7h9v9"/></svg><span class="sr-only">(opens in new tab)</span></a>
+      </div>
+      <div class="decisions">
+        <div class="decision"><h3>$240M Commercial Contract Impact</h3><p>Architected TeeSDK, a zero-trust encrypted storage foundation on Android Keystore and iOS Secure Enclave, establishing the offline baseline to unlock $240M in commercial contract value across 1M+ active enterprise seats.</p></div>
+        <div class="decision"><h3>Hardware-Enforced Biometric Defense</h3><p>Engineered cryptographic biometric tampering detection using Keystore CryptoObjects; closed zero-day memory-hooking and runtime Frida bypass vectors across the enterprise mobile attack surface.</p></div>
+        <div class="decision"><h3>Binary Hardening, Zero Performance Penalty</h3><p>Replaced baseline R8/ProGuard with customized DexGuard rulesets (control-flow virtualization, string encryption) and profiled class-loading paths to safeguard cold-start SLA budgets.</p></div>
+        <div class="decision"><h3>Storage Architecture ADR (P50/P95/P99)</h3><p>Benchmarked tail latencies comparing Preferences DataStore vs. Proto DataStore; authored the company-wide ADR standardizing Preferences DataStore for atomic, non-blocking asynchronous I/O.</p></div>
+        <div class="decision"><h3>28% Latency Reduction</h3><p>Optimized TeeSDK cryptographic and I/O execution paths using multi-layer caching with DataStore, cutting cold-start initialization latency by 28%.</p></div>
+        <div class="decision"><h3>C4 Architecture Modeling</h3><p>Modeled system topologies across Context, Container, Component, and Code levels, driving STRIDE threat modeling and SSDLC compliance across mobile, backend, and security teams.</p></div>
+      </div>
+    </div>
+  </section>
+
+  <section id="lab" class="right">
+    <div class="panel wide">
+      <div class="label">04 / Mobile1x</div>
+      <h2>Independent Systems Advisory &amp; <em>Engineering Lab</em></h2>
+      <p class="tag">Principal Mobile Systems Architect | Dec 2025 – Present</p>
+      <div class="apps">
+        <div class="app">
+          <h3>DeDup</h3><div class="sub">On-device duplicate media cleaner</div>
+          <p>Privacy-first: scanning and duplicate detection run on-device and your files are never uploaded. 600+ combined active users. Kotlin, Jetpack Compose, On-Device ML, MediaStore, Coroutines Flow.</p>
+          <div class="row">
+            <a class="btn ext" href="https://play.google.com/store/apps/details?id=com.rp.dedup" target="_blank" rel="noopener noreferrer">Google Play <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M7 17 17 7M8 7h9v9"/></svg><span class="sr-only">(opens in new tab)</span></a>
+            <a class="btn ext" href="https://apps.apple.com/us/app/dedup-ai-photo-cleaner/id6814824281" target="_blank" rel="noopener noreferrer">App Store <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M7 17 17 7M8 7h9v9"/></svg><span class="sr-only">(opens in new tab)</span></a>
+          </div>
+        </div>
+        <div class="app">
+          <h3>Notes: Archive &amp; Reflect</h3><div class="sub">Offline-first enterprise capture</div>
+          <p>Voice memos, speech-to-text, image OCR, drawings and reminders behind a biometric vault. Native Swift and Kotlin, Core ML OCR, SQLite/Room.</p>
+          <div class="row">
+            <a class="btn ext" href="https://play.google.com/store/apps/details?id=com.rp.notes" target="_blank" rel="noopener noreferrer">Google Play <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M7 17 17 7M8 7h9v9"/></svg><span class="sr-only">(opens in new tab)</span></a>
+            <a class="btn ext" href="https://apps.apple.com/us/app/notes-archive-reflect/id6798175378" target="_blank" rel="noopener noreferrer">App Store <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M7 17 17 7M8 7h9v9"/></svg><span class="sr-only">(opens in new tab)</span></a>
+          </div>
+        </div>
+        <div class="app">
+          <h3>The A2Z Collection</h3><div class="sub">Production e-commerce architecture</div>
+          <p>Sustained 2,500 DAU with zero-egress media caching. Razorpay, Cloudflare R2, automated carrier shipping APIs, resilient OTP auth.</p>
+          <div class="row"><a class="btn ext" href="https://thea2zcollection.com" target="_blank" rel="noopener noreferrer">Live solution <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M7 17 17 7M8 7h9v9"/></svg><span class="sr-only">(opens in new tab)</span></a></div>
+        </div>
+        <div class="app">
+          <h3>Smart Form Engine</h3><div class="sub">Schema-driven dynamic forms</div>
+          <p>Dynamic JSON form engine decoupling UI rendering from schema definitions, cutting enterprise form-creation cycles by 50%.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="career">
+    <div class="panel wide">
+      <div class="label">05 / Career</div>
+      <h2>A linear <em>timeline</em></h2>
+      <ol class="timeline">
+        <li><b>Principal Mobile Systems Architect <em>@ Independent Systems Advisory &amp; Engineering Lab (Mobile1x)</em></b><small>Dec 2025 – Present</small><p>DeDup, Notes, The A2Z Collection and the Smart Form Engine.</p></li>
+        <li><b>Staff Software Engineer - Mobile Architecture <em>@ Idira by Palo Alto Networks (formerly CyberArk)</em></b><small>Nov 2024 – Dec 2025</small><p>TeeSDK on Android Keystore and iOS Secure Enclave; $240M in contract value across 1M+ seats; 28% cold-start latency reduction.</p></li>
+        <li><b>Technical Lead (Android &amp; iOS) <em>@ Coforge (Contract, Bankwest / Commonwealth Bank of Australia)</em></b><small>Mar 2024 – Nov 2024</small><p>Zero production rollbacks across features serving 1M+ daily users; 35% reduction in password-reset failures.</p></li>
+        <li><b>Senior Engineer (Android Sensors) <em>@ Conviva</em></b><small>May 2022 – Sep 2023</small><p>12B+ metric computations/min; 45% reduction in playback issues via ExoPlayer and Brightcove integrations.</p></li>
+        <li><b>Senior Software Engineer (Mobile SDK) <em>@ Intellicus Technologies</em></b><small>Dec 2019 – Apr 2022</small><p>32% crash-rate reduction and 40% faster dashboard loads via Kotlin modernization and SDK profiling.</p></li>
+        <li><b>Unified Mobile App Developer <em>@ Wipro Limited</em></b><small>Aug 2014 – Dec 2019</small><p>Chevron Lubricant Track &amp; Trace, ELCITA Citizen, and Mahindra First Choice Wheels connected-vehicle telematics.</p></li>
+      </ol>
+    </div>
+  </section>
+
+  <section id="skills" class="right">
+    <div class="panel wide">
+      <div class="label">06 / Technical skills matrix</div>
+      <h2>Built on <em>hardware-backed</em> trust</h2>
+      <div class="skills">
+        <div><h3>Mobile Security &amp; Cryptography</h3><div class="pills"><span>Android Keystore</span><span>iOS Secure Enclave</span><span>Biometric CryptoObject</span><span>DexGuard</span><span>STRIDE Threat Modeling</span><span>OWASP Mobile Top 10</span><span>SSDLC</span><span>Zero-Trust Architecture</span><span>Snyk</span></div></div>
+        <div><h3>Client Architecture &amp; Platforms</h3><div class="pills"><span>Kotlin</span><span>Swift</span><span>Jetpack Compose</span><span>SwiftUI</span><span>Coroutines &amp; Flow</span><span>Combine</span><span>Clean Architecture</span><span>MVI</span><span>MVVM</span><span>Modularization</span><span>C4 Architecture Modeling</span><span>ADRs</span></div></div>
+        <div><h3>Performance &amp; Benchmarking</h3><div class="pills"><span>P50/P95/P99 Tail-Latency Profiling</span><span>Preferences vs. Proto DataStore</span><span>Cold-Start Optimization</span><span>Memory Leak / OOM Profiling</span><span>ExoPlayer</span><span>AVFoundation</span></div></div>
+        <div><h3>Cloud, Infrastructure &amp; Payments</h3><div class="pills"><span>Cloudflare R2</span><span>Razorpay</span><span>S3-Compatible Object Storage</span><span>CI/CD (Fastlane, GitHub Actions, TeamCity)</span><span>Docker</span></div></div>
+      </div>
+      <div class="row" style="margin-top:22px">
+        <a class="btn primary" href="mailto:therahulpahuja@gmail.com">Get In Touch</a>
+        <a class="btn ext" href="https://www.linkedin.com/in/therahulpahuja/" target="_blank" rel="noopener noreferrer">LinkedIn <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M7 17 17 7M8 7h9v9"/></svg><span class="sr-only">(opens in new tab)</span></a>
+        <a class="btn ext" href="https://github.com/rahulpahuja" target="_blank" rel="noopener noreferrer">GitHub <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M7 17 17 7M8 7h9v9"/></svg><span class="sr-only">(opens in new tab)</span></a>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer>
+  <span>© 2026 Rahul Pahuja</span>
+  <span>Staff / Principal Mobile Systems Architect · Indore</span>
+  <a href="/?v=2d">Back to the 2D site</a>
+</footer>
+
+<script type="module">
+import * as THREE from 'three';
+
+const reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
+const canvas = document.getElementById('bg');
+let renderer;
+try {
+  renderer = new THREE.WebGLRenderer({ canvas, antialias: true, alpha: true, powerPreference: 'high-performance' });
+} catch (e) {
+  canvas.remove();
+  document.body.classList.add('no-webgl');
+}
+
+/* section nav highlighting works with or without WebGL */
+const sections = [...document.querySelectorAll('main section')];
+const dots = [...document.querySelectorAll('nav.dots a')];
+const io = new IntersectionObserver(es => es.forEach(e => {
+  if (e.isIntersecting) dots.forEach((d, i) => d.classList.toggle('on', sections[i] === e.target));
+}), { threshold: 0.5 });
+sections.forEach(s => io.observe(s));
+
+if (renderer) {
+  const ACCENT = 0x3b82f6, CYAN = 0x22d3ee, VIOLET = 0x8b5cf6;
+  const scene = new THREE.Scene();
+  scene.background = new THREE.Color(0x05070d);
+  scene.fog = new THREE.FogExp2(0x05070d, 0.014);
+  const camera = new THREE.PerspectiveCamera(55, 1, 0.1, 400);
+  const SPACING = 34;                       // z distance between section scenes
+  const zs = sections.map((_, i) => -i * SPACING);
+
+  const wire = (geo, color, opacity = 0.55) =>
+    new THREE.Mesh(geo, new THREE.MeshBasicMaterial({ color, wireframe: true, transparent: true, opacity }));
+  const edges = (geo, color, opacity = 0.9) =>
+    new THREE.LineSegments(new THREE.EdgesGeometry(geo), new THREE.LineBasicMaterial({ color, transparent: true, opacity }));
+  const group = (i) => { const g = new THREE.Group(); g.position.z = zs[i]; scene.add(g); return g; };
+
+  /* starfield */
+  {
+    const n = 1600, pos = new Float32Array(n * 3);
+    for (let i = 0; i < n; i++) {
+      pos[i * 3] = (Math.random() - 0.5) * 140;
+      pos[i * 3 + 1] = (Math.random() - 0.5) * 90;
+      pos[i * 3 + 2] = 30 - Math.random() * (SPACING * sections.length + 60);
+    }
+    const g = new THREE.BufferGeometry();
+    g.setAttribute('position', new THREE.BufferAttribute(pos, 3));
+    scene.add(new THREE.Points(g, new THREE.PointsMaterial({ color: 0x9db8e8, size: 0.12, transparent: true, opacity: 0.7, sizeAttenuation: true })));
+  }
+
+  /* 0 hero: secure enclave (nested shells, rings, core) */
+  const hero = group(0);
+  const core = wire(new THREE.IcosahedronGeometry(0.9, 1), CYAN, 0.95);
+  const shell1 = wire(new THREE.IcosahedronGeometry(1.7, 1), ACCENT, 0.45);
+  const shell2 = wire(new THREE.IcosahedronGeometry(2.5, 1), VIOLET, 0.25);
+  const ringA = new THREE.Mesh(new THREE.TorusGeometry(3.2, 0.025, 8, 160), new THREE.MeshBasicMaterial({ color: CYAN }));
+  const ringB = ringA.clone(); ringB.rotation.x = Math.PI / 2.4; ringB.scale.setScalar(0.88);
+  hero.add(core, shell1, shell2, ringA, ringB);
+
+  /* company logo tiles: use /3d/logos/<slug>.png|svg when present, else a clean name tile */
+  const COMPANIES = [
+    ['palo-alto-networks', 'Palo Alto Networks'], ['bankwest', 'Bankwest'],
+    ['conviva', 'Conviva'], ['intellicus', 'Intellicus'],
+    ['wipro', 'Wipro'], ['chevron', 'Chevron'], ['mahindra-first-choice-wheels', 'Mahindra First Choice'], ['coforge', 'Coforge'],
+  ];
+  const logoCache = {};
+  function logoTile(slug, name) {
+    if (logoCache[slug]) return logoCache[slug].clone();
+    const cv = document.createElement('canvas'); cv.width = 512; cv.height = 256;
+    const g = cv.getContext('2d');
+    const tex = new THREE.CanvasTexture(cv); tex.colorSpace = THREE.SRGBColorSpace; tex.anisotropy = 4;
+    const lines = (n) => { const w = n.split(' '); if (n.length < 16 || w.length < 2) return [n]; const m = Math.ceil(w.length / 2); return [w.slice(0, m).join(' '), w.slice(m).join(' ')]; };
+    const draw = (img) => {
+      g.clearRect(0, 0, 512, 256);
+      g.fillStyle = 'rgba(10,18,36,0.92)'; g.beginPath(); g.roundRect(4, 4, 504, 248, 30); g.fill();
+      g.strokeStyle = 'rgba(110,160,240,0.6)'; g.lineWidth = 3; g.stroke();
+      g.fillStyle = '#eef2f9'; g.font = '600 40px Inter, sans-serif'; g.textBaseline = 'middle';
+      const ls = lines(name);
+      if (img) {
+        g.fillStyle = '#ffffff'; g.beginPath(); g.roundRect(34, 68, 120, 120, 22); g.fill();
+        const r = Math.min(96 / img.width, 96 / img.height); const w = img.width * r, h = img.height * r;
+        g.drawImage(img, 34 + 60 - w / 2, 68 + 60 - h / 2, w, h);
+        g.fillStyle = '#eef2f9'; g.textAlign = 'left';
+        ls.forEach((t, i) => g.fillText(t, 176, 128 + (i - (ls.length - 1) / 2) * 48));
+      } else {
+        g.textAlign = 'center';
+        ls.forEach((t, i) => g.fillText(t, 256, 128 + (i - (ls.length - 1) / 2) * 52));
+      }
+      tex.needsUpdate = true;
+    };
+    draw(null);
+    const tryLoad = (exts) => {
+      if (!exts.length) return;
+      const im = new Image();
+      im.onload = () => draw(im);
+      im.onerror = () => tryLoad(exts.slice(1));
+      im.src = '/3d/logos/' + slug + '.' + exts[0];
+    };
+    tryLoad(['png', 'svg']);
+    const sp = new THREE.Sprite(new THREE.SpriteMaterial({ map: tex, transparent: true, depthWrite: false }));
+    sp.scale.set(1.3, 0.65, 1);
+    logoCache[slug] = sp;
+    return sp.clone();
+  }
+
+  /* hero: logos orbit the enclave */
+  const orbit = new THREE.Group();
+  COMPANIES.forEach(([slug, name], i) => {
+    const sp = logoTile(slug, name), a = (i / COMPANIES.length) * Math.PI * 2;
+    sp.position.set(Math.cos(a) * 4.8, Math.sin(a * 2) * 0.6, Math.sin(a) * 2.4);
+    orbit.add(sp);
+  });
+  hero.add(orbit);
+
+  /* 1 impact: four stat cubes */
+  const impact = group(1);
+  const cubes = [];
+  [[-1.3, 1.3], [1.3, 1.3], [-1.3, -1.3], [1.3, -1.3]].forEach(([x, y], i) => {
+    const geo = new THREE.BoxGeometry(1.7, 1.7, 1.7);
+    const c = new THREE.Group();
+    c.add(new THREE.Mesh(geo, new THREE.MeshBasicMaterial({ color: ACCENT, transparent: true, opacity: 0.1 })), edges(geo, i % 2 ? CYAN : ACCENT));
+    c.position.set(x, y, 0); c.userData.phase = i * 1.3; impact.add(c); cubes.push(c);
+  });
+
+  /* 2 idira: zero-trust layers around a key */
+  const idira = group(2);
+  const layers = [1.2, 1.9, 2.7].map((r, i) => { const m = wire(new THREE.IcosahedronGeometry(r, 2), [CYAN, ACCENT, VIOLET][i], 0.35 - i * 0.06); idira.add(m); return m; });
+  const key = new THREE.Mesh(new THREE.TorusKnotGeometry(0.45, 0.14, 120, 14), new THREE.MeshBasicMaterial({ color: CYAN, wireframe: true }));
+  idira.add(key);
+
+  /* 3 lab: floating phones with real screenshots + generated panels */
+  const lab = group(3);
+  const loader = new THREE.TextureLoader();
+  const tex = (url) => { const t = loader.load(url); t.colorSpace = THREE.SRGBColorSpace; t.anisotropy = 4; return t; };
+  const panelTex = (title, sub, lines) => {
+    const c = document.createElement('canvas'); c.width = 440; c.height = 952;
+    const g = c.getContext('2d');
+    const bg = g.createLinearGradient(0, 0, 0, 952); bg.addColorStop(0, '#0b1a3a'); bg.addColorStop(1, '#05070d');
+    g.fillStyle = bg; g.fillRect(0, 0, 440, 952);
+    g.fillStyle = '#22d3ee'; g.font = '500 22px monospace'; g.fillText(sub.toUpperCase(), 36, 120);
+    g.fillStyle = '#eef2f9'; g.font = '700 54px sans-serif';
+    title.forEach((t, i) => g.fillText(t, 36, 200 + i * 64));
+    g.fillStyle = '#9aa7bd'; g.font = '400 26px sans-serif';
+    lines.forEach((t, i) => g.fillText(t, 36, 440 + i * 44));
+    const t = new THREE.CanvasTexture(c); t.colorSpace = THREE.SRGBColorSpace; return t;
+  };
+  const phones = [
+    tex('/public/dedup-ss/dashboard-1.jpg'),
+    tex('/public/notes-ss/home-1.jpg'),
+    panelTex(['The A2Z', 'Collection'], 'Production e-commerce', ['2,500 DAU sustained', 'Razorpay payments', 'Cloudflare R2 caching', 'Carrier shipping APIs', 'Resilient OTP auth']),
+    panelTex(['Smart Form', 'Engine'], 'Schema-driven forms', ['JSON schema in', 'UI rendering out', '50% faster form', 'creation cycles']),
+  ].map((t, i) => {
+    const w = 1.7, h = w * (952 / 440);
+    const geo = new THREE.PlaneGeometry(w, h);
+    const m = new THREE.Group();
+    m.add(new THREE.Mesh(geo, new THREE.MeshBasicMaterial({ map: t, side: THREE.DoubleSide })));
+    m.add(edges(new THREE.BoxGeometry(w, h, 0.02), i % 2 ? CYAN : ACCENT, 0.9));
+    const a = (i / 4) * Math.PI * 2 + Math.PI / 4;
+    m.position.set(Math.cos(a) * 3.1, Math.sin(a) * 1.1, Math.sin(a) * 1.4);
+    m.rotation.y = -Math.cos(a) * 0.45;
+    m.userData.phase = i * 1.7; lab.add(m); return m;
+  });
+
+  /* 4 career: helix of six roles */
+  const career = group(4);
+  const helixPts = [];
+  for (let i = 0; i <= 120; i++) { const t = i / 120 * Math.PI * 4; helixPts.push(new THREE.Vector3(Math.cos(t) * 2, (i / 120 - 0.5) * 6, Math.sin(t) * 2)); }
+  career.add(new THREE.Line(new THREE.BufferGeometry().setFromPoints(helixPts), new THREE.LineBasicMaterial({ color: ACCENT, transparent: true, opacity: 0.8 })));
+  for (let i = 0; i < 6; i++) {
+    const p = helixPts[Math.round(i / 5 * 120)];
+    const s = new THREE.Mesh(new THREE.SphereGeometry(0.2, 16, 12), new THREE.MeshBasicMaterial({ color: i === 0 ? CYAN : 0xeef2f9 }));
+    s.position.copy(p); career.add(s);
+    const [slug, name] = [['mobile1x', 'Mobile1x'], ['palo-alto-networks', 'Palo Alto Networks'], ['bankwest', 'Bankwest'], ['conviva', 'Conviva'], ['intellicus', 'Intellicus'], ['wipro', 'Wipro']][i];
+    const tile = logoTile(slug, name); tile.scale.set(1.2, 0.6, 1);
+    tile.position.set(p.x * 1.75, p.y, p.z * 1.75); career.add(tile);
+  }
+
+  /* 5 skills: orbiting crystals around a lattice */
+  const skills = group(5);
+  const lattice = wire(new THREE.OctahedronGeometry(1.5, 1), CYAN, 0.7);
+  skills.add(lattice);
+  const crystals = [];
+  for (let i = 0; i < 28; i++) {
+    const m = edges(new THREE.OctahedronGeometry(0.16 + Math.random() * 0.16), i % 3 ? ACCENT : VIOLET, 0.9);
+    m.userData = { r: 2.2 + Math.random() * 1.6, a: Math.random() * 6.28, s: 0.2 + Math.random() * 0.5, y: (Math.random() - 0.5) * 3 };
+    skills.add(m); crystals.push(m);
+  }
+
+  /* layout: scene objects sit beside the text panel (right on desktop, up top on phones) */
+  const movers = [hero, impact, idira, lab, career, skills];
+  let narrow = false;
+  const place = () => {
+    narrow = innerWidth < 860;
+    movers.forEach((g, i) => {
+      const textRight = sections[i].classList.contains('right');
+      const side = narrow ? 0 : (textRight ? -1 : 1);
+      const fit = g === lab ? 0.72 : 1;          // the phone arc is wider than the other scenes
+      g.position.x = side * 3.6 * (g === lab ? 0.8 : 1);
+      g.position.y = narrow ? 2.1 : 0;
+      g.scale.setScalar((narrow ? 0.62 : 1) * fit);
+    });
+  };
+
+  const resize = () => {
+    renderer.setPixelRatio(Math.min(devicePixelRatio, 2));
+    renderer.setSize(innerWidth, innerHeight, false);
+    camera.aspect = innerWidth / innerHeight; camera.updateProjectionMatrix();
+    place(); anchors();
+  };
+
+  /* scroll -> camera depth: piecewise-linear between each section centre and its scene's z */
+  let pts = [];
+  function anchors() {
+    pts = sections.map((s, i) => ({ y: s.offsetTop + s.offsetHeight / 2 - innerHeight / 2, z: zs[i] + 9 }));
+  }
+  const targetZ = () => {
+    const y = scrollY;
+    if (y <= pts[0].y) return pts[0].z;
+    for (let i = 1; i < pts.length; i++) {
+      if (y <= pts[i].y) { const t = (y - pts[i - 1].y) / (pts[i].y - pts[i - 1].y); return pts[i - 1].z + (pts[i].z - pts[i - 1].z) * t; }
+    }
+    return pts[pts.length - 1].z;
+  };
+
+  let mx = 0, my = 0;
+  addEventListener('pointermove', e => { mx = e.clientX / innerWidth - 0.5; my = e.clientY / innerHeight - 0.5; }, { passive: true });
+  addEventListener('resize', resize);
+  addEventListener('load', anchors);
+  resize();
+  camera.position.set(0, 0, pts[0].z);
+
+  const clock = new THREE.Clock();
+  let running = true;
+  document.addEventListener('visibilitychange', () => { running = !document.hidden; if (running) loop(); });
+
+  function loop() {
+    if (!running) return;
+    requestAnimationFrame(loop);
+    const t = reduce ? 0 : clock.getElapsedTime();
+    const k = reduce ? 1 : 0.07;
+    camera.position.z += (targetZ() - camera.position.z) * k;
+    camera.position.x += ((reduce ? 0 : mx * 1.4) - camera.position.x) * 0.05;
+    camera.position.y += ((reduce ? 0 : -my * 0.9) - camera.position.y) * 0.05;
+    camera.lookAt(camera.position.x * 0.3, camera.position.y * 0.3, camera.position.z - 12);
+
+    core.rotation.set(t * 0.5, t * 0.7, 0); shell1.rotation.set(-t * 0.25, t * 0.3, 0); shell2.rotation.set(t * 0.12, -t * 0.18, 0);
+    ringA.rotation.set(t * 0.3, 0, t * 0.2); ringB.rotation.z = -t * 0.25; orbit.rotation.y = t * 0.12;
+    cubes.forEach(c => { c.rotation.set(t * 0.35 + c.userData.phase, t * 0.5, 0); c.position.z = Math.sin(t + c.userData.phase) * 0.4; });
+    layers.forEach((l, i) => l.rotation.set(t * 0.12 * (i % 2 ? -1 : 1), t * 0.18 * (i % 2 ? 1 : -1), 0));
+    key.rotation.set(t * 0.6, t * 0.4, 0);
+    phones.forEach(p => { p.position.y += (Math.sin(t * 0.9 + p.userData.phase) * 0.004); });
+    lab.rotation.y = Math.sin(t * 0.25) * 0.25;
+    career.rotation.y = t * 0.2;
+    lattice.rotation.set(t * 0.3, t * 0.4, 0);
+    crystals.forEach(c => { const u = c.userData; const a = u.a + t * u.s; c.position.set(Math.cos(a) * u.r, u.y + Math.sin(t + u.a) * 0.2, Math.sin(a) * u.r); c.rotation.set(t, t * 0.7, 0); });
+
+    renderer.render(scene, camera);
+  }
+  loop();
+}
+</script>
+<script>
+/* A/B tracking: same events as the 2D page, tagged ab_variant=3d */
+(function () {
+  var V = '3d';
+  function send(n, p) { try { p = p || {}; p.ab_variant = V; gtag('event', n, p); } catch (e) {} }
+  document.addEventListener('click', function (e) {
+    var a = e.target.closest && e.target.closest('a[href]'); if (!a) return;
+    var h = a.getAttribute('href') || '', u;
+    if (/\.pdf(\?|$)/i.test(h)) return send('resume_download', { link_url: h });
+    if (/^mailto:/i.test(h)) return send('contact_click', { method: 'email' });
+    if (/^tel:/i.test(h)) return send('contact_click', { method: 'phone' });
+    if (/apps\.apple\.com|play\.google\.com/i.test(h)) return send('store_click', { link_url: h });
+    try { u = new URL(a.href, location.href); } catch (x) { return; }
+    if (u.origin !== location.origin) send('outbound_click', { link_url: u.href });
+  }, true);
+  var seen = {};
+  addEventListener('scroll', function () {
+    var d = document.documentElement, p = 100 * (scrollY + innerHeight) / d.scrollHeight;
+    [25, 50, 75, 100].forEach(function (m) { if (p >= m - 1 && !seen[m]) { seen[m] = 1; send('scroll_depth', { percent: m }); } });
+  }, { passive: true });
+})();
+</script>
+</body>
+</html>

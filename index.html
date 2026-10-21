@@ -223,7 +223,8 @@
   function gtag(){dataLayer.push(arguments);}
   gtag('js', new Date());
 
-  gtag('config', 'G-QS8D87DMKZ');
+  gtag('set', 'user_properties', { ab_variant: '2d' });
+  gtag('config', 'G-QS8D87DMKZ', { ab_variant: '2d' });
 </script>
   <script src="https://cdn.tailwindcss.com" defer></script>
   <script src="https://unpkg.com/react@18/umd/react.production.min.js" defer></script>
@@ -1623,5 +1624,27 @@ const App=()=>{
 ReactDOM.createRoot(document.getElementById('root')).render(<App/>);
 </script>
 <script src="blogs.js" defer></script>
+<script>
+/* A/B tracking: same events as the 2D page, tagged ab_variant=2d */
+(function () {
+  var V = '2d';
+  function send(n, p) { try { p = p || {}; p.ab_variant = V; gtag('event', n, p); } catch (e) {} }
+  document.addEventListener('click', function (e) {
+    var a = e.target.closest && e.target.closest('a[href]'); if (!a) return;
+    var h = a.getAttribute('href') || '', u;
+    if (/\.pdf(\?|$)/i.test(h)) return send('resume_download', { link_url: h });
+    if (/^mailto:/i.test(h)) return send('contact_click', { method: 'email' });
+    if (/^tel:/i.test(h)) return send('contact_click', { method: 'phone' });
+    if (/apps\.apple\.com|play\.google\.com/i.test(h)) return send('store_click', { link_url: h });
+    try { u = new URL(a.href, location.href); } catch (x) { return; }
+    if (u.origin !== location.origin) send('outbound_click', { link_url: u.href });
+  }, true);
+  var seen = {};
+  addEventListener('scroll', function () {
+    var d = document.documentElement, p = 100 * (scrollY + innerHeight) / d.scrollHeight;
+    [25, 50, 75, 100].forEach(function (m) { if (p >= m - 1 && !seen[m]) { seen[m] = 1; send('scroll_depth', { percent: m }); } });
+  }, { passive: true });
+})();
+</script>
 </body>
 </html>
