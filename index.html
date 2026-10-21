@@ -499,9 +499,9 @@
   <section style="margin-top:40px">
     <h2 class="display-sm" style="font-size:1.6rem">Career</h2>
     <ul style="margin-top:12px;padding-left:20px;list-style:none">
-      <li style="margin-bottom:18px"><strong>Principal Systems Architect, Independent Systems Advisory &amp; Engineering Lab (Mobile1x)</strong> (Dec 2025 – Present) — DeDup, Notes, The A2Z Collection e-commerce architecture, and the Smart Form Engine.</li>
+      <li style="margin-bottom:18px"><strong>Principal Mobile Systems Architect, Independent Systems Advisory &amp; Engineering Lab (Mobile1x)</strong> (Dec 2025 – Present) — DeDup, Notes, The A2Z Collection e-commerce architecture, and the Smart Form Engine.</li>
       <li style="margin-bottom:18px"><strong>Staff Software Engineer - Mobile Architecture, Idira by Palo Alto Networks (formerly CyberArk)</strong> (Nov 2024 – Dec 2025) — Architected TeeSDK on Android Keystore and iOS Secure Enclave; $240M in commercial contract value across 1M+ enterprise seats; 28% cold-start latency reduction. <a href="https://apps.apple.com/in/app/idira-identity/id499910663">iOS</a> · <a href="https://play.google.com/store/apps/details?id=com.centrify.mdm.samsung&amp;hl=en_IN">Android</a></li>
-      <li style="margin-bottom:18px"><strong>Technical Lead (Android &amp; iOS), Coforge — Bankwest / Commonwealth Bank of Australia</strong> (Mar 2024 – Nov 2024) — Zero production rollbacks across digital banking features serving 1M+ daily users; 35% reduction in password-reset failures.</li>
+      <li style="margin-bottom:18px"><strong>Technical Lead (Android &amp; iOS), Coforge — Bankwest / Commonwealth Bank of Australia</strong> (Mar 2024 – Nov 2024) — Zero production rollbacks across digital banking features serving 1M+ daily users; 35% reduction in password-reset failures. <a href="https://apps.apple.com/au/app/bankwest/id419259235" target="_blank" rel="noopener noreferrer">Bankwest on iOS</a> · <a href="https://play.google.com/store/apps/details?id=au.com.bankwest.mobile&amp;hl=en_IN" target="_blank" rel="noopener noreferrer">Bankwest on Android</a></li>
       <li style="margin-bottom:18px"><strong>Senior Engineer (Android Sensors), Conviva</strong> (May 2022 – Sep 2023) — 12B+ metric computations/min; 45% reduction in playback issues via ExoPlayer &amp; Brightcove integrations.</li>
       <li style="margin-bottom:18px"><strong>Senior Software Engineer (Mobile SDK), Intellicus Technologies</strong> (Dec 2019 – Apr 2022) — 32% crash-rate reduction and 40% faster dashboard loads via Kotlin modernization and SDK profiling. <a href="https://play.google.com/store/apps/details?id=com.intellicus.android&amp;hl=en_IN">Intellicus Mobile on Google Play</a></li>
       <li style="margin-bottom:18px"><strong>Unified Mobile App Developer, Wipro Limited</strong> (Aug 2014 – Dec 2019) — Chevron <a href="https://apps.apple.com/in/app/lubricant-trackandtrace/id1534588269">Lubricant Track &amp; Trace</a> (iOS); ELCITA Bengaluru <a href="https://apps.apple.com/in/app/elcita-citizen/id1473400141">ELCITA Citizen</a> (iOS); Mahindra First Choice Wheels AutoInsights connected-vehicle telematics (<a href="https://www.wipro.com/insurance/solutions/connected-automobiles/">solution page</a>).</li>
@@ -631,7 +631,7 @@ const COMPANIES=["Palo Alto Networks","CyberArk","Bankwest","CBA","Conviva","Int
 
 const TIMELINE=[
   {
-    role:"Principal Systems Architect",co:"Independent Systems Advisory & Engineering Lab (Mobile1x)",period:"Dec 2025 — Present",tag:"Systems Advisory",
+    role:"Principal Mobile Systems Architect",co:"Independent Systems Advisory & Engineering Lab (Mobile1x)",period:"Dec 2025 — Present",tag:"Systems Advisory",
     bullets:[
       "DeDup — privacy-first, on-device duplicate media cleaner on Google Play and the App Store; 600+ combined active users.",
       "Notes — Archive & Reflect — offline-first capture app in native Swift and Kotlin with a biometric vault, OCR and speech-to-text.",
@@ -657,6 +657,10 @@ const TIMELINE=[
       "Zero production rollbacks across digital banking features serving 1M+ daily users; 35% reduction in password-reset failures.",
       "Architected self-service features: password reset, currency conversion, and account management across Android and iOS.",
       "Established code coverage standards and CI test pipelines that reduced regression cycles significantly.",
+    ],
+    links:[
+      {label:"Bankwest — iOS App Store",href:"https://apps.apple.com/au/app/bankwest/id419259235"},
+      {label:"Bankwest — Google Play Store",href:"https://play.google.com/store/apps/details?id=au.com.bankwest.mobile&hl=en_IN"},
     ]
   },
   {
@@ -1034,7 +1038,7 @@ const App=()=>{
         <div className="wrap">
           <div className="hero-grid" style={{display:'grid',gridTemplateColumns:'1fr auto',gap:'56px',alignItems:'center'}}>
             <div>
-              <FI><div className="label" style={{marginBottom:'24px'}}>// Staff_Principal_Architect — Indore, IN</div></FI>
+              <FI><div className="label" style={{marginBottom:'24px'}}>// Indore, India</div></FI>
               <FI delay={.1}>
                 <h1 className="display-hero" style={{marginBottom:'20px'}}>
                   {content.hero_headline.split('\n').map((line,i,arr)=>(
@@ -1201,7 +1205,7 @@ const App=()=>{
               <h2 className="display-sm" style={{fontSize:'clamp(1.7rem,3.6vw,2.8rem)',flex:'1 1 320px'}}>Independent Systems Advisory &amp; Engineering Lab</h2>
               <span className="label" style={{marginLeft:'auto'}}>04 / Lab</span>
             </div>
-            <p className="label" style={{marginBottom:'40px'}}>Mobile1x · Principal Systems Architect · Dec 2025 – Present</p>
+            <p className="label" style={{marginBottom:'40px'}}>Mobile1x · Principal Mobile Systems Architect · Dec 2025 – Present</p>
           </FI>
 
           <FI delay={.05}>

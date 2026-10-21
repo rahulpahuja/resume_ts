@@ -6,7 +6,7 @@ Rahul Pahuja is a mobile systems architect based in Indore, India, actively eval
 
 ## Now
 
-Since Dec 2025 Rahul is Principal Systems Architect of an Independent Systems Advisory & Engineering Lab (Mobile1x). Current work: DeDup (privacy-first on-device duplicate media cleaner; Google Play and App Store; 600+ combined active users), Notes — Archive & Reflect (offline-first capture, Android and iOS), The A2Z Collection (production e-commerce architecture sustained at 2,500 DAU) and Smart Form Engine (schema-driven JSON forms, 50% faster form creation). He also maintains AI Similarity, a developer reference that maps Android and iOS APIs side by side.
+Since Dec 2025 Rahul is Principal Mobile Systems Architect of an Independent Systems Advisory & Engineering Lab (Mobile1x). Current work: DeDup (privacy-first on-device duplicate media cleaner; Google Play and App Store; 600+ combined active users), Notes — Archive & Reflect (offline-first capture, Android and iOS), The A2Z Collection (production e-commerce architecture sustained at 2,500 DAU) and Smart Form Engine (schema-driven JSON forms, 50% faster form creation). He also maintains AI Similarity, a developer reference that maps Android and iOS APIs side by side.
 
 ## Core impact
 
@@ -29,9 +29,9 @@ Since Dec 2025 Rahul is Principal Systems Architect of an Independent Systems Ad
 
 ## Career
 
-- **Independent Systems Advisory & Engineering Lab (Mobile1x)** — Principal Systems Architect (Dec 2025 – Present). DeDup, Notes, The A2Z Collection, Smart Form Engine.
+- **Independent Systems Advisory & Engineering Lab (Mobile1x)** — Principal Mobile Systems Architect (Dec 2025 – Present). DeDup, Notes, The A2Z Collection, Smart Form Engine.
 - **Idira by Palo Alto Networks (formerly CyberArk)** — Staff Software Engineer - Mobile Architecture (Nov 2024 – Dec 2025). TeeSDK on Android Keystore and iOS Secure Enclave; $240M in commercial contract value across 1M+ enterprise seats; hardware-enforced biometric tampering detection (Keystore CryptoObjects); DexGuard binary hardening; company-wide Preferences vs. Proto DataStore ADR from P50/P95/P99 benchmarks; 28% cold-start latency reduction; C4 modeling, STRIDE threat modeling and SSDLC. iOS: https://apps.apple.com/in/app/idira-identity/id499910663 — Android: https://play.google.com/store/apps/details?id=com.centrify.mdm.samsung&hl=en_IN
-- **Coforge (Contract — Bankwest / Commonwealth Bank of Australia)** — Technical Lead, Android & iOS (Mar 2024 – Nov 2024). Zero production rollbacks across digital banking features serving 1M+ daily users; 35% reduction in password-reset failures.
+- **Coforge (Contract — Bankwest / Commonwealth Bank of Australia)** — Technical Lead, Android & iOS (Mar 2024 – Nov 2024). Zero production rollbacks across digital banking features serving 1M+ daily users; 35% reduction in password-reset failures. Bankwest iOS: https://apps.apple.com/au/app/bankwest/id419259235 — Android: https://play.google.com/store/apps/details?id=au.com.bankwest.mobile&hl=en_IN
 - **Conviva** — Senior Engineer, Android Sensors (May 2022 – Sep 2023). 12B+ metric computations/min; 45% reduction in playback issues via ExoPlayer and Brightcove integrations.
 - **Intellicus Technologies** — Senior Software Engineer, Mobile SDK (Dec 2019 – Apr 2022). 32% crash-rate reduction and 40% faster dashboard loads via Kotlin modernization and SDK profiling. https://play.google.com/store/apps/details?id=com.intellicus.android&hl=en_IN
 - **Wipro Limited** — Unified Mobile App Developer (Aug 2014 – Dec 2019). Chevron Lubricant Track & Trace (iOS: https://apps.apple.com/in/app/lubricant-trackandtrace/id1534588269); ELCITA Citizen for ELCITA Bengaluru (iOS: https://apps.apple.com/in/app/elcita-citizen/id1473400141); Mahindra First Choice Wheels AutoInsights connected-vehicle telematics (https://www.wipro.com/insurance/solutions/connected-automobiles/).
