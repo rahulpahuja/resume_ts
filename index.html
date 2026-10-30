@@ -532,7 +532,7 @@
   </header>
 
   <nav aria-label="Sections" style="margin-bottom:36px">
-    <a href="#hero">Home</a> · <a href="#writing">Writing</a> · <a href="#impact">Impact</a> ·
+    <a href="#hero">Home</a> · <a href="/blog/">Blogs</a> · <a href="#impact">Impact</a> ·
     <a href="#feature">Idira</a> · <a href="#lab">Mobile1x Lab</a> · <a href="#work">Career</a> ·
     <a href="#training">Training</a> · <a href="#about">About</a> · <a href="#music">Personal</a>
   </nav>
@@ -546,19 +546,6 @@
       <a href="https://www.linkedin.com/in/therahulpahuja/">LinkedIn</a> ·
       <a href="https://github.com/rahulpahuja">GitHub</a>
     </p>
-  </section>
-
-  <section style="margin-top:40px">
-    <h2 class="display-sm" style="font-size:1.6rem">Writing</h2>
-    <ul style="margin-top:12px;padding-left:20px">
-      <li><a href="/blog/2026-05-19-google-just-crossed-a-line-at-io-that-changes-the-future-of-ai-forever/">Google just crossed a line at I/O that changes the future of AI forever</a></li>
-      <li><a href="/blog/2026-05-19-google-just-changed-the-future-of-search-with-ask-youtube-and-almost-nobody-is-talking-abo/">Google just changed the future of Search with "Ask YouTube"</a></li>
-      <li><a href="/blog/2026-05-07-secure-db-proposal/">Secure DB Proposal</a>: a reactive, coroutine-native embedded database runtime for mobile.</li>
-      <li><a href="/blog/2026-05-07-mobile-app-architecture-comparison/">Mobile App Architecture Comparison</a>: MVC, MVP, MVVM, MVI, VIPER, TCA compared.</li>
-      <li><a href="/blog/2026-04-29-mcp-servers-resources-and-tools-explained-without-the-hype/">MCP Servers, Resources, and Tools: Explained Without the Hype</a></li>
-      <li><a href="/blog/2026-03-15-secure-data-at-scale-designing-a-robust-storage-stack-with-teesdk-encrypted-data-stores-and-intelligent-caching/">Secure Data at Scale: Designing a Robust Storage Stack with TEESDK</a></li>
-      <li><a href="https://www.linkedin.com/pulse/jetpack-compose-staff-android-engineers-perspective-rahul-pahuja-zauif">Jetpack Compose: A Staff Engineer's Perspective</a></li>
-    </ul>
   </section>
 
   <section style="margin-top:40px">
@@ -713,7 +700,6 @@ function Field({label,value,onChange,rows=1,placeholder=''}){
 
 const NAV=[
   {id:'hero',    label:'Home'},
-  {id:'writing', label:'Writing'},
   {id:'impact',  label:'Impact'},
   {id:'feature', label:'Idira'},
   {id:'lab',     label:'Lab'},
@@ -797,20 +783,6 @@ const TIMELINE=[
   },
 ];
 
-const BLOGS=[
-  {title:"Building Enterprise Security with Secured Storage",tag:"Security",
-   desc:"Architecture decisions behind hardware-backed credential protection: TEE design, key binding, and the threat model that shaped every choice.",link:"#"},
-  {title:"Real-time Analytics: Conviva SDK Architecture",tag:"Architecture",
-   desc:"How we processed 12 billion metric computations per minute, and what the SDK boundary looks like at that scale.",link:"#"},
-  {title:"Jetpack Compose: A Staff Engineer's Perspective",tag:"Android",
-   desc:"Evaluating Compose for production adoption: performance, migration risk, and the team decisions around it.",
-   link:"https://www.linkedin.com/pulse/jetpack-compose-staff-android-engineers-perspective-rahul-pahuja-zauif"},
-  {title:"Mobile Banking: Lessons from Bankwest",tag:"FinTech",
-   desc:"What building secure self-service features for millions of banking customers taught me about trust hierarchies.",link:"#"},
-  {title:"LLM Poisoning: A Cybersecurity Threat Most Companies Are Ignoring",tag:"AI Security",
-   desc:"Adversarial data injection into training pipelines: why it matters for every engineer building on AI.",link:"#"},
-];
-
 const SKILLS={
   "Mobile Security & Cryptography":["Android Keystore","iOS Secure Enclave","Biometric CryptoObject","DexGuard","STRIDE Threat Modeling","OWASP Mobile Top 10","SSDLC","Zero-Trust Architecture","Snyk"],
   "Client Architecture & Platforms":["Kotlin","Swift","Jetpack Compose","SwiftUI","Coroutines & Flow","Combine","Clean Architecture","MVI","MVVM","Modularization","C4 Architecture Modeling","ADRs"],
@@ -873,7 +845,6 @@ const DEFAULT_CONTENT={
     {h:'C4 Architecture Modeling',b:'Modeled system topologies across Context, Container, Component, and Code levels, driving STRIDE threat modeling and SSDLC compliance across mobile, backend, and security teams.'},
   ],
 
-  blogs:BLOGS,
   timeline:TIMELINE,
 
   training_count:'41',
@@ -937,17 +908,6 @@ const App=()=>{
     setDraft(null);
     showToast();
   };
-
-  /* ── SYNC BLOGS FROM blogs.js ── */
-  useEffect(()=>{
-    const handler=(e)=>{
-      const blogs=e.detail;
-      if(blogs&&blogs.length>0)setContent(prev=>({...prev,blogs}));
-    };
-    window.addEventListener('blogsLoaded',handler);
-    if(window.BLOGS&&window.BLOGS.length>0)setContent(prev=>({...prev,blogs:window.BLOGS}));
-    return()=>window.removeEventListener('blogsLoaded',handler);
-  },[]);
 
   /* ── DRAFT FIELD HELPER ── */
   const dset=(key,val)=>setDraft(d=>({...d,[key]:val}));
@@ -1048,21 +1008,6 @@ const App=()=>{
       </>}
     </Drawer>
 
-    {/* WRITING drawer */}
-    <Drawer open={drawer==='writing'} title="Edit Writing / Blogs" onClose={closeDrawer} onSave={saveDrawer}>
-      {draft&&<>
-        {draft.blogs.map((b,i)=>(
-          <div key={i} style={{marginBottom:'20px',padding:'16px',border:'1px solid var(--border)',borderRadius:'2px'}}>
-            <div style={{fontFamily:'JetBrains Mono,monospace',fontSize:'10px',color:'var(--muted)',textTransform:'uppercase',letterSpacing:'.1em',marginBottom:'10px'}}>Article {i+1}</div>
-            <Field label="Tag" value={b.tag} onChange={v=>{const a=[...draft.blogs];a[i]={...a[i],tag:v};dset('blogs',a);}}/>
-            <Field label="Title" value={b.title} onChange={v=>{const a=[...draft.blogs];a[i]={...a[i],title:v};dset('blogs',a);}}/>
-            <Field label="Description" value={b.desc} onChange={v=>{const a=[...draft.blogs];a[i]={...a[i],desc:v};dset('blogs',a);}} rows={2}/>
-            <Field label="URL" value={b.link} onChange={v=>{const a=[...draft.blogs];a[i]={...a[i],link:v};dset('blogs',a);}}/>
-          </div>
-        ))}
-      </>}
-    </Drawer>
-
     {/* WORK drawer */}
     <Drawer open={drawer==='work'} title="Edit Career Timeline" onClose={closeDrawer} onSave={saveDrawer}>
       {draft&&<>
@@ -1121,7 +1066,7 @@ const App=()=>{
           <a href="https://github.com/rahulpahuja" target="_blank" rel="noopener noreferrer" className="si"><GH/></a>
           <a href="https://www.codementor.io/@rahulpahuja?refer=badge" target="_blank" rel="noopener noreferrer" className="si si-badge" aria-label="Find me on Codementor"><img src="https://www.codementor.io/m-badges/rahulpahuja/find-me-on-cm-b.svg" alt="Codementor badge" width="58" height="22"/></a>
         </div>
-        <a href="#writing" className="btn btn-ghost" onClick={e=>{e.preventDefault();go('writing');}}>Blogs</a>
+        <a href="/blog/" className="btn btn-ghost">Blogs</a>
         <a href={PHONE_HREF} className="btn btn-accent">Contact me →</a>
         <a href={RESUME_URL} download className="btn btn-solid">Download Resume</a>
       </div>
@@ -1195,37 +1140,7 @@ const App=()=>{
         </div>
       </section>
 
-      {/* ═══ 02. WRITING ═══ */}
-      <section id="writing" className="section editable-section">
-        <EditBtn label="Writing" onClick={()=>openDrawer('writing')}/>
-        <div className="wrap">
-          <FI>
-            <div style={{display:'flex',alignItems:'baseline',gap:'18px',marginBottom:'56px'}}>
-              <div className="accent-rule"></div>
-              <h2 className="display-sm">Writing</h2>
-              <span className="label" style={{marginLeft:'auto'}}>02 / Thought leadership</span>
-            </div>
-          </FI>
-          <div className="blog-list">
-            {content.blogs.map((b,i)=>(
-              <FI key={i} delay={i*.06}>
-                <a href={b.link} {...(b.link&&b.link.startsWith('/blog/')?{}:{target:'_blank',rel:'noopener noreferrer'})} style={{display:'block',color:'inherit'}}>
-                  <div className="blog-row">
-                    <div>
-                      <div style={{display:'flex',alignItems:'center',gap:'10px',marginBottom:'8px'}}><span className="tag tag-accent">{b.tag}</span></div>
-                      <div className="blog-title">{b.title}</div>
-                      <div className="blog-desc">{b.desc}</div>
-                    </div>
-                    <span className="arrow">→</span>
-                  </div>
-                </a>
-              </FI>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* ═══ 03. IMPACT ═══ */}
+      {/* ═══ 02. IMPACT ═══ */}
       <section id="impact" className="section section-alt editable-section">
         <EditBtn label="Impact" onClick={()=>openDrawer('impact')}/>
         <div className="wrap">
@@ -1233,7 +1148,7 @@ const App=()=>{
             <div style={{display:'flex',alignItems:'baseline',gap:'18px',marginBottom:'56px'}}>
               <div className="accent-rule"></div>
               <h2 className="display-sm">Core impact at scale</h2>
-              <span className="label" style={{marginLeft:'auto'}}>03 / Impact</span>
+              <span className="label" style={{marginLeft:'auto'}}>02 / Impact</span>
             </div>
           </FI>
           <div className="impact-grid">
@@ -1276,7 +1191,7 @@ const App=()=>{
         </div>
       </section>
 
-      {/* ═══ 04. FEATURED ENTERPRISE SPOTLIGHT ═══ */}
+      {/* ═══ 03. FEATURED ENTERPRISE SPOTLIGHT ═══ */}
       <section id="feature" className="section editable-section">
         <EditBtn label="Idira" onClick={()=>openDrawer('feature')}/>
         <div className="wrap">
@@ -1284,7 +1199,7 @@ const App=()=>{
             <div style={{display:'flex',alignItems:'baseline',gap:'18px',marginBottom:'56px'}}>
               <div className="accent-rule"></div>
               <h2 className="display-sm">Featured enterprise spotlight</h2>
-              <span className="label" style={{marginLeft:'auto'}}>04 / Idira</span>
+              <span className="label" style={{marginLeft:'auto'}}>03 / Idira</span>
             </div>
           </FI>
           <div className="feature-card">
@@ -1328,14 +1243,14 @@ const App=()=>{
         </div>
       </section>
 
-      {/* ═══ 05. INDEPENDENT SYSTEMS ADVISORY & ENGINEERING LAB ═══ */}
+      {/* ═══ 04. INDEPENDENT SYSTEMS ADVISORY & ENGINEERING LAB ═══ */}
       <section id="lab" className="section section-alt">
         <div className="wrap">
           <FI>
             <div style={{display:'flex',alignItems:'baseline',gap:'18px',marginBottom:'20px',flexWrap:'wrap'}}>
               <div className="accent-rule"></div>
               <h2 className="display-sm" style={{fontSize:'clamp(1.7rem,3.6vw,2.8rem)',flex:'1 1 320px'}}>Independent Systems Advisory &amp; Engineering Lab</h2>
-              <span className="label" style={{marginLeft:'auto'}}>05 / Lab</span>
+              <span className="label" style={{marginLeft:'auto'}}>04 / Lab</span>
             </div>
             <p className="label" style={{marginBottom:'40px'}}>Mobile1x · Principal Mobile Systems Architect · Dec 2025 – Present</p>
           </FI>
@@ -1428,7 +1343,7 @@ const App=()=>{
         </div>
       </section>
 
-      {/* ═══ 06. CAREER ═══ */}
+      {/* ═══ 05. CAREER ═══ */}
       <section id="work" className="section section-alt editable-section">
         <EditBtn label="Career" onClick={()=>openDrawer('work')}/>
         <div className="wrap">
@@ -1436,7 +1351,7 @@ const App=()=>{
             <div style={{display:'flex',alignItems:'baseline',gap:'18px',marginBottom:'56px'}}>
               <div className="accent-rule"></div>
               <h2 className="display-sm">Career</h2>
-              <span className="label" style={{marginLeft:'auto'}}>06 / Timeline</span>
+              <span className="label" style={{marginLeft:'auto'}}>05 / Timeline</span>
             </div>
           </FI>
           <div className="timeline">
@@ -1466,7 +1381,7 @@ const App=()=>{
         </div>
       </section>
 
-      {/* ═══ 07. TRAINING ═══ */}
+      {/* ═══ 06. TRAINING ═══ */}
       <section id="training" className="section editable-section">
         <EditBtn label="Training" onClick={()=>openDrawer('training')}/>
         <div className="wrap">
@@ -1474,7 +1389,7 @@ const App=()=>{
             <div style={{display:'flex',alignItems:'baseline',gap:'18px',marginBottom:'56px'}}>
               <div className="accent-rule"></div>
               <h2 className="display-sm">Teaching</h2>
-              <span className="label" style={{marginLeft:'auto'}}>07 / Training</span>
+              <span className="label" style={{marginLeft:'auto'}}>06 / Training</span>
             </div>
           </FI>
           <div className="training-grid" style={{display:'grid',gridTemplateColumns:'1fr 1fr',gap:'48px',alignItems:'start'}}>
@@ -1512,7 +1427,7 @@ const App=()=>{
         </div>
       </section>
 
-      {/* ═══ 08. ABOUT ═══ */}
+      {/* ═══ 07. ABOUT ═══ */}
       <section id="about" className="section section-alt editable-section">
         <EditBtn label="About" onClick={()=>openDrawer('about')}/>
         <div className="wrap">
@@ -1520,7 +1435,7 @@ const App=()=>{
             <div style={{display:'flex',alignItems:'baseline',gap:'18px',marginBottom:'56px'}}>
               <div className="accent-rule"></div>
               <h2 className="display-sm">About</h2>
-              <span className="label" style={{marginLeft:'auto'}}>08 / Human</span>
+              <span className="label" style={{marginLeft:'auto'}}>07 / Human</span>
             </div>
           </FI>
           <div className="about-grid" style={{display:'grid',gridTemplateColumns:'2fr 1fr',gap:'72px',alignItems:'start'}}>
@@ -1566,7 +1481,7 @@ const App=()=>{
         </div>
       </section>
 
-      {/* ═══ 09. PERSONAL & CREATIVE PURSUITS ═══ */}
+      {/* ═══ 08. PERSONAL & CREATIVE PURSUITS ═══ */}
       <section id="music" className="section section-compact editable-section" style={{borderTop:'1px solid var(--border)'}}>
         <EditBtn label="Music" onClick={()=>openDrawer('music')}/>
         <div className="wrap">
@@ -1574,7 +1489,7 @@ const App=()=>{
             <div style={{display:'flex',alignItems:'baseline',gap:'18px',marginBottom:'32px'}}>
               <div className="accent-rule"></div>
               <h2 className="serif" style={{fontSize:'clamp(1.3rem,2.4vw,1.7rem)',letterSpacing:'-.02em'}}>Personal &amp; Creative Pursuits</h2>
-              <span className="label" style={{marginLeft:'auto'}}>09 / Personal</span>
+              <span className="label" style={{marginLeft:'auto'}}>08 / Personal</span>
             </div>
           </FI>
           <div className="music-grid" style={{display:'grid',gridTemplateColumns:'1fr 1fr',gap:'48px',alignItems:'center'}}>
@@ -1629,7 +1544,6 @@ const App=()=>{
 
 ReactDOM.createRoot(document.getElementById('root')).render(<App/>);
 </script>
-<script src="blogs.js" defer></script>
 <script>
 /* A/B tracking: same events as the 2D page, tagged ab_variant=2d */
 (function () {

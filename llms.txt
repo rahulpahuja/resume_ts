@@ -16,6 +16,7 @@ Rahul Pahuja architects mobile security and high-concurrency client infrastructu
 
 - [Home](https://www.therahulpahuja.com/): hero, core impact, Idira spotlight, independent lab, career timeline, skills matrix.
 - [Full profile for LLMs](https://www.therahulpahuja.com/llms-full.txt): career, architectural decisions, projects, skills, FAQ.
+- [Blogs (all posts)](https://www.therahulpahuja.com/blog/)
 - [Writing feed (RSS)](https://www.therahulpahuja.com/feed.xml)
 
 ## Apps and projects
