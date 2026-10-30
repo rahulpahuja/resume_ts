@@ -33,6 +33,7 @@
   .brand{font-family:'Space Grotesk',sans-serif;font-weight:700;letter-spacing:-.02em}
   .brand small{font-family:'JetBrains Mono',monospace;font-weight:400;font-size:10px;letter-spacing:.14em;text-transform:uppercase;color:var(--muted);margin-left:12px}
   .hbtns{display:flex;gap:10px}
+  .hbtns .cm{display:inline-flex;align-items:center}
   .btn{display:inline-flex;align-items:center;gap:8px;padding:9px 16px;border-radius:8px;font-size:13px;font-weight:600;border:1px solid var(--line);background:rgba(255,255,255,.04);transition:background .16s,border-color .16s,transform .16s}
   .btn:hover{background:rgba(255,255,255,.1);border-color:rgba(148,170,210,.5);transform:translateY(-1px)}
   .btn.primary{background:var(--accent);border-color:var(--accent);color:#fff}
@@ -94,6 +95,7 @@
     .decisions,.apps,.stats{grid-template-columns:1fr}
     nav.dots{display:none}
     .brand small{display:none}
+    .hbtns .cm{display:none}
     .right{justify-content:flex-start}
   }
   @media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}}
@@ -106,6 +108,7 @@
 <header>
   <a class="brand" href="#hero">Rahul Pahuja<small>3D portfolio</small></a>
   <div class="hbtns">
+    <a class="cm" href="https://www.codementor.io/@rahulpahuja?refer=badge" target="_blank" rel="noopener noreferrer"><img src="https://www.codementor.io/m-badges/rahulpahuja/find-me-on-cm-b.svg" alt="Codementor badge" width="91" height="34"></a>
     <a class="btn" href="/?v=2d">2D site</a>
     <a class="btn primary" href="/public/rahul_pahuja_resume.pdf" download>Resume (PDF)</a>
   </div>
