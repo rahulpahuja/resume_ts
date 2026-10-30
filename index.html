@@ -296,6 +296,7 @@
     .si{width:34px;height:34px;border:1px solid var(--border);border-radius:8px;background:var(--card);display:flex;align-items:center;justify-content:center;color:var(--muted);transition:.16s;box-shadow:var(--shadow-sm)}
     .si:hover{color:var(--accent);border-color:var(--amid);background:var(--adim)}
     .si svg{width:14px;height:14px;fill:currentColor}
+    .si.si-text{width:auto;padding:0 12px;font:500 10px 'JetBrains Mono',monospace;letter-spacing:.1em;text-transform:uppercase}
 
     /* nav */
     #site-nav{position:fixed;bottom:24px;left:50%;transform:translateX(-50%);z-index:500;background:rgba(15,23,42,.92);backdrop-filter:blur(20px);border:1px solid rgba(255,255,255,.1);border-radius:12px;padding:5px;display:flex;gap:2px;box-shadow:var(--shadow-md)}
@@ -1116,7 +1117,7 @@ const App=()=>{
         <div className="header-socials" style={{display:'flex',gap:'8px'}}>
           <a href="https://www.linkedin.com/in/therahulpahuja/" target="_blank" rel="noopener noreferrer" className="si"><LI/></a>
           <a href="https://github.com/rahulpahuja" target="_blank" rel="noopener noreferrer" className="si"><GH/></a>
-          <a href="https://www.codementor.io/@rahulpahuja?refer=badge" target="_blank" rel="noopener noreferrer" style={{display:'inline-flex'}}><img src="https://www.codementor.io/m-badges/rahulpahuja/find-me-on-cm-b.svg" alt="Codementor badge" width="91" height="34"/></a>
+          <a href="https://www.codementor.io/@rahulpahuja?refer=badge" target="_blank" rel="noopener noreferrer" className="si si-text" aria-label="Find me on Codementor">Codementor</a>
         </div>
         <a href={PHONE_HREF} className="btn btn-accent">Contact me →</a>
         <a href={RESUME_URL} download className="btn btn-solid">Download Resume</a>
