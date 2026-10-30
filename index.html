@@ -532,8 +532,8 @@
   </header>
 
   <nav aria-label="Sections" style="margin-bottom:36px">
-    <a href="#hero">Home</a> · <a href="#impact">Impact</a> · <a href="#feature">Idira</a> ·
-    <a href="#lab">Mobile1x Lab</a> · <a href="#writing">Writing</a> · <a href="#work">Career</a> ·
+    <a href="#hero">Home</a> · <a href="#writing">Writing</a> · <a href="#impact">Impact</a> ·
+    <a href="#feature">Idira</a> · <a href="#lab">Mobile1x Lab</a> · <a href="#work">Career</a> ·
     <a href="#training">Training</a> · <a href="#about">About</a> · <a href="#music">Personal</a>
   </nav>
 
@@ -546,6 +546,19 @@
       <a href="https://www.linkedin.com/in/therahulpahuja/">LinkedIn</a> ·
       <a href="https://github.com/rahulpahuja">GitHub</a>
     </p>
+  </section>
+
+  <section style="margin-top:40px">
+    <h2 class="display-sm" style="font-size:1.6rem">Writing</h2>
+    <ul style="margin-top:12px;padding-left:20px">
+      <li><a href="/blog/2026-05-19-google-just-crossed-a-line-at-io-that-changes-the-future-of-ai-forever/">Google just crossed a line at I/O that changes the future of AI forever</a></li>
+      <li><a href="/blog/2026-05-19-google-just-changed-the-future-of-search-with-ask-youtube-and-almost-nobody-is-talking-abo/">Google just changed the future of Search with "Ask YouTube"</a></li>
+      <li><a href="/blog/2026-05-07-secure-db-proposal/">Secure DB Proposal</a>: a reactive, coroutine-native embedded database runtime for mobile.</li>
+      <li><a href="/blog/2026-05-07-mobile-app-architecture-comparison/">Mobile App Architecture Comparison</a>: MVC, MVP, MVVM, MVI, VIPER, TCA compared.</li>
+      <li><a href="/blog/2026-04-29-mcp-servers-resources-and-tools-explained-without-the-hype/">MCP Servers, Resources, and Tools: Explained Without the Hype</a></li>
+      <li><a href="/blog/2026-03-15-secure-data-at-scale-designing-a-robust-storage-stack-with-teesdk-encrypted-data-stores-and-intelligent-caching/">Secure Data at Scale: Designing a Robust Storage Stack with TEESDK</a></li>
+      <li><a href="https://www.linkedin.com/pulse/jetpack-compose-staff-android-engineers-perspective-rahul-pahuja-zauif">Jetpack Compose: A Staff Engineer's Perspective</a></li>
+    </ul>
   </section>
 
   <section style="margin-top:40px">
@@ -580,19 +593,6 @@
       <li><strong>Notes: Archive &amp; Reflect (Offline-First Enterprise Capture)</strong> (<a href="https://play.google.com/store/apps/details?id=com.rp.notes">Google Play Store</a> | <a href="https://apps.apple.com/us/app/notes-archive-reflect/id6798175378">Apple App Store</a>). Native Swift &amp; Kotlin, Core ML OCR, Speech-to-Text, Biometric Vault, SQLite/Room.</li>
       <li><strong>Production E-Commerce Architecture (The A2Z Collection)</strong>: <a href="https://thea2zcollection.com">thea2zcollection.com</a>. Razorpay Payment Gateway, Cloudflare R2 Object Storage, Automated Carrier Shipping APIs, Resilient OTP Auth. Scaled to and sustained 2,500 Daily Active Users (DAU) with zero-egress media caching.</li>
       <li><strong>Smart Form Engine</strong>: Schema-driven dynamic JSON form engine decoupling UI rendering from schema definitions, cutting enterprise form-creation cycles by 50%.</li>
-    </ul>
-  </section>
-
-  <section style="margin-top:40px">
-    <h2 class="display-sm" style="font-size:1.6rem">Writing</h2>
-    <ul style="margin-top:12px;padding-left:20px">
-      <li><a href="/blog/2026-05-19-google-just-crossed-a-line-at-io-that-changes-the-future-of-ai-forever/">Google just crossed a line at I/O that changes the future of AI forever</a></li>
-      <li><a href="/blog/2026-05-19-google-just-changed-the-future-of-search-with-ask-youtube-and-almost-nobody-is-talking-abo/">Google just changed the future of Search with "Ask YouTube"</a></li>
-      <li><a href="/blog/2026-05-07-secure-db-proposal/">Secure DB Proposal</a>: a reactive, coroutine-native embedded database runtime for mobile.</li>
-      <li><a href="/blog/2026-05-07-mobile-app-architecture-comparison/">Mobile App Architecture Comparison</a>: MVC, MVP, MVVM, MVI, VIPER, TCA compared.</li>
-      <li><a href="/blog/2026-04-29-mcp-servers-resources-and-tools-explained-without-the-hype/">MCP Servers, Resources, and Tools: Explained Without the Hype</a></li>
-      <li><a href="/blog/2026-03-15-secure-data-at-scale-designing-a-robust-storage-stack-with-teesdk-encrypted-data-stores-and-intelligent-caching/">Secure Data at Scale: Designing a Robust Storage Stack with TEESDK</a></li>
-      <li><a href="https://www.linkedin.com/pulse/jetpack-compose-staff-android-engineers-perspective-rahul-pahuja-zauif">Jetpack Compose: A Staff Engineer's Perspective</a></li>
     </ul>
   </section>
 
@@ -713,10 +713,10 @@ function Field({label,value,onChange,rows=1,placeholder=''}){
 
 const NAV=[
   {id:'hero',    label:'Home'},
+  {id:'writing', label:'Writing'},
   {id:'impact',  label:'Impact'},
   {id:'feature', label:'Idira'},
   {id:'lab',     label:'Lab'},
-  {id:'writing', label:'Writing'},
   {id:'work',    label:'Career'},
   {id:'training',label:'Training'},
   {id:'about',   label:'About'},
@@ -1121,6 +1121,7 @@ const App=()=>{
           <a href="https://github.com/rahulpahuja" target="_blank" rel="noopener noreferrer" className="si"><GH/></a>
           <a href="https://www.codementor.io/@rahulpahuja?refer=badge" target="_blank" rel="noopener noreferrer" className="si si-badge" aria-label="Find me on Codementor"><img src="https://www.codementor.io/m-badges/rahulpahuja/find-me-on-cm-b.svg" alt="Codementor badge" width="58" height="22"/></a>
         </div>
+        <a href="#writing" className="btn btn-ghost" onClick={e=>{e.preventDefault();go('writing');}}>Blogs</a>
         <a href={PHONE_HREF} className="btn btn-accent">Contact me →</a>
         <a href={RESUME_URL} download className="btn btn-solid">Download Resume</a>
       </div>
@@ -1194,7 +1195,37 @@ const App=()=>{
         </div>
       </section>
 
-      {/* ═══ 02. IMPACT ═══ */}
+      {/* ═══ 02. WRITING ═══ */}
+      <section id="writing" className="section editable-section">
+        <EditBtn label="Writing" onClick={()=>openDrawer('writing')}/>
+        <div className="wrap">
+          <FI>
+            <div style={{display:'flex',alignItems:'baseline',gap:'18px',marginBottom:'56px'}}>
+              <div className="accent-rule"></div>
+              <h2 className="display-sm">Writing</h2>
+              <span className="label" style={{marginLeft:'auto'}}>02 / Thought leadership</span>
+            </div>
+          </FI>
+          <div className="blog-list">
+            {content.blogs.map((b,i)=>(
+              <FI key={i} delay={i*.06}>
+                <a href={b.link} {...(b.link&&b.link.startsWith('/blog/')?{}:{target:'_blank',rel:'noopener noreferrer'})} style={{display:'block',color:'inherit'}}>
+                  <div className="blog-row">
+                    <div>
+                      <div style={{display:'flex',alignItems:'center',gap:'10px',marginBottom:'8px'}}><span className="tag tag-accent">{b.tag}</span></div>
+                      <div className="blog-title">{b.title}</div>
+                      <div className="blog-desc">{b.desc}</div>
+                    </div>
+                    <span className="arrow">→</span>
+                  </div>
+                </a>
+              </FI>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* ═══ 03. IMPACT ═══ */}
       <section id="impact" className="section section-alt editable-section">
         <EditBtn label="Impact" onClick={()=>openDrawer('impact')}/>
         <div className="wrap">
@@ -1202,7 +1233,7 @@ const App=()=>{
             <div style={{display:'flex',alignItems:'baseline',gap:'18px',marginBottom:'56px'}}>
               <div className="accent-rule"></div>
               <h2 className="display-sm">Core impact at scale</h2>
-              <span className="label" style={{marginLeft:'auto'}}>02 / Impact</span>
+              <span className="label" style={{marginLeft:'auto'}}>03 / Impact</span>
             </div>
           </FI>
           <div className="impact-grid">
@@ -1245,7 +1276,7 @@ const App=()=>{
         </div>
       </section>
 
-      {/* ═══ 03. FEATURED ENTERPRISE SPOTLIGHT ═══ */}
+      {/* ═══ 04. FEATURED ENTERPRISE SPOTLIGHT ═══ */}
       <section id="feature" className="section editable-section">
         <EditBtn label="Idira" onClick={()=>openDrawer('feature')}/>
         <div className="wrap">
@@ -1253,7 +1284,7 @@ const App=()=>{
             <div style={{display:'flex',alignItems:'baseline',gap:'18px',marginBottom:'56px'}}>
               <div className="accent-rule"></div>
               <h2 className="display-sm">Featured enterprise spotlight</h2>
-              <span className="label" style={{marginLeft:'auto'}}>03 / Idira</span>
+              <span className="label" style={{marginLeft:'auto'}}>04 / Idira</span>
             </div>
           </FI>
           <div className="feature-card">
@@ -1297,14 +1328,14 @@ const App=()=>{
         </div>
       </section>
 
-      {/* ═══ 04. INDEPENDENT SYSTEMS ADVISORY & ENGINEERING LAB ═══ */}
+      {/* ═══ 05. INDEPENDENT SYSTEMS ADVISORY & ENGINEERING LAB ═══ */}
       <section id="lab" className="section section-alt">
         <div className="wrap">
           <FI>
             <div style={{display:'flex',alignItems:'baseline',gap:'18px',marginBottom:'20px',flexWrap:'wrap'}}>
               <div className="accent-rule"></div>
               <h2 className="display-sm" style={{fontSize:'clamp(1.7rem,3.6vw,2.8rem)',flex:'1 1 320px'}}>Independent Systems Advisory &amp; Engineering Lab</h2>
-              <span className="label" style={{marginLeft:'auto'}}>04 / Lab</span>
+              <span className="label" style={{marginLeft:'auto'}}>05 / Lab</span>
             </div>
             <p className="label" style={{marginBottom:'40px'}}>Mobile1x · Principal Mobile Systems Architect · Dec 2025 – Present</p>
           </FI>
@@ -1391,36 +1422,6 @@ const App=()=>{
                   <div className="tags" style={{marginBottom:'18px'}}>{p.tech.map(t=><span key={t} className="tag">{t}</span>)}</div>
                   <ExtLink href={p.link} style={{fontFamily:'JetBrains Mono,monospace',fontSize:'10px',textTransform:'uppercase',letterSpacing:'.1em',color:'var(--accent)'}}>View project</ExtLink>
                 </div>
-              </FI>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* ═══ 05. WRITING ═══ */}
-      <section id="writing" className="section editable-section">
-        <EditBtn label="Writing" onClick={()=>openDrawer('writing')}/>
-        <div className="wrap">
-          <FI>
-            <div style={{display:'flex',alignItems:'baseline',gap:'18px',marginBottom:'56px'}}>
-              <div className="accent-rule"></div>
-              <h2 className="display-sm">Writing</h2>
-              <span className="label" style={{marginLeft:'auto'}}>05 / Thought leadership</span>
-            </div>
-          </FI>
-          <div className="blog-list">
-            {content.blogs.map((b,i)=>(
-              <FI key={i} delay={i*.06}>
-                <a href={b.link} {...(b.link&&b.link.startsWith('/blog/')?{}:{target:'_blank',rel:'noopener noreferrer'})} style={{display:'block',color:'inherit'}}>
-                  <div className="blog-row">
-                    <div>
-                      <div style={{display:'flex',alignItems:'center',gap:'10px',marginBottom:'8px'}}><span className="tag tag-accent">{b.tag}</span></div>
-                      <div className="blog-title">{b.title}</div>
-                      <div className="blog-desc">{b.desc}</div>
-                    </div>
-                    <span className="arrow">→</span>
-                  </div>
-                </a>
               </FI>
             ))}
           </div>
